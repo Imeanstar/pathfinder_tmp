@@ -1,12 +1,12 @@
-/* AJOU Pathfinder 공통 디자인 시스템 — Design Reference 폴더의 톤(네이비+블루, 화이트 카드,
-   차분한 여백)을 따르되 우리 스펙(역할 8트랙 + 산업/연구실 조건부 드롭다운, 과정 구분)에 맞춤. */
+/* AJOU Pathfinder 공통 디자인 시스템 — majorpath(랜딩 프론트) 톤에 맞춰 재조정
+   (2026-08-21): 네이비 단일 톤(blue-950/900), 더 둥근 radius, 살짝 더 뚜렷한 그림자. */
 
 :root {
-  --navy-900: #12213f;
-  --navy-800: #1a2f57;
-  --blue-600: #2f5fda;
-  --blue-500: #4f74e3;
-  --blue-50: #eef2ff;
+  --navy-900: #172554;
+  --navy-800: #1e3a8a;
+  --blue-600: #1e3a8a;
+  --blue-500: #1d4ed8;.
+  --blue-50: #eff6ff;
   --bg: #f5f7fb;
   --card: #ffffff;
   --border: #e3e6ee;
@@ -17,8 +17,8 @@
   --amber-text: #8a5a00;
   --green: #1e8e5a;
   --red: #d33f3f;
-  --radius: 10px;
-  --shadow: 0 1px 2px rgba(20, 30, 60, 0.06), 0 1px 8px rgba(20, 30, 60, 0.04);
+  --radius: 16px;
+  --shadow: 0 1px 3px rgba(30, 41, 59, 0.08), 0 4px 16px rgba(30, 41, 59, 0.06);
 }
 
 * { box-sizing: border-box; }
@@ -37,8 +37,9 @@ a:hover { text-decoration: underline; }
 
 /* --- 헤더 --- */
 .app-header {
-  background: var(--navy-900);
-  color: #fff;
+  background: #fff;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
   padding: 14px 28px;
   display: flex;
   align-items: center;
@@ -49,22 +50,23 @@ a:hover { text-decoration: underline; }
 }
 .app-header .brand { display: flex; align-items: center; gap: 9px; }
 .app-header .brand-name {
-  font-weight: 800; font-size: 14px; letter-spacing: 0.06em; white-space: nowrap;
+  font-weight: 700; font-size: 14px; letter-spacing: 0.025em; white-space: nowrap;
+  color: var(--navy-900);
 }
 .app-header .brand-sub {
-  font-size: 11px; letter-spacing: 0.12em; color: #9fb0d9; font-weight: 600;
-  margin-left: 6px; padding-left: 10px; border-left: 1px solid rgba(255,255,255,.18);
+  font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted); font-weight: 600;
+  margin-left: 6px; padding-left: 10px; border-left: 1px solid var(--border);
 }
-/* 로고 — index.html/upload.html/dashboard.html 헤더에서 공통으로 쓴다(2026-08-21 통일) */
+
 .brand-logo { width: 20px; height: 20px; display: block; flex-shrink: 0; }
 .app-header .header-context {
-  font-size: 13px; color: #c7d2f0; margin-left: 16px;
+  font-size: 13px; color: var(--text-muted); margin-left: 16px;
 }
 .header-right { display: flex; align-items: center; gap: 10px; }
 .pill {
   display: inline-flex; align-items: center; gap: 6px;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: #dfe6fb; border-radius: 999px; padding: 6px 14px; font-size: 12.5px;
+  border: 1px solid var(--border);
+  color: var(--text-muted); border-radius: 999px; padding: 6px 14px; font-size: 12.5px;
 }
 
 /* --- 레이아웃 --- */
@@ -131,7 +133,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer;
   transition: background .15s;
 }
-.btn-primary:hover { background: #274ec2; }
+.btn-primary:hover { background: var(--navy-800); }
 .btn-primary:disabled { background: #a8b5d6; cursor: not-allowed; }
 
 .footnote { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: 16px; }
@@ -142,10 +144,10 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 
 .app-header .header-context { font-size: 13px; color: #c7d2f0; }
 .header-right .btn-ghost {
-  background: none; border: 1px solid rgba(255,255,255,0.3); color: #fff;
+  background: none; border: 1px solid var(--border); color: var(--text);
   border-radius: 8px; padding: 7px 14px; font-size: 12.5px; cursor: pointer;
 }
-.header-right .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+.header-right .btn-ghost:hover { background: var(--bg); }
 
 .dashboard-grid {
   display: grid;
@@ -272,7 +274,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
    랜딩(index.html) — 2026-08-21 신설.
    앱 내부(대시보드)의 네이비 헤더 대신, 흰 배경 위 큰 타이포 한 덩어리로 첫인상을 만든다.
    ============================================================ */
-.landing-body { background: #fff; }
+.landing-body { background: #fafafa; }
 
 .landing-header {
   display: flex; align-items: center; justify-content: space-between;
@@ -280,7 +282,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 }
 .landing-brand { display: flex; align-items: center; gap: 10px; }
 .landing-brand span {
-  font-weight: 800; font-size: 13px; letter-spacing: 0.14em; color: var(--navy-900);
+  font-weight: 700; font-size: 14px; letter-spacing: 0.025em; color: var(--navy-900);
 }
 
 /* 2026-08-21: 전체적으로 60~70% 크기로 축소 — 원래 값은 화면을 거의 다 채울 만큼 컸다 */
@@ -289,25 +291,26 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   text-align: center; padding: 6vh 24px 8vh; gap: 20px;
 }
 .landing-hero {
-  margin: 0; font-size: clamp(21px, 3.4vw, 44px); line-height: 1.28;
-  font-weight: 800; letter-spacing: -0.02em; color: var(--navy-900);
+  margin: 0; font-size: clamp(28px, 4.4vw, 52px); line-height: 1.2;
+  font-weight: 600; letter-spacing: -0.02em; color: var(--navy-900);
   /* 한글은 어절 중간에서 끊으면 안 된다 — keep-all 없이는 "추/천해"처럼 갈라진다 */
   word-break: keep-all;
   max-width: 20em;
 }
 .landing-hero em { font-style: normal; color: var(--blue-600); }
 .landing-sub {
-  margin: 0; color: var(--text-muted); font-size: clamp(12px, 1.05vw, 13px); line-height: 1.7;
+  margin: 16px 0 0; color: var(--text-muted); font-size: clamp(15px, 1.4vw, 18px); line-height: 1.7;
+  max-width: 32em;
 }
 
 .landing-cta {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   min-width: min(280px, 70vw); padding: 12px 22px;
-  background: var(--navy-900); color: #fff; border: none; border-radius: 7px;
+  background: var(--navy-900); color: #fff; border: none; border-radius: 14px;
   font-size: 13.5px; font-weight: 700; cursor: pointer;
   transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
 }
-.landing-cta:hover { background: var(--navy-800); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(18,33,63,.22); }
+.landing-cta:hover { background: var(--navy-800); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(23,37,84,.25); }
 
 .landing-or {
   display: flex; align-items: center; gap: 12px;
@@ -448,3 +451,125 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 /* 졸업요건 목록 — 값 문구가 길어도 항목명이 세로로 깨지지 않게 */
 .req-list .req-name, .req-list .req-detail { word-break: keep-all; }
 .req-list .req-value { word-break: keep-all; text-align: right; flex-shrink: 0; max-width: 48%; }
+
+/* ============================================================
+   랜딩 확장 — majorpath(Next.js) 랜딩과 동일 구성으로 맞춤(2026-08-21).
+   히어로 스크롤 페이드(.fade-hero) + 섹션 등장 애니메이션(.reveal)은
+   js/landing.js의 IntersectionObserver/scroll 리스너로 제어한다.
+   ============================================================ */
+
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 640px;
+  height: calc(100svh - 73px);
+  padding: 0 24px;
+  overflow: hidden;
+}
+.hero-content { display: flex; flex-direction: column; align-items: center; }
+
+.landing-hero .accent { color: var(--navy-900); }
+
+.hero-cta-card { margin-top: 24px; width: 100%; max-width: 380px; }
+.hero-cta-card .landing-cta { width: 100%; border-radius: 16px; padding: 16px 24px; font-size: 14px; }
+.hero-cta-card .landing-or { margin: 24px 0; width: 100%; }
+.hero-resume-label { margin: 0; font-size: 12px; color: var(--text-muted); }
+.hero-resume-link {
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 8px;
+  font-size: 14px; font-weight: 700; color: var(--navy-900);
+}
+.hero-resume-link:hover { color: var(--navy-800); text-decoration: none; }
+
+.scroll-indicator {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  color: rgba(23, 37, 84, 0.3); animation: bounce 1.6s infinite;
+}
+.scroll-indicator:hover { color: rgba(23, 37, 84, 0.6); }
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.eyebrow-label { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--navy-900); }
+.section-title { margin: 8px 0 0; font-size: 26px; font-weight: 700; color: var(--text); }
+
+.how-it-works-section { background: #fff; padding: 80px 24px; border-radius: 48px 48px 0 0; }
+.steps-grid {
+  margin-top: 48px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;
+}
+@media (min-width: 900px) { .steps-grid { grid-template-columns: repeat(4, 1fr); } }
+.step-num { font-size: 14px; font-weight: 700; color: var(--navy-900); }
+.step-title { margin: 12px 0 0; font-size: 16px; font-weight: 700; color: var(--text); }
+.step-desc { margin: 8px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-muted); }
+
+.preview-section { background: #fff; border-top: 1px solid var(--border); padding: 80px 24px; }
+.preview-window {
+  position: relative; margin: 40px auto 0; max-width: 720px;
+  border-radius: 16px; border: 1px solid var(--border); background: var(--bg);
+  padding: 12px; box-shadow: 0 20px 40px rgba(30, 41, 59, 0.15);
+}
+.preview-chrome { display: flex; gap: 6px; padding: 4px 8px 12px; }
+.preview-chrome span { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+.preview-body { background: #fff; border-radius: 12px; padding: 24px 32px; }
+.preview-body-head { display: flex; align-items: center; justify-content: space-between; }
+.preview-term { font-size: 14px; font-weight: 700; color: var(--navy-900); }
+.preview-badge {
+  border-radius: 999px; background: var(--blue-50); color: var(--navy-900);
+  font-size: 12px; font-weight: 600; padding: 4px 12px;
+}
+.preview-progress-list { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.preview-progress-label {
+  display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted);
+}
+.preview-progress-label span:last-child { font-weight: 600; color: var(--text); }
+.preview-progress-bar {
+  margin-top: 6px; height: 8px; border-radius: 999px; background: var(--bg); overflow: hidden;
+}
+.preview-progress-bar > div { height: 100%; border-radius: 999px; background: var(--navy-900); }
+.preview-courses { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.preview-course-chip {
+  border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
+  font-size: 13px; font-weight: 600; color: var(--text);
+}
+.preview-expand {
+  position: absolute; bottom: -16px; right: -16px; width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center; border-radius: 50%;
+  background: var(--navy-900); color: #fff; box-shadow: 0 8px 20px rgba(23, 37, 84, 0.3);
+}
+
+.resources-section { padding: 80px 24px; }
+.resources-grid { margin-top: 40px; display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 700px) { .resources-grid { grid-template-columns: 1fr 1fr; } }
+.resource-card {
+  display: flex; height: 100%; flex-direction: column; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--card); box-shadow: var(--shadow);
+  padding: 32px; color: inherit; transition: border-color .2s ease;
+}
+.resource-card:hover { border-color: rgba(23,37,84,.3); text-decoration: none; }
+.resource-card h3 { margin: 0; font-size: 17px; font-weight: 700; color: var(--text); }
+.resource-card p { margin: 8px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-muted); }
+.resource-cta {
+  margin-top: auto; padding-top: 24px; display: inline-flex; align-items: center; gap: 4px;
+  font-size: 13.5px; font-weight: 700; color: var(--navy-900);
+}
+
+.landing-footer {
+  border-top: 1px solid var(--border); background: #fff; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: space-between;
+  font-size: 11.5px; color: var(--text-muted); text-align: center;
+}
+@media (min-width: 700px) {
+  .landing-footer { flex-direction: row; }
+}
+
+/* --- 등장 애니메이션 --- */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease-out, transform .7s ease-out;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
