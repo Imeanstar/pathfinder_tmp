@@ -1,4 +1,30 @@
-from app.llm import _call_gemini, default_structure_fn
+from app.llm import PROMPT_TEMPLATE, _call_gemini, default_structure_fn
+
+
+def test_prompt_template_category_enum_includes_major_foundation():
+    # 요람상 전공기초(확률및통계1, SW커리어세미나 등)는 전공필수/전공선택과 별도
+    # 영역인데, 프롬프트가 이 카테고리를 몰라 LLM이 "전공선택"으로 잘못 분류했다
+    # (2026-08-22 실사용 버그 리포트 — 전공기초 학점이 전공선택 학점에 섞여 들어가
+    # 일반과정 전공선택 10학점 기준이 미달인데도 충족으로 오판정될 수 있었다).
+    assert "전공기초" in PROMPT_TEMPLATE
+
+
+def test_prompt_template_maps_transcript_abbreviations_to_full_category_names():
+    # 실제 아주대 성적표는 이수구분이 "전필/전선/전기/교필/교선/일선" 약어로 찍혀
+    # 있다(성적표.pdf 실측 확인, 2026-08-22). 특히 "전기"는 "전기공학"과 혼동되기
+    # 쉬워 프롬프트에 명시적으로 매핑을 알려줘야 한다.
+    for abbr in ["전필", "전선", "전기", "교필", "교선", "일선"]:
+        assert abbr in PROMPT_TEMPLATE
+    assert "전기공학" in PROMPT_TEMPLATE  # 혼동하지 말라는 경고 문구가 있어야 함
+    assert "일반선택" in PROMPT_TEMPLATE  # "일선" 대응 카테고리, 기존 enum엔 없었음
+
+
+def test_prompt_template_requires_year_field_for_admission_year_inference():
+    # 학번(admission_year)은 화면 입력이 아니라 성적표의 "수강년도" 최솟값으로
+    # 서버가 자동 추론한다(1학년 1학기 휴학 불가 교칙 근거, 2026-08-22 사용자 지시).
+    # 그러려면 과목마다 수강년도를 추출해야 한다.
+    assert "year" in PROMPT_TEMPLATE
+    assert "수강년도" in PROMPT_TEMPLATE
 
 
 def test_default_structure_fn_returns_empty_list_without_api_key(monkeypatch):
