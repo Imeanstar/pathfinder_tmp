@@ -2,6 +2,7 @@ from fastapi.testclient import TestClient
 
 from app.api import app
 from app.guardrail import set_guardrail_override
+from app.parser import TranscriptData
 from tests.conftest import build_test_transcript_pdf
 
 client = TestClient(app)
@@ -38,6 +39,50 @@ def test_upload_masks_pii_and_returns_courses_without_api_key(monkeypatch):
     # 응답 어디에도 원본 PII가 남아있지 않아야 함
     assert "홍길동" not in resp.text
     assert "202512345" not in resp.text
+
+
+def test_upload_includes_inferred_admission_year_in_response(monkeypatch):
+    monkeypatch.setattr(
+        "app.api.parse_transcript",
+        lambda pdf_bytes, structure_fn: TranscriptData(
+            courses=[
+                {"name": "이산수학", "credit": 3, "category": "전공필수", "year": 2022},
+                {"name": "자료구조", "credit": 3, "category": "전공필수", "year": 2023},
+            ],
+            masked_text="dummy",
+        ),
+    )
+    res = client.post("/api/upload", files={"file": ("t.pdf", b"%PDF-1.4", "application/pdf")})
+    assert res.status_code == 200
+    assert res.json()["admission_year"] == 2022
+
+
+def test_plan_infers_admission_year_from_courses_year_field_over_request_default():
+    # req.admission_year는 기본값 2025지만, courses가 2021년도 수강 기록을 담고
+    # 있으면 서버는 그쪽을 신뢰해 2021학번 요건(140학점)으로 판정해야 한다.
+    payload = {
+        "courses": [
+            {"name": "이산수학", "credit": 3, "category": "전공필수", "year": 2021},
+        ],
+        "admission_year": 2025,
+        "track_type": "심화과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    body = res.json()
+    assert body["admission_year"] == 2021
+    assert body["requirements_summary"]["total_credit_required"] == 140  # 2021학번 기준
+
+
+def test_plan_falls_back_to_request_admission_year_when_courses_lack_year(monkeypatch):
+    # courses에 year가 하나도 없으면(개발 모드 수동 입력 등) req.admission_year를
+    # 그대로 쓴다 — 기존 동작과 100% 호환.
+    payload = {
+        "courses": [], "admission_year": 2025, "track_type": "심화과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    body = res.json()
+    assert body["admission_year"] == 2025
+    assert body["requirements_summary"]["total_credit_required"] == 128
 
 
 def test_upload_rejects_pdf_with_injection():

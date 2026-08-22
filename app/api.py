@@ -43,7 +43,7 @@ from app.auth import InvalidDomainError, verify_google_id_token
 from app.guardrail import get_blocked_count, is_guardrail_enabled, set_guardrail_override
 from app.llm import default_structure_fn, soften_recommendation_reasons
 from app.masking import PiiLeakDetected
-from app.parser import InjectionDetected, TranscriptData, parse_transcript
+from app.parser import InjectionDetected, TranscriptData, infer_admission_year, parse_transcript
 from app.retrieval import retrieve
 from app.user_store import get_latest_plan, save_latest_plan
 
@@ -152,6 +152,7 @@ async def upload(file: UploadFile = File(...)):
         "courses": transcript.courses,
         "pii_masked": True,
         "masked_preview": transcript.masked_text[:1200],
+        "admission_year": infer_admission_year(transcript.courses),
     }
     if not os.environ.get("GOOGLE_API_KEY"):
         response["warning"] = (
@@ -240,9 +241,10 @@ def _apply_dropdown_selfreports(audit: AuditResult, req: "PlanRequest", requirem
 
 @app.post("/api/plan")
 def plan(req: PlanRequest):
+    resolved_admission_year = infer_admission_year(req.courses) or req.admission_year
     transcript = TranscriptData(courses=req.courses)
-    requirements = load_requirements(req.admission_year)
-    audit = audit_graduation(transcript, req.admission_year, req.track_type, requirements)
+    requirements = load_requirements(resolved_admission_year)
+    audit = audit_graduation(transcript, resolved_admission_year, req.track_type, requirements)
     audit = _apply_dropdown_selfreports(audit, req, requirements)
 
     taken_course_names = {c["name"] for c in req.courses}
@@ -295,6 +297,7 @@ def plan(req: PlanRequest):
 
     response = {
         "audit": asdict(audit),
+        "admission_year": resolved_admission_year,
         "requirements_summary": requirements_summary,
         "citations": citations,
         "questions": build_question_list(audit.unresolved),
