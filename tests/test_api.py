@@ -448,7 +448,7 @@ def test_plan_returns_competency_levels_with_strict_multi_factor_scoring():
     assert levels[axis]["level"] in ("매우 부족", "부족")
 
 
-def test_plan_accepts_certification_and_club_activity_types():
+def test_plan_accepts_certification_and_award_activity_types():
     resp = client.post("/api/plan", json={
         "courses": [
             {"name": "자료구조", "credit": 3, "category": "전공필수"},
@@ -457,16 +457,17 @@ def test_plan_accepts_certification_and_club_activity_types():
         "admission_year": 2025, "track_type": "심화과정", "track": "백엔드",
         "projects": [
             {"title": "정보처리기사", "field": "웹_백엔드", "activity_type": "certification"},
-            {"title": "웹개발 동아리", "field": "웹_백엔드", "activity_type": "club"},
+            {"title": "교내 해커톤 대상", "field": "웹_백엔드", "activity_type": "award"},
             {"title": "배달앱 클론", "field": "웹_백엔드", "activity_type": "project"},
         ],
     })
     levels = resp.json()["competency_levels"]
-    # 클라우드_인프라는 웹_백엔드 project_field에 걸려있어 자격증·동아리·프로젝트 증거를 다 받음
+    # 클라우드_인프라는 웹_백엔드 project_field에 걸려있어 자격증·수상경력·프로젝트 증거를 다 받음
     factors = levels["클라우드_인프라"]["factors"]
-    assert factors["certification"] is True
-    assert factors["club"] is True
-    assert factors["activity"] is True
+    assert factors["certification"] == 1
+    assert factors["award"] == 1
+    assert factors["activity"] == 1
+    assert "club" not in factors
 
 
 def test_audit_selfreport_updates_language_only_via_dropdown_and_persists_shape():

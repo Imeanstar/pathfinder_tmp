@@ -247,29 +247,95 @@ def test_classify_competency_levels_falls_back_to_course_count_when_no_required_
 
 
 def test_classify_competency_levels_combines_course_ratio_with_other_three_factors():
-    """수업 요소(연속값)와 실전참여/동아리/자격증(불리언)을 합산해 최종 점수를 낸다."""
+    """수업 요소(연속값)와 실전참여·자격증(0.5점/개)·수상경력(1점/개)을 합산해 최종
+    점수를 낸다(2026-08-22 재설계 — 동아리 제거, 수상 경력 추가, O/X 대신 개수 기반
+    점수제로 변경)."""
     evidence = {"자료구조_알고리즘": [
         {"type": "course", "name": "이산수학"},  # 1/3
-        {"type": "project", "name": "토이프로젝트"},
-        {"type": "club", "name": "알고리즘 동아리"},
+        {"type": "project", "name": "토이프로젝트"},  # 실전 참여 1회 -> 0.5
+        {"type": "certification", "name": "정보처리기사"},  # 자격증 1개 -> 0.5
+        {"type": "award", "name": "해커톤 수상"},  # 수상 경력 1회 -> 1.0
     ]}
     target = {"자료구조_알고리즘": 0.8}
 
     levels = classify_competency_levels(evidence, target, current_grade=2, course_catalog=FAKE_CATALOG)
     result = levels["자료구조_알고리즘"]
 
-    assert result["score"] == pytest.approx(1 / 3 + 1 + 1)
-    assert result["level"] == "보통"  # round(2.33) == 2
+    assert result["score"] == pytest.approx(1 / 3 + 0.5 + 0.5 + 1.0)
+    assert result["level"] == "만족"  # 2 < 2.333 <= 2.5
 
 
 def test_classify_competency_levels_program_participation_counts_as_activity():
-    """교내 프로그램 참여도 '실전 참여' 요소로 인정된다(프로젝트와 동일 취급)."""
+    """교내 프로그램 참여도 '실전 참여' 요소로 인정된다(프로젝트와 동일 취급).
+    실전 참여는 이제 O/X가 아니라 횟수(1회당 0.5점)다."""
     evidence = {"데이터베이스": [{"type": "program", "name": "AWS 부트캠프"}]}
     target = {"데이터베이스": 0.6}
 
     levels = classify_competency_levels(evidence, target, current_grade=4, course_catalog=FAKE_CATALOG)
 
-    assert levels["데이터베이스"]["factors"]["activity"] is True
+    assert levels["데이터베이스"]["factors"]["activity"] == 1
+    assert levels["데이터베이스"]["score"] == pytest.approx(0.5)
+
+
+def test_classify_competency_levels_certification_count_scores_half_point_each():
+    evidence = {"데이터베이스": [
+        {"type": "certification", "name": "정보처리기사"},
+        {"type": "certification", "name": "SQLD"},
+    ]}
+    levels = classify_competency_levels(
+        evidence, {"데이터베이스": 0.6}, current_grade=4, course_catalog=FAKE_CATALOG
+    )
+    assert levels["데이터베이스"]["factors"]["certification"] == 2
+    assert levels["데이터베이스"]["score"] == pytest.approx(1.0)
+
+
+def test_classify_competency_levels_award_count_scores_one_point_each():
+    evidence = {"데이터베이스": [
+        {"type": "award", "name": "교내 해커톤 대상"},
+        {"type": "award", "name": "공모전 입상"},
+    ]}
+    levels = classify_competency_levels(
+        evidence, {"데이터베이스": 0.6}, current_grade=4, course_catalog=FAKE_CATALOG
+    )
+    assert levels["데이터베이스"]["factors"]["award"] == 2
+    assert levels["데이터베이스"]["score"] == pytest.approx(2.0)
+
+
+def test_classify_competency_levels_club_evidence_no_longer_contributes_score():
+    # 동아리는 더 이상 역량 판정 요소가 아니다(2026-08-22 사용자 요청) — evidence에
+    # club 항목이 있어도 factors에 "club" 키 자체가 없고 점수에도 기여하지 않는다.
+    evidence = {"데이터베이스": [{"type": "club", "name": "데이터 분석 동아리"}]}
+    levels = classify_competency_levels(
+        evidence, {"데이터베이스": 0.6}, current_grade=4, course_catalog=FAKE_CATALOG
+    )
+    assert levels["데이터베이스"]["score"] == 0
+    assert "club" not in levels["데이터베이스"]["factors"]
+
+
+@pytest.mark.parametrize(
+    "activity_count,expected_score,expected_level",
+    [
+        (0, 0.0, "매우 부족"),
+        (1, 0.5, "매우 부족"),   # 경계값: 0.5는 매우 부족(사용자 명시)
+        (2, 1.0, "부족"),        # 경계값: 1.0은 부족
+        (3, 1.5, "보통"),
+        (4, 2.0, "보통"),        # 경계값: 2.0은 보통
+        (5, 2.5, "만족"),        # 경계값: 2.5는 만족(사용자 확인)
+        (6, 3.0, "매우 만족"),
+    ],
+)
+def test_classify_competency_levels_boundary_thresholds(activity_count, expected_score, expected_level):
+    # 과목 근거가 전혀 없는 축(course_factor=0)에서 실전 참여 횟수만으로 점수 경계를
+    # 정확히 테스트한다(1회당 0.5점, 0.5 단위로 정확히 떨어짐).
+    evidence = {"웹_프론트엔드": [
+        {"type": "project", "name": f"프로젝트{i}"} for i in range(activity_count)
+    ]}
+    levels = classify_competency_levels(
+        evidence, {"웹_프론트엔드": 0.5}, current_grade=4, course_catalog=FAKE_CATALOG
+    )
+    result = levels["웹_프론트엔드"]
+    assert result["score"] == pytest.approx(expected_score)
+    assert result["level"] == expected_level
 
 
 def test_classify_competency_levels_skips_axes_with_zero_target():
@@ -289,19 +355,20 @@ def test_classify_competency_levels_no_evidence_is_매우_부족():
 
 
 def test_collect_competency_evidence_tags_activity_type_from_manual_project():
-    """자격증·동아리·교내프로그램도 project_fields를 '분야' 선택지로 재사용하되,
+    """자격증·수상경력·교내프로그램도 project_fields를 '분야' 선택지로 재사용하되,
     근거 표시에는 실제 활동 유형(activity_type)이 그대로 남아야 한다
-    (2026-08-21 — 역량 판정이 과목 존재만으로 결정되지 않도록 다양한 근거를 받기 위함)."""
+    (2026-08-21 — 역량 판정이 과목 존재만으로 결정되지 않도록 다양한 근거를 받기 위함.
+    2026-08-22: 동아리 대신 수상 경력으로 예시 교체)."""
     activities = [
         ManualProject(title="정보처리기사", field="웹_백엔드", activity_type="certification"),
-        ManualProject(title="웹개발 동아리", field="웹_백엔드", activity_type="club"),
+        ManualProject(title="교내 해커톤 대상", field="웹_백엔드", activity_type="award"),
         ManualProject(title="AWS 클라우드 스쿨", field="웹_백엔드", activity_type="program"),
     ]
     evidence = collect_competency_evidence(TranscriptData(courses=[]), activities)
 
     types_by_name = {e["name"]: e["type"] for e in evidence["클라우드_인프라"]}
     assert types_by_name["정보처리기사"] == "certification"
-    assert types_by_name["웹개발 동아리"] == "club"
+    assert types_by_name["교내 해커톤 대상"] == "award"
     assert types_by_name["AWS 클라우드 스쿨"] == "program"
 
 
