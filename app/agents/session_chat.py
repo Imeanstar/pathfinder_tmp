@@ -43,16 +43,30 @@ def build_question_list(unresolved: list[str]) -> list[dict]:
 NEGATIVE_PATTERN = re.compile(r"없|안\s*땄|못\s*땄|아직\s*(안|못)")
 
 
+# IELTS는 소수점 점수(예: 6.5)라 다른 시험처럼 int()로 바꾸면 안 된다.
+_FLOAT_SCORE_EXAMS = {"IELTS"}
+
+
 def _parse_language_answer(text: str) -> dict | None:
+    # 뉴텝스는 "텝스"를 부분 문자열로 포함하므로, 구분되는 패턴을 일반 "텝스"보다
+    # 먼저 검사해야 한다(순서가 바뀌면 "뉴텝스 350점"이 구 텝스 기준으로 잘못
+    # 판정된다). 마찬가지로 "구 토익스피킹"도 순서상 먼저 온다 — 다만 신규
+    # TOEIC Speaking(IM1 등 등급제)은 자유 텍스트에서 아직 인식하지 않는다(기존 갭,
+    # 화면1·대시보드 드롭다운으로는 이미 선택 가능하다).
     exam_patterns = [
         ("TOEIC", r"(토익|toeic)\D{0,5}(\d{2,4})"),
+        ("TEPS_NEW", r"(뉴\s*텝스|new\s*teps)\D{0,5}(\d{2,4})"),
         ("TEPS", r"(텝스|teps)\D{0,5}(\d{2,4})"),
         ("TOEFL_iBT", r"(토플\s*ibt|toefl\s*ibt)\D{0,5}(\d{2,3})"),
+        ("TOEIC_Speaking_OLD", r"(구\s*토익\s*스피킹|old\s*toeic\s*speaking)\D{0,5}(\d{1,2})"),
+        ("IELTS", r"(아이엘츠|ielts)\D{0,5}(\d(?:\.\d)?)"),
     ]
     for exam, pattern in exam_patterns:
         m = re.search(pattern, text, re.I)
         if m:
-            return {"exam": exam, "score": int(m.group(2)), "negative": False}
+            raw_score = m.group(2)
+            score = float(raw_score) if exam in _FLOAT_SCORE_EXAMS else int(raw_score)
+            return {"exam": exam, "score": score, "negative": False}
     if NEGATIVE_PATTERN.search(text):
         return {"exam": None, "score": None, "negative": True}
     return None

@@ -95,6 +95,48 @@ def test_apply_self_reported_answers_does_not_certify_below_topcit_threshold_wit
     assert "programming_competency" not in updated.unresolved  # 미달도 "확인됨"으로 해결 처리
 
 
+def test_apply_self_reported_answers_recognizes_new_teps_from_free_text():
+    # 뉴텝스(329점 기준)와 구 텝스(605점 기준)는 서로 다른 시험이라 문구로 구분해야
+    # 한다(2026-08-22 사용자 요청 — 학교 어학 기준표가 신·구 버전을 둘 다 인정).
+    result = replace(BASE_RESULT, unresolved=["language_requirement"])
+    requirements = load_requirements(2025)
+    updated = apply_self_reported_answers(
+        result, {"language_requirement": "뉴텝스 350점 받았어"}, requirements
+    )
+    assert updated.language_ok is True  # 350 >= 329(뉴텝스 기준)
+    assert "language_requirement" not in updated.unresolved
+
+
+def test_apply_self_reported_answers_distinguishes_new_teps_from_old_teps():
+    # 같은 350점이라도 "텝스"라고만 하면 구 텝스(605점 기준)로 판정돼 미충족이어야 한다.
+    result = replace(BASE_RESULT, unresolved=["language_requirement"])
+    requirements = load_requirements(2025)
+    updated = apply_self_reported_answers(
+        result, {"language_requirement": "텝스 350점 받았어"}, requirements
+    )
+    assert updated.language_ok is False  # 350 < 605(구 텝스 기준)
+
+
+def test_apply_self_reported_answers_recognizes_old_toeic_speaking_from_free_text():
+    result = replace(BASE_RESULT, unresolved=["language_requirement"])
+    requirements = load_requirements(2025)
+    updated = apply_self_reported_answers(
+        result, {"language_requirement": "구 토익스피킹 레벨 6이야"}, requirements
+    )
+    assert updated.language_ok is True  # 6 >= 5(구버전 기준)
+    assert "language_requirement" not in updated.unresolved
+
+
+def test_apply_self_reported_answers_recognizes_ielts_decimal_score_from_free_text():
+    result = replace(BASE_RESULT, unresolved=["language_requirement"])
+    requirements = load_requirements(2025)
+    updated = apply_self_reported_answers(
+        result, {"language_requirement": "아이엘츠 6.5 받았어"}, requirements
+    )
+    assert updated.language_ok is True  # 6.5 >= 5.5
+    assert "language_requirement" not in updated.unresolved
+
+
 def test_apply_self_reported_answers_leaves_other_unresolved_items_untouched():
     result = replace(BASE_RESULT, unresolved=["language_requirement", "double_major_or_minor_out_of_scope"])
     requirements = load_requirements(2025)
