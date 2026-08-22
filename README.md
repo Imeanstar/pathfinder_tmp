@@ -69,6 +69,6 @@ app/
 data/                   과목·프로그램·요람 조항 카탈로그(JSON/JSONL)
 data_pipeline/          데이터 수집·정제 스크립트, 역량 온톨로지(competency.yaml)
 mcp_server/              졸업요건 판정 MCP 도구
-tests/                   pytest (전체 117개)
+tests/                   pytest (전체 292개)
 docs/                   기획서·실행계획
 ```
