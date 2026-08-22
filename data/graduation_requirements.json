@@ -212,6 +212,11 @@
       { "name": "운영체제", "credit": 3 },
       { "name": "시스템프로그래밍", "credit": 3 }
     ],
+    "major_foundation_courses": [
+      { "name": "SW커리어세미나", "credit": 1 },
+      { "name": "확률및통계1", "credit": 3 },
+      { "name": "선형대수1", "credit": 3 }
+    ],
     "major_foundation_credit": { "심화과정": 7, "일반과정": 7, "복수과정": 6, "부전공": 6 },
     "elective_major_credit": { "심화과정": 32, "일반과정": 10, "복수과정": 10 },
     "elective_credit_cap_groups": {
@@ -264,6 +269,11 @@
       { "name": "컴퓨터네트워크", "credit": 3 },
       { "name": "시스템프로그래밍", "credit": 3 },
       { "name": "운영체제", "credit": 3 }
+    ],
+    "major_foundation_courses": [
+      { "name": "SW커리어세미나", "credit": 1 },
+      { "name": "확률및통계1", "credit": 3 },
+      { "name": "선형대수1", "credit": 3 }
     ],
     "major_foundation_credit": { "심화과정": 7, "일반과정": 7, "복수과정": 6, "부전공": 6 },
     "elective_major_credit": { "심화과정": 32, "일반과정": 10, "복수과정": 10 },

@@ -44,6 +44,9 @@ class AuditResult:
     language_ok: bool | None
     unresolved: list[str] = field(default_factory=list)
     programming_competency_certified: bool | None = None  # Task 4-5가 자기신고로 채움(심화과정만 해당)
+    # 로드맵이 gap 추천과 무관하게 이 과목들을 우선 배치하기 위한 목록 — missing_required_major_courses와
+    # 같은 역할을 전공기초에 대해 한다. 그 학번에 전공기초 요건 자체가 없으면 빈 리스트(해당 없음).
+    missing_major_foundation_courses: list[str] = field(default_factory=list)
 
 
 def _elective_credit_earned(elective_courses: list[dict], requirements: dict) -> int:
@@ -95,6 +98,13 @@ def audit_graduation(
         None if major_foundation_threshold is None
         else major_foundation_credit_earned >= major_foundation_threshold
     )
+    major_foundation_names = {c["name"] for c in requirements.get("major_foundation_courses", [])}
+    if track_type in ("복수과정", "부전공"):
+        # 요람 원문: "SW커리어세미나: 전과(전입)생 및 편입학생은 이수 의무 없음" — 이
+        # 서비스는 학생 유형을 별도로 모델링하지 않으므로, 이미 전공기초 학점 기준을
+        # 6(복수·부전공)/7(심화·일반)로 나눠둔 것과 같은 근거로 여기서도 제외한다.
+        major_foundation_names.discard("SW커리어세미나")
+    missing_major_foundation = sorted(major_foundation_names - taken_names)
 
     industry_project_count = _industry_project_count(taken_names, requirements)
     min_courses = requirements["industry_project_certification"][track_type]["min_courses"]
@@ -116,6 +126,7 @@ def audit_graduation(
         elective_major_certified=elective_major_certified,
         major_foundation_credit_earned=major_foundation_credit_earned,
         major_foundation_certified=major_foundation_certified,
+        missing_major_foundation_courses=missing_major_foundation,
         industry_project_certified=industry_project_certified,
         industry_project_count=industry_project_count,
         language_ok=None,

@@ -96,6 +96,40 @@ def test_audit_major_foundation_certified_is_none_when_year_has_no_such_requirem
     assert result.major_foundation_credit_earned == 0
 
 
+def test_audit_missing_major_foundation_courses_lists_all_three_when_none_taken():
+    # 로드맵이 이 목록으로 전공기초 과목을 학기별로 배치한다(사용자 요청, 2026-08-22).
+    transcript = TranscriptData(courses=[])
+    result = audit_graduation(transcript, admission_year=2025, track_type="심화과정",
+                               requirements=load_requirements(2025))
+    assert result.missing_major_foundation_courses == ["SW커리어세미나", "선형대수1", "확률및통계1"]
+
+
+def test_audit_missing_major_foundation_courses_excludes_taken_course():
+    transcript = TranscriptData(courses=[
+        {"name": "SW커리어세미나", "credit": 1, "category": "전공기초"},
+    ])
+    result = audit_graduation(transcript, admission_year=2025, track_type="심화과정",
+                               requirements=load_requirements(2025))
+    assert result.missing_major_foundation_courses == ["선형대수1", "확률및통계1"]
+
+
+def test_audit_missing_major_foundation_courses_excludes_sw_career_seminar_for_double_major():
+    # 복수전공·부전공은 SW커리어세미나 이수 의무가 없다(요람 원문: "전과(전입)생 및
+    # 편입학생은 이수 의무 없음" — 이 서비스에선 복수/부전공 학번의 전공기초 기준이
+    # 7이 아니라 6인 것으로 이미 이 예외를 반영하고 있다).
+    transcript = TranscriptData(courses=[])
+    result = audit_graduation(transcript, admission_year=2025, track_type="복수과정",
+                               requirements=load_requirements(2025))
+    assert result.missing_major_foundation_courses == ["선형대수1", "확률및통계1"]
+
+
+def test_audit_missing_major_foundation_courses_empty_when_year_has_no_such_requirement():
+    transcript = TranscriptData(courses=[])
+    result = audit_graduation(transcript, admission_year=2021, track_type="심화과정",
+                               requirements=load_requirements(2021))
+    assert result.missing_major_foundation_courses == []
+
+
 def test_audit_industry_project_certified_with_two_courses_for_advanced_track():
     transcript = TranscriptData(courses=[
         {"name": "SW캡스톤디자인", "credit": 6, "category": "전공선택"},
