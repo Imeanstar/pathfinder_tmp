@@ -43,7 +43,14 @@ from app.auth import InvalidDomainError, verify_google_id_token
 from app.guardrail import get_blocked_count, is_guardrail_enabled, set_guardrail_override
 from app.llm import default_structure_fn, soften_recommendation_reasons
 from app.masking import PiiLeakDetected
-from app.parser import InjectionDetected, TranscriptData, infer_admission_year, parse_transcript
+from app.parser import (
+    InjectionDetected,
+    TranscriptData,
+    compute_remaining_terms,
+    find_low_credit_semesters,
+    infer_admission_year,
+    parse_transcript,
+)
 from app.retrieval import retrieve
 from app.user_store import get_latest_plan, save_latest_plan
 
@@ -153,6 +160,7 @@ async def upload(file: UploadFile = File(...)):
         "pii_masked": True,
         "masked_preview": transcript.masked_text[:1200],
         "admission_year": infer_admission_year(transcript.courses),
+        "low_credit_semesters": find_low_credit_semesters(transcript.courses),
     }
     if not os.environ.get("GOOGLE_API_KEY"):
         response["warning"] = (
@@ -193,6 +201,10 @@ class PlanRequest(BaseModel):
     grad_lab_cluster: Optional[str] = None
     projects: list[ManualProjectIn] = []
     remaining_terms: list[str] = DEFAULT_REMAINING_TERMS
+    # 화면1 마스킹 확인 단계에서 사용자가 "정규학기가 아닙니다"라고 답한 저학점
+    # 학기만 담긴다(키: f"{year}-{semester}", 값 False). 나머지는 그대로 정규학기로
+    # 간주한다(2026-08-22).
+    irregular_semester_answers: dict[str, bool] = {}
     # 성적표에 없는 자기신고 항목 — 원래는 챗봇으로만 채웠으나, 화면1에서 드롭다운으로
     # 직접 고를 수 있게 되면서 여기서도 받는다(2026-08-21). 안 보내면 unresolved 유지.
     language_score: Optional[LanguageScoreIn] = None
@@ -242,6 +254,9 @@ def _apply_dropdown_selfreports(audit: AuditResult, req: "PlanRequest", requirem
 @app.post("/api/plan")
 def plan(req: PlanRequest):
     resolved_admission_year = infer_admission_year(req.courses) or req.admission_year
+    resolved_remaining_terms = (
+        compute_remaining_terms(req.courses, req.irregular_semester_answers) or req.remaining_terms
+    )
     transcript = TranscriptData(courses=req.courses)
     requirements = load_requirements(resolved_admission_year)
     audit = audit_graduation(transcript, resolved_admission_year, req.track_type, requirements)
@@ -259,7 +274,7 @@ def plan(req: PlanRequest):
         req.track,
         taken_course_names=taken_course_names,
         taken_program_titles=set(),
-        remaining_terms=req.remaining_terms,
+        remaining_terms=resolved_remaining_terms,
         domain_overlay=req.domain_overlay,
         grad_lab_cluster=req.grad_lab_cluster,
         missing_required_courses=audit.missing_required_major_courses,

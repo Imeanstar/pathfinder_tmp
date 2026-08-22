@@ -57,6 +57,68 @@ def test_upload_includes_inferred_admission_year_in_response(monkeypatch):
     assert res.json()["admission_year"] == 2022
 
 
+def test_upload_includes_low_credit_semesters_in_response(monkeypatch):
+    monkeypatch.setattr(
+        "app.api.parse_transcript",
+        lambda pdf_bytes, structure_fn: TranscriptData(
+            courses=[
+                {"name": "이산수학", "credit": 3, "category": "전공필수", "year": 2024, "semester": "1학기"},
+                {"name": "자료구조", "credit": 3, "category": "전공필수", "year": 2024, "semester": "1학기"},
+                {"name": "알고리즘", "credit": 18, "category": "전공필수", "year": 2021, "semester": "1학기"},
+            ],
+            masked_text="dummy",
+        ),
+    )
+    res = client.post("/api/upload", files={"file": ("t.pdf", b"%PDF-1.4", "application/pdf")})
+    assert res.status_code == 200
+    assert res.json()["low_credit_semesters"] == [
+        {"year": 2024, "semester": "1학기", "credit_sum": 6}
+    ]
+
+
+def test_plan_computes_remaining_terms_from_transcript_regular_semester_count():
+    # 2025-1, 2025-2만 이수(정규학기 2개) -> 8-2=6학기, 2학년 1학기부터 시작해야 한다.
+    payload = {
+        "courses": [
+            {"name": "이산수학", "credit": 18, "category": "전공필수", "year": 2025, "semester": "1학기"},
+            {"name": "자료구조", "credit": 18, "category": "전공필수", "year": 2025, "semester": "2학기"},
+        ],
+        "admission_year": 2025,
+        "track_type": "심화과정",
+        "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert res.status_code == 200
+    assert set(res.json()["roadmap"]["schedule"].keys()) == {"2-1", "2-2", "3-1", "3-2", "4-1", "4-2"}
+
+
+def test_plan_excludes_semester_answered_as_not_regular():
+    payload = {
+        "courses": [
+            {"name": "이산수학", "credit": 18, "category": "전공필수", "year": 2021, "semester": "1학기"},
+            {"name": "자료구조", "credit": 18, "category": "전공필수", "year": 2021, "semester": "2학기"},
+            {"name": "군이러닝1", "credit": 3, "category": "전공선택", "year": 2024, "semester": "1학기"},
+        ],
+        "admission_year": 2021,
+        "track_type": "심화과정",
+        "track": "백엔드",
+        "irregular_semester_answers": {"2024-1학기": False},
+    }
+    res = client.post("/api/plan", json=payload)
+    # 정규학기 2개만 인정 -> 8-2=6학기, 2학년 1학기부터.
+    assert set(res.json()["roadmap"]["schedule"].keys()) == {"2-1", "2-2", "3-1", "3-2", "4-1", "4-2"}
+
+
+def test_plan_falls_back_to_request_remaining_terms_when_semester_data_missing():
+    # 기존 동작 100% 호환 — courses에 semester가 하나도 없으면(개발 모드 등)
+    # req.remaining_terms(기본값)를 그대로 쓴다.
+    payload = {
+        "courses": [], "admission_year": 2025, "track_type": "심화과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert set(res.json()["roadmap"]["schedule"].keys()) == {"2-2", "3-1", "3-2", "4-1", "4-2"}
+
+
 def test_plan_infers_admission_year_from_courses_year_field_over_request_default():
     # req.admission_year는 기본값 2025지만, courses가 2021년도 수강 기록을 담고
     # 있으면 서버는 그쪽을 신뢰해 2021학번 요건(140학점)으로 판정해야 한다.
