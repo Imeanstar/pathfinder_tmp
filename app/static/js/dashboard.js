@@ -78,6 +78,15 @@ function renderCreditCard() {
     detail: a.elective_major_certified ? null : "현장실습군은 최대 6학점까지만 인정됩니다.",
   });
 
+  if (req.major_foundation_credit_required !== undefined) {
+    items.push({
+      kind: a.major_foundation_certified ? "ok" : "warn",
+      name: "전공기초",
+      value: `${a.major_foundation_credit_earned}/${req.major_foundation_credit_required}학점`,
+      detail: null,
+    });
+  }
+
   items.push({
     kind: a.industry_project_certified ? "ok" : "warn",
     name: "산학프로젝트 인증",
@@ -231,6 +240,11 @@ function updateSrLanguageFields(formEl) {
       `<option value="">${exam === "TOEFL" ? "유형" : "등급"} 선택</option>` +
       subtypes.map((s) => `<option value="${s.value}">${s.label}</option>`).join("");
     subSlot.hidden = false;
+    // 유형·점수를 함께 보여준다 — 유형 선택 후 별도로 다시 채워지길 기다리면
+    // 아래 change 리스너가 exam 변경 시에만 이 함수를 부르므로 점수 칸이 영영
+    // 안 나타난다(2026-08-22 버그 수정: 예전엔 sub-select의 change에도 이 함수가
+    // 다시 걸려 있어서, 유형을 고르자마자 옵션이 재생성되며 선택이 즉시 초기화됐다).
+    scoreSlot.hidden = false;
     return;
   }
 
@@ -363,7 +377,10 @@ function setupSelfReportDelegation() {
   });
 
   card.addEventListener("change", (e) => {
-    if (e.target.matches(".sr-lang-exam, .sr-lang-sub")) {
+    // exam(시험 종류) 변경에만 반응한다 — sub(유형/등급) 변경에도 반응하면 이
+    // 함수가 sub-select의 옵션 목록을 다시 그리면서 방금 고른 값이 바로
+    // 초기화된다(2026-08-22 버그: "유형 선택이 안 되는 것처럼 보임").
+    if (e.target.matches(".sr-lang-exam")) {
       updateSrLanguageFields(e.target.closest(".selfreport-form"));
     }
     if (e.target.matches(".sr-prog-cert")) {

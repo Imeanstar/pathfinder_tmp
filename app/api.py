@@ -276,6 +276,9 @@ def plan(req: PlanRequest):
         "industry_project_min_courses": industry_cert["min_courses"],
         "language_requirement": requirements["language_requirement"],
     }
+    major_foundation_threshold = requirements.get("major_foundation_credit", {}).get(req.track_type)
+    if major_foundation_threshold is not None:
+        requirements_summary["major_foundation_credit_required"] = major_foundation_threshold
 
     # "근거 보기" — 미이수 전공필수 과목마다 요람 조항을 검색해 붙인다(Task 3-2 attach_citation,
     # Task 3-4 retrieve 연결). yoram 코퍼스 전용 검색이라 LLM 호출 없음.

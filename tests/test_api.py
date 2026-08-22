@@ -106,6 +106,22 @@ def test_plan_returns_requirements_summary_with_thresholds():
     assert summary["language_requirement"]["TOEIC"] == 730
 
 
+def test_plan_requirements_summary_includes_major_foundation_credit_for_2025():
+    payload = {
+        "courses": [], "admission_year": 2025, "track_type": "심화과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert res.json()["requirements_summary"]["major_foundation_credit_required"] == 7
+
+
+def test_plan_requirements_summary_omits_major_foundation_credit_for_2021():
+    payload = {
+        "courses": [], "admission_year": 2021, "track_type": "심화과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert "major_foundation_credit_required" not in res.json()["requirements_summary"]
+
+
 def test_plan_returns_citations_for_missing_required_courses():
     payload = {
         "courses": [{"name": "자료구조", "credit": 3, "category": "전공필수"}],
