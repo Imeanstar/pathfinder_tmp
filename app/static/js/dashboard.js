@@ -75,7 +75,13 @@ function renderCreditCard() {
     kind: a.elective_major_certified ? "ok" : "warn",
     name: "전공선택",
     value: `${a.elective_major_credit_earned}/${req.elective_major_credit_required}학점`,
-    detail: a.elective_major_certified ? null : "현장실습군은 최대 6학점까지만 인정됩니다.",
+    // 현장실습 학점 상한은 학번마다 다르다(21·22학번은 상한 없음, 23·24학번은
+    // 12학점, 25·26학번은 6학점) — 하드코딩하지 않고 요청 시점 요람 기준값을
+    // 그대로 쓴다(2026-08-22).
+    detail:
+      a.elective_major_certified || req.elective_fieldwork_cap_credit == null
+        ? null
+        : `현장실습군은 최대 ${req.elective_fieldwork_cap_credit}학점까지만 인정됩니다.`,
   });
 
   if (req.major_foundation_credit_required !== undefined) {

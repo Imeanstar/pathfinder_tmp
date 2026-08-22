@@ -275,6 +275,9 @@ def plan(req: PlanRequest):
         "required_major_course_count": len(requirements["required_major_courses"]),
         "industry_project_min_courses": industry_cert["min_courses"],
         "language_requirement": requirements["language_requirement"],
+        "elective_fieldwork_cap_credit": requirements.get("elective_credit_cap_groups", {})
+        .get("현장실습군", {})
+        .get("max_credit"),
     }
     major_foundation_threshold = requirements.get("major_foundation_credit", {}).get(req.track_type)
     if major_foundation_threshold is not None:

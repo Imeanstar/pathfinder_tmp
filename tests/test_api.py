@@ -106,6 +106,33 @@ def test_plan_returns_requirements_summary_with_thresholds():
     assert summary["language_requirement"]["TOEIC"] == 730
 
 
+def test_plan_requirements_summary_includes_fieldwork_cap_credit_for_2025():
+    # 25학번은 현장실습군 학점 상한이 6학점이다 — 카드 안내문구가 이 값을
+    # 그대로 써야 한다(2026-08-22, 학번마다 상한이 달라 하드코딩하면 안 됨).
+    payload = {
+        "courses": [], "admission_year": 2025, "track_type": "일반과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert res.json()["requirements_summary"]["elective_fieldwork_cap_credit"] == 6
+
+
+def test_plan_requirements_summary_fieldwork_cap_credit_is_12_for_2023():
+    payload = {
+        "courses": [], "admission_year": 2023, "track_type": "일반과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert res.json()["requirements_summary"]["elective_fieldwork_cap_credit"] == 12
+
+
+def test_plan_requirements_summary_fieldwork_cap_credit_is_none_for_2021():
+    # 21·22학번은 현장실습 학점 상한 자체가 없다.
+    payload = {
+        "courses": [], "admission_year": 2021, "track_type": "일반과정", "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert res.json()["requirements_summary"]["elective_fieldwork_cap_credit"] is None
+
+
 def test_plan_requirements_summary_includes_major_foundation_credit_for_2025():
     payload = {
         "courses": [], "admission_year": 2025, "track_type": "심화과정", "track": "백엔드",
