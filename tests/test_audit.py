@@ -298,6 +298,50 @@ def test_audit_2023_through_2025_accept_creative_sw_intro_as_equivalent_to_ai_in
         assert "인공지능입문" not in result.missing_required_major_courses, year
 
 
+def test_audit_all_years_accept_computer_programming_without_practicum_suffix():
+    # 2026-08-23 사용자 요청(구 교육과정 동일교과목 인정표): "컴퓨터프로그래밍"(및실습
+    # 없는 이름)으로 성적표에 찍혀 있어도 21~26학번 요람의 "컴퓨터프로그래밍및실습"
+    # 이수로 인정한다.
+    for year in (2021, 2022, 2023, 2024, 2025, 2026):
+        transcript = TranscriptData(courses=[
+            {"name": "컴퓨터프로그래밍", "credit": 3, "category": "전공필수"},
+        ])
+        result = audit_graduation(transcript, admission_year=year, track_type="심화과정",
+                                   requirements=load_requirements(year))
+        assert "컴퓨터프로그래밍및실습" not in result.missing_required_major_courses, year
+
+
+def test_audit_all_years_accept_object_oriented_programming_without_practicum_suffix():
+    for year in (2021, 2022, 2023, 2024, 2025, 2026):
+        transcript = TranscriptData(courses=[
+            {"name": "객체지향프로그래밍", "credit": 3, "category": "전공필수"},
+        ])
+        result = audit_graduation(transcript, admission_year=year, track_type="심화과정",
+                                   requirements=load_requirements(year))
+        assert "객체지향프로그래밍및실습" not in result.missing_required_major_courses, year
+
+
+def test_audit_all_years_accept_data_structures_with_practicum_suffix():
+    for year in (2021, 2022, 2023, 2024, 2025, 2026):
+        transcript = TranscriptData(courses=[
+            {"name": "자료구조및실습", "credit": 3, "category": "전공필수"},
+        ])
+        result = audit_graduation(transcript, admission_year=year, track_type="심화과정",
+                                   requirements=load_requirements(year))
+        assert "자료구조" not in result.missing_required_major_courses, year
+
+
+def test_audit_2021_through_2024_accept_digital_circuit_with_practicum_suffix():
+    # 25/26학번 요람엔 "디지털회로"가 애초에 필수과목 목록에 없어 해당 사항 없음.
+    for year in (2021, 2022, 2023, 2024):
+        transcript = TranscriptData(courses=[
+            {"name": "디지털회로및실습", "credit": 3, "category": "전공필수"},
+        ])
+        result = audit_graduation(transcript, admission_year=year, track_type="심화과정",
+                                   requirements=load_requirements(year))
+        assert "디지털회로" not in result.missing_required_major_courses, year
+
+
 def test_audit_2021_general_track_industry_project_fully_exempt():
     # 21학번 일반과정은 산학프로젝트 인증 자체가 면제 — 0과목이어도 충족이어야 한다.
     transcript = TranscriptData(courses=[])
