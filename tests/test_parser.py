@@ -3,7 +3,9 @@ import pytest
 from app.masking import PiiLeakDetected
 from app.parser import (
     InjectionDetected,
+    compute_remaining_terms,
     extract_words_from_pdf,
+    find_low_credit_semesters,
     infer_admission_year,
     parse_transcript,
     parse_transcript_from_words,
@@ -154,3 +156,91 @@ def test_infer_admission_year_ignores_courses_missing_year_field():
 
 def test_infer_admission_year_returns_none_for_empty_course_list():
     assert infer_admission_year([]) is None
+
+
+def test_find_low_credit_semesters_flags_regular_semester_at_or_below_threshold():
+    courses = [
+        {"name": "A", "credit": 3, "category": "전공필수", "year": 2024, "semester": "1학기"},
+        {"name": "B", "credit": 3, "category": "전공선택", "year": 2024, "semester": "1학기"},
+        {"name": "C", "credit": 3, "category": "전공선택", "year": 2021, "semester": "1학기"},
+        {"name": "D", "credit": 15, "category": "전공선택", "year": 2021, "semester": "1학기"},
+    ]
+    flagged = find_low_credit_semesters(courses)
+    assert flagged == [{"year": 2024, "semester": "1학기", "credit_sum": 6}]
+
+
+def test_find_low_credit_semesters_ignores_season_sessions_regardless_of_credit():
+    # 계절학기는 학점이 낮아도(원래 그런 것이므로) 절대 질의 대상이 아니다.
+    courses = [
+        {"name": "겨울특강", "credit": 3, "category": "전공선택", "year": 2024, "semester": "계절학기"},
+    ]
+    assert find_low_credit_semesters(courses) == []
+
+
+def test_find_low_credit_semesters_empty_when_all_semesters_above_threshold():
+    courses = [
+        {"name": "A", "credit": 15, "category": "전공필수", "year": 2021, "semester": "1학기"},
+    ]
+    assert find_low_credit_semesters(courses) == []
+
+
+def test_compute_remaining_terms_counts_regular_semesters_and_returns_eight_minus_n():
+    # 사용자 예시: 25학번이 2025-1, 2025-2만 이수(정규학기 2개) -> 8-2=6학기 남음,
+    # 2학년 1학기부터 시작해야 한다.
+    courses = [
+        {"name": "A", "credit": 18, "category": "전공필수", "year": 2025, "semester": "1학기"},
+        {"name": "B", "credit": 18, "category": "전공필수", "year": 2025, "semester": "2학기"},
+    ]
+    assert compute_remaining_terms(courses) == ["2-1", "2-2", "3-1", "3-2", "4-1", "4-2"]
+
+
+def test_compute_remaining_terms_excludes_season_sessions_from_count():
+    courses = [
+        {"name": "A", "credit": 18, "category": "전공필수", "year": 2025, "semester": "1학기"},
+        {"name": "B", "credit": 3, "category": "전공선택", "year": 2025, "semester": "계절학기"},
+    ]
+    # 계절학기는 세지 않으므로 정규학기 1개 -> 8-1=7학기, 1학년 2학기부터.
+    assert compute_remaining_terms(courses) == ["1-2", "2-1", "2-2", "3-1", "3-2", "4-1", "4-2"]
+
+
+def test_compute_remaining_terms_excludes_semester_confirmed_as_not_regular():
+    # 사용자 본인 사례: 2021-1~2022-2(4개 정규학기) 이수 후 휴학 중 군e-러닝으로
+    # 2024-1·2024-2가 성적표에 찍혔지만 정규학기가 아니라고 확인한 경우.
+    courses = [
+        {"name": "A", "credit": 18, "category": "전공필수", "year": 2021, "semester": "1학기"},
+        {"name": "B", "credit": 18, "category": "전공필수", "year": 2021, "semester": "2학기"},
+        {"name": "C", "credit": 18, "category": "전공필수", "year": 2022, "semester": "1학기"},
+        {"name": "D", "credit": 18, "category": "전공필수", "year": 2022, "semester": "2학기"},
+        {"name": "E", "credit": 3, "category": "전공선택", "year": 2024, "semester": "1학기"},
+        {"name": "F", "credit": 3, "category": "전공선택", "year": 2024, "semester": "2학기"},
+    ]
+    overrides = {"2024-1학기": False, "2024-2학기": False}
+    # 정규학기 4개만 인정 -> 8-4=4학기 남음, 3학년 1학기부터.
+    assert compute_remaining_terms(courses, overrides) == ["3-1", "3-2", "4-1", "4-2"]
+
+
+def test_compute_remaining_terms_counts_unanswered_low_credit_semester_as_regular_by_default():
+    # semester_overrides에 명시 안 된 저학점 학기는(화면 흐름상 항상 답하게 막지만, 이
+    # 함수 자체는 서버 단독 호출도 안전해야 하므로) 정규학기로 간주한다 — 8-2=6학기.
+    courses = [
+        {"name": "A", "credit": 18, "category": "전공필수", "year": 2025, "semester": "1학기"},
+        {"name": "B", "credit": 3, "category": "전공선택", "year": 2025, "semester": "2학기"},
+    ]
+    assert compute_remaining_terms(courses) == ["2-1", "2-2", "3-1", "3-2", "4-1", "4-2"]
+
+
+def test_compute_remaining_terms_returns_none_when_semester_field_missing():
+    # 개발 모드 수동 입력 등 semester 정보가 아예 없으면 추측하지 않고 None(폴백 유도).
+    courses = [{"name": "A", "credit": 3, "category": "전공필수", "year": 2025}]
+    assert compute_remaining_terms(courses) is None
+
+
+def test_compute_remaining_terms_clamps_to_empty_when_eight_or_more_regular_semesters():
+    courses = [
+        {
+            "name": f"C{i}", "credit": 18, "category": "전공필수",
+            "year": 2021 + i // 2, "semester": "1학기" if i % 2 == 0 else "2학기",
+        }
+        for i in range(9)
+    ]
+    assert compute_remaining_terms(courses) == []
