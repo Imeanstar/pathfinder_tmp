@@ -4,6 +4,7 @@ from app.masking import PiiLeakDetected
 from app.parser import (
     InjectionDetected,
     compute_remaining_terms,
+    compute_term_calendar_labels,
     extract_words_from_pdf,
     find_low_credit_semesters,
     infer_admission_year,
@@ -233,6 +234,51 @@ def test_compute_remaining_terms_returns_none_when_semester_field_missing():
     # 개발 모드 수동 입력 등 semester 정보가 아예 없으면 추측하지 않고 None(폴백 유도).
     courses = [{"name": "A", "credit": 3, "category": "전공필수", "year": 2025}]
     assert compute_remaining_terms(courses) is None
+
+
+def test_compute_term_calendar_labels_continues_sequentially_from_last_completed_semester():
+    # 2026-08-23 사용자 실사례: 21학번이 2023년 한 해를 통으로 휴학(군복무)해 2021-1~
+    # 2022-2, 2024-1~2026-1까지 이수했다. calendarLabel을 "입학년도 + (학년-1)"로 계산
+    # 하면 실제로는 2026-2학기(마지막 학기)인데 2024-2로 잘못 표시된다. 성적표에 실제로
+    # 찍힌 "마지막 정규학기"를 기준점 삼아 순차적으로 이어붙여야 휴학 여부와 무관하게
+    # 맞는다.
+    courses = [
+        {"name": "A", "credit": 18, "category": "전공필수", "year": 2021, "semester": "1학기"},
+        {"name": "B", "credit": 18, "category": "전공필수", "year": 2021, "semester": "2학기"},
+        {"name": "C", "credit": 18, "category": "전공필수", "year": 2022, "semester": "1학기"},
+        {"name": "D", "credit": 18, "category": "전공필수", "year": 2022, "semester": "2학기"},
+        {"name": "E", "credit": 3, "category": "전공선택", "year": 2024, "semester": "1학기"},
+        {"name": "F", "credit": 3, "category": "전공선택", "year": 2024, "semester": "2학기"},
+        {"name": "G", "credit": 18, "category": "전공필수", "year": 2025, "semester": "1학기"},
+        {"name": "H", "credit": 18, "category": "전공필수", "year": 2025, "semester": "2학기"},
+        {"name": "I", "credit": 18, "category": "전공필수", "year": 2026, "semester": "1학기"},
+    ]
+    overrides = {"2024-1학기": False, "2024-2학기": False}
+    remaining = compute_remaining_terms(courses, overrides)
+    assert remaining == ["4-2"]
+    labels = compute_term_calendar_labels(courses, remaining, overrides)
+    assert labels == {"4-2": "2026-2"}
+
+
+def test_compute_term_calendar_labels_starts_right_after_last_regular_semester():
+    courses = [
+        {"name": "A", "credit": 18, "category": "전공필수", "year": 2025, "semester": "1학기"},
+    ]
+    remaining = compute_remaining_terms(courses)  # 정규학기 1개 -> ["1-2","2-1",...,"4-2"] (7개)
+    labels = compute_term_calendar_labels(courses, remaining)
+    assert labels == {
+        "1-2": "2025-2",
+        "2-1": "2026-1",
+        "2-2": "2026-2",
+        "3-1": "2027-1",
+        "3-2": "2027-2",
+        "4-1": "2028-1",
+        "4-2": "2028-2",
+    }
+
+
+def test_compute_term_calendar_labels_returns_empty_when_no_regular_semester_found():
+    assert compute_term_calendar_labels([], []) == {}
 
 
 def test_compute_remaining_terms_clamps_to_empty_when_eight_or_more_regular_semesters():

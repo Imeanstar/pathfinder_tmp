@@ -47,6 +47,7 @@ from app.parser import (
     InjectionDetected,
     TranscriptData,
     compute_remaining_terms,
+    compute_term_calendar_labels,
     find_low_credit_semesters,
     infer_admission_year,
     parse_transcript,
@@ -254,8 +255,20 @@ def _apply_dropdown_selfreports(audit: AuditResult, req: "PlanRequest", requirem
 @app.post("/api/plan")
 def plan(req: PlanRequest):
     resolved_admission_year = infer_admission_year(req.courses) or req.admission_year
+    # "or" 폴백을 쓰면 안 된다 — compute_remaining_terms가 8개 정규학기를 모두 이수한
+    # 학생에 대해 정확히 빈 리스트([], 남은 학기 없음)를 돌려줘도 파이썬은 []를 falsy로
+    # 봐서 "계산 실패"로 오인해 req.remaining_terms(하드코딩된 기본값)로 되돌아간다
+    # (2026-08-23 사용자 실사례 — 로드맵에 엉뚱한 연도의 5개 학기가 나타난 원인).
+    # None(계산 불가, semester 정보 자체가 없음)일 때만 폴백해야 한다.
+    computed_remaining_terms = compute_remaining_terms(req.courses, req.irregular_semester_answers)
     resolved_remaining_terms = (
-        compute_remaining_terms(req.courses, req.irregular_semester_answers) or req.remaining_terms
+        computed_remaining_terms if computed_remaining_terms is not None else req.remaining_terms
+    )
+    # 화면이 학기별 로드맵 카드에 실제 달력 연도를 붙여야 해서, "입학년도+학년" 공식이
+    # 아니라 성적표에 실제로 찍힌 마지막 정규학기를 기준으로 계산한 라벨을 함께 보낸다
+    # (2026-08-23 — 휴학한 학생은 입학년도+학년 공식이 실제 달력과 어긋난다).
+    term_calendar_labels = compute_term_calendar_labels(
+        req.courses, resolved_remaining_terms, req.irregular_semester_answers
     )
     transcript = TranscriptData(courses=req.courses)
     requirements = load_requirements(resolved_admission_year)
@@ -343,6 +356,7 @@ def plan(req: PlanRequest):
         "course_recommendations": result["course_recommendations"],
         "program_recommendations": result["program_recommendations"],
         "roadmap": result["roadmap"],
+        "term_calendar_labels": term_calendar_labels,
     }
 
     if req.email_hash:

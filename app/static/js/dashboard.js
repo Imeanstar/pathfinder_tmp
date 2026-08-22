@@ -23,12 +23,18 @@ function loadState() {
   return true;
 }
 
-// --- 학기 라벨: admission_year + "grade-semester" -> "2026-2" 식 달력 표기 ---
+// --- 학기 라벨: "grade-semester" -> "2026-2" 식 달력 표기 ---
 function termSortKey(term) {
   const [grade, sem] = term.split("-").map(Number);
   return grade * 10 + sem;
 }
+// PLAN.term_calendar_labels(서버가 성적표의 실제 마지막 정규학기를 기준으로 계산한
+// 값)를 우선 쓴다. "입학년도 + (학년-1)" 공식은 휴학(군 e-러닝 등으로 정규학기가
+// 빠진 경우)이 있으면 실제 달력과 어긋나므로(2026-08-23 사용자 실사례), 서버 값이
+// 없을 때만(개발 모드 수동 입력처럼 semester 정보 자체가 없는 경우) 폴백으로 쓴다.
 function calendarLabel(term, admissionYear) {
+  const fromServer = PLAN?.term_calendar_labels?.[term];
+  if (fromServer) return fromServer;
   const [grade, sem] = term.split("-").map(Number);
   const year = admissionYear + (grade - 1);
   return `${year}-${sem}`;

@@ -109,6 +109,55 @@ def test_plan_excludes_semester_answered_as_not_regular():
     assert set(res.json()["roadmap"]["schedule"].keys()) == {"2-1", "2-2", "3-1", "3-2", "4-1", "4-2"}
 
 
+def test_plan_treats_all_eight_regular_semesters_completed_as_zero_remaining_not_default():
+    # 2026-08-23 사용자 실사례: 8개 정규학기를 모두 이수한 학생(휴학 등으로 실제 달력
+    # 상 연도는 많이 지났어도)은 compute_remaining_terms가 정확히 빈 리스트(더 들을
+    # 학기 없음)를 돌려주는데, "or req.remaining_terms" 폴백이 빈 리스트도 "계산 실패"로
+    # 오인해 하드코딩된 DEFAULT_REMAINING_TERMS(["2-2","3-1","3-2","4-1","4-2"])로
+    # 되돌아가는 버그가 있었다 — 로드맵에 엉뚱한 연도의 5개 학기가 나타난 원인.
+    courses = [
+        {"name": f"과목{i}", "credit": 18, "category": "전공필수", "year": 2021 + i // 2, "semester": "1학기" if i % 2 == 0 else "2학기"}
+        for i in range(8)
+    ]
+    payload = {
+        "courses": courses,
+        "admission_year": 2021,
+        "track_type": "심화과정",
+        "track": "백엔드",
+    }
+    res = client.post("/api/plan", json=payload)
+    assert res.status_code == 200
+    assert res.json()["roadmap"]["schedule"] == {}
+
+
+def test_plan_returns_term_calendar_labels_anchored_to_last_completed_semester_despite_gap():
+    # 2026-08-23 사용자 실사례: 2023년 통으로 휴학(군복무)한 21학번 — 마지막 정규학기가
+    # 2026-1이므로 남은 마지막 학기("4-2")는 실제 달력으로 2026-2여야 한다.
+    courses = [
+        {"name": "A", "credit": 18, "category": "전공필수", "year": 2021, "semester": "1학기"},
+        {"name": "B", "credit": 18, "category": "전공필수", "year": 2021, "semester": "2학기"},
+        {"name": "C", "credit": 18, "category": "전공필수", "year": 2022, "semester": "1학기"},
+        {"name": "D", "credit": 18, "category": "전공필수", "year": 2022, "semester": "2학기"},
+        {"name": "E", "credit": 3, "category": "전공선택", "year": 2024, "semester": "1학기"},
+        {"name": "F", "credit": 3, "category": "전공선택", "year": 2024, "semester": "2학기"},
+        {"name": "G", "credit": 18, "category": "전공필수", "year": 2025, "semester": "1학기"},
+        {"name": "H", "credit": 18, "category": "전공필수", "year": 2025, "semester": "2학기"},
+        {"name": "I", "credit": 18, "category": "전공필수", "year": 2026, "semester": "1학기"},
+    ]
+    payload = {
+        "courses": courses,
+        "admission_year": 2021,
+        "track_type": "심화과정",
+        "track": "백엔드",
+        "irregular_semester_answers": {"2024-1학기": False, "2024-2학기": False},
+    }
+    res = client.post("/api/plan", json=payload)
+    assert res.status_code == 200
+    body = res.json()
+    assert set(body["roadmap"]["schedule"].keys()) == {"4-2"}
+    assert body["term_calendar_labels"] == {"4-2": "2026-2"}
+
+
 def test_plan_falls_back_to_request_remaining_terms_when_semester_data_missing():
     # 기존 동작 100% 호환 — courses에 semester가 하나도 없으면(개발 모드 등)
     # req.remaining_terms(기본값)를 그대로 쓴다.

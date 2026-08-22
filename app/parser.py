@@ -109,6 +109,44 @@ def compute_remaining_terms(
     return [f"{i // 2 + 1}-{i % 2 + 1}" for i in range(start_index, 8)]
 
 
+def _next_semester(year: int, semester: str) -> tuple[int, str]:
+    if semester == "1학기":
+        return (year, "2학기")
+    return (year + 1, "1학기")
+
+
+def compute_term_calendar_labels(
+    courses: list[dict],
+    remaining_terms: list[str],
+    semester_overrides: dict[str, bool] | None = None,
+) -> dict[str, str]:
+    """remaining_terms(예: ["4-1","4-2"], compute_remaining_terms가 돌려주는 학년-학기
+    상대 표기)를 화면에 보여줄 실제 달력 연도-학기로 바꾼다.
+
+    "입학년도 + (학년-1)"처럼 계산하면 휴학(군 e-러닝으로 정규학기가 빠진 경우 등)이
+    있는 학생은 실제 달력과 어긋난다(2026-08-23 사용자 실사례 — 마지막 학기가 실제로는
+    2026-2인데 2024-2로 잘못 표시됨). 대신 성적표에 실제로 찍힌 "마지막 정규학기"를
+    기준점 삼아 그 다음 학기부터 순차적으로 이어붙인다 — 휴학 기간이 몇 년이든 무관하게
+    항상 실제 달력과 맞는다."""
+    overrides = semester_overrides or {}
+    sums = _regular_semester_credit_sums(courses)
+    regular_keys = [
+        (year, semester) for (year, semester) in sums
+        if overrides.get(_semester_key(year, semester), True)
+    ]
+    if not regular_keys:
+        return {}
+
+    regular_keys.sort(key=lambda ys: (ys[0], 0 if ys[1] == "1학기" else 1))
+    cursor = regular_keys[-1]
+    labels: dict[str, str] = {}
+    for term in remaining_terms:
+        cursor = _next_semester(*cursor)
+        sem_num = "1" if cursor[1] == "1학기" else "2"
+        labels[term] = f"{cursor[0]}-{sem_num}"
+    return labels
+
+
 def extract_words_from_pdf(pdf_bytes: bytes) -> list[dict]:
     """pdfplumber 경계 코드. 원본 PDF 바이트는 이 함수 밖으로 나가지 않는다."""
     words = []
