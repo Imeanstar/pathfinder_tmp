@@ -39,6 +39,15 @@ class TranscriptData:
     masked_text: str = ""
 
 
+def infer_admission_year(courses: list[dict]) -> int | None:
+    """1학년 1학기는 휴학이 교칙상 불가능하므로, 성적표에 찍힌 "수강년도"(courses의
+    "year" 키) 중 최솟값이 곧 입학년도다. 사용자가 화면에서 입학년도를 직접 입력하지
+    않아도 되게 하려고 서버가 자동으로 추론한다(2026-08-22 사용자 지시). "year"가
+    있는 과목이 하나도 없으면(예: 개발 모드 수동 입력) 추측하지 않고 None을 돌려준다."""
+    years = [c["year"] for c in courses if "year" in c]
+    return min(years) if years else None
+
+
 def extract_words_from_pdf(pdf_bytes: bytes) -> list[dict]:
     """pdfplumber 경계 코드. 원본 PDF 바이트는 이 함수 밖으로 나가지 않는다."""
     words = []

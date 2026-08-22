@@ -4,6 +4,7 @@ from app.masking import PiiLeakDetected
 from app.parser import (
     InjectionDetected,
     extract_words_from_pdf,
+    infer_admission_year,
     parse_transcript,
     parse_transcript_from_words,
 )
@@ -123,3 +124,33 @@ def test_parse_transcript_blocks_injection_embedded_in_real_pdf(monkeypatch):
         parse_transcript(pdf_bytes, structure_fn=fake_structure_fn)
 
     assert called == []
+
+
+def test_infer_admission_year_returns_minimum_year_across_courses():
+    # 1학년 1학기 휴학은 교칙상 불가능하므로, 성적표에 찍힌 수강년도의 최솟값이
+    # 곧 입학년도다(2026-08-22 사용자 지시).
+    courses = [
+        {"name": "선형대수1", "credit": 3, "category": "전공기초", "year": 2025},
+        {"name": "SW커리어세미나", "credit": 1, "category": "전공기초", "year": 2021},
+        {"name": "이산수학", "credit": 3, "category": "전공필수", "year": 2021},
+    ]
+    assert infer_admission_year(courses) == 2021
+
+
+def test_infer_admission_year_returns_none_when_no_course_has_year():
+    # 개발 모드(GOOGLE_API_KEY 없음)에서 사용자가 과목을 직접 입력하면 year가
+    # 없을 수 있다 — 이땐 "모른다"를 그대로 알려야 한다(추측해서 채우지 않는다).
+    courses = [{"name": "자료구조", "credit": 3, "category": "전공필수"}]
+    assert infer_admission_year(courses) is None
+
+
+def test_infer_admission_year_ignores_courses_missing_year_field():
+    courses = [
+        {"name": "자료구조", "credit": 3, "category": "전공필수", "year": 2022},
+        {"name": "수동입력과목", "credit": 3, "category": "전공선택"},  # year 없음
+    ]
+    assert infer_admission_year(courses) == 2022
+
+
+def test_infer_admission_year_returns_none_for_empty_course_list():
+    assert infer_admission_year([]) is None
