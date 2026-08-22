@@ -400,22 +400,25 @@ function setupSelfReportDelegation() {
 }
 
 // --- 역량 레이더 (SVG) ---
-// 2026-08-21 재설계. 예전엔 과목 1개만 태깅돼도 그 축이 "충족"으로 뜨는 게 너무
-// 낙관적이라는 지적을 받았다 — 백엔드가 이제 4요소(수업 2개 이상/실전참여[프로젝트·
-// 교내프로그램]/동아리/자격증) 중 몇 개나 있는지로 5단계(매우충족~매우부족)를 판정해
-// 내려주므로(competency_levels), 레이더의 "현재" 선도 연속 비율이 아니라 이 점수
-// (score/4)로 그린다 — 과목 하나로 육각형이 꽉 차 보이던 문제의 근본 해결.
+// 2026-08-21 최초 설계, 2026-08-22 점수 체계 재설계(사용자 요청). 예전엔 과목 1개만
+// 태깅돼도 그 축이 "충족"으로 뜨는 게 너무 낙관적이라는 지적을 받았다 — 백엔드가
+// 수업 이수율(0~1)·자격증(1개당 0.5점)·실전참여[프로젝트·교내프로그램](1회당 0.5점)·
+// 수상 경력(1회당 1점)을 합산한 점수로 5단계(매우만족~매우부족)를 판정해
+// 내려주므로(competency_levels), 레이더의 "현재" 선도 연속 비율이 아니라 이 점수를
+// "매우 만족" 문턱값(2.5)으로 정규화해 그린다 — 과목 하나로 육각형이 꽉 차 보이던
+// 문제의 근본 해결. "동아리"는 역량 근거로 부적절하다는 판단에 따라 뺐다.
 
 const RADAR_AXIS_COUNT = 6;
+const RADAR_SCORE_CAP = 2.5; // "매우 만족" 문턱값 — 이 이상이면 레이더가 꽉 찬다
 
 const LEVEL_COLOR = {
-  "매우 충족": "#0f6e42",
-  "충족": "#1e8e5a",
+  "매우 만족": "#0f6e42",
+  "만족": "#1e8e5a",
   "보통": "#b8860b",
   "부족": "#d9822b",
   "매우 부족": "#d33f3f",
 };
-const FACTOR_LABELS = { course: "수업", activity: "실전 참여", club: "동아리", certification: "자격증" };
+const FACTOR_LABELS = { course: "수업", activity: "실전 참여", certification: "자격증", award: "수상 경력" };
 
 function buildRadarAxes() {
   const target = PLAN.competency_target || {};
@@ -469,9 +472,12 @@ function renderRadarSvg(axes) {
     .join("");
 
   const targetPts = axes.map((_, i) => polarPoint(cx, cy, maxR, angleOf(i)));
-  // "현재" 선은 4요소 중 채운 개수(score/4)로 그린다 — 연속 수치가 아니라 이번에
-  // 새로 만든 엄격한 5단계 판정과 완전히 같은 기준이어야 육각형과 목록이 안 어긋난다.
-  const currentPts = axes.map((a, i) => polarPoint(cx, cy, maxR * (a.score / 4), angleOf(i)));
+  // "현재" 선은 점수를 "매우 만족" 문턱값(2.5)으로 정규화해 그린다 — 연속 수치가
+  // 아니라 5단계 판정과 완전히 같은 기준이어야 육각형과 목록이 안 어긋난다. 2.5를
+  // 넘겨도(고득점) 육각형이 문턱을 넘어가지 않게 1로 클램프한다.
+  const currentPts = axes.map((a, i) =>
+    polarPoint(cx, cy, maxR * Math.min(1, a.score / RADAR_SCORE_CAP), angleOf(i))
+  );
 
   const labels = axes
     .map((a, i) => {
@@ -497,26 +503,33 @@ function renderRadarSvg(axes) {
   `;
 }
 
-// "전부 충족"이 근거 없이 뜬다는 지적(2026-08-21) — 축마다 4요소 중 무엇이 있고
-// 없는지, 실제로 어떤 과목·활동 때문인지를 접힌 목록으로 확인할 수 있게 한다.
+// "전부 충족"이 근거 없이 뜬다는 지적(2026-08-21) — 축마다 근거가 무엇이고 없는지,
+// 실제로 어떤 과목·활동 때문인지를 접힌 목록으로 확인할 수 있게 한다.
+// 2026-08-22: 실전참여·자격증·수상 경력이 O/X에서 "개수당 점수"로 바뀌어 칩도 그에
+// 맞춰 개수·점수를 함께 보여준다(백엔드 app/agents/competency.py의 배점과 반드시
+// 같은 수치를 써야 한다 — 자격증·실전참여 0.5점/개, 수상 경력 1점/회).
+const FACTOR_POINTS_PER_UNIT = { activity: 0.5, certification: 0.5, award: 1 };
+
 function renderEvidenceDetails(items, factors) {
-  // course 요소는 이제 O/X가 아니라 "커리큘럼상 지금 들을 수 있는 관련 전공필수
-  // 이수율"(0~1 비율) — 2026-08-21 사용자 피드백: 과목 개수만으로 O/X를 가르는 게
-  // 여전히 너무 거칠다고 지적받아, 요람 권장 학기·학년 기준 이수율로 바꿨다.
+  // course 요소는 "커리큘럼상 지금 들을 수 있는 관련 전공필수 이수율"(0~1 비율) —
+  // 2026-08-21 사용자 피드백: 과목 개수만으로 O/X를 가르는 게 너무 거칠다고 지적받아,
+  // 요람 권장 학기·학년 기준 이수율로 바꿨다.
   const factorRow = Object.entries(factors || {})
     .map(([key, val]) => {
       if (key === "course") {
         const pct = Math.round(val * 100);
         return `<span class="factor-chip ${val >= 0.99 ? "on" : ""}">📘 수업 이수율 ${pct}%</span>`;
       }
-      return `<span class="factor-chip ${val ? "on" : ""}">${val ? "✓" : "✗"} ${FACTOR_LABELS[key]}</span>`;
+      const points = val * FACTOR_POINTS_PER_UNIT[key];
+      const unit = key === "award" ? "회" : key === "activity" ? "회" : "개";
+      return `<span class="factor-chip ${val > 0 ? "on" : ""}">${FACTOR_LABELS[key]} ${val}${unit} (${points}점)</span>`;
     })
     .join("");
 
   if (!items || items.length === 0) {
     return `<div class="evidence-empty">${factorRow}<div>근거 없음 — 이 역량에 기여한 과목·활동이 아직 없습니다</div></div>`;
   }
-  const typeLabel = { course: "과목", project: "프로젝트", club: "동아리", certification: "자격증", program: "프로그램" };
+  const typeLabel = { course: "과목", project: "프로젝트", award: "수상 경력", certification: "자격증", program: "프로그램" };
   const rows = items
     .map((e) => `<li><span class="evidence-badge ${e.type}">${typeLabel[e.type] || e.type}</span>${escapeHtml(e.name)}</li>`)
     .join("");
@@ -541,14 +554,14 @@ function renderCompetencyCard() {
       <div class="gap-row">
         <div class="gap-label"><span>${a.label}</span><span style="color:${color};font-weight:700">${a.level}</span></div>
         <div class="gap-bar">
-          <div style="width:${(a.score / 4) * 100}%;background:${color}"></div>
+          <div style="width:${Math.min(100, (a.score / RADAR_SCORE_CAP) * 100)}%;background:${color}"></div>
         </div>
         ${renderEvidenceDetails(evidenceMap[a.id], a.factors)}
       </div>`;
     })
     .join("");
 
-  const weakCount = axes.filter((a) => a.score <= 1).length;
+  const weakCount = axes.filter((a) => a.level === "부족" || a.level === "매우 부족").length;
   const summary =
     weakCount === 0
       ? "표시된 역량 대부분이 다양한 근거로 뒷받침되고 있습니다."
@@ -556,9 +569,9 @@ function renderCompetencyCard() {
 
   document.getElementById("competencyCard").innerHTML = `
     <p class="card-title">역량 진단</p>
-    <p class="card-subtitle">${summary} 과목·프로젝트·동아리·자격증을 종합해 판정합니다.</p>
+    <p class="card-subtitle">${summary} 과목·프로젝트·자격증·수상 경력을 종합해 판정합니다.</p>
     <div class="radar-legend">
-      <span><span class="legend-swatch" style="background:#2f5fda"></span>현재(4요소 중 충족 개수)</span>
+      <span><span class="legend-swatch" style="background:#2f5fda"></span>현재(수업·실전참여·자격증·수상 경력 종합 점수)</span>
       <span><span class="legend-swatch" style="background:transparent;border:1px dashed #9aa6bf"></span>목표 트랙</span>
     </div>
     <div style="text-align:center">${renderRadarSvg(axes)}</div>

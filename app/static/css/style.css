@@ -479,7 +479,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 .req-list .req-name, .req-list .req-detail { word-break: keep-all; }
 .req-list .req-value { word-break: keep-all; text-align: right; flex-shrink: 0; max-width: 48%; }
 
-/* 역량 4요소 체크(수업/실전참여/동아리/자격증) — 2026-08-21 */
+/* 역량 근거 칩(수업 이수율/실전참여/자격증/수상 경력) — 2026-08-21, 2026-08-22 개편 */
 .factor-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .evidence-empty .factor-row, .evidence-empty { display: flex; flex-direction: column; gap: 6px; }
 .factor-chip {

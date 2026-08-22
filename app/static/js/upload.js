@@ -398,13 +398,15 @@ function collectProgrammingCompetency() {
   return null;
 }
 
-// --- 개인 활동(프로젝트·동아리·자격증·교내프로그램) ---
+// --- 개인 활동(프로젝트·자격증·수상 경력·교내프로그램) ---
 // 2026-08-21: 역량 진단이 "과목 하나만 들어도 충족"으로 뜨는 게 너무 낙관적이라는
 // 피드백에 따라, 판정 근거를 과목 외에 다양화하려고 활동 유형을 추가했다(app/agents/
-// competency.py의 4요소 판정: 수업/실전참여/동아리/자격증).
+// competency.py의 점수 산정: 수업 이수율/실전참여/자격증/수상 경력).
+// 2026-08-22: "동아리"는 역량 근거로 부적절하다는 사용자 판단에 따라 빼고
+// "수상 경력"을 추가했다.
 const ACTIVITY_TYPES = [
   { id: "project", label: "프로젝트" },
-  { id: "club", label: "동아리" },
+  { id: "award", label: "수상 경력" },
   { id: "certification", label: "자격증" },
   { id: "program", label: "교내 프로그램" },
 ];
