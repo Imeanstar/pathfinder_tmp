@@ -27,6 +27,14 @@ def test_prompt_template_requires_year_field_for_admission_year_inference():
     assert "수강년도" in PROMPT_TEMPLATE
 
 
+def test_prompt_template_requires_semester_field_normalized_to_three_values():
+    # 남은 학기(8-n) 계산은 "수강학기"가 1학기/2학기/계절학기 중 뭔지 알아야 한다
+    # (2026-08-22 사용자 요청 — 계절학기는 정규학기 카운트에서 항상 제외).
+    assert "semester" in PROMPT_TEMPLATE
+    assert "수강학기" in PROMPT_TEMPLATE
+    assert "계절학기" in PROMPT_TEMPLATE
+
+
 def test_default_structure_fn_returns_empty_list_without_api_key(monkeypatch):
     monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     assert default_structure_fn("자료구조 3학점 전공필수") == []
