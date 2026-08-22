@@ -305,9 +305,16 @@ function updateLanguageFields() {
     return;
   }
 
-  // TOEIC / TEPS — 바로 점수 입력
+  // TOEIC / TEPS / TEPS_NEW / IELTS / TOEIC_Speaking_OLD — 바로 점수 입력
   setSlot("langScoreSlot", true);
-  note.textContent = exam === "TOEIC" ? "졸업 기준: 730점 이상" : "졸업 기준: 605점 이상";
+  const NOTES = {
+    TOEIC: "졸업 기준: 730점 이상",
+    TEPS: "졸업 기준: 605점 이상(구 텝스)",
+    TEPS_NEW: "졸업 기준: 329점 이상(뉴텝스)",
+    IELTS: "졸업 기준: 5.5점 이상",
+    TOEIC_Speaking_OLD: "졸업 기준: Level 5 이상(구버전)",
+  };
+  note.textContent = NOTES[exam] || "";
 }
 
 function collectLanguageScore() {

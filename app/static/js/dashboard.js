@@ -195,10 +195,13 @@ function buildLanguageSelfReportForm() {
     <select class="sr-lang-exam">
       <option value="">시험 선택</option>
       <option value="TOEIC">TOEIC</option>
-      <option value="TEPS">TEPS</option>
+      <option value="TEPS">TEPS (구버전)</option>
+      <option value="TEPS_NEW">TEPS (뉴텝스)</option>
       <option value="TOEFL">TOEFL</option>
       <option value="GTELP">G-TELP</option>
-      <option value="TOEIC_Speaking">TOEIC Speaking</option>
+      <option value="IELTS">IELTS</option>
+      <option value="TOEIC_Speaking">TOEIC Speaking (신규, IM/IH등급)</option>
+      <option value="TOEIC_Speaking_OLD">TOEIC Speaking (구버전, Level)</option>
       <option value="OPIc">OPIc</option>
     </select>
     <span class="sr-lang-sub-slot" hidden><select class="sr-lang-sub"></select></span>
