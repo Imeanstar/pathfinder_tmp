@@ -11,6 +11,7 @@ const PROJECT_FORM_TYPES = [
 let CONFIG = null;
 let uploadedCourses = [];
 let detectedAdmissionYear = null;
+let lowCreditSemesters = [];
 
 // --- 단계 전환: 나가는 섹션을 위로 페이드아웃 → 들어오는 섹션을 아래에서 페이드인 ---
 function goToStep(fromId, toId) {
@@ -194,6 +195,50 @@ function renderMaskResult(body) {
       </tr>`
     )
     .join("");
+
+  renderIrregularSemesterQuestions(body.low_credit_semesters);
+}
+
+function renderIrregularSemesterQuestions(lowCredit) {
+  lowCreditSemesters = lowCredit || [];
+  const section = document.getElementById("irregularSemesterSection");
+  const rows = document.getElementById("irregularSemesterRows");
+
+  if (lowCreditSemesters.length === 0) {
+    section.hidden = true;
+    rows.innerHTML = "";
+    return;
+  }
+
+  section.hidden = false;
+  rows.innerHTML = lowCreditSemesters
+    .map(
+      (s) => `
+      <div class="irregular-semester-row">
+        <p>${s.year}년도 ${s.semester}에 이수한 학점(${s.credit_sum}학점)이 너무 적어요. 정규학기가 아닌가요?</p>
+        <select data-year="${s.year}" data-semester="${s.semester}">
+          <option value="">선택해주세요</option>
+          <option value="regular">정규학기입니다.</option>
+          <option value="not_regular">정규학기가 아닙니다.</option>
+        </select>
+      </div>`
+    )
+    .join("");
+}
+
+function collectIrregularSemesterAnswers() {
+  const answers = {};
+  document.querySelectorAll("#irregularSemesterRows select").forEach((sel) => {
+    if (!sel.value) return;
+    answers[`${sel.dataset.year}-${sel.dataset.semester}`] = sel.value === "regular";
+  });
+  return answers;
+}
+
+function allIrregularSemestersAnswered() {
+  if (lowCreditSemesters.length === 0) return true;
+  const selects = document.querySelectorAll("#irregularSemesterRows select");
+  return Array.from(selects).every((sel) => sel.value !== "");
 }
 
 function escapeHtml(text) {
@@ -434,6 +479,7 @@ async function handleSubmit(e) {
     language_score: collectLanguageScore(),
     programming_competency: collectProgrammingCompetency(),
     email_hash: emailHash,
+    irregular_semester_answers: collectIrregularSemesterAnswers(),
   };
 
   try {
@@ -476,6 +522,10 @@ document.addEventListener("DOMContentLoaded", () => {
     goToStep("stepMasked", "stepUpload");
   });
   document.getElementById("confirmMaskBtn").addEventListener("click", () => {
+    if (!allIrregularSemestersAnswered()) {
+      alert("아직 답하지 않은 학기가 있습니다. 전부 답해주세요.");
+      return;
+    }
     goToStep("stepMasked", "stepSettings");
   });
 

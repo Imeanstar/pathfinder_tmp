@@ -488,7 +488,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 }
 .factor-chip.on { background: var(--blue-50); color: var(--blue-600); }
 
-/* 로드맵 계산 로딩 오버레이(2026-08-21) — Gemini 사유 생성까지 포함해 최대 20초
+/* 로드맵 계산 로딩 오버레이(2026-08-21) — Gemini 사유 생성까지 포함해 최대 1분
    걸리는데 화면이 멈춘 것처럼 보이지 않게 진행 중임을 명확히 알린다. */
 .loading-overlay {
   position: fixed; inset: 0; z-index: 100;
@@ -626,3 +626,12 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   cursor: pointer; padding: 8px; text-align: center;
 }
 .drawer-logout:hover { color: var(--red); }
+
+/* 저학점 학기(6학점 이하) 확인 질문 — 화면1 마스킹 확인 단계(2026-08-22) */
+.irregular-semester-row {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 12px 14px; margin-bottom: 8px;
+  background: var(--blue-50, #eef4ff); border-radius: 10px;
+}
+.irregular-semester-row p { margin: 0; flex: 1 1 260px; font-size: 14px; color: var(--navy-900, #14213c); }
+.irregular-semester-row select { flex: 0 0 auto; }
