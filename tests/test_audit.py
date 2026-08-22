@@ -1,3 +1,5 @@
+import pytest
+
 from app.audit import attach_citation, audit_graduation, load_requirements
 from app.parser import TranscriptData
 
@@ -41,6 +43,60 @@ def test_audit_elective_credit_sum_with_fieldwork_cap():
                                requirements=load_requirements(2025))
     assert result.elective_major_credit_earned == 9
     assert result.elective_major_certified is False  # 일반과정 기준 10학점, 9 < 10
+
+
+def test_audit_excludes_major_foundation_courses_from_elective_credit():
+    # 전공기초(확률및통계1 3학점, SW커리어세미나 1학점)는 전공선택과 별도 영역이라
+    # 전공선택 학점 합산에 들어가면 안 된다. 전공선택 실제 이수는 6학점뿐이라
+    # 일반과정 기준(10학점) 미달인데, 전공기초 4학점이 섞이면 10학점으로 잘못
+    # 합산돼 충족 오판정이 났었다(2026-08-22 실사용 버그 리포트).
+    transcript = TranscriptData(courses=[
+        {"name": "확률및통계1", "credit": 3, "category": "전공기초"},
+        {"name": "SW커리어세미나", "credit": 1, "category": "전공기초"},
+        {"name": "데이터베이스", "credit": 3, "category": "전공선택"},
+        {"name": "소프트웨어공학", "credit": 3, "category": "전공선택"},
+    ])
+    result = audit_graduation(transcript, admission_year=2025, track_type="일반과정",
+                               requirements=load_requirements(2025))
+    assert result.elective_major_credit_earned == 6
+    assert result.elective_major_certified is False  # 일반과정 기준 10학점, 6 < 10
+    assert result.total_credit_earned == 10  # 전공기초도 총 이수학점에는 포함돼야 함
+
+
+def test_audit_major_foundation_credit_tracked_when_year_has_the_requirement():
+    # 2025학번은 전공기초 7학점(심화과정) 요건이 있다. SW커리어세미나(1)+확률및통계1(3)만
+    # 이수하면 4학점으로 미달이어야 한다.
+    transcript = TranscriptData(courses=[
+        {"name": "SW커리어세미나", "credit": 1, "category": "전공기초"},
+        {"name": "확률및통계1", "credit": 3, "category": "전공기초"},
+    ])
+    result = audit_graduation(transcript, admission_year=2025, track_type="심화과정",
+                               requirements=load_requirements(2025))
+    assert result.major_foundation_credit_earned == 4
+    assert result.major_foundation_certified is False  # 7학점 기준, 4 < 7
+
+
+def test_audit_major_foundation_certified_when_threshold_met():
+    transcript = TranscriptData(courses=[
+        {"name": "SW커리어세미나", "credit": 1, "category": "전공기초"},
+        {"name": "확률및통계1", "credit": 3, "category": "전공기초"},
+        {"name": "선형대수1", "credit": 3, "category": "전공기초"},
+    ])
+    result = audit_graduation(transcript, admission_year=2025, track_type="심화과정",
+                               requirements=load_requirements(2025))
+    assert result.major_foundation_credit_earned == 7
+    assert result.major_foundation_certified is True
+
+
+@pytest.mark.skip(reason="Task 2에서 2021 데이터 추가 후 활성화")
+def test_audit_major_foundation_certified_is_none_when_year_has_no_such_requirement():
+    # 21학번은 전공기초라는 요건 자체가 없다(교필로 찍혀 전공 학점 미인정) —
+    # "미충족"이 아니라 "해당 없음"이어야 한다.
+    transcript = TranscriptData(courses=[])
+    result = audit_graduation(transcript, admission_year=2021, track_type="심화과정",
+                               requirements=load_requirements(2021))
+    assert result.major_foundation_certified is None
+    assert result.major_foundation_credit_earned == 0
 
 
 def test_audit_industry_project_certified_with_two_courses_for_advanced_track():

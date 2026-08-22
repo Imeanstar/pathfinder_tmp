@@ -44,6 +44,12 @@
         "credit": 3
       }
     ],
+    "major_foundation_credit": {
+      "심화과정": 7,
+      "일반과정": 7,
+      "복수과정": 6,
+      "부전공": 6
+    },
     "elective_major_credit": {
       "심화과정": 32,
       "일반과정": 10,

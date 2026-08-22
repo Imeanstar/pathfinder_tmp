@@ -37,6 +37,8 @@ class AuditResult:
     missing_required_major_courses: list[str]
     elective_major_credit_earned: int
     elective_major_certified: bool
+    major_foundation_credit_earned: int
+    major_foundation_certified: bool | None
     industry_project_certified: bool
     industry_project_count: int
     language_ok: bool | None
@@ -86,6 +88,14 @@ def audit_graduation(
     elective_threshold = requirements["elective_major_credit"][track_type]
     elective_major_certified = elective_credit_earned >= elective_threshold
 
+    major_foundation_courses = [c for c in courses if c["category"] == "전공기초"]
+    major_foundation_credit_earned = sum(c["credit"] for c in major_foundation_courses)
+    major_foundation_threshold = requirements.get("major_foundation_credit", {}).get(track_type)
+    major_foundation_certified = (
+        None if major_foundation_threshold is None
+        else major_foundation_credit_earned >= major_foundation_threshold
+    )
+
     industry_project_count = _industry_project_count(taken_names, requirements)
     min_courses = requirements["industry_project_certification"][track_type]["min_courses"]
     industry_project_certified = industry_project_count >= min_courses
@@ -104,6 +114,8 @@ def audit_graduation(
         missing_required_major_courses=missing_required,
         elective_major_credit_earned=elective_credit_earned,
         elective_major_certified=elective_major_certified,
+        major_foundation_credit_earned=major_foundation_credit_earned,
+        major_foundation_certified=major_foundation_certified,
         industry_project_certified=industry_project_certified,
         industry_project_count=industry_project_count,
         language_ok=None,
