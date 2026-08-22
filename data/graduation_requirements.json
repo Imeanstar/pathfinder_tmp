@@ -15,6 +15,9 @@
       { "name": "컴퓨터네트워크", "credit": 3 },
       { "name": "운영체제", "credit": 3 }
     ],
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+    },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "requires_double_major_or_minor": ["일반과정", "복수과정"],
     "industry_project_certification": {
@@ -60,6 +63,9 @@
       { "name": "컴퓨터네트워크", "credit": 3 },
       { "name": "운영체제", "credit": 3 }
     ],
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+    },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "requires_double_major_or_minor": ["일반과정", "복수과정"],
     "industry_project_certification": {
@@ -105,6 +111,9 @@
       { "name": "컴퓨터네트워크", "credit": 3 },
       { "name": "운영체제", "credit": 3 }
     ],
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+    },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "elective_credit_cap_groups": {
       "현장실습군": {
@@ -159,6 +168,9 @@
       { "name": "컴퓨터네트워크", "credit": 3 },
       { "name": "운영체제", "credit": 3 }
     ],
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+    },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "elective_credit_cap_groups": {
       "현장실습군": {

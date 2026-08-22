@@ -219,6 +219,48 @@ def test_audit_2021_uses_140_credit_and_36_credit_required_major_with_digital_ci
     assert sum(c["credit"] for c in requirements["required_major_courses"]) == 36
 
 
+def test_audit_2021_accepts_new_system_programming_name_as_equivalent():
+    # "시스템프로그래밍및실습"(21~24학번, 4학점)이 2025학번부터 "시스템프로그래밍"
+    # (3학점)으로 개편됐다 — 21학번 학생이 2024년까지 못 듣고 2025년에 개설된
+    # "시스템프로그래밍"을 들었어도(사용자 실사례) 같은 과목이므로 21학번 요람의
+    # "시스템프로그래밍및실습" 이수로 인정돼야 한다(2026-08-22 사용자 요청).
+    transcript = TranscriptData(courses=[
+        {"name": "시스템프로그래밍", "credit": 3, "category": "전공필수"},
+    ])
+    result = audit_graduation(transcript, admission_year=2021, track_type="심화과정",
+                               requirements=load_requirements(2021))
+    assert "시스템프로그래밍및실습" not in result.missing_required_major_courses
+    # 실제 인정 학점은 3(신 명칭 그대로) — 원래 요람의 4학점을 억지로 끼워맞추지 않는다.
+    assert result.total_credit_earned == 3
+
+
+def test_audit_2021_still_flags_missing_when_neither_system_programming_name_taken():
+    transcript = TranscriptData(courses=[])
+    result = audit_graduation(transcript, admission_year=2021, track_type="심화과정",
+                               requirements=load_requirements(2021))
+    assert "시스템프로그래밍및실습" in result.missing_required_major_courses
+
+
+def test_audit_2024_also_accepts_new_system_programming_name_as_equivalent():
+    transcript = TranscriptData(courses=[
+        {"name": "시스템프로그래밍", "credit": 3, "category": "전공필수"},
+    ])
+    result = audit_graduation(transcript, admission_year=2024, track_type="심화과정",
+                               requirements=load_requirements(2024))
+    assert "시스템프로그래밍및실습" not in result.missing_required_major_courses
+
+
+def test_audit_2025_unaffected_by_equivalence_mapping():
+    # 25학번은 애초에 자기 요람에 "시스템프로그래밍"(3학점)이 그대로 필수 목록에 있다 —
+    # 동등성 매핑이 없어도 원래부터 정상 동작해야 한다(회귀 방지).
+    transcript = TranscriptData(courses=[
+        {"name": "시스템프로그래밍", "credit": 3, "category": "전공필수"},
+    ])
+    result = audit_graduation(transcript, admission_year=2025, track_type="심화과정",
+                               requirements=load_requirements(2025))
+    assert "시스템프로그래밍" not in result.missing_required_major_courses
+
+
 def test_audit_2021_general_track_industry_project_fully_exempt():
     # 21학번 일반과정은 산학프로젝트 인증 자체가 면제 — 0과목이어도 충족이어야 한다.
     transcript = TranscriptData(courses=[])

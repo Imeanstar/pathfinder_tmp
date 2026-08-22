@@ -83,7 +83,16 @@ def audit_graduation(
     total_credit_earned = sum(c["credit"] for c in courses)
 
     required_names = {c["name"] for c in requirements["required_major_courses"]}
-    missing_required = sorted(required_names - taken_names)
+    # 과목명이 개편으로 바뀌는 경우(예: 21~24학번 "시스템프로그래밍및실습" ->
+    # 25학번부터 "시스템프로그래밍") 신 명칭으로 이수해도 같은 과목이므로 인정해야
+    # 한다(2026-08-22 사용자 실사례). 학점은 성적표에 찍힌 그대로(신 명칭 학점)
+    # total_credit_earned에 반영되고, 여기선 이수 여부만 판정한다.
+    name_equivalents = requirements.get("course_name_equivalents", {})
+    missing_required = sorted(
+        name for name in required_names
+        if name not in taken_names
+        and not any(alt in taken_names for alt in name_equivalents.get(name, []))
+    )
     required_major_completed = len(missing_required) == 0
 
     elective_courses = [c for c in courses if c["category"] == "전공선택"]
