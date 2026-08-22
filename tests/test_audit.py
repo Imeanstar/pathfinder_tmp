@@ -1,5 +1,3 @@
-import pytest
-
 from app.audit import attach_citation, audit_graduation, load_requirements
 from app.parser import TranscriptData
 
@@ -88,7 +86,6 @@ def test_audit_major_foundation_certified_when_threshold_met():
     assert result.major_foundation_certified is True
 
 
-@pytest.mark.skip(reason="Task 2에서 2021 데이터 추가 후 활성화")
 def test_audit_major_foundation_certified_is_none_when_year_has_no_such_requirement():
     # 21학번은 전공기초라는 요건 자체가 없다(교필로 찍혀 전공 학점 미인정) —
     # "미충족"이 아니라 "해당 없음"이어야 한다.
@@ -175,3 +172,113 @@ def test_attach_citation_returns_none_when_no_hits():
 
     result = attach_citation(["요람에 없는 과목"], search_fn=fake_search)
     assert result == [{"item": "요람에 없는 과목", "citation": None}]
+
+
+def test_audit_2021_uses_140_credit_and_36_credit_required_major_with_digital_circuit():
+    # 21학번은 디지털회로가 전공필수에 포함되고(11개, 36학점), 창의소프트웨어입문을 쓴다.
+    requirements = load_requirements(2021)
+    assert requirements["total_credit"] == 140
+    names = {c["name"] for c in requirements["required_major_courses"]}
+    assert "디지털회로" in names
+    assert "창의소프트웨어입문" in names
+    assert "인공지능입문" not in names
+    assert sum(c["credit"] for c in requirements["required_major_courses"]) == 36
+
+
+def test_audit_2021_general_track_industry_project_fully_exempt():
+    # 21학번 일반과정은 산학프로젝트 인증 자체가 면제 — 0과목이어도 충족이어야 한다.
+    transcript = TranscriptData(courses=[])
+    result = audit_graduation(transcript, admission_year=2021, track_type="일반과정",
+                               requirements=load_requirements(2021))
+    assert result.industry_project_count == 0
+    assert result.industry_project_certified is True  # 0/0 = 면제
+
+
+def test_audit_2021_general_track_elective_threshold_is_10_not_37():
+    transcript = TranscriptData(courses=[
+        {"name": "데이터베이스", "credit": 3, "category": "전공선택"},
+        {"name": "정보보호", "credit": 3, "category": "전공선택"},
+        {"name": "컴퓨터통신", "credit": 3, "category": "전공선택"},
+    ])
+    result = audit_graduation(transcript, admission_year=2021, track_type="일반과정",
+                               requirements=load_requirements(2021))
+    assert result.elective_major_credit_earned == 9
+    assert result.elective_major_certified is False  # 9 < 10
+
+
+def test_audit_2021_no_fieldwork_credit_cap():
+    # 21학번은 현장실습 학점 상한이 없다 — 9학점 전부 인정돼야 한다(25+는 6학점 상한).
+    transcript = TranscriptData(courses=[
+        {"name": "SW현장실습1", "credit": 3, "category": "전공선택"},
+        {"name": "SW현장실습2", "credit": 3, "category": "전공선택"},
+        {"name": "SW현장실습3", "credit": 3, "category": "전공선택"},
+    ])
+    result = audit_graduation(transcript, admission_year=2021, track_type="일반과정",
+                               requirements=load_requirements(2021))
+    assert result.elective_major_credit_earned == 9  # 상한 없이 전부 인정
+
+
+def test_audit_2022_identical_to_2021():
+    requirements = load_requirements(2022)
+    assert requirements == load_requirements(2021)
+
+
+def test_audit_2023_uses_ai_intro_and_12_credit_fieldwork_cap():
+    requirements = load_requirements(2023)
+    names = {c["name"] for c in requirements["required_major_courses"]}
+    assert "인공지능입문" in names
+    assert "창의소프트웨어입문" not in names
+    assert "디지털회로" in names
+    assert requirements["elective_credit_cap_groups"]["현장실습군"]["max_credit"] == 12
+    assert requirements["industry_project_certification"]["일반과정"]["min_courses"] == 1
+
+
+def test_audit_2023_fieldwork_capped_at_12_not_6():
+    transcript = TranscriptData(courses=[
+        {"name": "SW현장실습1", "credit": 3, "category": "전공선택"},
+        {"name": "SW현장실습2", "credit": 3, "category": "전공선택"},
+        {"name": "SW현장실습3", "credit": 3, "category": "전공선택"},
+        {"name": "SW현장실습4", "credit": 3, "category": "전공선택"},
+        {"name": "SW현장실습5", "credit": 3, "category": "전공선택"},
+    ])
+    result = audit_graduation(transcript, admission_year=2023, track_type="일반과정",
+                               requirements=load_requirements(2023))
+    assert result.elective_major_credit_earned == 12  # 15학점 이수해도 12까지만 인정
+
+
+def test_audit_2024_still_uses_140_credit_curriculum():
+    requirements = load_requirements(2024)
+    assert requirements["total_credit"] == 140
+
+
+def test_audit_2026_required_major_drops_ai_intro_and_totals_29_credits():
+    # 26학번은 인공지능입문이 전공필수에서 빠져 9개·29학점이 된다(25학번은 10개·32학점).
+    requirements = load_requirements(2026)
+    names = {c["name"] for c in requirements["required_major_courses"]}
+    assert "인공지능입문" not in names
+    assert "운영체제" in names
+    assert len(requirements["required_major_courses"]) == 9
+    assert sum(c["credit"] for c in requirements["required_major_courses"]) == 29
+    assert requirements["total_credit"] == 128
+    assert requirements["major_foundation_credit"]["심화과정"] == 7
+
+
+def test_audit_all_years_share_the_same_industry_project_course_groups():
+    # 사용자 지시: AI집중교육1,2는 21~26학번 전체에서 산학프로젝트 인증 과목군으로 인정.
+    for year in [2021, 2022, 2023, 2024, 2025, 2026]:
+        groups = load_requirements(year)["industry_project_certification"]["course_groups"]
+        assert "AI집중교육1" in groups["집중교육과목군"]
+        assert "AI집중교육2" in groups["집중교육과목군"]
+
+
+def test_audit_all_years_share_the_identical_language_requirement():
+    # 어학 기준은 학번별로 다른 게 아니라, TEPS/TOEIC Speaking만 신·구 버전을
+    # 둘 다 인정하는 것뿐이다(2026-08-22 사용자 정정 — 학교 공식 어학 기준표 근거).
+    reference = load_requirements(2021)["language_requirement"]
+    for year in [2022, 2023, 2024, 2025, 2026]:
+        assert load_requirements(year)["language_requirement"] == reference
+    assert reference["TEPS"] == 605
+    assert reference["TEPS_NEW"] == 329
+    assert reference["TOEIC_Speaking_OLD"] == 5
+    assert reference["TOEIC_Speaking"] == "IM1"
+    assert reference["IELTS"] == 5.5
