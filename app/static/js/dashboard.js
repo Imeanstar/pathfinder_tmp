@@ -194,20 +194,23 @@ const SR_GTELP_SUBTYPES = [
   { value: "GTELP_Lv2", label: "Level 2" },
   { value: "GTELP_Lv3", label: "Level 3" },
 ];
-const SR_SPEAKING_GRADES = ["AH", "AM", "AL", "IH", "IM", "IL", "NH", "NM", "NL"];
+// (NEW) TOEIC Speaking과 OPIc은 등급 체계가 다르다(2026-08-22 사용자 지시) — OPIc은
+// AH/AM 등급이 없다. IM은 세부적으로 IM1~IM3로 나뉘어 성적표에 그대로 찍힌다.
+const SR_TOEIC_SPEAKING_NEW_GRADES = ["AH", "AM", "AL", "IH", "IM3", "IM2", "IM1", "IL", "NH", "NM", "NL"];
+const SR_OPIC_GRADES = ["AL", "IH", "IM3", "IM2", "IM1", "IL", "NH", "NM", "NL"];
 
 function buildLanguageSelfReportForm() {
   return `<div class="selfreport-form">
     <select class="sr-lang-exam">
       <option value="">시험 선택</option>
       <option value="TOEIC">TOEIC</option>
-      <option value="TEPS">TEPS (구버전)</option>
-      <option value="TEPS_NEW">TEPS (뉴텝스)</option>
+      <option value="TEPS">TEPS</option>
+      <option value="TEPS_NEW">(NEW) TEPS</option>
       <option value="TOEFL">TOEFL</option>
       <option value="GTELP">G-TELP</option>
       <option value="IELTS">IELTS</option>
-      <option value="TOEIC_Speaking">TOEIC Speaking (신규, IM/IH등급)</option>
-      <option value="TOEIC_Speaking_OLD">TOEIC Speaking (구버전, Level)</option>
+      <option value="TOEIC_Speaking_OLD">TOEIC Speaking</option>
+      <option value="TOEIC_Speaking">(NEW) TOEIC Speaking</option>
       <option value="OPIc">OPIc</option>
     </select>
     <span class="sr-lang-sub-slot" hidden><select class="sr-lang-sub"></select></span>
@@ -258,10 +261,11 @@ function updateSrLanguageFields(formEl) {
   }
 
   if (exam === "TOEIC_Speaking" || exam === "OPIc") {
+    const grades = exam === "TOEIC_Speaking" ? SR_TOEIC_SPEAKING_NEW_GRADES : SR_OPIC_GRADES;
     const gradeSelect = formEl.querySelector(".sr-lang-grade");
     gradeSelect.innerHTML =
       `<option value="">등급 선택</option>` +
-      SR_SPEAKING_GRADES.map((g) => `<option value="${g}">${g}</option>`).join("");
+      grades.map((g) => `<option value="${g}">${g}</option>`).join("");
     gradeSlot.hidden = false;
     return;
   }

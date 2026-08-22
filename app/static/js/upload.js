@@ -307,8 +307,11 @@ const GTELP_SUBTYPES = [
   { value: "GTELP_Lv2", label: "Level 2" },
   { value: "GTELP_Lv3", label: "Level 3" },
 ];
-// TOEIC Speaking·OPIc 등급(높은 것부터 나열해 고르기 쉽게)
-const SPEAKING_GRADES = ["AH", "AM", "AL", "IH", "IM", "IL", "NH", "NM", "NL"];
+// (NEW) TOEIC Speaking·OPIc 등급(높은 것부터 나열해 고르기 쉽게). 둘은 등급 체계가
+// 다르다(2026-08-22 사용자 지시) — OPIc은 AH/AM 등급이 없고, IM은 세부적으로
+// IM1~IM3로 나뉘어 성적표에 그대로 찍힌다.
+const TOEIC_SPEAKING_NEW_GRADES = ["AH", "AM", "AL", "IH", "IM3", "IM2", "IM1", "IL", "NH", "NM", "NL"];
+const OPIC_GRADES = ["AL", "IH", "IM3", "IM2", "IM1", "IL", "NH", "NM", "NL"];
 
 function setSlot(slotId, visible) {
   document.getElementById(slotId).hidden = !visible;
@@ -339,9 +342,10 @@ function updateLanguageFields() {
   }
 
   if (exam === "TOEIC_Speaking" || exam === "OPIc") {
+    const grades = exam === "TOEIC_Speaking" ? TOEIC_SPEAKING_NEW_GRADES : OPIC_GRADES;
     gradeSelect.innerHTML =
       `<option value="">등급 선택</option>` +
-      SPEAKING_GRADES.map((g) => `<option value="${g}">${g}</option>`).join("");
+      grades.map((g) => `<option value="${g}">${g}</option>`).join("");
     setSlot("langGradeSlot", true);
     note.textContent =
       exam === "TOEIC_Speaking"
