@@ -252,13 +252,50 @@ def test_audit_2024_also_accepts_new_system_programming_name_as_equivalent():
 
 def test_audit_2025_unaffected_by_equivalence_mapping():
     # 25학번은 애초에 자기 요람에 "시스템프로그래밍"(3학점)이 그대로 필수 목록에 있다 —
-    # 동등성 매핑이 없어도 원래부터 정상 동작해야 한다(회귀 방지).
+    # 원래부터 정상 동작해야 한다(회귀 방지). 아래에서 시스템프로그래밍및실습 ->
+    # 시스템프로그래밍 역방향 동등성도 추가되지만, 이 케이스(신 명칭 그대로 이수)는
+    # 그 매핑 없이도 이미 통과해야 한다.
     transcript = TranscriptData(courses=[
         {"name": "시스템프로그래밍", "credit": 3, "category": "전공필수"},
     ])
     result = audit_graduation(transcript, admission_year=2025, track_type="심화과정",
                                requirements=load_requirements(2025))
     assert "시스템프로그래밍" not in result.missing_required_major_courses
+
+
+def test_audit_2025_and_2026_accept_old_system_programming_practicum_name_as_equivalent():
+    # 2026-08-23 사용자 요청: "시스템프로그래밍및실습을 들은 사람도 시스템프로그래밍을
+    # 들은 것으로 간주" — 기존 21~24학번 매핑(신->구)의 역방향(구->신)이다. 복수전공·
+    # 재입학 등으로 25/26학번 학생 성적표에 구 명칭이 찍히는 경우를 위한 것.
+    for year in (2025, 2026):
+        transcript = TranscriptData(courses=[
+            {"name": "시스템프로그래밍및실습", "credit": 4, "category": "전공필수"},
+        ])
+        result = audit_graduation(transcript, admission_year=year, track_type="심화과정",
+                                   requirements=load_requirements(year))
+        assert "시스템프로그래밍" not in result.missing_required_major_courses, year
+
+
+def test_audit_2021_and_2022_accept_ai_intro_as_equivalent_to_creative_sw_intro():
+    # 2026-08-23 사용자 요청: 창의소프트웨어입문(21~22학번 필수명) <-> 인공지능입문
+    # (23학번부터 필수명, 같은 과목의 개편된 이름) 양방향 동등 인정.
+    for year in (2021, 2022):
+        transcript = TranscriptData(courses=[
+            {"name": "인공지능입문", "credit": 3, "category": "전공필수"},
+        ])
+        result = audit_graduation(transcript, admission_year=year, track_type="심화과정",
+                                   requirements=load_requirements(year))
+        assert "창의소프트웨어입문" not in result.missing_required_major_courses, year
+
+
+def test_audit_2023_through_2025_accept_creative_sw_intro_as_equivalent_to_ai_intro():
+    for year in (2023, 2024, 2025):
+        transcript = TranscriptData(courses=[
+            {"name": "창의소프트웨어입문", "credit": 3, "category": "전공필수"},
+        ])
+        result = audit_graduation(transcript, admission_year=year, track_type="심화과정",
+                                   requirements=load_requirements(year))
+        assert "인공지능입문" not in result.missing_required_major_courses, year
 
 
 def test_audit_2021_general_track_industry_project_fully_exempt():

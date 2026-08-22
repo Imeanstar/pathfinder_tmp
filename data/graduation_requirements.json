@@ -16,7 +16,8 @@
       { "name": "운영체제", "credit": 3 }
     ],
     "course_name_equivalents": {
-      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "창의소프트웨어입문": ["인공지능입문"]
     },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "requires_double_major_or_minor": ["일반과정", "복수과정"],
@@ -64,7 +65,8 @@
       { "name": "운영체제", "credit": 3 }
     ],
     "course_name_equivalents": {
-      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "창의소프트웨어입문": ["인공지능입문"]
     },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "requires_double_major_or_minor": ["일반과정", "복수과정"],
@@ -112,7 +114,8 @@
       { "name": "운영체제", "credit": 3 }
     ],
     "course_name_equivalents": {
-      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "인공지능입문": ["창의소프트웨어입문"]
     },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "elective_credit_cap_groups": {
@@ -169,7 +172,8 @@
       { "name": "운영체제", "credit": 3 }
     ],
     "course_name_equivalents": {
-      "시스템프로그래밍및실습": ["시스템프로그래밍"]
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "인공지능입문": ["창의소프트웨어입문"]
     },
     "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
     "elective_credit_cap_groups": {
@@ -229,6 +233,10 @@
       { "name": "확률및통계1", "credit": 3 },
       { "name": "선형대수1", "credit": 3 }
     ],
+    "course_name_equivalents": {
+      "시스템프로그래밍": ["시스템프로그래밍및실습"],
+      "인공지능입문": ["창의소프트웨어입문"]
+    },
     "major_foundation_credit": { "심화과정": 7, "일반과정": 7, "복수과정": 6, "부전공": 6 },
     "elective_major_credit": { "심화과정": 32, "일반과정": 10, "복수과정": 10 },
     "elective_credit_cap_groups": {
@@ -287,6 +295,9 @@
       { "name": "확률및통계1", "credit": 3 },
       { "name": "선형대수1", "credit": 3 }
     ],
+    "course_name_equivalents": {
+      "시스템프로그래밍": ["시스템프로그래밍및실습"]
+    },
     "major_foundation_credit": { "심화과정": 7, "일반과정": 7, "복수과정": 6, "부전공": 6 },
     "elective_major_credit": { "심화과정": 32, "일반과정": 10, "복수과정": 10 },
     "elective_credit_cap_groups": {
