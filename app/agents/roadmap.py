@@ -108,7 +108,8 @@ def _topological_order_required_courses(names: list[str], catalog: dict) -> list
 
 def _place_one_course(
     name: str, reason: str, catalog: dict, schedule: dict, taken: set,
-    assigned_terms: dict[str, str], remaining_terms: list[str], warnings: list[str], required: bool,
+    assigned_terms: dict[str, str], remaining_terms: list[str], warnings: list[str],
+    required_label: str | None,
 ) -> None:
     info = catalog.get(name)
     if info is None:
@@ -141,7 +142,7 @@ def _place_one_course(
     term, is_recommended = _earliest_matching_term(info, candidate_terms)
     overdue = False
     if term is None:
-        if required:
+        if required_label is not None:
             # 요람 권장/허용 시기를 이미 지났어도 졸업을 위해선 결국 들어야 하므로, 조용히
             # 빠뜨리지 않고 후보 중 가장 이른 학기에 밀려서라도 배치한다(2026-08-21 사용자
             # 요청 — "얼른 이수하도록" 안내).
@@ -159,7 +160,7 @@ def _place_one_course(
     else:
         timing_note = f"요람상 이 시기({grade}학년 {sem}학기)에 들어도 무방합니다."
 
-    prefix = "[졸업요건] 전공필수 — " if required else ""
+    prefix = f"[졸업요건] {required_label} — " if required_label is not None else ""
     schedule[term]["courses"].append({
         "name": name, "credit": info.get("credit"), "category": info.get("category"),
         "reason": f"{prefix}{reason} {timing_note}",
@@ -173,6 +174,7 @@ def plan_roadmap(
     taken_course_names: set[str],
     remaining_terms: list[str],
     missing_required_courses: list[str] | None = None,
+    missing_major_foundation_courses: list[str] | None = None,
 ) -> dict:
     catalog = _load_course_catalog()
     schedule = {term: {"courses": [], "programs": []} for term in remaining_terms}
@@ -187,7 +189,19 @@ def plan_roadmap(
     for name in ordered_required:
         _place_one_course(
             name, "졸업을 위해 반드시 이수해야 합니다.", catalog, schedule, taken,
-            assigned_terms, remaining_terms, warnings, required=True,
+            assigned_terms, remaining_terms, warnings, required_label="전공필수",
+        )
+
+    # 1.5단계: 미이수 전공기초(25·26학번 신설) — 전공필수와 같은 원칙으로 gap 추천과
+    # 무관하게 무조건 배치 시도한다. 그 요건 자체가 없는 학번은 audit.py가 빈 리스트를
+    # 넘기므로 이 단계가 자연히 아무 일도 하지 않는다.
+    ordered_major_foundation = _topological_order_required_courses(
+        missing_major_foundation_courses or [], catalog
+    )
+    for name in ordered_major_foundation:
+        _place_one_course(
+            name, "졸업을 위해 반드시 이수해야 합니다.", catalog, schedule, taken,
+            assigned_terms, remaining_terms, warnings, required_label="전공기초",
         )
 
     # 2단계: 역량 격차 기반 전공선택 추천 — 1단계에서 이미 배치된 과목은 건너뛴다
@@ -201,7 +215,7 @@ def plan_roadmap(
             continue
         _place_one_course(
             name, reco.get("reason", ""), catalog, schedule, taken,
-            assigned_terms, remaining_terms, warnings, required=False,
+            assigned_terms, remaining_terms, warnings, required_label=None,
         )
 
     for reco in program_recommendations:

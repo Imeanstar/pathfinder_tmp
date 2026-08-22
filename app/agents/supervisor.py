@@ -34,6 +34,7 @@ class PathfinderState(TypedDict, total=False):
     taken_program_titles: set[str]
     remaining_terms: list[str]
     missing_required_courses: list[str]
+    missing_major_foundation_courses: list[str]
     domain_overlay: str | None
     grad_lab_cluster: str | None
     competency_vector: dict[str, dict[str, float]]
@@ -108,6 +109,7 @@ def _roadmap_node(state: PathfinderState) -> dict:
         taken_course_names=state.get("taken_course_names", set()),
         remaining_terms=state.get("remaining_terms", []),
         missing_required_courses=state.get("missing_required_courses", []),
+        missing_major_foundation_courses=state.get("missing_major_foundation_courses", []),
     )
     return {"roadmap": result}
 
@@ -184,12 +186,15 @@ def run_full_plan(
     domain_overlay: str | None = None,
     grad_lab_cluster: str | None = None,
     missing_required_courses: list[str] | None = None,
+    missing_major_foundation_courses: list[str] | None = None,
 ) -> PathfinderState:
     """화면 3(로드맵) 진입점 — 그래프 전체(역량진단→격차→추천→학기 배치)를 돈다.
 
     missing_required_courses: audit_graduation()이 이미 계산한 미이수 전공필수 목록.
     로드맵이 gap 추천과 무관하게 이 과목들을 우선 배치하기 위해 필요하다
     (2026-08-21, "로드맵에 과목이 하나도 안 뜬다" 문제의 근본 원인 수정).
+    missing_major_foundation_courses: 같은 이유로 미이수 전공기초(25·26학번 신설) 목록도
+    받는다(2026-08-22) — 그 요건이 없는 학번은 audit.py가 빈 리스트를 넘긴다.
     """
     return _GRAPH.invoke({
         "transcript": transcript,
@@ -201,4 +206,5 @@ def run_full_plan(
         "domain_overlay": domain_overlay,
         "grad_lab_cluster": grad_lab_cluster,
         "missing_required_courses": missing_required_courses or [],
+        "missing_major_foundation_courses": missing_major_foundation_courses or [],
     })

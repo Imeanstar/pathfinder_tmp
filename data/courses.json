@@ -1,5 +1,35 @@
 [
   {
+    "name": "SW커리어세미나",
+    "credit": 1,
+    "category": "전공기초",
+    "prereq": [],
+    "offered_terms": ["1-1"],
+    "recommended_terms": ["1-1"],
+    "optional_terms": [],
+    "competency_tags": []
+  },
+  {
+    "name": "확률및통계1",
+    "credit": 3,
+    "category": "전공기초",
+    "prereq": [],
+    "offered_terms": ["2-1"],
+    "recommended_terms": ["2-1"],
+    "optional_terms": [],
+    "competency_tags": []
+  },
+  {
+    "name": "선형대수1",
+    "credit": 3,
+    "category": "전공기초",
+    "prereq": [],
+    "offered_terms": ["2-2"],
+    "recommended_terms": ["2-2"],
+    "optional_terms": [],
+    "competency_tags": []
+  },
+  {
     "name": "컴퓨터프로그래밍및실습",
     "credit": 4,
     "category": "전공필수",

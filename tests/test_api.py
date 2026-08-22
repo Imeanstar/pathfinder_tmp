@@ -194,6 +194,26 @@ def test_plan_returns_full_pipeline_result_for_backend_track():
     assert set(body["roadmap"]["schedule"].keys()) == {"2-2", "3-1", "3-2", "4-1", "4-2"}
 
 
+def test_plan_schedules_missing_major_foundation_courses_in_roadmap():
+    # 25학번은 전공기초 3과목이 미이수면 로드맵에 자동 배치돼야 한다(2026-08-22 사용자 요청).
+    payload = {
+        "courses": [],
+        "admission_year": 2025,
+        "track_type": "심화과정",
+        "track": "백엔드",
+        "remaining_terms": ["1-1", "2-1", "2-2"],
+    }
+    resp = client.post("/api/plan", json=payload)
+    assert resp.status_code == 200
+    body = resp.json()
+    placed_names = [
+        c["name"] for term in body["roadmap"]["schedule"].values() for c in term["courses"]
+    ]
+    assert "SW커리어세미나" in placed_names
+    assert "확률및통계1" in placed_names
+    assert "선형대수1" in placed_names
+
+
 def test_plan_with_domain_overlay_surfaces_real_automotive_program():
     payload = {
         "courses": [],

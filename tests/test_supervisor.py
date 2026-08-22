@@ -88,3 +88,20 @@ def test_run_full_plan_produces_a_roadmap_from_end_to_end_graph_execution():
     placed_count = sum(len(term["courses"]) + len(term["programs"]) for term in schedule.values())
     # 추천이 실제로 배치되거나, 안 됐다면 왜 안 됐는지 warnings에 남아야 한다 — 둘 다 비면 버그
     assert placed_count > 0 or result["roadmap"]["warnings"]
+
+
+def test_run_full_plan_forwards_missing_major_foundation_courses_to_roadmap():
+    # 25·26학번 신설 전공기초도 missing_required_courses와 같은 경로로 그래프를 통과해
+    # roadmap 노드까지 전달돼야 자동 배치된다(2026-08-22 사용자 요청).
+    transcript = TranscriptData(courses=[])
+    result = run_full_plan(
+        transcript, projects=[], track="백엔드",
+        taken_course_names=set(), taken_program_titles=set(),
+        remaining_terms=["1-1", "2-1", "2-2"],
+        missing_major_foundation_courses=["SW커리어세미나", "확률및통계1", "선형대수1"],
+    )
+    schedule = result["roadmap"]["schedule"]
+    placed_names = [c["name"] for term in schedule.values() for c in term["courses"]]
+    assert "SW커리어세미나" in placed_names
+    assert "확률및통계1" in placed_names
+    assert "선형대수1" in placed_names

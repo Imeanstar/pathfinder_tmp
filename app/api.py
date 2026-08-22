@@ -263,6 +263,7 @@ def plan(req: PlanRequest):
         domain_overlay=req.domain_overlay,
         grad_lab_cluster=req.grad_lab_cluster,
         missing_required_courses=audit.missing_required_major_courses,
+        missing_major_foundation_courses=audit.missing_major_foundation_courses,
     )
 
     # 화면이 "33/42학점"처럼 기준치를 같이 보여줘야 해서, AuditResult엔 없는 원 기준값을
