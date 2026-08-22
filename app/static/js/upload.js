@@ -10,6 +10,7 @@ const PROJECT_FORM_TYPES = [
 
 let CONFIG = null;
 let uploadedCourses = [];
+let detectedAdmissionYear = null;
 
 // --- 단계 전환: 나가는 섹션을 위로 페이드아웃 → 들어오는 섹션을 아래에서 페이드인 ---
 function goToStep(fromId, toId) {
@@ -121,6 +122,11 @@ function uploadFile(file) {
     document.getElementById("upCheck").hidden = false;
 
     uploadedCourses = body.courses || [];
+    detectedAdmissionYear = body.admission_year || null;
+    const chip = document.getElementById("admissionYearChip");
+    chip.textContent = detectedAdmissionYear
+      ? `${detectedAdmissionYear}학번 · 소프트웨어학과`
+      : "학번 확인 불가 · 소프트웨어학과"; // 개발 모드(과목 미인식) 등 수강년도를 못 얻은 경우
     renderMaskResult(body);
     setTimeout(() => goToStep("stepUpload", "stepMasked"), 700);
   });
@@ -391,7 +397,7 @@ async function handleSubmit(e) {
   const submitBtn = document.getElementById("submitBtn");
   submitBtn.disabled = true;
   submitBtn.textContent = "분석 중...";
-  // 졸업판정+역량진단+추천(Gemini 사유 생성 포함)까지 한 번에 계산해 20초 가까이
+  // 졸업판정+역량진단+추천(Gemini 사유 생성 포함)까지 한 번에 계산해 최대 1분 가까이
   // 걸린다 — 화면이 멈춘 것처럼 보이지 않게 전체 화면 오버레이로 진행 중임을 알린다.
   document.getElementById("loadingOverlay").hidden = false;
 
@@ -431,6 +437,14 @@ async function handleSubmit(e) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const result = await res.json();
+
+    // 서버가 성적표의 수강년도로 실제 판정에 쓴 입학년도를 되돌려준다 — 화면1에서
+    // 보낸 admission_year(기본값 2025)는 폴백일 뿐이라, 응답값으로 덮어써야
+    // 대시보드의 "OOOO학년도 학사요람" 표시와 자기신고 재판정이 정확해진다
+    // (2026-08-22, 21~26학번 확장).
+    if (result.admission_year) {
+      payload.admission_year = result.admission_year;
+    }
 
     sessionStorage.setItem("pathfinder:formState", JSON.stringify(payload));
     sessionStorage.setItem("pathfinder:planResult", JSON.stringify(result));

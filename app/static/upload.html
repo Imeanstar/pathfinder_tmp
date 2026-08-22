@@ -115,7 +115,7 @@
 
           <div class="field">
             <label>대상 학번 · 학과</label>
-            <div class="locked-chip">2025학번 · 소프트웨어학과</div>
+            <div class="locked-chip" id="admissionYearChip">학번 확인 중 · 소프트웨어학과</div>
           </div>
         </div>
 
@@ -184,12 +184,13 @@
 
   </main>
 
-  <!-- 로드맵 계산(추천 사유 Gemini 호출 포함)이 20초 가까이 걸려서, 아무 반응이
-       없어 보이지 않게 전체 화면 오버레이로 진행 중임을 보여준다(2026-08-21 요청). -->
+  <!-- 로드맵 계산(추천 사유 Gemini 호출 포함)이 20초~1분 가까이 걸려서, 아무 반응이
+       없어 보이지 않게 전체 화면 오버레이로 진행 중임을 보여준다(2026-08-21 요청,
+       2026-08-22 안내 문구를 실측 소요시간에 맞게 "최대 1분"으로 수정). -->
   <div class="loading-overlay" id="loadingOverlay" hidden>
     <div class="loading-spinner"></div>
     <p class="loading-title">로드맵을 만들고 있어요</p>
-    <p class="loading-sub">졸업 요건 확인 · 역량 진단 · 과목·프로그램 추천까지 한 번에 계산 중입니다 (최대 20초 정도 걸려요)</p>
+    <p class="loading-sub">졸업 요건 확인 · 역량 진단 · 과목·프로그램 추천까지 한 번에 계산 중입니다 (최대 1분 정도 걸려요)</p>
   </div>
 
   <script src="/js/upload.js"></script>
