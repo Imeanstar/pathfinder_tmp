@@ -268,6 +268,15 @@ def plan(req: PlanRequest):
         for p in req.projects
     ]
 
+    # 역량 격차(gap)가 자기신고로 다 채워져도 전공선택 학점·산학프로젝트 인증이 아직
+    # 부족하면 로드맵에 그 졸업요건을 채울 과목이 추천돼야 한다(2026-08-23 사용자
+    # 실사례 — gap 기반 추천만으론 이 두 요건이 로드맵에서 완전히 누락될 수 있었다).
+    elective_threshold = requirements["elective_major_credit"][req.track_type]
+    elective_credit_shortfall = max(0, elective_threshold - audit.elective_major_credit_earned)
+    industry_min_courses = requirements["industry_project_certification"][req.track_type]["min_courses"]
+    industry_project_shortfall = max(0, industry_min_courses - audit.industry_project_count)
+    industry_project_course_groups = requirements["industry_project_certification"]["course_groups"]
+
     result = run_full_plan(
         transcript,
         projects,
@@ -279,6 +288,9 @@ def plan(req: PlanRequest):
         grad_lab_cluster=req.grad_lab_cluster,
         missing_required_courses=audit.missing_required_major_courses,
         missing_major_foundation_courses=audit.missing_major_foundation_courses,
+        elective_credit_shortfall=elective_credit_shortfall,
+        industry_project_shortfall=industry_project_shortfall,
+        industry_project_course_groups=industry_project_course_groups,
     )
 
     # 화면이 "33/42학점"처럼 기준치를 같이 보여줘야 해서, AuditResult엔 없는 원 기준값을

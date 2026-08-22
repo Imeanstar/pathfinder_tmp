@@ -175,6 +175,8 @@ def plan_roadmap(
     remaining_terms: list[str],
     missing_required_courses: list[str] | None = None,
     missing_major_foundation_courses: list[str] | None = None,
+    missing_elective_courses: list[str] | None = None,
+    missing_industry_project_courses: list[str] | None = None,
 ) -> dict:
     catalog = _load_course_catalog()
     schedule = {term: {"courses": [], "programs": []} for term in remaining_terms}
@@ -202,6 +204,31 @@ def plan_roadmap(
         _place_one_course(
             name, "졸업을 위해 반드시 이수해야 합니다.", catalog, schedule, taken,
             assigned_terms, remaining_terms, warnings, required_label="전공기초",
+        )
+
+    # 1.75단계: 전공선택 학점 백필 — 역량 격차(gap) 기반 추천(2단계)만으로는 졸업에
+    # 필요한 전공선택 학점이 안 채워질 때(특히 gap이 전부 0이면 2단계가 아예 텅 빈다)
+    # course_reco.recommend_elective_backfill이 미리 골라준 과목을 무조건 배치한다
+    # (2026-08-23 사용자 실사례 — 역량은 충분한데 전공선택 학점이 부족한데도 로드맵에
+    # 과목이 하나도 안 뜬 문제).
+    ordered_elective_backfill = _topological_order_required_courses(
+        missing_elective_courses or [], catalog
+    )
+    for name in ordered_elective_backfill:
+        _place_one_course(
+            name, "전공선택 학점이 아직 부족해 추천합니다.", catalog, schedule, taken,
+            assigned_terms, remaining_terms, warnings, required_label="전공선택",
+        )
+
+    # 1.9단계: 산학프로젝트 인증 백필 — 1.75단계와 같은 이유로, 인증에 필요한 과목군
+    # 중 course_reco.recommend_industry_project_backfill이 골라준 과목을 배치한다.
+    ordered_industry_backfill = _topological_order_required_courses(
+        missing_industry_project_courses or [], catalog
+    )
+    for name in ordered_industry_backfill:
+        _place_one_course(
+            name, "산학프로젝트 인증이 아직 부족해 추천합니다.", catalog, schedule, taken,
+            assigned_terms, remaining_terms, warnings, required_label="산학프로젝트 인증",
         )
 
     # 2단계: 역량 격차 기반 전공선택 추천 — 1단계에서 이미 배치된 과목은 건너뛴다

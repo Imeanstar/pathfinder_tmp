@@ -276,6 +276,28 @@ def test_plan_schedules_missing_major_foundation_courses_in_roadmap():
     assert "선형대수1" in placed_names
 
 
+def test_plan_schedules_graduation_shortfall_backfill_courses_beyond_gap_recommendations():
+    # 2026-08-23 사용자 실사례: 자기신고를 많이 채워 역량 격차(gap)가 0에 가까워도
+    # 전공선택 학점·산학프로젝트 인증이 아직 부족하면 로드맵에 그 졸업요건을 채울
+    # 과목이 추천돼야 한다(gap 기반 추천이 텅 비어도 backfill이 대신 채워야 함).
+    payload = {
+        "courses": [],
+        "admission_year": 2025,
+        "track_type": "심화과정",
+        "track": "백엔드",
+        "remaining_terms": ["3-1", "3-2", "4-1", "4-2"],
+    }
+    resp = client.post("/api/plan", json=payload)
+    assert resp.status_code == 200
+    body = resp.json()
+    reasons = [
+        c.get("reason", "") for term in body["roadmap"]["schedule"].values() for c in term["courses"]
+    ]
+    assert any(
+        "[졸업요건] 전공선택" in r or "[졸업요건] 산학프로젝트 인증" in r for r in reasons
+    )
+
+
 def test_plan_with_domain_overlay_surfaces_real_automotive_program():
     payload = {
         "courses": [],
