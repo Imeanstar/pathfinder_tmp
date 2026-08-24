@@ -4,6 +4,9 @@
 let PLAN = null;
 let FORM_STATE = null;
 let CHAT_HISTORY = [];
+// 졸업요건 아코디언 열림 상태 — renderCreditCard()가 자기신고 제출 후 다시 그려질 때도
+// 유지되도록 카드 밖(모듈 스코프)에 기억해둔다.
+let CREDIT_ACCORDION_OPEN = false;
 
 function escapeHtml(text) {
   const div = document.createElement("div");
@@ -140,36 +143,55 @@ function renderCreditCard() {
 
   const citationByItem = Object.fromEntries((PLAN.citations || []).map((c) => [c.item, c.citation]));
 
-  document.getElementById("creditCard").innerHTML = `
-    <p class="card-subtitle">${FORM_STATE.admission_year}학년도 학사요람 · ${FORM_STATE.track_type}</p>
-    <div class="credit-big">${a.total_credit_earned}<span class="of"> / ${req.total_credit_required}</span></div>
-    <div class="progress-bar"><div style="width:${pct}%"></div></div>
-    <div class="remaining-terms">남은 학기 ${Object.keys(PLAN.roadmap.schedule).length}학기</div>
-    <ul class="req-list">
-      ${items
-        .map((it) => {
-          const citations = it.name === "전공필수" && !majorOk
-            ? renderCitations(a.missing_required_major_courses, citationByItem)
-            : "";
-          // "챗봇에서 알려주세요" 대신 이 카드 안에서 바로 입력할 수 있는 링크(2026-08-21
-          // 사용자 요청) — 챗봇은 더 이상 이 두 항목을 먼저 묻지 않는다.
-          const addLink = it.selfReportReason
-            ? `<div class="req-detail"><a href="#" class="add-selfreport-link" data-reason="${it.selfReportReason}">+ 추가하기</a></div>
-               <div class="selfreport-slot" data-reason-slot="${it.selfReportReason}" hidden></div>`
-            : "";
-          return `
-        <li>
-          <span class="req-dot ${statusDotClass(it.kind)}"></span>
-          <div style="flex:1">
+  const reqItemsHtml = items
+    .map((it) => {
+      const citations = it.name === "전공필수" && !majorOk
+        ? renderCitations(a.missing_required_major_courses, citationByItem)
+        : "";
+      // "챗봇에서 알려주세요" 대신 이 카드 안에서 바로 입력할 수 있는 링크(2026-08-21
+      // 사용자 요청) — 챗봇은 더 이상 이 두 항목을 먼저 묻지 않는다.
+      const addLink = it.selfReportReason
+        ? `<div class="req-detail"><a href="#" class="add-selfreport-link" data-reason="${it.selfReportReason}">+ 추가하기</a></div>
+           <div class="selfreport-slot" data-reason-slot="${it.selfReportReason}" hidden></div>`
+        : "";
+      return `
+        <details class="req-item">
+          <summary class="req-item-head">
+            <span class="req-dot ${statusDotClass(it.kind)}"></span>
             <span class="req-name">${it.name}</span>
+            <span class="req-value">${it.value}</span>
+            <span class="req-item-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="req-item-body">
             ${it.detail ? `<div class="req-detail">${it.detail}${citations}</div>` : ""}
             ${addLink}
           </div>
-          <span class="req-value">${it.value}</span>
-        </li>`;
-        })
-        .join("")}
-    </ul>
+        </details>`;
+    })
+    .join("");
+
+  // 졸업요건 목록 전체를 카드 안 아코디언 하나로 접어둔다(2026-08-24 사용자 요청) —
+  // 요약(학점·진행률)은 항상 보이고, 목록은 눌러야 나온다. 자기신고 제출 후
+  // renderCreditCard()가 통째로 다시 그려지므로, CREDIT_ACCORDION_OPEN에 마지막
+  // 열림 상태를 기억해뒀다가 다시 그릴 때 그대로 반영한다(안 그러면 방금 입력하고
+  // 제출했는데 목록이 도로 접혀버린다).
+  document.getElementById("creditCard").innerHTML = `
+    <details class="acc-outer"${CREDIT_ACCORDION_OPEN ? " open" : ""}>
+      <summary class="acc-outer-summary">
+        <p class="card-subtitle">${FORM_STATE.admission_year}학년도 학사요람 · ${FORM_STATE.track_type}</p>
+        <div class="credit-big">${a.total_credit_earned}<span class="of"> / ${req.total_credit_required}</span></div>
+        <div class="progress-bar"><div style="width:${pct}%"></div></div>
+        <div class="remaining-terms">남은 학기 ${Object.keys(PLAN.roadmap.schedule).length}학기</div>
+        <div class="acc-toggle-row">
+          <span class="acc-toggle-label acc-toggle-closed-label">졸업 요건 상세 보기</span>
+          <span class="acc-toggle-label acc-toggle-open-label">접기</span>
+          <span class="acc-chevron" aria-hidden="true"></span>
+        </div>
+      </summary>
+      <div class="acc-outer-body">
+        <div class="req-list">${reqItemsHtml}</div>
+      </div>
+    </details>
   `;
 }
 
@@ -369,6 +391,17 @@ async function submitSelfReport(reason, formEl) {
 function setupSelfReportDelegation() {
   const card = document.getElementById("creditCard");
 
+  // <details>의 toggle 이벤트는 버블링되지 않아 delegation은 capture 단계에서만 잡힌다
+  // (capture는 버블링 여부와 무관하게 상위 요소를 거쳐가므로 동작한다). renderCreditCard()가
+  // 통째로 다시 그려도 #creditCard 자체는 안 바뀌니 이 리스너는 한 번만 걸면 계속 유효하다.
+  card.addEventListener(
+    "toggle",
+    (e) => {
+      if (e.target.matches(".acc-outer")) CREDIT_ACCORDION_OPEN = e.target.open;
+    },
+    true
+  );
+
   card.addEventListener("click", (e) => {
     const link = e.target.closest(".add-selfreport-link");
     if (link) {
@@ -520,7 +553,12 @@ function renderRadarSvg(axes) {
 // 같은 수치를 써야 한다 — 자격증·실전참여 0.5점/개, 수상 경력 1점/회).
 const FACTOR_POINTS_PER_UNIT = { activity: 0.5, certification: 0.5, award: 1 };
 
-function renderEvidenceDetails(items, factors) {
+// isOpen: "매우 부족" 축은 근거를 바로 펼쳐서 보여준다(2026-08-24 사용자 요청) —
+// 나머지는 접힌 채로 시작. 근거가 하나도 없어도(items 비어있음) 항상 <details>로
+// 감싸 접었다 펼 수 있게 하고("근거가 없더라도 접었다 펼 수 있게"), 요약 문구도
+// "근거 N건 보기"였던 걸 "근거 보기"로 통일한다(개수가 있으나 없으나 문구가
+// 똑같아야 "왜 어떤 건 N건이고 어떤 건 아니지" 하는 혼란이 없다).
+function renderEvidenceDetails(items, factors, isOpen) {
   // course 요소는 "커리큘럼상 지금 들을 수 있는 관련 전공필수 이수율"(0~1 비율) —
   // 2026-08-21 사용자 피드백: 과목 개수만으로 O/X를 가르는 게 너무 거칠다고 지적받아,
   // 요람 권장 학기·학년 기준 이수율로 바꿨다.
@@ -536,17 +574,21 @@ function renderEvidenceDetails(items, factors) {
     })
     .join("");
 
-  if (!items || items.length === 0) {
-    return `<div class="evidence-empty">${factorRow}<div>근거 없음 — 이 역량에 기여한 과목·활동이 아직 없습니다</div></div>`;
-  }
-  const typeLabel = { course: "과목", project: "프로젝트", award: "수상 경력", certification: "자격증", program: "프로그램" };
-  const rows = items
-    .map((e) => `<li><span class="evidence-badge ${e.type}">${typeLabel[e.type] || e.type}</span>${escapeHtml(e.name)}</li>`)
-    .join("");
-  return `<details class="citation-details evidence-details">
-    <summary>근거 ${items.length}건 보기</summary>
+  const body =
+    !items || items.length === 0
+      ? `<div class="evidence-empty-note">근거 없음 — 이 역량에 기여한 과목·활동이 아직 없습니다</div>`
+      : (() => {
+          const typeLabel = { course: "과목", project: "프로젝트", award: "수상 경력", certification: "자격증", program: "프로그램" };
+          const rows = items
+            .map((e) => `<li><span class="evidence-badge ${e.type}">${typeLabel[e.type] || e.type}</span>${escapeHtml(e.name)}</li>`)
+            .join("");
+          return `<ul class="evidence-list">${rows}</ul>`;
+        })();
+
+  return `<details class="citation-details evidence-details"${isOpen ? " open" : ""}>
+    <summary>근거 보기</summary>
     <div class="factor-row">${factorRow}</div>
-    <ul class="evidence-list">${rows}</ul>
+    ${body}
   </details>`;
 }
 
@@ -566,7 +608,7 @@ function renderCompetencyCard() {
         <div class="gap-bar">
           <div style="width:${Math.min(100, (a.score / RADAR_SCORE_CAP) * 100)}%;background:${color}"></div>
         </div>
-        ${renderEvidenceDetails(evidenceMap[a.id], a.factors)}
+        ${renderEvidenceDetails(evidenceMap[a.id], a.factors, a.level === "매우 부족")}
       </div>`;
     })
     .join("");
@@ -577,49 +619,89 @@ function renderCompetencyCard() {
       ? "표시된 역량 대부분이 다양한 근거로 뒷받침되고 있습니다."
       : `보완이 필요한(부족·매우 부족) 역량이 ${weakCount}개 있습니다.`;
 
+  // 졸업 현황 카드와 같은 아코디언 패턴(2026-08-24) — 요약(레이더 차트)은 항상 보이고
+  // 축별 상세 목록은 눌러야 나온다. 이 카드는 다시 그려지는 일이 없어(초기 1회 렌더만)
+  // 열림 상태를 별도로 기억해둘 필요는 없다.
   document.getElementById("competencyCard").innerHTML = `
-    <p class="card-title">역량 진단</p>
-    <p class="card-subtitle">${summary} 과목·프로젝트·자격증·수상 경력을 종합해 판정합니다.</p>
-    <div class="radar-legend">
-      <span><span class="legend-swatch" style="background:#2f5fda"></span>현재(수업·실전참여·자격증·수상 경력 종합 점수)</span>
-      <span><span class="legend-swatch" style="background:transparent;border:1px dashed #9aa6bf"></span>목표 트랙</span>
-    </div>
-    <div style="text-align:center">${renderRadarSvg(axes)}</div>
-    <div class="gap-list">${gapRows}</div>
+    <details class="acc-outer">
+      <summary class="acc-outer-summary">
+        <p class="card-title">역량 진단</p>
+        <p class="card-subtitle">${summary} 과목·프로젝트·자격증·수상 경력을 종합해 판정합니다.</p>
+        <div class="radar-legend">
+          <span><span class="legend-swatch" style="background:#2f5fda"></span>현재</span>
+          <span><span class="legend-swatch" style="background:transparent;border:1px dashed #9aa6bf"></span>목표 트랙</span>
+        </div>
+        <div style="text-align:center">${renderRadarSvg(axes)}</div>
+        <div class="acc-toggle-row">
+          <span class="acc-toggle-label acc-toggle-closed-label">역량별 상세 보기</span>
+          <span class="acc-toggle-label acc-toggle-open-label">접기</span>
+          <span class="acc-chevron" aria-hidden="true"></span>
+        </div>
+      </summary>
+      <div class="acc-outer-body">
+        <div class="gap-list">${gapRows}</div>
+      </div>
+    </details>
   `;
 }
 
-// --- 로드맵 ---
-function itemCardHtml(item, kind) {
-  if (kind === "course") {
-    return `
-      <div class="item-card">
-        <div class="item-card-top">
-          <span class="item-badge course">교과</span>
-          <span class="item-name">${item.name}</span>
-          <span class="item-meta">${item.category || ""} ${item.credit ?? ""}</span>
-        </div>
-        <div class="item-reason">${item.reason}</div>
-      </div>`;
-  }
-  const deadline = item.apply_period ? item.apply_period.split("~")[1]?.trim() : "";
-  const urlLink = item.url ? `<a href="${item.url}" target="_blank" rel="noopener">원문 보기 ↗</a>` : "";
+// --- 로드맵(아코디언, 2026-08-24 전면 개편) ---
+function courseBadgeClass(category) {
+  if (category === "전공필수") return "required";
+  if (category === "전공기초") return "foundation";
+  if (category === "전공선택") return "elective";
+  return "etc";
+}
+
+// 과목 설명(reason) 자체가 이미 근거 문장이라 별도 "근거 보기" 버튼은 군더더기이고,
+// 일부 과목만 PLAN.citations에 항목이 있어(전공필수 미이수 사유 등) 있다/없다가
+// 뒤섞여 보였다(2026-08-24 사용자 지적) — 버튼을 없애고 배지·이름·학점·설명 네 칸을
+// 모든 행에서 같은 고정폭으로 맞춰 표처럼 정렬한다.
+function courseRowHtml(item) {
+  return `
+    <div class="rm-course-row">
+      <span class="rm-course-badge ${courseBadgeClass(item.category)}">${item.category || "교과"}</span>
+      <span class="rm-course-name">${item.name}</span>
+      <span class="rm-course-credit">${item.credit ?? ""}학점</span>
+      <span class="rm-course-desc">${item.reason}</span>
+    </div>`;
+}
+
+// 신청 마감 시각이 이미 지났으면 "신청 ~ 날짜"를 아예 표시하지 않는다(2026-08-24
+// 사용자 지적) — 아주허브 데이터가 특정 시점 스냅샷이라 대부분 이미 지난 신청기간인데,
+// 지난 날짜를 마치 아직 신청 가능한 것처럼 보여주면 오해를 준다. 시:분 사이에
+// "00 : 00"처럼 공백이 섞여 오는 원본 표기를 그대로 허용한다.
+function isDeadlineUpcoming(deadlineStr) {
+  const m = deadlineStr.match(/(\d{4})-(\d{2})-(\d{2})(?:\s*(\d{1,2})\s*:\s*(\d{2}))?/);
+  if (!m) return false;
+  const [, y, mo, d, hh, mm] = m;
+  const deadline = new Date(Number(y), Number(mo) - 1, Number(d), Number(hh || 0), Number(mm || 0));
+  return deadline.getTime() >= Date.now();
+}
+
+function activityCardHtml(item) {
+  const deadlineRaw = item.apply_period ? item.apply_period.split("~")[1]?.trim() : "";
+  const deadlineHtml =
+    deadlineRaw && isDeadlineUpcoming(deadlineRaw)
+      ? `<div class="rm-activity-deadline">신청 ~ ${deadlineRaw}</div>`
+      : "";
   // 우리 프로그램 데이터는 특정 연도 한 시점 스냅샷이라, 미래 학기에 배치된 항목은
   // "그 해 그 시기에 실제로 열린다"가 아니라 "이맘때 이런 프로그램이 있었다"는 참고
   // 사례다(2026-08-21 사용자 요청 — 개설 여부 확인이 필요하다는 걸 명시해달라).
   const precedentNote = item.is_precedent
-    ? `<div class="item-precedent">📌 과거에 이맘때 있었던 프로그램입니다 — 이번에도 열리는지는 아주허브에서 확인하세요</div>`
+    ? `<div class="rm-activity-precedent">📌 과거에 이맘때 있었던 프로그램입니다 — 이번에도 열리는지는 아주허브에서 확인하세요</div>`
+    : "";
+  const detailBtn = item.url
+    ? `<a class="rm-activity-btn" href="${item.url}" target="_blank" rel="noopener">자세히 보기</a>`
     : "";
   return `
-    <div class="item-card">
-      <div class="item-card-top">
-        <span class="item-badge program">비교과</span>
-        <span class="item-name">${item.name}</span>
-      </div>
-      <div class="item-sub">${item.org || ""}${deadline ? " · 신청 ~" + deadline : ""}</div>
-      <div class="item-reason">${item.reason}</div>
+    <div class="rm-activity-card">
+      <div class="rm-activity-title">${item.name}</div>
+      <div class="rm-activity-org">${item.org || ""}</div>
+      ${deadlineHtml}
+      <div class="rm-activity-reason">${item.reason}</div>
       ${precedentNote}
-      ${urlLink ? `<div style="margin-top:6px">${urlLink}</div>` : ""}
+      ${detailBtn}
     </div>`;
 }
 
@@ -632,39 +714,55 @@ function renderRoadmapCard() {
     ? `<div class="warning-banner">⚠️ ${warnings.join("<br />⚠️ ")}</div>`
     : "";
 
-  // 학기 블록을 좌(이수 과목)/우(교내 프로그램) 2열로 나눈다 — 예전엔 프로그램만
-  // 세로로 쭉 나열돼 있어 "왜 과목은 안 알려주냐"는 지적을 받았다(2026-08-21).
+  // 학기 하나당 아코디언 한 칸 — 열림 상태는 <details open>이 그대로 담당한다.
+  // 이번 학기(idx 0)만 기본으로 펼쳐두고 나머지는 접어둔다.
   const termsHtml = terms
     .map((term, idx) => {
       const items = schedule[term];
       const totalCredit = items.courses.reduce((s, c) => s + (c.credit || 0), 0);
-      const label =
-        idx === 0 ? "이번 학기" : idx === terms.length - 1 ? "마지막 학기" : "다음 학기";
-      const courseCol = items.courses.length
-        ? items.courses.map((c) => itemCardHtml(c, "course")).join("")
-        : '<p class="term-col-empty">추천할 과목이 없습니다.</p>';
-      const programCol = items.programs.length
-        ? items.programs.map((p) => itemCardHtml(p, "program")).join("")
-        : '<p class="term-col-empty">추천할 프로그램이 없습니다.</p>';
+      const isFirst = idx === 0;
+      const isLast = idx === terms.length - 1 && terms.length > 1;
+      const [grade, sem] = term.split("-").map(Number);
+      const termTitle = `${grade}학년 ${sem}학기 (${calendarLabel(term, FORM_STATE.admission_year)})`;
+      const badge = isFirst
+        ? `<span class="term-badge current">이번 학기</span>`
+        : isLast
+        ? `<span class="term-badge last">마지막 학기</span>`
+        : "";
+      const courseRows = items.courses.length
+        ? items.courses.map((c) => courseRowHtml(c)).join("")
+        : '<p class="rm-empty">추천할 과목이 없습니다.</p>';
+      const activityCards = items.programs.length
+        ? items.programs.map((p) => activityCardHtml(p)).join("")
+        : '<p class="rm-empty">추천할 활동이 없습니다.</p>';
       return `
-        <div class="term-block">
-          <div class="term-block-head">
-            <span class="term-dot ${idx === 0 ? "current" : ""}"></span>
-            <span class="term-label">${calendarLabel(term, FORM_STATE.admission_year)}</span>
-            <span class="term-sub">${label}</span>
-            <span class="term-credit">${totalCredit}학점</span>
-          </div>
-          <div class="term-columns">
-            <div class="term-col">
-              <div class="term-col-head">📘 이수 추천 과목</div>
-              ${courseCol}
+        <details class="term-item"${isFirst ? " open" : ""}>
+          <summary class="term-item-head">
+            <span class="term-item-title">
+              <span class="term-item-label">${termTitle}</span>
+              ${badge}
+            </span>
+            <span class="term-item-right">
+              <span class="term-item-credit">총 ${totalCredit}학점</span>
+              <span class="term-item-chevron" aria-hidden="true"></span>
+            </span>
+          </summary>
+          <div class="term-item-body">
+            <div class="rm-section-head">
+              <span class="rm-section-icon">🎓</span>
+              <span class="rm-section-title">핵심 이수 추천 과목</span>
+              <span class="rm-section-note">(필수 우선)</span>
             </div>
-            <div class="term-col">
-              <div class="term-col-head">🎯 교내 프로그램</div>
-              ${programCol}
+            <div class="rm-course-list">${courseRows}</div>
+            <hr class="rm-divider" />
+            <div class="rm-section-head">
+              <span class="rm-section-icon">🎯</span>
+              <span class="rm-section-title">함께 하면 좋은 활동</span>
+              <span class="rm-section-note">(비교과)</span>
             </div>
+            <div class="rm-activity-grid">${activityCards}</div>
           </div>
-        </div>`;
+        </details>`;
     })
     .join("");
 
@@ -673,8 +771,9 @@ function renderRoadmapCard() {
       <h2>학기별 로드맵</h2>
       <span class="term-count-badge">${terms.length}개 학기</span>
     </div>
+    <p class="roadmap-desc">현재 학기를 기준으로 추천 순서로 정리했습니다. 학기를 눌러 상세 내용을 확인하세요.</p>
     ${warningHtml}
-    ${termsHtml}
+    <div class="roadmap-accordion">${termsHtml}</div>
   `;
 }
 
