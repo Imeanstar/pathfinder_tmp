@@ -21,6 +21,10 @@ langgraph>=0.2
 # 바꿀 때 조용히 깨질 수 있음).
 google-genai>=1
 google-auth>=2
+# app/retrieval.py의 GeminiEncoder(하이브리드 RAG)가 쓴다. 이게 빠져 있으면
+# GeminiEncoder() 생성이 조용히 실패해 TF-IDF 단독으로만 폴백한다 — 실제로 이
+# 상태로 배포돼 있었다(2026-08-24 발견). requirements.txt 쪽 주석 참고.
+langchain-google-genai>=2
 
 # 로그인 계정별 최신 로드맵 저장(app/user_store.py, Firestore 우선·SQLite 대체).
 # **버전을 반드시 고정할 것** — 최신 google-cloud-firestore(2.28+)는 protobuf>=6.33을

@@ -17,6 +17,12 @@ python-dotenv>=1
 # 예정이라 유지보수 중인 google-genai(신 SDK)를 쓴다.
 google-genai>=1
 google-auth>=2
+# app/retrieval.py의 GeminiEncoder(하이브리드 RAG의 임베딩 절반)가 쓴다. 이게 빠져
+# 있으면 GeminiEncoder() 생성이 ModuleNotFoundError를 던지고 make_encoder()의
+# try/except가 조용히 삼켜서 TF-IDF 단독으로만 폴백한다 — 실제로 이 상태로
+# 배포돼 있었다(2026-08-24 비용 최적화 작업 중 발견, RAG가 하이브리드로 동작한
+# 적이 한 번도 없었음).
+langchain-google-genai>=2
 
 # 로그인 계정별 최신 로드맵 저장(app/user_store.py) — 로컬 개발엔 GCP 인증정보가 없어
 # 항상 SQLite로 대체되지만, 실제 배포(Cloud Run)에서 쓸 코드 경로라 로컬에도 설치해
