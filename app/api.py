@@ -40,7 +40,13 @@ from app.agents.session_chat import (
 from app.agents.supervisor import run_full_plan
 from app.audit import AuditResult, attach_citation, audit_graduation, load_requirements
 from app.auth import InvalidDomainError, verify_google_id_token
-from app.guardrail import get_blocked_count, is_guardrail_enabled, set_guardrail_override
+from app.guardrail import (
+    detect_injection,
+    get_blocked_count,
+    increment_blocked_count,
+    is_guardrail_enabled,
+    set_guardrail_override,
+)
 from app.llm import check_gemini_reachability, default_structure_fn, soften_recommendation_reasons
 from app.masking import PiiLeakDetected
 from app.parser import (
@@ -156,9 +162,17 @@ def plan_latest(email_hash: str):
     return record
 
 
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 성적표 PDF는 보통 1MB를 안 넘는다 — 넉넉히 10MB
+
+
 @app.post("/api/upload")
 async def upload(file: UploadFile = File(...)):
     pdf_bytes = await file.read()
+    # 2026-08-24 보안 감사에서 발견: 업로드 크기 제한이 없어 file.read()가 무제한으로
+    # 메모리에 올라갔다(DoS 여지) — 파싱을 시도하기 전에 먼저 거절한다.
+    if len(pdf_bytes) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="파일이 너무 큽니다(10MB 이하만 업로드할 수 있어요).")
+
     try:
         transcript = parse_transcript(pdf_bytes, structure_fn=default_structure_fn)
     except PiiLeakDetected:
@@ -170,6 +184,15 @@ async def upload(file: UploadFile = File(...)):
         raise HTTPException(
             status_code=422,
             detail="입력에서 이상한 지시문이 감지되어 처리를 거부했습니다.",
+        )
+    except Exception:
+        # 2026-08-24 보안 감사에서 발견: PDF가 아니거나 깨진 파일을 pdfplumber에 그대로
+        # 넘기면 잡히지 않은 예외가 FastAPI 기본 500으로 새 나갔다(스택트레이스 노출
+        # 위험). 원인이 다양해(암호화된 PDF, 손상된 파일 등) 구체적으로 분류하지 않고
+        # 전부 "파일을 열 수 없다"는 정직한 4xx로 처리한다.
+        raise HTTPException(
+            status_code=422,
+            detail="PDF 파일을 열 수 없습니다. 손상되지 않은 성적표 PDF인지 확인해주세요.",
         )
 
     # 마스킹 본문은 앞부분만 잘라 보낸다 — 화면에서 "이렇게 가렸습니다"를 확인시키는 용도라
@@ -270,8 +293,25 @@ def _apply_dropdown_selfreports(audit: AuditResult, req: "PlanRequest", requirem
     )
 
 
+def _reject_injected_project_titles(projects: list["ManualProjectIn"]) -> None:
+    """개인 프로젝트 제목은 자유 입력이라 성적표 텍스트와 같은 인젝션 방어를 적용한다
+    (app/guardrail.py 설계 원칙의 "2경로" 중 하나 — 2026-08-24 보안 감사에서 실제로는
+    성적표 경로만 적용돼 있던 걸 발견해 보완). GUARDRAIL_ENABLED=false면 건너뛴다
+    (parser.py의 인젝션 검사와 동일한 토글 규칙)."""
+    if not is_guardrail_enabled():
+        return
+    for p in projects:
+        if detect_injection(p.title):
+            increment_blocked_count()
+            raise HTTPException(
+                status_code=422,
+                detail="입력에서 이상한 지시문이 감지되어 처리를 거부했습니다.",
+            )
+
+
 @app.post("/api/plan")
 def plan(req: PlanRequest):
+    _reject_injected_project_titles(req.projects)
     resolved_admission_year = infer_admission_year(req.courses) or req.admission_year
     # "or" 폴백을 쓰면 안 된다 — compute_remaining_terms가 8개 정규학기를 모두 이수한
     # 학생에 대해 정확히 빈 리스트([], 남은 학기 없음)를 돌려줘도 파이썬은 []를 falsy로

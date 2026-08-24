@@ -657,13 +657,18 @@ function courseBadgeClass(category) {
 // 일부 과목만 PLAN.citations에 항목이 있어(전공필수 미이수 사유 등) 있다/없다가
 // 뒤섞여 보였다(2026-08-24 사용자 지적) — 버튼을 없애고 배지·이름·학점·설명 네 칸을
 // 모든 행에서 같은 고정폭으로 맞춰 표처럼 정렬한다.
+// item.reason은 소프트 문구로 Gemini가 다시 쓸 수 있고(app/llm.py
+// soften_recommendation_reasons), item.name·category는 아주허브/과목 카탈로그(외부
+// 스크래핑 데이터 포함)에서 온다 — 둘 다 우리가 직접 통제하지 않는 문자열이라
+// escapeHtml 없이 innerHTML에 넣으면 XSS 경로가 된다(2026-08-24 보안 감사에서 발견,
+// upload.js는 이미 이 관례를 따르고 있었는데 로드맵 카드만 빠져 있었다).
 function courseRowHtml(item) {
   return `
     <div class="rm-course-row">
-      <span class="rm-course-badge ${courseBadgeClass(item.category)}">${item.category || "교과"}</span>
-      <span class="rm-course-name">${item.name}</span>
+      <span class="rm-course-badge ${courseBadgeClass(item.category)}">${escapeHtml(item.category || "교과")}</span>
+      <span class="rm-course-name">${escapeHtml(item.name)}</span>
       <span class="rm-course-credit">${item.credit ?? ""}학점</span>
-      <span class="rm-course-desc">${item.reason}</span>
+      <span class="rm-course-desc">${escapeHtml(item.reason)}</span>
     </div>`;
 }
 
@@ -691,15 +696,18 @@ function activityCardHtml(item) {
   const precedentNote = item.is_precedent
     ? `<div class="rm-activity-precedent">📌 과거에 이맘때 있었던 프로그램입니다 — 이번에도 열리는지는 아주허브에서 확인하세요</div>`
     : "";
-  const detailBtn = item.url
-    ? `<a class="rm-activity-btn" href="${item.url}" target="_blank" rel="noopener">자세히 보기</a>`
-    : "";
+  // http(s)가 아닌 스킴(javascript: 등)은 링크 자체를 안 만든다 — 스크래핑 데이터의
+  // url 필드가 오염됐을 때 클릭형 XSS로 이어지는 걸 막는 최소한의 방어(2026-08-24).
+  const detailBtn =
+    item.url && /^https?:\/\//i.test(item.url)
+      ? `<a class="rm-activity-btn" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">자세히 보기</a>`
+      : "";
   return `
     <div class="rm-activity-card">
-      <div class="rm-activity-title">${item.name}</div>
-      <div class="rm-activity-org">${item.org || ""}</div>
+      <div class="rm-activity-title">${escapeHtml(item.name)}</div>
+      <div class="rm-activity-org">${escapeHtml(item.org || "")}</div>
       ${deadlineHtml}
-      <div class="rm-activity-reason">${item.reason}</div>
+      <div class="rm-activity-reason">${escapeHtml(item.reason)}</div>
       ${precedentNote}
       ${detailBtn}
     </div>`;
