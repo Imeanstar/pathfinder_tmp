@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+# tests/ 에 __init__.py가 없어 pytest의 기본 rootdir 삽입이 프로젝트 루트(app 패키지가
+# 있는 곳)까지는 못 넣는다 — "python -m pytest"는 현재 디렉토리를 자동으로
+# sys.path에 넣어줘서 여태 드러나지 않았지만, 콘솔 스크립트로 직접 부르는
+# "pytest"(README·CI가 실제로 쓰는 방식)는 그렇지 않아 ModuleNotFoundError: No module
+# named 'app'로 깨진다(2026-08-24, CI에서 처음 발견 — 계층 1이 존재하는 이유 그대로).
+pythonpath = ["."]
