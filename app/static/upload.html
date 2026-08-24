@@ -14,6 +14,7 @@
         <span class="brand-name">AJOU PATHFINDER</span>
       </a>
     </div>
+    <div class="auth-slot" id="authSlot"></div>
   </header>
 
   <main class="wizard">
@@ -201,6 +202,22 @@
     <p class="loading-sub">졸업 요건 확인 · 역량 진단 · 과목·프로그램 추천까지 한 번에 계산 중입니다 (최대 1분 정도 걸려요)</p>
   </div>
 
+  <!-- 계정 드로어 — index.html과 동일. [내 로드맵]을 누르면 가장 최근 로드맵을
+       불러와 dashboard.html로 이동한다(2026-08-24 신설). -->
+  <div class="modal-overlay" id="drawerOverlay" hidden>
+    <aside class="side-drawer">
+      <button class="modal-close" id="drawerCloseBtn" aria-label="닫기">✕</button>
+      <div class="drawer-account">
+        <div class="drawer-avatar" id="drawerAvatar"></div>
+        <div class="drawer-name" id="drawerName"></div>
+        <div class="drawer-email" id="drawerEmail"></div>
+      </div>
+      <button class="drawer-action" id="drawerMyRoadmapBtn">내 로드맵</button>
+      <button class="drawer-logout" id="drawerLogoutBtn">로그아웃</button>
+    </aside>
+  </div>
+
+  <script src="/js/auth.js"></script>
   <script src="/js/upload.js"></script>
 </body>
 </html>

@@ -17,6 +17,7 @@
     </div>
     <div class="header-right">
       <button class="btn-ghost" id="restartBtn">처음부터</button>
+      <div class="auth-slot" id="authSlot"></div>
     </div>
   </header>
 
@@ -50,6 +51,21 @@
     </section>
   </main>
 
+  <!-- 계정 드로어 — index.html/upload.html과 동일하되 [내 로드맵] 버튼은 없음
+       (이미 로드맵 화면이라 불필요, 2026-08-24 사용자 요청). -->
+  <div class="modal-overlay" id="drawerOverlay" hidden>
+    <aside class="side-drawer">
+      <button class="modal-close" id="drawerCloseBtn" aria-label="닫기">✕</button>
+      <div class="drawer-account">
+        <div class="drawer-avatar" id="drawerAvatar"></div>
+        <div class="drawer-name" id="drawerName"></div>
+        <div class="drawer-email" id="drawerEmail"></div>
+      </div>
+      <button class="drawer-logout" id="drawerLogoutBtn">로그아웃</button>
+    </aside>
+  </div>
+
+  <script src="/js/auth.js"></script>
   <script src="/js/dashboard.js"></script>
 </body>
 </html>
