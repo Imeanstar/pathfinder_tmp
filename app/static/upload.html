@@ -17,61 +17,83 @@
   </header>
 
   <main class="wizard">
+    <nav class="wizard-progress" aria-label="로드맵 만들기 단계">
+      <span class="wizard-progress-item is-active" data-wizard-step="stepUpload"><b>1</b><em>성적표</em></span>
+      <i aria-hidden="true"></i>
+      <span class="wizard-progress-item" data-wizard-step="stepMasked"><b>2</b><em>확인</em></span>
+      <i aria-hidden="true"></i>
+      <span class="wizard-progress-item" data-wizard-step="stepSettings"><b>3</b><em>방향 설정</em></span>
+    </nav>
 
     <!-- ── STEP 1 · 업로드 ─────────────────────────────────── -->
     <section class="wizard-step" id="stepUpload">
       <div class="wizard-heading">
-        <h1>성적표를 올려주세요</h1>
-        <p>이름·학번은 서버에서 지운 뒤에만 분석에 사용합니다.</p>
-        <p class="wizard-subnote">🔒 파일은 서버에 저장되지 않습니다</p>
+        <span class="wizard-eyebrow">1 / 3 · 성적표 분석</span>
+        <h1>성적표를 업로드해주세요</h1>
+        <p>이름·학번을 먼저 가린 뒤 과목·학점 정보만 분석합니다.</p>
+        <p class="wizard-subnote">원본 파일은 서버에 저장하지 않습니다</p>
       </div>
 
       <div class="upload-card">
-        <div class="dropzone" id="dropzone">
-          <svg class="dropzone-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="6" y="12" width="30" height="42" rx="4" fill="#cfe0fa"
-                  transform="rotate(-10 21 33)" />
-            <rect x="24" y="7" width="34" height="50" rx="5" fill="#2f5fda" />
-            <path d="M32 24h18M32 33h18M32 42h11" stroke="#fff" stroke-width="3"
-                  stroke-linecap="round" />
-          </svg>
-          <div class="dropzone-title">성적표 PDF를 끌어다 놓거나, <b>찾아보기</b></div>
-          <div class="dropzone-hint">PDF 파일만 지원합니다</div>
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="성적표 PDF 파일 선택">
+          <div class="dropzone-default" id="dropzoneDefault">
+            <svg class="dropzone-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="6" y="12" width="30" height="42" rx="4" fill="#cfe0fa"
+                    transform="rotate(-10 21 33)" />
+              <rect x="24" y="7" width="34" height="50" rx="5" fill="#2f5fda" />
+              <path d="M32 24h18M32 33h18M32 42h11" stroke="#fff" stroke-width="3"
+                    stroke-linecap="round" />
+            </svg>
+            <div class="dropzone-title">성적표 <b>PDF 선택</b></div>
+            <div class="dropzone-hint">PDF 파일을 선택하면 개인정보를 먼저 가립니다.</div>
+          </div>
+
+          <div class="dropzone-processing" id="uploadProgress" hidden aria-live="polite">
+            <span class="processing-document" aria-hidden="true"></span>
+            <div class="processing-copy">
+              <small class="processing-file" id="upFileName">선택한 파일</small>
+              <strong class="processing-title" id="upTitle">파일 업로드 중</strong>
+              <span class="processing-detail" id="upSub">0%</span>
+            </div>
+            <span class="processing-check" id="upCheck" hidden aria-label="완료">✓</span>
+            <div class="processing-track" aria-hidden="true"><span id="upBarFill"></span></div>
+            <p class="processing-error" id="upError" hidden></p>
+          </div>
           <input type="file" id="fileInput" accept="application/pdf" hidden />
         </div>
 
-        <div class="upload-progress" id="uploadProgress" hidden>
-          <div class="up-row">
-            <div class="up-texts">
-              <div class="up-title" id="upTitle">업로드 중...</div>
-              <div class="up-sub" id="upSub">0%</div>
-            </div>
-            <div class="up-check" id="upCheck" hidden>✓</div>
-          </div>
-          <div class="up-bar"><div class="up-bar-fill" id="upBarFill"></div></div>
-          <div class="up-error" id="upError" hidden></div>
+        <div class="upload-reassurance" aria-label="업로드 안내">
+          <span>PDF 파일만</span>
+          <span>원본 미보관</span>
+          <span>분석 약 30초</span>
         </div>
+
       </div>
     </section>
 
     <!-- ── STEP 2 · 마스킹 결과 확인 ───────────────────────── -->
     <section class="wizard-step" id="stepMasked" hidden>
       <div class="wizard-heading">
-        <h1>이렇게 가렸습니다</h1>
-        <p>아래 내용만 분석에 사용됩니다. 지워지지 않은 개인정보가 보이면 업로드를 취소해주세요.</p>
+        <span class="wizard-eyebrow">2 / 3 · 개인정보 확인</span>
+        <h1>업로드 내용 확인</h1>
+        <p>이름과 학번은 분석 전에 가렸습니다. 인식된 과목 정보를 확인해주세요.</p>
       </div>
 
       <div class="upload-card">
-        <div class="mask-result-head">
-          <span class="mask-badge">🔒 이름·학번 마스킹 완료</span>
-          <span class="up-sub" id="maskCourseCount"></span>
+        <div class="review-status">
+          <span class="review-status-mark" aria-hidden="true">✓</span>
+          <div>
+            <strong>개인정보 처리 완료</strong>
+            <p>이름·학번은 분석에 사용하지 않습니다.</p>
+          </div>
+          <span class="review-count" id="maskCourseCount"></span>
         </div>
 
-        <div class="mask-section-label">마스킹된 본문 (모델에 전달되는 내용)</div>
-        <div class="mask-preview" id="maskPreview"></div>
-
         <div id="courseSection">
-          <div class="mask-section-label">인식된 과목</div>
+          <div class="review-section-heading">
+            <strong>인식된 과목</strong>
+            <span>학점 및 이수구분</span>
+          </div>
           <div class="course-scroll">
             <table class="course-table">
               <thead>
@@ -81,6 +103,14 @@
             </table>
           </div>
         </div>
+
+        <details class="masked-source">
+          <summary>
+            <span>가려진 원문 확인</span>
+            <small>분석에 전달된 내용</small>
+          </summary>
+          <div class="mask-preview" id="maskPreview"></div>
+        </details>
 
         <div class="wizard-actions">
           <button class="btn-secondary" id="reuploadBtn">다시 업로드</button>
@@ -92,8 +122,9 @@
     <!-- ── STEP 3 · 진로 목표 + 자기신고 ───────────────────── -->
     <section class="wizard-step" id="stepSettings" hidden>
       <div class="wizard-heading">
-        <h1>진로 목표를 골라주세요</h1>
-        <p>성적표에 남지 않는 이력(어학·프로그래밍 역량·개인 프로젝트)도 함께 채우면 더 정확해집니다.</p>
+        <span class="wizard-eyebrow">3 / 3 · 방향 설정</span>
+        <h1>어떤 방향을 준비하고 있나요?</h1>
+        <p>지금의 선택만으로도 로드맵을 만들 수 있어요. 추가 경험은 원할 때만 입력하세요.</p>
       </div>
 
       <form class="card" id="planForm">
@@ -119,61 +150,54 @@
           </div>
         </div>
 
-        <hr class="form-divider" />
+        <details class="optional-profile">
+          <summary>
+            <span><b>추가 경험 입력</b><small>선택 · 추천 정확도를 높여요</small></span>
+            <span class="optional-profile-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="optional-profile-content">
+            <div class="field">
+              <label for="langExam">어학 성적 (선택)</label>
+              <div class="cascade-row">
+                <select id="langExam">
+                  <option value="">없음</option>
+                  <option value="TOEIC">TOEIC</option>
+                  <option value="TEPS">TEPS</option>
+                  <option value="TOEFL">TOEFL</option>
+                  <option value="GTELP">G-TELP</option>
+                  <option value="TOEIC_Speaking">TOEIC Speaking</option>
+                  <option value="OPIc">OPIc</option>
+                </select>
 
-        <div class="field">
-          <label for="langExam">어학 성적 (선택)</label>
-          <div class="cascade-row">
-            <select id="langExam">
-              <option value="">없음</option>
-              <option value="TOEIC">TOEIC</option>
-              <option value="TEPS">TEPS</option>
-              <option value="TOEFL">TOEFL</option>
-              <option value="GTELP">G-TELP</option>
-              <option value="TOEIC_Speaking">TOEIC Speaking</option>
-              <option value="OPIc">OPIc</option>
-            </select>
+                <span class="cascade-slot" id="langSubSlot" hidden><select id="langSub"></select></span>
+                <span class="cascade-slot" id="langScoreSlot" hidden><input type="number" id="langScore" placeholder="점수 입력" min="0" /></span>
+                <span class="cascade-slot" id="langGradeSlot" hidden><select id="langGrade"></select></span>
+              </div>
+              <div class="field-note" id="langNote"></div>
+            </div>
 
-            <span class="cascade-slot" id="langSubSlot" hidden>
-              <select id="langSub"></select>
-            </span>
+            <div class="field">
+              <label for="progCert">프로그래밍 역량 인증 (선택)</label>
+              <div class="cascade-row">
+                <select id="progCert">
+                  <option value="">없음</option>
+                  <option value="topcit">TOPCIT 점수</option>
+                  <option value="apc">APC 대회 1문제 이상 정답</option>
+                  <option value="contest">SW 관련 전국대회 입상</option>
+                </select>
+                <span class="cascade-slot" id="topcitSlot" hidden><input type="number" id="topcitScore" placeholder="TOPCIT 점수" min="0" /></span>
+              </div>
+              <div class="field-note">심화과정은 TOPCIT 190점 이상이거나 APC·전국대회 실적이 있어야 합니다.</div>
+            </div>
 
-            <span class="cascade-slot" id="langScoreSlot" hidden>
-              <input type="number" id="langScore" placeholder="점수 입력" min="0" />
-            </span>
-
-            <span class="cascade-slot" id="langGradeSlot" hidden>
-              <select id="langGrade"></select>
-            </span>
+            <div class="section-head">
+              <h2>프로젝트 · 동아리 · 자격증 · 교내 프로그램</h2>
+              <span class="hint">성적표에 남지 않는 이력을 채우면 역량 진단이 더 정확해집니다.</span>
+            </div>
+            <div id="projectRows"></div>
+            <button type="button" class="add-link" id="addProjectRow">+ 항목 추가</button>
           </div>
-          <div class="field-note" id="langNote"></div>
-        </div>
-
-        <div class="field">
-          <label for="progCert">프로그래밍 역량 인증 (선택)</label>
-          <div class="cascade-row">
-            <select id="progCert">
-              <option value="">없음</option>
-              <option value="topcit">TOPCIT 점수</option>
-              <option value="apc">APC 대회 1문제 이상 정답</option>
-              <option value="contest">SW 관련 전국대회 입상</option>
-            </select>
-
-            <span class="cascade-slot" id="topcitSlot" hidden>
-              <input type="number" id="topcitScore" placeholder="TOPCIT 점수" min="0" />
-            </span>
-          </div>
-          <div class="field-note">심화과정은 TOPCIT 190점 이상이거나 APC·전국대회 실적이 있어야 합니다.</div>
-        </div>
-
-        <hr class="form-divider" />
-
-        <div class="section-head">
-          <h2>프로젝트 · 동아리 · 자격증 · 교내 프로그램</h2>
-          <span class="hint">선택 · 성적표에 남지 않는 이력을 채웁니다. 다양하게 입력할수록 역량 진단이 정확해집니다</span>
-        </div>
-        <div id="projectRows"></div>
-        <button type="button" class="add-link" id="addProjectRow">+ 항목 추가</button>
+        </details>
 
         <button type="submit" class="btn-primary" id="submitBtn">로드맵 만들기</button>
         <p class="disclaimer">
@@ -187,9 +211,17 @@
   <!-- 로드맵 계산(추천 사유 Gemini 호출 포함)이 20초 가까이 걸려서, 아무 반응이
        없어 보이지 않게 전체 화면 오버레이로 진행 중임을 보여준다(2026-08-21 요청). -->
   <div class="loading-overlay" id="loadingOverlay" hidden>
-    <div class="loading-spinner"></div>
-    <p class="loading-title">로드맵을 만들고 있어요</p>
-    <p class="loading-sub">졸업 요건 확인 · 역량 진단 · 과목·프로그램 추천까지 한 번에 계산 중입니다 (최대 20초 정도 걸려요)</p>
+    <div class="loading-card">
+      <div class="loading-spinner"></div>
+      <p class="loading-title">맞춤 로드맵을 정리하고 있어요</p>
+      <p class="loading-sub">학사요람과 이수 현황, 목표 트랙을 순서대로 대조합니다.</p>
+      <ol class="loading-steps" aria-label="로드맵 생성 과정">
+        <li class="is-active" data-loading-stage="0"><span>1</span> 졸업 요건 대조 <em>진행 중</em></li>
+        <li data-loading-stage="1"><span>2</span> 역량 근거 정리 <em>대기</em></li>
+        <li data-loading-stage="2"><span>3</span> 학기별 추천 생성 <em>대기</em></li>
+      </ol>
+      <p class="loading-footnote">보통 30초 이내에 완료됩니다. 원본 성적표는 저장하지 않아요.</p>
+    </div>
   </div>
 
   <script src="/js/upload.js"></script>

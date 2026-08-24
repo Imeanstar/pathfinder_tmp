@@ -23,7 +23,7 @@ function loadState() {
   return true;
 }
 
-// --- 학기 라벨: admission_year + "grade-semester" -> "2026-2" 식 달력 표기 ---
+// --- 학기 라벨: 내부 "grade-semester" 키를 학년·학기와 실제 연도로 함께 표기한다. ---
 function termSortKey(term) {
   const [grade, sem] = term.split("-").map(Number);
   return grade * 10 + sem;
@@ -31,7 +31,7 @@ function termSortKey(term) {
 function calendarLabel(term, admissionYear) {
   const [grade, sem] = term.split("-").map(Number);
   const year = admissionYear + (grade - 1);
-  return `${year}-${sem}`;
+  return `${grade}학년 ${sem}학기 (${year}-${sem})`;
 }
 
 // --- 헤더 ---
@@ -55,10 +55,16 @@ function statusDotClass(kind) {
   return { ok: "ok", warn: "warn", bad: "bad", unknown: "unknown" }[kind] || "unknown";
 }
 
+function statusLabel(kind) {
+  return { ok: "이수 완료", warn: "진행 중", bad: "보완 필요", unknown: "확인 필요" }[kind] || "확인 필요";
+}
+
 function renderCreditCard() {
   const a = PLAN.audit;
   const req = PLAN.requirements_summary;
   const pct = Math.min(100, Math.round((a.total_credit_earned / req.total_credit_required) * 100));
+  const remainingCredit = Math.max(0, req.total_credit_required - a.total_credit_earned);
+  const remainingTerms = Object.keys(PLAN.roadmap.schedule).length;
 
   const items = [];
 
@@ -120,11 +126,22 @@ function renderCreditCard() {
   const citationByItem = Object.fromEntries((PLAN.citations || []).map((c) => [c.item, c.citation]));
 
   document.getElementById("creditCard").innerHTML = `
-    <p class="card-subtitle">${FORM_STATE.admission_year}학년도 학사요람 · ${FORM_STATE.track_type}</p>
-    <div class="credit-big">${a.total_credit_earned}<span class="of"> / ${req.total_credit_required}</span></div>
-    <div class="progress-bar"><div style="width:${pct}%"></div></div>
-    <div class="remaining-terms">남은 학기 ${Object.keys(PLAN.roadmap.schedule).length}학기</div>
-    <ul class="req-list">
+    <div class="academic-card-head">
+      <div>
+        <p class="card-title">학사 점검표</p>
+        <p class="card-subtitle">${FORM_STATE.admission_year}학년도 학사요람 · ${FORM_STATE.track_type}</p>
+      </div>
+      <span class="academic-term-count">남은 ${remainingTerms}학기</span>
+    </div>
+    <section class="credit-overview" aria-label="취득 학점 현황">
+      <div class="credit-overview-head"><span>취득 학점</span><span>졸업 기준 ${req.total_credit_required}학점</span></div>
+      <div class="credit-big">${a.total_credit_earned}<span class="of">학점</span></div>
+      <div class="progress-bar"><div style="width:${pct}%"></div></div>
+      <div class="credit-overview-meta"><span>이수율 ${pct}%</span><span>남은 ${remainingCredit}학점</span></div>
+    </section>
+    <section class="academic-requirements" aria-label="졸업 요건 점검">
+      <div class="academic-section-head"><strong>졸업 요건 점검</strong><span>현재 이수 현황</span></div>
+      <ul class="req-list academic-req-list">
       ${items
         .map((it) => {
           const citations = it.name === "전공필수" && !majorOk
@@ -139,8 +156,8 @@ function renderCreditCard() {
           return `
         <li>
           <span class="req-dot ${statusDotClass(it.kind)}"></span>
-          <div style="flex:1">
-            <span class="req-name">${it.name}</span>
+          <div class="req-main">
+            <div class="req-title-row"><span class="req-name">${it.name}</span><span class="req-status ${statusDotClass(it.kind)}">${statusLabel(it.kind)}</span></div>
             ${it.detail ? `<div class="req-detail">${it.detail}${citations}</div>` : ""}
             ${addLink}
           </div>
@@ -148,7 +165,8 @@ function renderCreditCard() {
         </li>`;
         })
         .join("")}
-    </ul>
+      </ul>
+    </section>
   `;
 }
 
@@ -423,7 +441,7 @@ function renderRadarSvg(axes) {
   }
 
   // 라벨(최대 8글자 한글 ≈ 70px)이 양옆으로 뻗으므로 뷰박스를 넉넉히 잡는다
-  const W = 340, H = 250, cx = W / 2, cy = 118, maxR = 70;
+  const W = 300, H = 238, cx = W / 2, cy = 112, maxR = 66;
   const angleOf = (i) => (i / n) * 2 * Math.PI;
   const toPath = (pts) => pts.map((p) => p.join(",")).join(" ");
 
@@ -446,6 +464,9 @@ function renderRadarSvg(axes) {
   // "현재" 선은 4요소 중 채운 개수(score/4)로 그린다 — 연속 수치가 아니라 이번에
   // 새로 만든 엄격한 5단계 판정과 완전히 같은 기준이어야 육각형과 목록이 안 어긋난다.
   const currentPts = axes.map((a, i) => polarPoint(cx, cy, maxR * (a.score / 4), angleOf(i)));
+  const currentDots = currentPts
+    .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3" fill="#d9822b" />`)
+    .join("");
 
   const labels = axes
     .map((a, i) => {
@@ -453,8 +474,8 @@ function renderRadarSvg(axes) {
       const [x, y] = polarPoint(cx, cy, maxR + 16, angle);
       const sin = Math.sin(angle);
       const anchor = sin > 0.25 ? "start" : sin < -0.25 ? "end" : "middle";
-      return `<text x="${x}" y="${y + 3}" font-size="10" font-weight="600"
-        fill="${LEVEL_COLOR[a.level] || "#6b7280"}" text-anchor="${anchor}">${a.label}</text>`;
+      return `<text x="${x}" y="${y + 3}" font-size="9.5" font-weight="600"
+        fill="#455468" text-anchor="${anchor}">${a.label}</text>`;
     })
     .join("");
 
@@ -462,11 +483,11 @@ function renderRadarSvg(axes) {
     <svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" role="img"
          aria-label="역량 레이더 차트">
       ${rings}${spokes}
-      <polygon points="${toPath(targetPts)}" fill="none" stroke="#9aa6bf"
-               stroke-width="1.2" stroke-dasharray="4,3" />
-      <polygon points="${toPath(currentPts)}" fill="rgba(47,95,218,0.22)"
-               stroke="#2f5fda" stroke-width="2" stroke-linejoin="round" />
-      ${labels}
+      <polygon points="${toPath(targetPts)}" fill="none" stroke="#9ec5b4"
+               stroke-width="1.2" stroke-dasharray="3,3" />
+      <polygon points="${toPath(currentPts)}" fill="rgba(217,130,43,0.08)"
+               stroke="#d9822b" stroke-width="1.8" stroke-linejoin="round" />
+      ${currentDots}${labels}
     </svg>
   `;
 }
@@ -512,11 +533,8 @@ function renderCompetencyCard() {
     .map((a) => {
       const color = LEVEL_COLOR[a.level] || "#6b7280";
       return `
-      <div class="gap-row">
-        <div class="gap-label"><span>${a.label}</span><span style="color:${color};font-weight:700">${a.level}</span></div>
-        <div class="gap-bar">
-          <div style="width:${(a.score / 4) * 100}%;background:${color}"></div>
-        </div>
+      <div class="gap-row competency-row">
+        <div class="gap-label"><span>${a.label}</span><span class="competency-level" style="color:${color}">${a.level}</span></div>
         ${renderEvidenceDetails(evidenceMap[a.id], a.factors)}
       </div>`;
     })
@@ -527,51 +545,60 @@ function renderCompetencyCard() {
     weakCount === 0
       ? "표시된 역량 대부분이 다양한 근거로 뒷받침되고 있습니다."
       : `보완이 필요한(부족·매우 부족) 역량이 ${weakCount}개 있습니다.`;
+  const diagnosisLabel = weakCount === 0 ? "전반적으로 양호" : `보완 필요 ${weakCount}개`;
 
   document.getElementById("competencyCard").innerHTML = `
-    <p class="card-title">역량 진단</p>
-    <p class="card-subtitle">${summary} 과목·프로젝트·동아리·자격증을 종합해 판정합니다.</p>
-    <div class="radar-legend">
-      <span><span class="legend-swatch" style="background:#2f5fda"></span>현재(4요소 중 충족 개수)</span>
-      <span><span class="legend-swatch" style="background:transparent;border:1px dashed #9aa6bf"></span>목표 트랙</span>
+    <div class="competency-card-head">
+      <div>
+        <p class="card-title">역량 진단</p>
+        <p class="card-subtitle">${summary}</p>
+      </div>
+      <span class="competency-summary ${weakCount === 0 ? "is-good" : ""}">${diagnosisLabel}</span>
     </div>
-    <div style="text-align:center">${renderRadarSvg(axes)}</div>
-    <div class="gap-list">${gapRows}</div>
+    <div class="radar-frame">${renderRadarSvg(axes)}</div>
+    <div class="radar-legend">
+      <span><i class="level-dot level-critical"></i>매우 부족</span>
+      <span><i class="level-dot level-warning"></i>부족</span>
+      <span><i class="level-dot level-caution"></i>보통</span>
+      <span><i class="level-dot level-ok"></i>충족</span>
+    </div>
+    <section class="gap-list competency-inspection" aria-label="역량별 진단 결과">
+      <div class="competency-list-head"><span>역량</span><span>현재 상태</span></div>
+      ${gapRows}
+    </section>
   `;
 }
 
 // --- 로드맵 ---
-function itemCardHtml(item, kind) {
-  if (kind === "course") {
-    return `
-      <div class="item-card">
-        <div class="item-card-top">
-          <span class="item-badge course">교과</span>
-          <span class="item-name">${item.name}</span>
-          <span class="item-meta">${item.category || ""} ${item.credit ?? ""}</span>
-        </div>
-        <div class="item-reason">${item.reason}</div>
-      </div>`;
-  }
+function roadmapCourseRowHtml(item) {
+  const category = item.category || "교과";
+  const categoryClass = category.includes("필수") ? "required" : category.includes("기초") ? "basic" : "elective";
+  return `
+    <article class="roadmap-course-row">
+      <div class="roadmap-course-main">
+        <span class="roadmap-course-badge ${categoryClass}">${escapeHtml(category)}</span>
+        <strong>${escapeHtml(item.name)}</strong>
+        <span class="roadmap-course-credit">${item.credit ?? "-"}학점</span>
+      </div>
+      ${item.reason ? `<details class="roadmap-reason"><summary>추천 근거</summary><p>${escapeHtml(item.reason)}</p></details>` : ""}
+    </article>`;
+}
+
+function roadmapProgramCardHtml(item) {
   const deadline = item.apply_period ? item.apply_period.split("~")[1]?.trim() : "";
   const urlLink = item.url ? `<a href="${item.url}" target="_blank" rel="noopener">원문 보기 ↗</a>` : "";
-  // 우리 프로그램 데이터는 특정 연도 한 시점 스냅샷이라, 미래 학기에 배치된 항목은
-  // "그 해 그 시기에 실제로 열린다"가 아니라 "이맘때 이런 프로그램이 있었다"는 참고
-  // 사례다(2026-08-21 사용자 요청 — 개설 여부 확인이 필요하다는 걸 명시해달라).
   const precedentNote = item.is_precedent
-    ? `<div class="item-precedent">📌 과거에 이맘때 있었던 프로그램입니다 — 이번에도 열리는지는 아주허브에서 확인하세요</div>`
+    ? `<p class="roadmap-program-note">이전 개설 이력이 있는 프로그램입니다.</p>`
     : "";
   return `
-    <div class="item-card">
-      <div class="item-card-top">
-        <span class="item-badge program">비교과</span>
-        <span class="item-name">${item.name}</span>
-      </div>
-      <div class="item-sub">${item.org || ""}${deadline ? " · 신청 ~" + deadline : ""}</div>
-      <div class="item-reason">${item.reason}</div>
+    <article class="roadmap-program-card">
+      <span class="roadmap-program-badge">비교과</span>
+      <strong>${escapeHtml(item.name)}</strong>
+      <p>${escapeHtml(item.org || "")}${deadline ? " · 신청 ~" + escapeHtml(deadline) : ""}</p>
+      ${item.reason ? `<details class="roadmap-reason"><summary>추천 근거</summary><p>${escapeHtml(item.reason)}</p></details>` : ""}
       ${precedentNote}
-      ${urlLink ? `<div style="margin-top:6px">${urlLink}</div>` : ""}
-    </div>`;
+      ${urlLink ? `<div class="roadmap-program-link">${urlLink}</div>` : ""}
+    </article>`;
 }
 
 function renderRoadmapCard() {
@@ -583,39 +610,39 @@ function renderRoadmapCard() {
     ? `<div class="warning-banner">⚠️ ${warnings.join("<br />⚠️ ")}</div>`
     : "";
 
-  // 학기 블록을 좌(이수 과목)/우(교내 프로그램) 2열로 나눈다 — 예전엔 프로그램만
-  // 세로로 쭉 나열돼 있어 "왜 과목은 안 알려주냐"는 지적을 받았다(2026-08-21).
+  // 학기 요약을 먼저 훑을 수 있도록 모든 카드는 접힌 상태로 시작한다.
   const termsHtml = terms
     .map((term, idx) => {
       const items = schedule[term];
       const totalCredit = items.courses.reduce((s, c) => s + (c.credit || 0), 0);
-      const label =
-        idx === 0 ? "이번 학기" : idx === terms.length - 1 ? "마지막 학기" : "다음 학기";
+      const labelHtml = idx === 0
+        ? '<em class="roadmap-term-state is-current">이번 학기</em>'
+        : idx === terms.length - 1
+          ? '<em class="roadmap-term-state is-final">마지막 학기</em>'
+          : "";
       const courseCol = items.courses.length
-        ? items.courses.map((c) => itemCardHtml(c, "course")).join("")
+        ? items.courses.map(roadmapCourseRowHtml).join("")
         : '<p class="term-col-empty">추천할 과목이 없습니다.</p>';
       const programCol = items.programs.length
-        ? items.programs.map((p) => itemCardHtml(p, "program")).join("")
+        ? items.programs.map(roadmapProgramCardHtml).join("")
         : '<p class="term-col-empty">추천할 프로그램이 없습니다.</p>';
       return `
-        <div class="term-block">
-          <div class="term-block-head">
-            <span class="term-dot ${idx === 0 ? "current" : ""}"></span>
-            <span class="term-label">${calendarLabel(term, FORM_STATE.admission_year)}</span>
-            <span class="term-sub">${label}</span>
-            <span class="term-credit">${totalCredit}학점</span>
+        <details class="roadmap-term">
+          <summary>
+            <span class="roadmap-term-title">
+              <strong>${calendarLabel(term, FORM_STATE.admission_year)}</strong>
+              ${labelHtml}
+            </span>
+            <span class="roadmap-term-credit">총 ${totalCredit}학점</span>
+            <span class="roadmap-term-chevron" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="roadmap-term-body">
+            <p class="roadmap-section-title"><span>▣</span> 핵심 이수 추천 과목 <small>(필수 우선)</small></p>
+            <div class="roadmap-course-list">${courseCol}</div>
+            <p class="roadmap-section-title roadmap-program-title"><span>▣</span> 함께 하면 좋은 활동 <small>(비교과)</small></p>
+            <div class="roadmap-program-grid">${programCol}</div>
           </div>
-          <div class="term-columns">
-            <div class="term-col">
-              <div class="term-col-head">📘 이수 추천 과목</div>
-              ${courseCol}
-            </div>
-            <div class="term-col">
-              <div class="term-col-head">🎯 교내 프로그램</div>
-              ${programCol}
-            </div>
-          </div>
-        </div>`;
+        </details>`;
     })
     .join("");
 
@@ -624,6 +651,7 @@ function renderRoadmapCard() {
       <h2>학기별 로드맵</h2>
       <span class="term-count-badge">${terms.length}개 학기</span>
     </div>
+    <p class="roadmap-intro">현재 학기를 기준으로 추천 과목과 활동을 정리했습니다.</p>
     ${warningHtml}
     ${termsHtml}
   `;
@@ -721,6 +749,34 @@ function setupGuardrailToggle() {
   });
 }
 
+// 모바일에서는 3열 대시보드를 한 번에 축소하지 않는다. 현황·로드맵·역량진단을
+// 하단 탭으로 전환하고, 상담은 필요할 때만 시트처럼 열어 현재 행동을 방해하지 않는다.
+function setupMobileNavigation() {
+  const tabButtons = document.querySelectorAll("[data-mobile-tab]");
+  const setTab = (tab) => {
+    document.body.dataset.mobileTab = tab;
+    tabButtons.forEach((button) => {
+      const active = button.dataset.mobileTab === tab;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-current", active ? "page" : "false");
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  tabButtons.forEach((button) => button.addEventListener("click", () => setTab(button.dataset.mobileTab)));
+  setTab("status");
+
+  const chatFab = document.getElementById("chatFab");
+  const chatClose = document.getElementById("chatClose");
+  const toggleChat = (open) => {
+    document.body.classList.toggle("chat-open", open);
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) setTimeout(() => document.getElementById("chatInput").focus(), 180);
+  };
+  chatFab.addEventListener("click", () => toggleChat(true));
+  chatClose.addEventListener("click", () => toggleChat(false));
+}
+
 // --- 초기화 ---
 document.addEventListener("DOMContentLoaded", () => {
   if (!loadState()) return;
@@ -732,6 +788,7 @@ document.addEventListener("DOMContentLoaded", () => {
   refreshGuardrail();
   setupGuardrailToggle();
   setupSelfReportDelegation();
+  setupMobileNavigation();
 
   document.getElementById("chatSend").addEventListener("click", sendChat);
   const chatInputEl = document.getElementById("chatInput");

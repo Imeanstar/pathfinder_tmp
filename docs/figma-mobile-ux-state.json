@@ -1,0 +1,33 @@
+{
+  "runId": "ajou-pathfinder-mobile-ux-20260824",
+  "fileKey": "XijBLDXrqdhRE3vV1kZLo2",
+  "phase": "phase1-complete",
+  "step": "foundations-ready",
+  "completedSteps": ["P0.a", "P0.b", "P0.c", "P0.d", "P1.a", "P1.b", "P1.c", "P1.d"],
+  "entities": {
+    "pages": { "initial": "0:1" },
+    "collections": {
+      "primitives": "VariableCollectionId:2:2",
+      "semantic": "VariableCollectionId:2:3",
+      "layout": "VariableCollectionId:2:4"
+    },
+    "variables": {
+      "color/action/primary": "VariableID:2:22",
+      "color/bg/canvas": "VariableID:2:18",
+      "color/bg/surface": "VariableID:2:19",
+      "color/text/primary": "VariableID:2:20",
+      "color/text/secondary": "VariableID:2:21",
+      "color/border/default": "VariableID:2:25",
+      "spacing/16": "VariableID:2:30",
+      "radius/card": "VariableID:2:33"
+    },
+    "components": {},
+    "frames": {}
+  },
+  "pendingValidations": [],
+  "decisions": {
+    "font": "Noto Sans KR",
+    "library": "None — build local to retain the AJOU Pathfinder brand",
+    "screenCount": 9
+  }
+}

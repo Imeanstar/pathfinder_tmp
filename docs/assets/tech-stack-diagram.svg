@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">AJOU Pathfinder 기술 스택 다이어그램</title>
+  <desc id="desc">웹 프론트엔드에서 FastAPI 서버로 요청이 전달되고, 개인정보 보호 입력 파이프라인, Gemini, LangGraph, TF-IDF RAG, 공식 교내 데이터가 졸업 현황과 학기별 로드맵 대시보드를 생성하는 구조.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0B2A4A" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M1,1 L10,5.5 L1,10 Z" fill="#477AAE"/>
+    </marker>
+    <marker id="arrowSoft" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M1,1 L10,5.5 L1,10 Z" fill="#9BB4CB"/>
+    </marker>
+    <style>
+      .group { fill: #FFFFFF; stroke: #DCE7F1; stroke-width: 2; }
+      .group-label { font: 700 22px Arial, 'Malgun Gothic', sans-serif; letter-spacing: 1.4px; }
+      .node { fill: #FFFFFF; stroke: #DDE7F0; stroke-width: 2; filter: url(#shadow); }
+      .node-label { fill: #17324D; font: 700 25px Arial, 'Malgun Gothic', sans-serif; text-anchor: middle; }
+      .node-sub { fill: #687D93; font: 500 18px Arial, 'Malgun Gothic', sans-serif; text-anchor: middle; }
+      .line { fill: none; stroke: #477AAE; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+      .line-soft { fill: none; stroke: #9BB4CB; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 9 9; marker-end: url(#arrowSoft); }
+      .mini-label { fill: #FFFFFF; font: 700 17px Arial, 'Malgun Gothic', sans-serif; letter-spacing: .6px; }
+      .data-label { fill: #2B6F50; font: 700 21px Arial, 'Malgun Gothic', sans-serif; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#F8FBFE"/>
+  <text x="86" y="92" fill="#1C62AC" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="28" font-weight="700" letter-spacing="3">AJOU PATHFINDER</text>
+  <text x="86" y="140" fill="#17324D" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="42" font-weight="700">Technology Stack</text>
+  <line x1="86" y1="169" x2="1834" y2="169" stroke="#DCE7F1" stroke-width="2"/>
+
+  <!-- Group containers -->
+  <rect class="group" x="80" y="222" width="252" height="630" rx="22"/>
+  <rect class="group" x="366" y="222" width="330" height="630" rx="22"/>
+  <rect class="group" x="730" y="222" width="312" height="630" rx="22"/>
+  <rect class="group" x="1076" y="222" width="390" height="630" rx="22"/>
+  <rect class="group" x="1500" y="222" width="252" height="630" rx="22"/>
+  <rect class="group" x="1760" y="222" width="130" height="630" rx="22"/>
+
+  <!-- Group headers -->
+  <rect x="104" y="245" width="202" height="40" rx="20" fill="#EAF3FF"/>
+  <text class="group-label" x="205" y="273" text-anchor="middle" fill="#1C62AC">WEB</text>
+  <rect x="390" y="245" width="282" height="40" rx="20" fill="#FFF0F0"/>
+  <text class="group-label" x="531" y="273" text-anchor="middle" fill="#B74848">SAFE INPUT</text>
+  <rect x="754" y="245" width="264" height="40" rx="20" fill="#EAF3FF"/>
+  <text class="group-label" x="886" y="273" text-anchor="middle" fill="#1C62AC">BACKEND</text>
+  <rect x="1100" y="245" width="342" height="40" rx="20" fill="#F3EEFF"/>
+  <text class="group-label" x="1271" y="273" text-anchor="middle" fill="#7357C8">AI WORKFLOW</text>
+  <rect x="1524" y="245" width="204" height="40" rx="20" fill="#ECF8EF"/>
+  <text class="group-label" x="1626" y="273" text-anchor="middle" fill="#2B7D55">OFFICIAL DATA</text>
+
+  <!-- User -->
+  <g transform="translate(125 337)">
+    <circle cx="80" cy="62" r="53" fill="#EAF3FF"/>
+    <circle cx="80" cy="45" r="18" fill="#3974BA"/>
+    <path d="M43 111c5-26 23-39 37-39s32 13 37 39" fill="#3974BA"/>
+    <text class="node-label" x="80" y="156">User</text>
+  </g>
+
+  <!-- Web UI -->
+  <g transform="translate(105 548)">
+    <rect class="node" x="0" y="0" width="200" height="188" rx="18"/>
+    <rect x="42" y="34" width="116" height="72" rx="7" fill="#EAF3FF" stroke="#3974BA" stroke-width="4"/>
+    <path d="M65 70l18-15m-18 15l18 15m37-30l18 15m-18 15l18-15M100 93l12-44" fill="none" stroke="#3974BA" stroke-width="5" stroke-linecap="round"/>
+    <path d="M82 126h36m-18-20v20" stroke="#3974BA" stroke-width="5" stroke-linecap="round"/>
+    <text class="node-label" x="100" y="151">Web UI</text>
+    <text class="node-sub" x="100" y="177">HTML · CSS · JS</text>
+  </g>
+
+  <!-- PDF -->
+  <g transform="translate(425 327)">
+    <rect class="node" x="0" y="0" width="212" height="150" rx="18"/>
+    <path d="M45 33h56l28 28v56H45z" fill="#FFF0F0" stroke="#CC5C50" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M101 33v28h28" fill="none" stroke="#CC5C50" stroke-width="4"/>
+    <path d="M61 91h51M61 109h39" stroke="#CC5C50" stroke-width="4" stroke-linecap="round"/>
+    <text class="node-label" x="154" y="76">PDF</text>
+    <text class="node-sub" x="154" y="104">pdfplumber</text>
+  </g>
+
+  <!-- PII masking -->
+  <g transform="translate(425 529)">
+    <rect class="node" x="0" y="0" width="212" height="150" rx="18"/>
+    <path d="M78 31l42 16v31c0 28-18 43-42 54-24-11-42-26-42-54V47z" fill="#FFF0F0" stroke="#CC5C50" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M59 82l13 13 28-31" fill="none" stroke="#CC5C50" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="node-label" x="154" y="76" font-size="22">PII Masking</text>
+    <text class="node-sub" x="154" y="104">Name · ID</text>
+  </g>
+
+  <!-- Guardrail -->
+  <g transform="translate(425 731)">
+    <rect class="node" x="0" y="0" width="212" height="88" rx="18"/>
+    <path d="M48 27l31 0 14 17-14 17H48L34 44z" fill="#FFF0F0" stroke="#CC5C50" stroke-width="3"/>
+    <path d="M63 34v15m0 8v1" stroke="#CC5C50" stroke-width="5" stroke-linecap="round"/>
+    <text class="node-label" x="146" y="51">Guardrail</text>
+  </g>
+
+  <!-- FastAPI -->
+  <g transform="translate(790 333)">
+    <rect class="node" x="0" y="0" width="192" height="183" rx="18"/>
+    <circle cx="96" cy="69" r="42" fill="#1C9E7A"/>
+    <path d="M105 33L71 80h25l-8 29 35-48h-25z" fill="#FFFFFF"/>
+    <text class="node-label" x="96" y="146">FastAPI</text>
+    <text class="node-sub" x="96" y="172">REST · Static</text>
+  </g>
+
+  <!-- Deterministic audit -->
+  <g transform="translate(790 588)">
+    <rect class="node" x="0" y="0" width="192" height="158" rx="18"/>
+    <rect x="44" y="29" width="76" height="83" rx="8" fill="#EAF3FF" stroke="#3974BA" stroke-width="4"/>
+    <path d="M61 55l9 9 16-18M61 80l9 9 16-18" fill="none" stroke="#3974BA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="node-label" x="96" y="135">Audit</text>
+  </g>
+
+  <!-- MCP -->
+  <g transform="translate(780 772)">
+    <rect x="0" y="0" width="212" height="52" rx="16" fill="#F4F8FC" stroke="#9BB4CB" stroke-width="2" stroke-dasharray="7 7"/>
+    <path d="M33 18h14v-7m0 7l10 8-10 8m42-16H75v-7m0 7l-10 8 10 8" fill="none" stroke="#477AAE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="144" y="33" fill="#477AAE" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="20" font-weight="700" text-anchor="middle">MCP Tool</text>
+  </g>
+
+  <!-- Gemini -->
+  <g transform="translate(1127 325)">
+    <rect class="node" x="0" y="0" width="288" height="150" rx="18"/>
+    <path d="M73 25l11 30 30 11-30 11-11 30-11-30-30-11 30-11z" fill="#8B6CD8"/>
+    <path d="M101 91l6 16 16 6-16 6-6 16-6-16-16-6 16-6z" fill="#C1B2F2"/>
+    <text class="node-label" x="184" y="67">Gemini</text>
+    <text class="node-sub" x="184" y="97">Parse · Explain · Chat</text>
+  </g>
+
+  <!-- LangGraph -->
+  <g transform="translate(1127 535)">
+    <rect class="node" x="0" y="0" width="288" height="164" rx="18"/>
+    <path d="M57 97L87 55l37 22 42-35M87 55v72m37-50v46" fill="none" stroke="#7357C8" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="57" cy="97" r="13" fill="#7357C8"/><circle cx="87" cy="55" r="13" fill="#A894E8"/><circle cx="87" cy="127" r="13" fill="#A894E8"/><circle cx="124" cy="77" r="13" fill="#7357C8"/><circle cx="124" cy="123" r="13" fill="#A894E8"/><circle cx="166" cy="42" r="13" fill="#7357C8"/>
+    <text class="node-label" x="198" y="74">LangGraph</text>
+    <text class="node-sub" x="198" y="104">Diagnose · Plan</text>
+    <text class="node-sub" x="198" y="129">Roadmap</text>
+  </g>
+
+  <!-- RAG -->
+  <g transform="translate(1127 758)">
+    <rect class="node" x="0" y="0" width="288" height="66" rx="18"/>
+    <ellipse cx="55" cy="24" rx="22" ry="9" fill="#F3EEFF" stroke="#7357C8" stroke-width="3"/>
+    <path d="M33 24v17c0 5 10 9 22 9s22-4 22-9V24" fill="#F3EEFF" stroke="#7357C8" stroke-width="3"/>
+    <circle cx="90" cy="36" r="10" fill="none" stroke="#7357C8" stroke-width="4"/><path d="M98 44l10 10" stroke="#7357C8" stroke-width="4" stroke-linecap="round"/>
+    <text class="node-label" x="195" y="43">TF-IDF RAG</text>
+  </g>
+
+  <!-- Official data -->
+  <g transform="translate(1540 336)">
+    <rect class="node" x="0" y="0" width="172" height="122" rx="18"/>
+    <path d="M42 33h59v56H42zM55 20h59v56H55z" fill="#ECF8EF" stroke="#3F8A57" stroke-width="3"/>
+    <path d="M68 36h33M68 49h33" stroke="#3F8A57" stroke-width="3" stroke-linecap="round"/>
+    <text class="data-label" x="86" y="103">요람</text>
+  </g>
+  <g transform="translate(1540 505)">
+    <rect class="node" x="0" y="0" width="172" height="122" rx="18"/>
+    <path d="M45 39h70v50H45z" fill="#ECF8EF" stroke="#3F8A57" stroke-width="3"/>
+    <path d="M45 52h70M68 39v50M92 39v50" stroke="#3F8A57" stroke-width="3"/>
+    <text class="data-label" x="86" y="103">과목 63</text>
+  </g>
+  <g transform="translate(1540 674)">
+    <rect class="node" x="0" y="0" width="172" height="122" rx="18"/>
+    <path d="M46 37h69v47H46z" fill="#ECF8EF" stroke="#3F8A57" stroke-width="3"/>
+    <path d="M46 52h69M61 68l12-11 11 9 12-13 19 15" fill="none" stroke="#3F8A57" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="data-label" x="86" y="103">아주허브 282</text>
+  </g>
+
+  <!-- Output dashboard -->
+  <g transform="translate(1770 390)">
+    <rect x="0" y="0" width="110" height="276" rx="18" fill="#FFFFFF" stroke="#DDE7F0" stroke-width="2" filter="url(#shadow)"/>
+    <rect x="18" y="31" width="74" height="132" rx="7" fill="#FFF5EA" stroke="#FF8F3C" stroke-width="4"/>
+    <path d="M31 133V106m16 27V77m16 56V94m16 39V65" stroke="#FF8F3C" stroke-width="8" stroke-linecap="round"/>
+    <path d="M37 189h36m-18-18v18" stroke="#FF8F3C" stroke-width="4" stroke-linecap="round"/>
+    <text x="55" y="218" fill="#D76C1C" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18" font-weight="700" text-anchor="middle">Dashboard</text>
+    <text x="55" y="246" fill="#687D93" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="15" font-weight="500" text-anchor="middle">Status</text>
+    <text x="55" y="266" fill="#687D93" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="15" font-weight="500" text-anchor="middle">Roadmap</text>
+  </g>
+
+  <!-- Primary flows -->
+  <path class="line" d="M205 494V548"/>
+  <path class="line" d="M305 642H790"/>
+  <path class="line-soft" d="M305 642H390V402H425"/>
+  <path class="line" d="M531 477V529"/>
+  <path class="line" d="M531 679V731"/>
+  <path class="line" d="M637 775H705V408H790"/>
+  <path class="line" d="M982 424H1127"/>
+  <path class="line" d="M982 667H1060V617H1127"/>
+  <path class="line" d="M1271 475V535"/>
+  <path class="line" d="M1271 699V758"/>
+  <path class="line" d="M1415 617H1770"/>
+  <path class="line-soft" d="M1540 397H1490V791H1415"/>
+  <path class="line-soft" d="M1540 566H1514V791H1415"/>
+  <path class="line-soft" d="M1540 735H1538V791H1415"/>
+  <path class="line-soft" d="M886 746V772"/>
+
+  <!-- Small flow labels -->
+  <rect x="612" y="612" width="94" height="30" rx="15" fill="#FFFFFF"/>
+  <text x="659" y="633" fill="#477AAE" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle">API</text>
+  <rect x="1472" y="744" width="78" height="30" rx="15" fill="#FFFFFF"/>
+  <text x="1511" y="765" fill="#6E9E83" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="16" font-weight="700" text-anchor="middle">Search</text>
+</svg>

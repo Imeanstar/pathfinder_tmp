@@ -32,7 +32,7 @@
 
     <section class="col chat-col">
       <div class="card" id="chatCard">
-        <div class="chat-head">상담 <span class="sub">근거 없으면 답하지 않음</span></div>
+        <div class="chat-head">상담 <span class="sub">근거 없으면 답하지 않음</span><button class="chat-close" id="chatClose" aria-label="상담 닫기">✕</button></div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-chips" id="chatChips"></div>
         <div class="chat-input-row">
@@ -49,6 +49,13 @@
       </div>
     </section>
   </main>
+
+  <button class="chat-fab" id="chatFab" aria-label="상담 열기"><span class="chat-fab-dots" aria-hidden="true">•••</span><strong>상담</strong></button>
+  <nav class="mobile-tabbar" aria-label="대시보드 탐색">
+    <button type="button" class="is-active" data-mobile-tab="status"><span>◷</span>현황</button>
+    <button type="button" data-mobile-tab="roadmap"><span>⌁</span>로드맵</button>
+    <button type="button" data-mobile-tab="skills"><span>◇</span>역량진단</button>
+  </nav>
 
   <script src="/js/dashboard.js"></script>
 </body>

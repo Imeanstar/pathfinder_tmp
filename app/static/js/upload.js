@@ -10,11 +10,25 @@ const PROJECT_FORM_TYPES = [
 
 let CONFIG = null;
 let uploadedCourses = [];
+let loadingStageTimer = null;
+
+const WIZARD_STEP_IDS = ["stepUpload", "stepMasked", "stepSettings"];
+
+function syncWizardProgress(activeId) {
+  const activeIndex = WIZARD_STEP_IDS.indexOf(activeId);
+  document.querySelectorAll(".wizard-progress-item").forEach((item, index) => {
+    item.classList.toggle("is-active", index === activeIndex);
+    item.classList.toggle("is-complete", index < activeIndex);
+    item.toggleAttribute("aria-current", index === activeIndex);
+  });
+}
 
 // --- 단계 전환: 나가는 섹션을 위로 페이드아웃 → 들어오는 섹션을 아래에서 페이드인 ---
 function goToStep(fromId, toId) {
   const from = document.getElementById(fromId);
   const to = document.getElementById(toId);
+
+  syncWizardProgress(toId);
 
   from.classList.add("is-leave");
   setTimeout(() => {
@@ -29,6 +43,38 @@ function goToStep(fromId, toId) {
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, 380);
+}
+
+function setLoadingStage(activeStage) {
+  const labels = ["진행 중", "대기", "대기"];
+  labels.forEach((_, index) => {
+    if (index < activeStage) labels[index] = "완료";
+    if (index === activeStage) labels[index] = "진행 중";
+  });
+  document.querySelectorAll(".loading-steps li").forEach((item) => {
+    const index = Number(item.dataset.loadingStage);
+    item.classList.toggle("is-active", index === activeStage);
+    item.classList.toggle("is-complete", index < activeStage);
+    item.querySelector("em").textContent = labels[index];
+  });
+}
+
+function showRoadmapLoading() {
+  const overlay = document.getElementById("loadingOverlay");
+  overlay.hidden = false;
+  setLoadingStage(0);
+  if (loadingStageTimer) clearInterval(loadingStageTimer);
+  let nextStage = 1;
+  loadingStageTimer = setInterval(() => {
+    setLoadingStage(nextStage);
+    nextStage = Math.min(2, nextStage + 1);
+  }, 2200);
+}
+
+function hideRoadmapLoading() {
+  if (loadingStageTimer) clearInterval(loadingStageTimer);
+  loadingStageTimer = null;
+  document.getElementById("loadingOverlay").hidden = true;
 }
 
 // ============================================================
@@ -48,15 +94,25 @@ function showUploadError(message) {
   document.getElementById("upBarFill").style.background = "var(--red)";
   document.getElementById("upTitle").textContent = "업로드 실패";
   document.getElementById("upSub").textContent = "다른 파일로 다시 시도해주세요.";
-  document.getElementById("dropzone").classList.remove("is-disabled");
+  const dropzone = document.getElementById("dropzone");
+  dropzone.classList.remove("is-disabled");
+  dropzone.setAttribute("aria-busy", "false");
 }
 
-function resetProgressUi() {
+function resetProgressUi(fileName = "선택한 파일") {
+  document.getElementById("dropzoneDefault").hidden = true;
   document.getElementById("uploadProgress").hidden = false;
   document.getElementById("upError").hidden = true;
   document.getElementById("upCheck").hidden = true;
+  document.getElementById("upFileName").textContent = fileName;
   document.getElementById("upBarFill").style.background = "var(--blue-600)";
-  setProgress(0, "업로드 중...", "0%");
+  setProgress(0, "파일 업로드 중", "0%");
+}
+
+function showUploadDefault() {
+  document.getElementById("dropzoneDefault").hidden = false;
+  document.getElementById("uploadProgress").hidden = true;
+  document.getElementById("dropzone").setAttribute("aria-busy", "false");
 }
 
 /**
@@ -72,8 +128,10 @@ function uploadFile(file) {
     return;
   }
 
-  resetProgressUi();
-  document.getElementById("dropzone").classList.add("is-disabled");
+  resetProgressUi(file.name);
+  const dropzone = document.getElementById("dropzone");
+  dropzone.classList.add("is-disabled");
+  dropzone.setAttribute("aria-busy", "true");
 
   const formData = new FormData();
   formData.append("file", file);
@@ -119,6 +177,7 @@ function uploadFile(file) {
 
     setProgress(100, "완료", "마스킹 결과를 확인해주세요");
     document.getElementById("upCheck").hidden = false;
+    dropzone.setAttribute("aria-busy", "false");
 
     uploadedCourses = body.courses || [];
     renderMaskResult(body);
@@ -138,13 +197,21 @@ function setupDropzone() {
   const dz = document.getElementById("dropzone");
   const input = document.getElementById("fileInput");
 
-  dz.addEventListener("click", () => input.click());
+  const openFilePicker = () => {
+    if (!dz.classList.contains("is-disabled")) input.click();
+  };
+  dz.addEventListener("click", openFilePicker);
+  dz.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    openFilePicker();
+  });
   input.addEventListener("change", () => uploadFile(input.files[0]));
 
   ["dragover", "dragenter"].forEach((evt) =>
     dz.addEventListener(evt, (e) => {
       e.preventDefault();
-      dz.classList.add("is-dragover");
+      if (!dz.classList.contains("is-disabled")) dz.classList.add("is-dragover");
     })
   );
   ["dragleave", "drop"].forEach((evt) =>
@@ -154,6 +221,7 @@ function setupDropzone() {
     })
   );
   dz.addEventListener("drop", (e) => {
+    if (dz.classList.contains("is-disabled")) return;
     const file = e.dataTransfer.files[0];
     if (file) uploadFile(file);
   });
@@ -393,7 +461,7 @@ async function handleSubmit(e) {
   submitBtn.textContent = "분석 중...";
   // 졸업판정+역량진단+추천(Gemini 사유 생성 포함)까지 한 번에 계산해 20초 가까이
   // 걸린다 — 화면이 멈춘 것처럼 보이지 않게 전체 화면 오버레이로 진행 중임을 알린다.
-  document.getElementById("loadingOverlay").hidden = false;
+  showRoadmapLoading();
 
   const track = document.getElementById("track").value;
   const overlayValue = document.getElementById("overlay").value || null;
@@ -434,9 +502,10 @@ async function handleSubmit(e) {
 
     sessionStorage.setItem("pathfinder:formState", JSON.stringify(payload));
     sessionStorage.setItem("pathfinder:planResult", JSON.stringify(result));
+    if (loadingStageTimer) clearInterval(loadingStageTimer);
     window.location.href = "dashboard.html"; // 페이지 이동으로 오버레이도 자연히 사라짐
   } catch (err) {
-    document.getElementById("loadingOverlay").hidden = true;
+    hideRoadmapLoading();
     submitBtn.disabled = false;
     submitBtn.textContent = "로드맵 만들기";
     alert("로드맵 생성에 실패했습니다. 잠시 후 다시 시도해주세요.");
@@ -447,11 +516,12 @@ async function handleSubmit(e) {
 document.addEventListener("DOMContentLoaded", () => {
   loadConfig();
   setupDropzone();
+  syncWizardProgress("stepUpload");
 
   document.getElementById("reuploadBtn").addEventListener("click", () => {
-    document.getElementById("uploadProgress").hidden = true;
     document.getElementById("dropzone").classList.remove("is-disabled");
     document.getElementById("fileInput").value = "";
+    showUploadDefault();
     goToStep("stepMasked", "stepUpload");
   });
   document.getElementById("confirmMaskBtn").addEventListener("click", () => {
