@@ -59,9 +59,13 @@ from app.parser import (
     parse_transcript,
 )
 from app.retrieval import retrieve
+from app.tracing import setup_tracing
 from app.user_store import get_latest_plan, save_latest_plan
 
 app = FastAPI(title="AJOU Pathfinder API")
+# ENABLE_CLOUD_TRACE=true일 때만 켜진다(Cloud Run 배포에서만 설정) — 로컬 개발·테스트엔
+# GCP 인증정보가 없어 기본은 꺼둔다. app/tracing.py 참고.
+setup_tracing(app)
 
 
 @app.middleware("http")

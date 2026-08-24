@@ -32,3 +32,11 @@ langchain-google-genai>=2
 # 2026-08-21). grpcio-status도 최신판은 protobuf>=6.33을 요구해 같이 맞춰야 한다.
 google-cloud-firestore==2.20.2
 grpcio-status<1.71
+
+# 분산 추적(app/tracing.py, 2026-08-24) — 로컬에선 ENABLE_CLOUD_TRACE가 안 켜져
+# 있어 실제로 import되진 않지만(app/tracing.py가 그 전에 return), tests/test_tracing.py가
+# 켜졌을 때의 동작(FastAPIInstrumentor.instrument_app 등)까지 검증하므로 로컬에도 필요.
+opentelemetry-sdk>=1.44
+opentelemetry-instrumentation-fastapi>=0.65b0
+opentelemetry-exporter-gcp-trace>=1.15
+opentelemetry-resourcedetector-gcp>=1.14

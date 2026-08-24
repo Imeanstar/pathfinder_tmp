@@ -56,7 +56,7 @@ jobs:
             --allow-unauthenticated \
             --memory 1Gi \
             --max-instances 5 \
-            --set-env-vars GOOGLE_OAUTH_CLIENT_ID=783601922022-n6g99mfjumm2hquqk3aam6cv50l2dnpd.apps.googleusercontent.com,GIT_SHA=$(git rev-parse --short HEAD) \
+            --set-env-vars GOOGLE_OAUTH_CLIENT_ID=783601922022-n6g99mfjumm2hquqk3aam6cv50l2dnpd.apps.googleusercontent.com,GIT_SHA=$(git rev-parse --short HEAD),ENABLE_CLOUD_TRACE=true \
             --set-secrets GOOGLE_API_KEY=GOOGLE_API_KEY:latest,EMAIL_HASH_PEPPER=EMAIL_HASH_PEPPER:latest \
             --quiet
 
