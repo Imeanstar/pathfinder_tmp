@@ -1,0 +1,13 @@
+# Vertex AI Agent Engine 원격 런타임이 실제로 설치할 의존성 목록(agent_engines.create의
+# requirements 인자로 그대로 넘어간다) — 로컬 개발 venv(.venv)와는 별개다.
+#
+# app/agents/supervisor.py의 그래프는 결정론적 코드만 쓴다(Gemini 등 LLM 호출이
+# 그래프 안에 없음, app/llm.py·app/agents/chat.py만 LLM을 쓴다) — 그래서
+# google-genai/langchain-google-genai가 전혀 필요 없고, deploy.py가 요구하는
+# google-cloud-aiplatform과 정확히 부딪히던 protobuf<6.0 대 6.x 충돌
+# (requirements.txt·requirements-runtime.txt 주석 참고, 2026-08-21/24 직접 겪음)을
+# 원천적으로 피한다.
+
+langgraph>=0.2
+pdfplumber>=0.11
+pyyaml>=6
