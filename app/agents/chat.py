@@ -23,6 +23,30 @@ from typing import Callable
 from app.guardrail import detect_injection, increment_blocked_count, is_guardrail_enabled
 
 RetrieveFn = Callable[..., list[dict]]
+RewriteFn = Callable[[str, list[dict]], str]
+
+# RAG 질의 재작성 — 서비스 고도화(2026-08-24). 지금까지는 학생의 원문 메시지를 그대로
+# 검색기에 넣었다: "그거 언제까지 신청해야 돼?" 같은 짧고 대명사투인 질문은 요람/과목/
+# 프로그램 코퍼스와 어휘가 거의 안 겹쳐 검색 재현율이 낮다. 이전 대화를 참고해 검색
+# 친화적인 키워드로 바꾸는 단계를 answer_question() 앞에 끼워넣는다 — 단, 최종 답변
+# 프롬프트의 "학생의 질문"엔 원문을 그대로 쓴다(재작성된 키워드투로 답하면 어색하다).
+REWRITE_QUERY_PROMPT = """다음은 학생이 진로·졸업 상담 챗봇에게 한 질문이다. 이 질문을
+요람 조항·과목 카탈로그·교내 프로그램 목록에서 검색하기 좋은 핵심 키워드로 바꿔라.
+
+규칙:
+- 대명사·생략된 주어는 "이전 대화"를 참고해 구체적인 명사로 채워라(예: "그거 언제까지야?"
+  -> 직전에 언급된 대상 이름으로).
+- 인사말·군더더기 표현은 빼고 검색에 필요한 핵심 명사·키워드만 남겨라.
+- 한국어로, 한 줄로만 답하라. 설명이나 따옴표를 붙이지 마라.
+
+--- 이전 대화 ---
+{history_text}
+
+--- 질문 ---
+{message}
+
+--- 검색 키워드 ---
+"""
 
 SYSTEM_PROMPT = """너는 아주대학교 소프트웨어학과 학생의 졸업·진로를 상담하는 챗봇이다.
 성적표·자기신고 정보를 근거로 졸업요건을 확인해줄 뿐 아니라, 어떤 과목을 들으면 좋을지,
@@ -92,11 +116,30 @@ def _format_history(history: list[dict]) -> str:
     return "\n".join(f"{role_label.get(h['role'], h['role'])}: {h['content']}" for h in history)
 
 
+def rewrite_query(message: str, history: list[dict]) -> str:
+    """검색용 질의만 바꾼다 — 실패하거나 키가 없으면 원문을 그대로 돌려준다(검색
+    자체가 막히면 안 된다는 이 프로젝트의 '모든 AI 경로에 대체 경로' 원칙)."""
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        return message
+    try:
+        from google import genai
+
+        client = genai.Client(api_key=api_key)
+        prompt = REWRITE_QUERY_PROMPT.format(history_text=_format_history(history), message=message)
+        response = client.models.generate_content(model="gemini-3.6-flash", contents=prompt)
+        rewritten = response.text.strip()
+        return rewritten or message
+    except Exception:
+        return message
+
+
 def answer_question(
     message: str,
     context: dict,
     history: list[dict],
     retrieve_fn: RetrieveFn | None = None,
+    rewrite_fn: RewriteFn | None = None,
 ) -> dict:
     """반환값: {"reply": str, "blocked": bool}"""
     if is_guardrail_enabled() and detect_injection(message):
@@ -115,14 +158,19 @@ def answer_question(
 
     if retrieve_fn is None:
         from app.retrieval import retrieve as retrieve_fn  # 지연 import(1차 프로젝트와 같은 패턴)
+    if rewrite_fn is None:
+        rewrite_fn = rewrite_query
 
     try:
         from google import genai
 
+        # 검색은 재작성된 질의로, 최종 프롬프트의 "학생의 질문"은 원문 그대로 —
+        # 챗봇이 재작성된 키워드투로 되묻듯 답하면 안 된다.
+        search_query = rewrite_fn(message, history)
         client = genai.Client(api_key=api_key)
         prompt = SYSTEM_PROMPT.format(
             context_summary=_summarize_context(context),
-            retrieved_docs=_retrieve_context_docs(message, retrieve_fn),
+            retrieved_docs=_retrieve_context_docs(search_query, retrieve_fn),
             history_text=_format_history(history),
             message=message,
         )
