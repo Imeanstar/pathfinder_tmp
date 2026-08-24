@@ -57,13 +57,40 @@ def _summarize_context(context: dict) -> str:
     )
 
 
+# Self-RAG 스타일 관련성 게이팅 — Response Quality Enhancement(2026-08-24). retrieve()의
+# score는 질의마다 0~1로 재정규화된다(app/retrieval.py HybridEncoder.similarity의
+# minmax) — 그래서 "완전히 무관한 질문"도 최상위 결과가 늘 1.0 근처로 나온다(실측
+# 확인: "오늘 날씨 어때?"도 yoram 코퍼스에서 1.0이 나옴). 그 점수를 근거로 "검색됐으니
+# 근거가 있다"고 프롬프트에 실으면 안 된다 — 검색된 문서마다 원시(재정규화 없는) 어휘
+# 유사도를 TfidfEncoder로 새로 계산해 실제로 겹치는 것만 근거로 남긴다. 임계값 0.15는
+# 실측으로 정했다 — 관련 있는 질의(재작성된 질의 포함) 0.21~0.38, 무관한 질의는
+# 대부분 0.0이지만 char n-gram 우연 중복으로 최대 0.12까지 튀는 경우가 있어(실측:
+# "오늘 저녁 뭐 먹으면 좋을까?" vs "오픈소스SW입문..." = 0.1155) 그 위에 여유를 뒀다.
+# Gemini 호출을 추가하지 않고(비용/지연 없음) 기존에 검증된 char n-gram 인코더를 재사용한다.
+RELEVANCE_THRESHOLD = 0.15
+
+
+def _is_relevant(query: str, doc_text: str) -> bool:
+    from app.retrieval import TfidfEncoder
+
+    encoder = TfidfEncoder()
+    encoder.fit([doc_text])
+    return float(encoder.similarity(query)[0]) >= RELEVANCE_THRESHOLD
+
+
 def _retrieve_context_docs(message: str, retrieve_fn: RetrieveFn) -> str:
     blocks = []
     for corpus in ("yoram", "courses", "programs"):
         hits = retrieve_fn(message, corpus, top_k=2)
         for hit in hits:
-            blocks.append(f"[{corpus}] {hit['doc']}")
-    return "\n".join(blocks) if blocks else "(관련 자료를 찾지 못했습니다)"
+            if _is_relevant(message, hit["doc"]):
+                blocks.append(f"[{corpus}] {hit['doc']}")
+    if not blocks:
+        return (
+            "(관련성 있는 자료를 찾지 못했습니다 — 이 질문에 대한 사실 판단은 반드시 "
+            "거부하고, 학사팀에 문의하도록 안내하세요.)"
+        )
+    return "\n".join(blocks)
 
 
 def _format_history(history: list[dict]) -> str:

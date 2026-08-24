@@ -97,6 +97,38 @@ def test_answer_question_returns_fallback_on_call_failure(monkeypatch):
     assert "실패" in result["reply"] or "오류" in result["reply"] or "잠시" in result["reply"]
 
 
+# --- Self-RAG 스타일 관련성 게이팅 — Response Quality Enhancement 완성(2026-08-24) ---
+# retrieve()의 score는 질의마다 0~1로 재정규화된다(app/retrieval.py minmax) — 그래서
+# "완전히 무관한 질문"도 최상위 결과가 늘 1.0 근처로 나온다(실측 확인: "오늘 날씨 어때?"도
+# yoram 코퍼스에서 1.0). score를 못 믿으니, 검색된 문서마다 원시(재정규화 없는) 어휘
+# 유사도를 별도로 계산해 걸러낸다.
+
+
+def test_retrieve_context_docs_filters_out_lexically_unrelated_hits():
+    from app.agents.chat import _retrieve_context_docs
+
+    def fake_retrieve(query, corpus, top_k=2):
+        # retrieve()가 실제로 그러듯 완전히 무관해도 1.0에 가까운 score를 준다 —
+        # 이 테스트는 score를 안 믿고 별도로 걸러내는지 확인한다.
+        return [{"doc": "2025학년도 이후 입학자의 총 졸업 이수학점은 128학점이다.", "score": 1.0, "source": corpus}]
+
+    result = _retrieve_context_docs("오늘 날씨 어때?", fake_retrieve)
+
+    assert "128학점" not in result
+    assert "찾지 못했습니다" in result
+
+
+def test_retrieve_context_docs_keeps_lexically_related_hits():
+    from app.agents.chat import _retrieve_context_docs
+
+    def fake_retrieve(query, corpus, top_k=2):
+        return [{"doc": "2025학년도 이후 입학자의 총 졸업 이수학점은 128학점이다.", "score": 1.0, "source": corpus}]
+
+    result = _retrieve_context_docs("총 이수학점이 몇 학점이야", fake_retrieve)
+
+    assert "128학점" in result
+
+
 # --- RAG 질의 재작성 — 서비스 고도화(2026-08-24) ---
 # 지금까지 검색기에 학생의 원문 메시지를 그대로 넣었다("나 졸업 가능해?" 같은 짧고
 # 모호한 질문은 요람/과목/프로그램 코퍼스와 어휘가 안 겹쳐 검색 재현율이 낮다).
