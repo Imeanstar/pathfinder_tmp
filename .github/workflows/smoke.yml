@@ -29,6 +29,10 @@ jobs:
       - name: 스모크 테스트 실행
         id: smoke
         run: |
+          # pipefail 없이는 tee의 종료 코드(항상 0)가 파이프 전체 종료 코드를 가려서
+          # 스모크 테스트가 실패해도 이 스텝이 성공으로 보고된다(2026-08-24 실제로
+          # 겪음 — 실패를 정확히 출력하고도 워크플로우가 초록불이었다).
+          set -o pipefail
           python3 .github/scripts/smoke_test.py "$DEPLOY_URL" "$(git rev-parse --short HEAD)" \
             | tee smoke_report.md
         continue-on-error: true
