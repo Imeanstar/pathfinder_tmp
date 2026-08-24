@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AJOU Pathfinder</title>
   <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body class="landing-body">
   <header class="landing-header">
@@ -12,6 +13,7 @@
       <img src="/ajou-logo.svg" alt="" class="brand-logo" />
       <span>AJOU PATHFINDER</span>
     </div>
+    <div class="auth-slot" id="authSlot"></div>
   </header>
 
   <section class="hero-section fade-hero" id="heroSection">
@@ -33,7 +35,7 @@
         <div class="landing-or">또는</div>
 
         <p class="hero-resume-label">이미 정보를 입력하셨나요?</p>
-        <a class="hero-resume-link" href="/dashboard.html">내 로드맵 이어보기 <span aria-hidden="true">→</span></a>
+        <button class="hero-resume-link" id="resumeBtn" type="button">내 로드맵 이어보기 <span aria-hidden="true">→</span></button>
       </div>
     </div>
 
@@ -157,6 +159,33 @@
     <span>아주대학교 학생을 위한 맞춤형 졸업 로드맵 서비스</span>
   </footer>
 
+  <!-- 로그인 오버레이 — 구글 계정(@ajou.ac.kr 전용) 로그인(2026-08-21 신설) -->
+  <div class="modal-overlay" id="loginOverlay" hidden>
+    <div class="modal-card login-card">
+      <button class="modal-close" id="loginCloseBtn" aria-label="닫기">✕</button>
+      <img src="/ajou-logo.svg" alt="" class="modal-logo" />
+      <h2 class="modal-title">로그인</h2>
+      <p class="modal-sub">아주대학교 이메일(@ajou.ac.kr) 계정으로만<br />로그인할 수 있어요.</p>
+      <div id="googleBtnSlot" class="google-btn-slot"></div>
+      <p class="modal-error" id="loginError" hidden></p>
+    </div>
+  </div>
+
+  <!-- 계정 드로어 — 로그인 상태에서 헤더의 계정 아이콘을 누르면 오른쪽에서 열림 -->
+  <div class="modal-overlay" id="drawerOverlay" hidden>
+    <aside class="side-drawer">
+      <button class="modal-close" id="drawerCloseBtn" aria-label="닫기">✕</button>
+      <div class="drawer-account">
+        <div class="drawer-avatar" id="drawerAvatar"></div>
+        <div class="drawer-name" id="drawerName"></div>
+        <div class="drawer-email" id="drawerEmail"></div>
+      </div>
+      <button class="drawer-action" id="drawerMyRoadmapBtn">내 로드맵</button>
+      <button class="drawer-logout" id="drawerLogoutBtn">로그아웃</button>
+    </aside>
+  </div>
+
+  <script src="/js/auth.js"></script>
   <script src="/js/landing.js"></script>
 </body>
 </html>

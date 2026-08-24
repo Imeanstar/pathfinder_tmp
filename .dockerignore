@@ -1,0 +1,36 @@
+.venv/
+venv/
+.git/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.env.local
+.DS_Store
+
+# 데이터 파이프라인 원본·로그, 테스트, 문서, MCP 서버 — Dockerfile이 필요한 파일만
+# 명시적으로 COPY하므로 빌드 컨텍스트에서 아예 제외해 업로드 크기도 줄인다
+data_pipeline/spike_samples/
+data_pipeline/logs/
+data/programs_raw.json
+data/user_plans.db
+data/*.sqlite
+data/*.db
+tests/
+docs/
+mcp_server/
+node_modules/
+
+# 실제 학생 성적표(PII) — 어떤 경우에도 빌드 컨텍스트에 올리지 않는다
+*.transcript.pdf
+uploads/
+성적표.pdf
+성적표*.pdf
+*성적표*
+*_transcript*.pdf
+
+# 제출용 문서(큰 용량, 런타임에 불필요)
+*.docx
+*.pptx
+*.backup_*.docx
+*.backup_*.pptx

@@ -1,7 +1,12 @@
 import pytest
 
 from app.agents.competency import ManualProject
-from app.agents.supervisor import run_competency_diagnosis, run_full_plan, run_recommendations
+from app.agents.supervisor import (
+    _roadmap_node,
+    run_competency_diagnosis,
+    run_full_plan,
+    run_recommendations,
+)
 from app.parser import TranscriptData
 
 
@@ -88,3 +93,123 @@ def test_run_full_plan_produces_a_roadmap_from_end_to_end_graph_execution():
     placed_count = sum(len(term["courses"]) + len(term["programs"]) for term in schedule.values())
     # 추천이 실제로 배치되거나, 안 됐다면 왜 안 됐는지 warnings에 남아야 한다 — 둘 다 비면 버그
     assert placed_count > 0 or result["roadmap"]["warnings"]
+
+
+def test_run_full_plan_forwards_missing_major_foundation_courses_to_roadmap():
+    # 25·26학번 신설 전공기초도 missing_required_courses와 같은 경로로 그래프를 통과해
+    # roadmap 노드까지 전달돼야 자동 배치된다(2026-08-22 사용자 요청).
+    transcript = TranscriptData(courses=[])
+    result = run_full_plan(
+        transcript, projects=[], track="백엔드",
+        taken_course_names=set(), taken_program_titles=set(),
+        remaining_terms=["1-1", "2-1", "2-2"],
+        missing_major_foundation_courses=["SW커리어세미나", "확률및통계1", "선형대수1"],
+    )
+    schedule = result["roadmap"]["schedule"]
+    placed_names = [c["name"] for term in schedule.values() for c in term["courses"]]
+    assert "SW커리어세미나" in placed_names
+    assert "확률및통계1" in placed_names
+    assert "선형대수1" in placed_names
+
+
+# --- 졸업요건 백필(전공선택 학점·산학프로젝트 인증) — _roadmap_node 단위 테스트 ---
+# 2026-08-23 사용자 실사례: 자기신고를 많이 채워 역량 격차(gap)가 전부 0이 되면
+# course_recommendations가 텅 비어, 아직 전공선택 학점·산학프로젝트 인증이 부족해도
+# 로드맵에 아무 과목도 안 뜨는 문제가 있었다. _roadmap_node를 직접 호출해(그래프
+# 전체를 안 돌려도) target/shortfall 조합으로 배치가 정확히 되는지 검증한다.
+
+def test_roadmap_node_schedules_elective_backfill_using_shortfall_and_target():
+    # target에서 "데이터베이스" 비중을 압도적으로 높여 백필 후보 1순위가 되게 한다
+    # (course_reco.recommend_elective_backfill이 target으로 순위를 매김).
+    state = {
+        "course_recommendations": [],
+        "program_recommendations": [],
+        "taken_course_names": {"자료구조"},  # 데이터베이스의 선수과목
+        "remaining_terms": ["3-1", "3-2"],
+        "competency_target": {"데이터베이스": 10.0},
+        "elective_credit_shortfall": 3,
+    }
+    result = _roadmap_node(state)
+    placed = [c for term in result["roadmap"]["schedule"].values() for c in term["courses"]]
+    assert any(c["name"] == "데이터베이스" for c in placed)
+
+
+def test_roadmap_node_schedules_industry_project_backfill_using_shortfall_and_groups():
+    state = {
+        "course_recommendations": [],
+        "program_recommendations": [],
+        "taken_course_names": {"객체지향프로그래밍및실습"},  # 자기주도프로젝트의 선수과목
+        "remaining_terms": ["3-1", "3-2"],
+        "competency_target": {},
+        "industry_project_shortfall": 1,
+        "industry_project_course_groups": {"자기주도프로젝트과목군": ["자기주도프로젝트"]},
+    }
+    result = _roadmap_node(state)
+    placed = [c for term in result["roadmap"]["schedule"].values() for c in term["courses"]]
+    assert any(c["name"] == "자기주도프로젝트" for c in placed)
+
+
+def test_roadmap_node_elective_backfill_excludes_names_already_gap_recommended():
+    state = {
+        "course_recommendations": [
+            {"name": "데이터베이스", "reason": "격차", "credit": 3, "category": "전공선택"}
+        ],
+        "program_recommendations": [],
+        "taken_course_names": {"자료구조"},
+        "remaining_terms": ["3-1", "3-2"],
+        "competency_target": {"데이터베이스": 10.0},
+        "elective_credit_shortfall": 6,
+    }
+    result = _roadmap_node(state)
+    placed = [c for term in result["roadmap"]["schedule"].values() for c in term["courses"]]
+    db_entries = [c for c in placed if c["name"] == "데이터베이스"]
+    assert len(db_entries) == 1  # gap 추천과 백필이 같은 과목을 중복 배치하면 안 됨
+
+
+def test_roadmap_node_nets_out_gap_recommended_credit_from_elective_shortfall():
+    # course_recommendations(2단계, gap 기반)가 이미 3학점을 추천했으면, shortfall
+    # 3은 이미 채워진 것으로 보고 별도 백필을 추가하지 않아야 한다(과다 추천 방지).
+    state = {
+        "course_recommendations": [
+            {"name": "데이터베이스", "reason": "격차", "credit": 3, "category": "전공선택"}
+        ],
+        "program_recommendations": [],
+        "taken_course_names": {"자료구조"},
+        "remaining_terms": ["3-1", "3-2"],
+        "competency_target": {},
+        "elective_credit_shortfall": 3,
+    }
+    result = _roadmap_node(state)
+    placed = [c for term in result["roadmap"]["schedule"].values() for c in term["courses"]]
+    backfill_entries = [c for c in placed if "[졸업요건] 전공선택" in c.get("reason", "")]
+    assert backfill_entries == []
+
+
+def test_roadmap_node_without_shortfall_state_behaves_like_before():
+    # 새 state 키(elective_credit_shortfall 등)를 전혀 안 넘겨도(기존 호출부 호환)
+    # 에러 없이 기존과 동일하게 동작해야 한다.
+    state = {
+        "course_recommendations": [],
+        "program_recommendations": [],
+        "taken_course_names": set(),
+        "remaining_terms": [],
+    }
+    result = _roadmap_node(state)
+    assert result["roadmap"]["schedule"] == {}
+
+
+def test_run_full_plan_forwards_elective_and_industry_project_shortfall():
+    # 자기주도프로젝트의 선수과목(객체지향프로그래밍및실습)을 taken에 넣어야
+    # 산학프로젝트 인증 백필이 남은 학기(3-1, 3-2) 안에 실제로 배치될 수 있다.
+    transcript = TranscriptData(courses=[])
+    result = run_full_plan(
+        transcript, projects=[], track="백엔드",
+        taken_course_names={"자료구조", "객체지향프로그래밍및실습"}, taken_program_titles=set(),
+        remaining_terms=["3-1", "3-2"],
+        elective_credit_shortfall=3,
+        industry_project_shortfall=1,
+        industry_project_course_groups={"자기주도프로젝트과목군": ["자기주도프로젝트"]},
+    )
+    schedule = result["roadmap"]["schedule"]
+    reasons = [c.get("reason", "") for term in schedule.values() for c in term["courses"]]
+    assert any("[졸업요건] 전공선택" in r or "[졸업요건] 산학프로젝트 인증" in r for r in reasons)

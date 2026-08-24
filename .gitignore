@@ -19,6 +19,9 @@ data/*.sqlite
 data/programs_raw.json
 data_pipeline/logs/
 
+# 로그인 계정별 최신 로드맵 저장소 — 이메일 해시 키지만 사용자 진단 데이터라 커밋 안 함
+data/*.db
+
 # 실제 사용자 성적표(PII) — 데모용 마스킹 샘플만 tests/fixtures/에 별도로 커밋
 *.transcript.pdf
 uploads/

@@ -1,120 +1,45 @@
 {
-  "2025": {
-    "total_credit": 128,
+  "2021": {
+    "total_credit": 140,
     "min_gpa": 2.0,
     "required_major_courses": [
-      {
-        "name": "컴퓨터프로그래밍및실습",
-        "credit": 4
-      },
-      {
-        "name": "이산수학",
-        "credit": 3
-      },
-      {
-        "name": "인공지능입문",
-        "credit": 3
-      },
-      {
-        "name": "객체지향프로그래밍및실습",
-        "credit": 4
-      },
-      {
-        "name": "자료구조",
-        "credit": 3
-      },
-      {
-        "name": "컴퓨터구조",
-        "credit": 3
-      },
-      {
-        "name": "알고리즘",
-        "credit": 3
-      },
-      {
-        "name": "컴퓨터네트워크",
-        "credit": 3
-      },
-      {
-        "name": "운영체제",
-        "credit": 3
-      },
-      {
-        "name": "시스템프로그래밍",
-        "credit": 3
-      }
+      { "name": "컴퓨터프로그래밍및실습", "credit": 4 },
+      { "name": "이산수학", "credit": 3 },
+      { "name": "창의소프트웨어입문", "credit": 3 },
+      { "name": "디지털회로", "credit": 3 },
+      { "name": "객체지향프로그래밍및실습", "credit": 4 },
+      { "name": "자료구조", "credit": 3 },
+      { "name": "컴퓨터구조", "credit": 3 },
+      { "name": "알고리즘", "credit": 3 },
+      { "name": "시스템프로그래밍및실습", "credit": 4 },
+      { "name": "컴퓨터네트워크", "credit": 3 },
+      { "name": "운영체제", "credit": 3 }
     ],
-    "elective_major_credit": {
-      "심화과정": 32,
-      "일반과정": 10,
-      "복수과정": 10
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "창의소프트웨어입문": ["인공지능입문"],
+      "컴퓨터프로그래밍및실습": ["컴퓨터프로그래밍"],
+      "객체지향프로그래밍및실습": ["객체지향프로그래밍"],
+      "자료구조": ["자료구조및실습"],
+      "디지털회로": ["디지털회로및실습"]
     },
-    "elective_credit_cap_groups": {
-      "현장실습군": {
-        "courses": [
-          "SW현장실습1",
-          "SW현장실습2",
-          "SW현장실습3",
-          "SW현장실습4",
-          "SW현장실습5",
-          "SW현장실습6",
-          "창업실습1",
-          "창업실습2",
-          "창업현장실습1",
-          "창업현장실습2"
-        ],
-        "max_credit": 6
-      }
-    },
-    "requires_double_major_or_minor": [
-      "일반과정",
-      "복수과정"
-    ],
+    "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
+    "requires_double_major_or_minor": ["일반과정", "복수과정"],
     "industry_project_certification": {
-      "심화과정": {
-        "min_courses": 2
-      },
-      "일반과정": {
-        "min_courses": 1
-      },
-      "복수과정": {
-        "min_courses": 1
-      },
+      "심화과정": { "min_courses": 2 },
+      "일반과정": { "min_courses": 0 },
+      "복수과정": { "min_courses": 0 },
       "course_groups": {
-        "집중교육과목군": [
-          "IT집중교육1",
-          "IT집중교육2",
-          "AI집중교육1",
-          "AI집중교육2"
-        ],
-        "자기주도프로젝트과목군": [
-          "자기주도프로젝트"
-        ],
-        "현장실습과목군": [
-          "SW현장실습1",
-          "SW현장실습2",
-          "SW현장실습3",
-          "SW현장실습4",
-          "SW현장실습5",
-          "SW현장실습6"
-        ],
-        "창업실습과목군": [
-          "창업실습1",
-          "창업실습2"
-        ],
-        "캡스톤디자인과목군": [
-          "SW캡스톤디자인"
-        ],
-        "자기주도연구과목군": [
-          "자기주도연구1",
-          "자기주도연구2"
-        ]
+        "집중교육과목군": ["IT집중교육1", "IT집중교육2", "AI집중교육1", "AI집중교육2"],
+        "자기주도프로젝트과목군": ["자기주도프로젝트"],
+        "현장실습과목군": ["SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6"],
+        "창업실습과목군": ["창업실습1", "창업실습2"],
+        "캡스톤디자인과목군": ["SW캡스톤디자인"],
+        "자기주도연구과목군": ["자기주도연구1", "자기주도연구2"]
       }
     },
     "programming_competency_certification": {
-      "applies_to": [
-        "심화과정"
-      ],
+      "applies_to": ["심화과정"],
       "topcit_min_score": 190,
       "exemptions": [
         "APC 대회 참가 및 1문제 이상 정답",
@@ -122,15 +47,316 @@
       ]
     },
     "language_requirement": {
-      "TOEIC": 730,
-      "TEPS": 605,
-      "TOEFL_PBT": 534,
-      "TOEFL_CBT": 200,
-      "TOEFL_iBT": 72,
-      "GTELP_Lv2": 67,
-      "GTELP_Lv3": 89,
-      "TOEIC_Speaking": "IM1",
-      "OPIc": "IL"
+      "TOEIC": 730, "TEPS": 605, "TEPS_NEW": 329, "TOEFL_PBT": 534, "TOEFL_CBT": 200,
+      "TOEFL_iBT": 72, "GTELP_Lv2": 67, "GTELP_Lv3": 89, "TOEIC_Speaking_OLD": 5,
+      "TOEIC_Speaking": "IM1", "OPIc": "IL", "IELTS": 5.5
+    }
+  },
+  "2022": {
+    "total_credit": 140,
+    "min_gpa": 2.0,
+    "required_major_courses": [
+      { "name": "컴퓨터프로그래밍및실습", "credit": 4 },
+      { "name": "이산수학", "credit": 3 },
+      { "name": "창의소프트웨어입문", "credit": 3 },
+      { "name": "디지털회로", "credit": 3 },
+      { "name": "객체지향프로그래밍및실습", "credit": 4 },
+      { "name": "자료구조", "credit": 3 },
+      { "name": "컴퓨터구조", "credit": 3 },
+      { "name": "알고리즘", "credit": 3 },
+      { "name": "시스템프로그래밍및실습", "credit": 4 },
+      { "name": "컴퓨터네트워크", "credit": 3 },
+      { "name": "운영체제", "credit": 3 }
+    ],
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "창의소프트웨어입문": ["인공지능입문"],
+      "컴퓨터프로그래밍및실습": ["컴퓨터프로그래밍"],
+      "객체지향프로그래밍및실습": ["객체지향프로그래밍"],
+      "자료구조": ["자료구조및실습"],
+      "디지털회로": ["디지털회로및실습"]
+    },
+    "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
+    "requires_double_major_or_minor": ["일반과정", "복수과정"],
+    "industry_project_certification": {
+      "심화과정": { "min_courses": 2 },
+      "일반과정": { "min_courses": 0 },
+      "복수과정": { "min_courses": 0 },
+      "course_groups": {
+        "집중교육과목군": ["IT집중교육1", "IT집중교육2", "AI집중교육1", "AI집중교육2"],
+        "자기주도프로젝트과목군": ["자기주도프로젝트"],
+        "현장실습과목군": ["SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6"],
+        "창업실습과목군": ["창업실습1", "창업실습2"],
+        "캡스톤디자인과목군": ["SW캡스톤디자인"],
+        "자기주도연구과목군": ["자기주도연구1", "자기주도연구2"]
+      }
+    },
+    "programming_competency_certification": {
+      "applies_to": ["심화과정"],
+      "topcit_min_score": 190,
+      "exemptions": [
+        "APC 대회 참가 및 1문제 이상 정답",
+        "SW 관련 전국대회 입상(2개년 이상 개최, 참가 100명 이상)"
+      ]
+    },
+    "language_requirement": {
+      "TOEIC": 730, "TEPS": 605, "TEPS_NEW": 329, "TOEFL_PBT": 534, "TOEFL_CBT": 200,
+      "TOEFL_iBT": 72, "GTELP_Lv2": 67, "GTELP_Lv3": 89, "TOEIC_Speaking_OLD": 5,
+      "TOEIC_Speaking": "IM1", "OPIc": "IL", "IELTS": 5.5
+    }
+  },
+  "2023": {
+    "total_credit": 140,
+    "min_gpa": 2.0,
+    "required_major_courses": [
+      { "name": "컴퓨터프로그래밍및실습", "credit": 4 },
+      { "name": "이산수학", "credit": 3 },
+      { "name": "인공지능입문", "credit": 3 },
+      { "name": "디지털회로", "credit": 3 },
+      { "name": "객체지향프로그래밍및실습", "credit": 4 },
+      { "name": "자료구조", "credit": 3 },
+      { "name": "컴퓨터구조", "credit": 3 },
+      { "name": "알고리즘", "credit": 3 },
+      { "name": "시스템프로그래밍및실습", "credit": 4 },
+      { "name": "컴퓨터네트워크", "credit": 3 },
+      { "name": "운영체제", "credit": 3 }
+    ],
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "인공지능입문": ["창의소프트웨어입문"],
+      "컴퓨터프로그래밍및실습": ["컴퓨터프로그래밍"],
+      "객체지향프로그래밍및실습": ["객체지향프로그래밍"],
+      "자료구조": ["자료구조및실습"],
+      "디지털회로": ["디지털회로및실습"]
+    },
+    "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
+    "elective_credit_cap_groups": {
+      "현장실습군": {
+        "courses": [
+          "SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6",
+          "창업실습1", "창업실습2", "창업현장실습1", "창업현장실습2"
+        ],
+        "max_credit": 12
+      }
+    },
+    "requires_double_major_or_minor": ["일반과정", "복수과정"],
+    "industry_project_certification": {
+      "심화과정": { "min_courses": 2 },
+      "일반과정": { "min_courses": 1 },
+      "복수과정": { "min_courses": 1 },
+      "course_groups": {
+        "집중교육과목군": ["IT집중교육1", "IT집중교육2", "AI집중교육1", "AI집중교육2"],
+        "자기주도프로젝트과목군": ["자기주도프로젝트"],
+        "현장실습과목군": ["SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6"],
+        "창업실습과목군": ["창업실습1", "창업실습2"],
+        "캡스톤디자인과목군": ["SW캡스톤디자인"],
+        "자기주도연구과목군": ["자기주도연구1", "자기주도연구2"]
+      }
+    },
+    "programming_competency_certification": {
+      "applies_to": ["심화과정"],
+      "topcit_min_score": 190,
+      "exemptions": [
+        "APC 대회 참가 및 1문제 이상 정답",
+        "SW 관련 전국대회 입상(2개년 이상 개최, 참가 100명 이상)"
+      ]
+    },
+    "language_requirement": {
+      "TOEIC": 730, "TEPS": 605, "TEPS_NEW": 329, "TOEFL_PBT": 534, "TOEFL_CBT": 200,
+      "TOEFL_iBT": 72, "GTELP_Lv2": 67, "GTELP_Lv3": 89, "TOEIC_Speaking_OLD": 5,
+      "TOEIC_Speaking": "IM1", "OPIc": "IL", "IELTS": 5.5
+    }
+  },
+  "2024": {
+    "total_credit": 140,
+    "min_gpa": 2.0,
+    "required_major_courses": [
+      { "name": "컴퓨터프로그래밍및실습", "credit": 4 },
+      { "name": "이산수학", "credit": 3 },
+      { "name": "인공지능입문", "credit": 3 },
+      { "name": "디지털회로", "credit": 3 },
+      { "name": "객체지향프로그래밍및실습", "credit": 4 },
+      { "name": "자료구조", "credit": 3 },
+      { "name": "컴퓨터구조", "credit": 3 },
+      { "name": "알고리즘", "credit": 3 },
+      { "name": "시스템프로그래밍및실습", "credit": 4 },
+      { "name": "컴퓨터네트워크", "credit": 3 },
+      { "name": "운영체제", "credit": 3 }
+    ],
+    "course_name_equivalents": {
+      "시스템프로그래밍및실습": ["시스템프로그래밍"],
+      "인공지능입문": ["창의소프트웨어입문"],
+      "컴퓨터프로그래밍및실습": ["컴퓨터프로그래밍"],
+      "객체지향프로그래밍및실습": ["객체지향프로그래밍"],
+      "자료구조": ["자료구조및실습"],
+      "디지털회로": ["디지털회로및실습"]
+    },
+    "elective_major_credit": { "심화과정": 37, "일반과정": 10, "복수과정": 10 },
+    "elective_credit_cap_groups": {
+      "현장실습군": {
+        "courses": [
+          "SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6",
+          "창업실습1", "창업실습2", "창업현장실습1", "창업현장실습2"
+        ],
+        "max_credit": 12
+      }
+    },
+    "requires_double_major_or_minor": ["일반과정", "복수과정"],
+    "industry_project_certification": {
+      "심화과정": { "min_courses": 2 },
+      "일반과정": { "min_courses": 1 },
+      "복수과정": { "min_courses": 1 },
+      "course_groups": {
+        "집중교육과목군": ["IT집중교육1", "IT집중교육2", "AI집중교육1", "AI집중교육2"],
+        "자기주도프로젝트과목군": ["자기주도프로젝트"],
+        "현장실습과목군": ["SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6"],
+        "창업실습과목군": ["창업실습1", "창업실습2"],
+        "캡스톤디자인과목군": ["SW캡스톤디자인"],
+        "자기주도연구과목군": ["자기주도연구1", "자기주도연구2"]
+      }
+    },
+    "programming_competency_certification": {
+      "applies_to": ["심화과정"],
+      "topcit_min_score": 190,
+      "exemptions": [
+        "APC 대회 참가 및 1문제 이상 정답",
+        "SW 관련 전국대회 입상(2개년 이상 개최, 참가 100명 이상)"
+      ]
+    },
+    "language_requirement": {
+      "TOEIC": 730, "TEPS": 605, "TEPS_NEW": 329, "TOEFL_PBT": 534, "TOEFL_CBT": 200,
+      "TOEFL_iBT": 72, "GTELP_Lv2": 67, "GTELP_Lv3": 89, "TOEIC_Speaking_OLD": 5,
+      "TOEIC_Speaking": "IM1", "OPIc": "IL", "IELTS": 5.5
+    }
+  },
+  "2025": {
+    "total_credit": 128,
+    "min_gpa": 2.0,
+    "required_major_courses": [
+      { "name": "컴퓨터프로그래밍및실습", "credit": 4 },
+      { "name": "이산수학", "credit": 3 },
+      { "name": "인공지능입문", "credit": 3 },
+      { "name": "객체지향프로그래밍및실습", "credit": 4 },
+      { "name": "자료구조", "credit": 3 },
+      { "name": "컴퓨터구조", "credit": 3 },
+      { "name": "알고리즘", "credit": 3 },
+      { "name": "컴퓨터네트워크", "credit": 3 },
+      { "name": "운영체제", "credit": 3 },
+      { "name": "시스템프로그래밍", "credit": 3 }
+    ],
+    "major_foundation_courses": [
+      { "name": "SW커리어세미나", "credit": 1 },
+      { "name": "확률및통계1", "credit": 3 },
+      { "name": "선형대수1", "credit": 3 }
+    ],
+    "course_name_equivalents": {
+      "시스템프로그래밍": ["시스템프로그래밍및실습"],
+      "인공지능입문": ["창의소프트웨어입문"],
+      "컴퓨터프로그래밍및실습": ["컴퓨터프로그래밍"],
+      "객체지향프로그래밍및실습": ["객체지향프로그래밍"],
+      "자료구조": ["자료구조및실습"]
+    },
+    "major_foundation_credit": { "심화과정": 7, "일반과정": 7, "복수과정": 6, "부전공": 6 },
+    "elective_major_credit": { "심화과정": 32, "일반과정": 10, "복수과정": 10 },
+    "elective_credit_cap_groups": {
+      "현장실습군": {
+        "courses": [
+          "SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6",
+          "창업실습1", "창업실습2", "창업현장실습1", "창업현장실습2"
+        ],
+        "max_credit": 6
+      }
+    },
+    "requires_double_major_or_minor": ["일반과정", "복수과정"],
+    "industry_project_certification": {
+      "심화과정": { "min_courses": 2 },
+      "일반과정": { "min_courses": 1 },
+      "복수과정": { "min_courses": 1 },
+      "course_groups": {
+        "집중교육과목군": ["IT집중교육1", "IT집중교육2", "AI집중교육1", "AI집중교육2"],
+        "자기주도프로젝트과목군": ["자기주도프로젝트"],
+        "현장실습과목군": ["SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6"],
+        "창업실습과목군": ["창업실습1", "창업실습2"],
+        "캡스톤디자인과목군": ["SW캡스톤디자인"],
+        "자기주도연구과목군": ["자기주도연구1", "자기주도연구2"]
+      }
+    },
+    "programming_competency_certification": {
+      "applies_to": ["심화과정"],
+      "topcit_min_score": 190,
+      "exemptions": [
+        "APC 대회 참가 및 1문제 이상 정답",
+        "SW 관련 전국대회 입상(2개년 이상 개최, 참가 100명 이상)"
+      ]
+    },
+    "language_requirement": {
+      "TOEIC": 730, "TEPS": 605, "TEPS_NEW": 329, "TOEFL_PBT": 534, "TOEFL_CBT": 200,
+      "TOEFL_iBT": 72, "GTELP_Lv2": 67, "GTELP_Lv3": 89, "TOEIC_Speaking_OLD": 5,
+      "TOEIC_Speaking": "IM1", "OPIc": "IL", "IELTS": 5.5
+    }
+  },
+  "2026": {
+    "total_credit": 128,
+    "min_gpa": 2.0,
+    "required_major_courses": [
+      { "name": "컴퓨터프로그래밍및실습", "credit": 4 },
+      { "name": "이산수학", "credit": 3 },
+      { "name": "객체지향프로그래밍및실습", "credit": 4 },
+      { "name": "자료구조", "credit": 3 },
+      { "name": "컴퓨터구조", "credit": 3 },
+      { "name": "알고리즘", "credit": 3 },
+      { "name": "컴퓨터네트워크", "credit": 3 },
+      { "name": "시스템프로그래밍", "credit": 3 },
+      { "name": "운영체제", "credit": 3 }
+    ],
+    "major_foundation_courses": [
+      { "name": "SW커리어세미나", "credit": 1 },
+      { "name": "확률및통계1", "credit": 3 },
+      { "name": "선형대수1", "credit": 3 }
+    ],
+    "course_name_equivalents": {
+      "시스템프로그래밍": ["시스템프로그래밍및실습"],
+      "컴퓨터프로그래밍및실습": ["컴퓨터프로그래밍"],
+      "객체지향프로그래밍및실습": ["객체지향프로그래밍"],
+      "자료구조": ["자료구조및실습"]
+    },
+    "major_foundation_credit": { "심화과정": 7, "일반과정": 7, "복수과정": 6, "부전공": 6 },
+    "elective_major_credit": { "심화과정": 32, "일반과정": 10, "복수과정": 10 },
+    "elective_credit_cap_groups": {
+      "현장실습군": {
+        "courses": [
+          "SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6",
+          "창업실습1", "창업실습2", "창업현장실습1", "창업현장실습2"
+        ],
+        "max_credit": 6
+      }
+    },
+    "requires_double_major_or_minor": ["일반과정", "복수과정"],
+    "industry_project_certification": {
+      "심화과정": { "min_courses": 2 },
+      "일반과정": { "min_courses": 1 },
+      "복수과정": { "min_courses": 1 },
+      "course_groups": {
+        "집중교육과목군": ["IT집중교육1", "IT집중교육2", "AI집중교육1", "AI집중교육2"],
+        "자기주도프로젝트과목군": ["자기주도프로젝트"],
+        "현장실습과목군": ["SW현장실습1", "SW현장실습2", "SW현장실습3", "SW현장실습4", "SW현장실습5", "SW현장실습6"],
+        "창업실습과목군": ["창업실습1", "창업실습2"],
+        "캡스톤디자인과목군": ["SW캡스톤디자인"],
+        "자기주도연구과목군": ["자기주도연구1", "자기주도연구2"]
+      }
+    },
+    "programming_competency_certification": {
+      "applies_to": ["심화과정"],
+      "topcit_min_score": 190,
+      "exemptions": [
+        "APC 대회 참가 및 1문제 이상 정답",
+        "SW 관련 전국대회 입상(2개년 이상 개최, 참가 100명 이상)"
+      ]
+    },
+    "language_requirement": {
+      "TOEIC": 730, "TEPS": 605, "TEPS_NEW": 329, "TOEFL_PBT": 534, "TOEFL_CBT": 200,
+      "TOEFL_iBT": 72, "GTELP_Lv2": 67, "GTELP_Lv3": 89, "TOEIC_Speaking_OLD": 5,
+      "TOEIC_Speaking": "IM1", "OPIc": "IL", "IELTS": 5.5
     }
   }
 }

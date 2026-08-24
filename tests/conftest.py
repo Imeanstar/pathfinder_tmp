@@ -4,12 +4,23 @@
 """
 import io
 
+import pytest
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.pdfgen import canvas
 
 _KOREAN_FONT = "HYSMyeongJo-Medium"
 pdfmetrics.registerFont(UnicodeCIDFont(_KOREAN_FONT))
+
+
+@pytest.fixture(autouse=True)
+def _no_real_gemini_calls(monkeypatch):
+    """테스트는 항상 키 없는 상태에서 시작한다(hermetic) — .env에 실제 GOOGLE_API_KEY가
+    있으면 app.api.load_dotenv()가 프로세스 환경에 그대로 심어놓고, 이후 /api/plan을
+    부르는 모든 테스트가 soften_recommendation_reasons 등을 통해 실제 Gemini로 네트워크
+    요청을 보내버린다(2026-08-21 실제로 겪음 — 테스트가 느려지고 API 키가 필요해짐).
+    개별 테스트가 실제 키 동작을 확인하려면 monkeypatch.setenv로 명시적으로 켜면 된다."""
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
 
 
 def build_test_transcript_pdf(include_pii: bool = True, include_injection: bool = False) -> bytes:

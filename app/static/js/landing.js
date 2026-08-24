@@ -46,10 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", onScroll);
   }
 
-  const startBtn = document.getElementById("startBtn");
-  if (startBtn) {
-    startBtn.addEventListener("click", () => {
-      window.location.href = "/upload.html";
-    });
-  }
+  // #startBtn 클릭 처리는 auth.js가 전담한다(로그인 여부에 따라 분기) — 여기서
+  // 같이 리스너를 걸면 auth.js의 로그인 게이트를 우회하게 된다(PR #1 머지 시
+  // 발견한 충돌, 2026-08-24).
 });

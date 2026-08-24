@@ -36,16 +36,39 @@ def build_question_list(unresolved: list[str]) -> list[dict]:
     ]
 
 
+# "없어" 한마디에도 계속 같은 질문을 반복하던 문제(2026-08-21 실사용 중 발견) —
+# 명시적 부정 표현("없다")은 "확실히 없다"는 정보이지 "이해 못 함"이 아니다.
+# "모르겠다"는 반대로 진짜 모른다는 뜻이라 이 패턴에 넣으면 안 된다(별도 케이스로 남겨
+# unresolved 유지 — "모른다"와 "없다"는 다른 정보다).
+NEGATIVE_PATTERN = re.compile(r"없|안\s*땄|못\s*땄|아직\s*(안|못)")
+
+
+# IELTS는 소수점 점수(예: 6.5)라 다른 시험처럼 int()로 바꾸면 안 된다.
+_FLOAT_SCORE_EXAMS = {"IELTS"}
+
+
 def _parse_language_answer(text: str) -> dict | None:
+    # 뉴텝스는 "텝스"를 부분 문자열로 포함하므로, 구분되는 패턴을 일반 "텝스"보다
+    # 먼저 검사해야 한다(순서가 바뀌면 "뉴텝스 350점"이 구 텝스 기준으로 잘못
+    # 판정된다). 마찬가지로 "구 토익스피킹"도 순서상 먼저 온다 — 다만 신규
+    # TOEIC Speaking(IM1 등 등급제)은 자유 텍스트에서 아직 인식하지 않는다(기존 갭,
+    # 화면1·대시보드 드롭다운으로는 이미 선택 가능하다).
     exam_patterns = [
         ("TOEIC", r"(토익|toeic)\D{0,5}(\d{2,4})"),
+        ("TEPS_NEW", r"(뉴\s*텝스|new\s*teps)\D{0,5}(\d{2,4})"),
         ("TEPS", r"(텝스|teps)\D{0,5}(\d{2,4})"),
         ("TOEFL_iBT", r"(토플\s*ibt|toefl\s*ibt)\D{0,5}(\d{2,3})"),
+        ("TOEIC_Speaking_OLD", r"(구\s*토익\s*스피킹|old\s*toeic\s*speaking)\D{0,5}(\d{1,2})"),
+        ("IELTS", r"(아이엘츠|ielts)\D{0,5}(\d(?:\.\d)?)"),
     ]
     for exam, pattern in exam_patterns:
         m = re.search(pattern, text, re.I)
         if m:
-            return {"exam": exam, "score": int(m.group(2))}
+            raw_score = m.group(2)
+            score = float(raw_score) if exam in _FLOAT_SCORE_EXAMS else int(raw_score)
+            return {"exam": exam, "score": score, "negative": False}
+    if NEGATIVE_PATTERN.search(text):
+        return {"exam": None, "score": None, "negative": True}
     return None
 
 
@@ -83,24 +106,44 @@ def evaluate_language_score(exam: str, score, requirements: dict) -> bool | None
 def _evaluate_language_requirement(answer: dict | None, requirements: dict) -> bool | None:
     if answer is None:
         return None
+    if answer["negative"]:
+        return False  # 명시적으로 "없다"고 답한 경우만 확정 미충족 — 애매한 침묵과 다르다
     return evaluate_language_score(answer["exam"], answer["score"], requirements)
 
 
-def _parse_programming_competency_answer(text: str) -> dict:
+def _parse_programming_competency_answer(text: str) -> dict | None:
     topcit_score = None
     m = re.search(r"topcit\D{0,5}(\d{2,3})", text, re.I)
     if m:
         topcit_score = int(m.group(1))
     apc_pass = bool(re.search(r"apc.{0,15}(정답|맞|통과)", text, re.I))
     contest_award = bool(re.search(r"전국대회.{0,15}(입상|수상)", text))
-    return {"topcit_score": topcit_score, "apc_pass": apc_pass, "contest_award": contest_award}
+    negative = bool(NEGATIVE_PATTERN.search(text))
+    # 숫자·키워드·부정표현 어느 것도 못 찾으면 "이해 못 함" — 가비지 입력을 미충족으로
+    # 확정하지 않는다(2026-08-21 실사용 중 발견: IME 잔여 글자 "어" 한 글자가 무조건
+    # "미충족"으로 감정되던 버그).
+    if topcit_score is None and not apc_pass and not contest_award and not negative:
+        return None
+    return {
+        "topcit_score": topcit_score,
+        "apc_pass": apc_pass,
+        "contest_award": contest_award,
+        "negative": negative,
+    }
 
 
-def _evaluate_programming_competency(answer: dict, requirements: dict) -> bool:
+def _evaluate_programming_competency(answer: dict | None, requirements: dict) -> bool | None:
+    if answer is None:
+        return None
     cert = requirements["programming_competency_certification"]
-    if answer["topcit_score"] is not None and answer["topcit_score"] >= cert["topcit_min_score"]:
+    if answer["apc_pass"] or answer["contest_award"]:
         return True
-    return answer["apc_pass"] or answer["contest_award"]
+    if answer["topcit_score"] is not None:
+        # 점수를 명확히 알아냈다면(기준 미달이어도) "확인됨" — 모른다와 다르다
+        return answer["topcit_score"] >= cert["topcit_min_score"]
+    if answer["negative"]:
+        return False
+    return None
 
 
 def apply_self_reported_answers(
@@ -126,8 +169,10 @@ def apply_self_reported_answers(
 
     if "programming_competency" in answers:
         parsed = _parse_programming_competency_answer(answers["programming_competency"])
-        programming_competency_certified = _evaluate_programming_competency(parsed, requirements)
-        unresolved = [r for r in unresolved if r != "programming_competency"]
+        evaluated = _evaluate_programming_competency(parsed, requirements)
+        if evaluated is not None:
+            programming_competency_certified = evaluated
+            unresolved = [r for r in unresolved if r != "programming_competency"]
 
     return replace(
         audit_result,

@@ -18,8 +18,8 @@ DATA_DIR = ROOT / "data"
 # 전공필수 10개 — 학점 합산이 아니라 "전부 이수했는가"로 판정한다 (audit.py Task 3-2 참고)
 REQUIRED_MAJOR_COURSES = [
     {"name": "컴퓨터프로그래밍및실습", "credit": 4, "offered_terms_main": ["1-1"], "offered_terms_sub": ["1-2"]},
-    {"name": "이산수학", "credit": 3, "offered_terms_main": ["1-2"], "offered_terms_sub": ["1-1"]},
-    {"name": "인공지능입문", "credit": 3, "offered_terms_main": ["1-2"], "offered_terms_sub": ["2-1"]},
+    {"name": "이산수학", "credit": 3, "offered_terms_main": ["2-1"], "offered_terms_sub": ["1-2"]},
+    {"name": "인공지능입문", "credit": 3, "offered_terms_main": ["2-1"], "offered_terms_sub": ["2-2"]},
     {"name": "객체지향프로그래밍및실습", "credit": 4, "offered_terms_main": ["2-1"], "offered_terms_sub": ["2-2"]},
     {"name": "자료구조", "credit": 3, "offered_terms_main": ["2-1"], "offered_terms_sub": ["2-2"]},
     {"name": "컴퓨터구조", "credit": 3, "offered_terms_main": ["2-1"], "offered_terms_sub": ["2-2"]},
@@ -178,6 +178,12 @@ GRADUATION_REQUIREMENTS = {
 
 
 def build_courses():
+    # 2026-08-21 추가: 요람은 "이 학기에 듣는 걸 강력 추천"(●)과 "이때 들어도 무방"
+    # (〈●〉)을 구분해서 표시하는데, 예전엔 이 둘을 offered_terms 하나로 합쳐버려서
+    # "언제 들어도 그만"인 것처럼 취급했다(로드맵 배치 근거가 불투명하다는 지적,
+    # 사용자가 준 요람 표 캡처로 재대조). recommended_terms/optional_terms로 분리해
+    # 내보내되, 기존 코드(prereq/개설학기 체크)가 의존하는 offered_terms는 그대로
+    # main+sub 합집합으로 유지해 하위 호환을 깨지 않는다.
     courses = []
     for c in REQUIRED_MAJOR_COURSES:
         courses.append({
@@ -186,6 +192,8 @@ def build_courses():
             "category": "전공필수",
             "prereq": PREREQ_MAP.get(c["name"], []),
             "offered_terms": c["offered_terms_main"] + c["offered_terms_sub"],
+            "recommended_terms": c["offered_terms_main"],
+            "optional_terms": c["offered_terms_sub"],
             "competency_tags": [],  # Task 2-4에서 채움 (역량 온톨로지 확정 후)
         })
     for c in ELECTIVE_MAJOR_COURSES:
@@ -195,6 +203,8 @@ def build_courses():
             "category": "전공선택",
             "prereq": PREREQ_MAP.get(c["name"], []),
             "offered_terms": c["offered_terms_main"] + c["offered_terms_sub"],
+            "recommended_terms": c["offered_terms_main"],
+            "optional_terms": c["offered_terms_sub"],
             "competency_tags": [],
         })
     return courses

@@ -1,0 +1,35 @@
+# Cloud Run 런타임에서만 필요한 최소 의존성(1차 프로젝트와 같은 패턴, 2026-08-21) —
+# pytest·reportlab(테스트용 PDF 생성)·mcp[cli](별도 MCP 서버, Cloud Run과 무관)는
+# 이미지에 넣지 않는다. 콜드스타트·이미지 크기만 늘고 실제 서비스 코드가 안 쓴다.
+# 전체 개발 의존성은 requirements.txt 참고.
+
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2
+python-multipart>=0.0.9
+python-dotenv>=1
+
+pdfplumber>=0.11
+pyyaml>=6
+numpy>=1.26
+scikit-learn>=1.9
+langgraph>=0.2
+
+# Gemini 호출(app/llm.py, app/retrieval.py) + 구글 로그인 ID 토큰 검증(app/auth.py).
+# google-auth는 google-genai의 전이 의존성으로도 설치되지만, app/auth.py가 직접
+# import하므로 명시적으로 고정해둔다(전이 의존성만 믿으면 상위 패키지가 버전을
+# 바꿀 때 조용히 깨질 수 있음).
+google-genai>=1
+google-auth>=2
+# app/retrieval.py의 GeminiEncoder(하이브리드 RAG)가 쓴다. 이게 빠져 있으면
+# GeminiEncoder() 생성이 조용히 실패해 TF-IDF 단독으로만 폴백한다 — 실제로 이
+# 상태로 배포돼 있었다(2026-08-24 발견). requirements.txt 쪽 주석 참고.
+langchain-google-genai>=2
+
+# 로그인 계정별 최신 로드맵 저장(app/user_store.py, Firestore 우선·SQLite 대체).
+# **버전을 반드시 고정할 것** — 최신 google-cloud-firestore(2.28+)는 protobuf>=6.33을
+# 요구하는데 google-genai가 물고 오는 google-ai-generativelanguage는 protobuf<6.0을
+# 요구해서 서로 충돌한다(직접 겪음, 2026-08-21). grpcio-status도 최신판은
+# protobuf>=6.33을 요구해 같이 맞춰야 한다.
+google-cloud-firestore==2.20.2
+grpcio-status<1.71

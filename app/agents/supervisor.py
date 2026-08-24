@@ -12,13 +12,19 @@ from langgraph.graph import END, StateGraph
 
 from app.agents.competency import (
     ManualProject,
+    classify_competency_levels,
+    collect_competency_evidence,
     compute_gap,
     compute_target,
     diagnose_competency,
     get_domain_overlay,
     get_grad_lab_cluster,
 )
-from app.agents.course_reco import recommend_courses
+from app.agents.course_reco import (
+    recommend_courses,
+    recommend_elective_backfill,
+    recommend_industry_project_backfill,
+)
 from app.agents.program_reco import recommend_programs
 from app.agents.roadmap import plan_roadmap
 from app.parser import TranscriptData
@@ -31,10 +37,17 @@ class PathfinderState(TypedDict, total=False):
     taken_course_names: set[str]
     taken_program_titles: set[str]
     remaining_terms: list[str]
+    missing_required_courses: list[str]
+    missing_major_foundation_courses: list[str]
+    elective_credit_shortfall: int
+    industry_project_shortfall: int
+    industry_project_course_groups: dict[str, list[str]]
     domain_overlay: str | None
     grad_lab_cluster: str | None
     competency_vector: dict[str, dict[str, float]]
+    competency_evidence: dict[str, list[dict]]
     competency_target: dict[str, float]
+    competency_levels: dict[str, dict]
     gap: dict[str, float]
     course_recommendations: list[dict]
     program_recommendations: list[dict]
@@ -43,7 +56,8 @@ class PathfinderState(TypedDict, total=False):
 
 def _competency_node(state: PathfinderState) -> dict:
     vector = diagnose_competency(state["transcript"], state.get("projects", []), state["track"])
-    return {"competency_vector": vector}
+    evidence = collect_competency_evidence(state["transcript"], state.get("projects", []))
+    return {"competency_vector": vector, "competency_evidence": evidence}
 
 
 def _resolve_overlay(state: PathfinderState) -> dict[str, float] | None:
@@ -62,16 +76,33 @@ def _gap_node(state: PathfinderState) -> dict:
     # 목표치도 같이 내보낸다 — 화면의 레이더 차트가 "목표(점선) vs 현재(실선)"를 그리려면
     # gap만으로는 부족하다(gap=0인 축의 목표를 역산할 수 없어 꽉 찬 육각형이 됐었다).
     target = compute_target(state["track"], overlay=overlay)
-    return {"gap": gap, "competency_target": target}
+    # 5단계 판정(매우충족~매우부족)도 여기서 같이 낸다 — target이 있어야 "이 축이
+    # 트랙과 관련 있는지"를 알 수 있어 compute_gap과 같은 노드에서 계산한다.
+    # current_grade: remaining_terms 첫 학기("2-2" 등)의 앞자리 = 현재 학년. 정보가
+    # 없으면(remaining_terms 없이 호출되는 화면2 경로 등) 4학년 기준(전 커리큘럼 대상)
+    # 으로 보수적으로 판정한다.
+    remaining_terms = state.get("remaining_terms") or []
+    current_grade = int(remaining_terms[0].split("-")[0]) if remaining_terms else 4
+    levels = classify_competency_levels(
+        state["competency_evidence"], target, current_grade=current_grade
+    )
+    return {"gap": gap, "competency_target": target, "competency_levels": levels}
+
+
+    # top_k 기본값(3)만 쓰면, 그 3개가 전부 선수과목 미충족일 때 로드맵에 배치할
+    # 후보가 하나도 안 남아 "학기별 로드맵에 과목이 하나도 안 뜨는" 문제가 있었다
+    # (2026-08-21 실사용 중 발견 — 실제로 심화 트랙 후보 3개가 전부 막혀 있었음).
+    # plan_roadmap이 실제로 배치 가능한 것만 화면에 남기므로, 후보 풀을 넉넉히 늘려도
+    # 화면이 산만해지지 않는다.
 
 
 def _course_reco_node(state: PathfinderState) -> dict:
-    result = recommend_courses(state["gap"], state.get("taken_course_names", set()))
+    result = recommend_courses(state["gap"], state.get("taken_course_names", set()), top_k=10)
     return {"course_recommendations": result}
 
 
 def _program_reco_node(state: PathfinderState) -> dict:
-    result = recommend_programs(state["gap"], state.get("taken_program_titles", set()))
+    result = recommend_programs(state["gap"], state.get("taken_program_titles", set()), top_k=10)
     return {"program_recommendations": result}
 
 
@@ -79,11 +110,56 @@ def _roadmap_node(state: PathfinderState) -> dict:
     # remaining_terms 없이 호출되면(예: run_recommendations가 화면3 추천만 필요할 때)
     # 빈 학기 목록으로 처리 — 배치할 학기가 없다는 뜻이라 전부 warnings로 빠지지만
     # 에러는 아니다. 로드맵 자체가 필요한 호출은 run_full_plan이 remaining_terms를 채워 넘긴다.
+    course_recos = state.get("course_recommendations", [])
+    taken = state.get("taken_course_names", set())
+    target = state.get("competency_target", {})
+
+    # 역량 격차(gap) 기반 추천(2단계)이 이미 이름을 골랐으면 중복 배치하지 않도록
+    # 백필 후보에서 뺀다. 이미 확정된 전공필수·전공기초 이름도 마찬가지로 뺀다
+    # (둘 다 각자 단계에서 이미 배치를 시도하므로).
+    already_selected = (
+        {r["name"] for r in course_recos}
+        | set(state.get("missing_required_courses", []))
+        | set(state.get("missing_major_foundation_courses", []))
+    )
+
+    # gap 기반 추천이 이미 전공선택 학점·산학프로젝트 인증에 기여한 만큼은 부족분에서
+    # 미리 빼야, "역량 추천이 우선이고 그걸로도 부족할 때만 더 채운다"는 원칙대로
+    # 과다 추천(중복 배치는 아니지만 필요 이상으로 더 얹는 것)을 막을 수 있다
+    # (2026-08-23 사용자 요청 — "역량에 따라 과목을 추천하는게 우선이지만, 역량이
+    # 채워졌더라도 졸업 요건을 만족하지 못했다면 그 졸업을 위해 과목을 더 추천해야지").
+    industry_project_group_courses = {
+        name for names in state.get("industry_project_course_groups", {}).values() for name in names
+    }
+    reco_elective_credit = sum(
+        r.get("credit", 0) for r in course_recos if r.get("category") == "전공선택"
+    )
+    reco_industry_count = sum(1 for r in course_recos if r["name"] in industry_project_group_courses)
+
+    elective_shortfall = max(
+        0, state.get("elective_credit_shortfall", 0) - reco_elective_credit
+    )
+    industry_shortfall = max(
+        0, state.get("industry_project_shortfall", 0) - reco_industry_count
+    )
+
+    elective_backfill = recommend_elective_backfill(
+        taken, already_selected, elective_shortfall, target
+    )
+    industry_backfill = recommend_industry_project_backfill(
+        taken, already_selected | set(elective_backfill),
+        state.get("industry_project_course_groups", {}), industry_shortfall, target,
+    )
+
     result = plan_roadmap(
-        course_recommendations=state.get("course_recommendations", []),
+        course_recommendations=course_recos,
         program_recommendations=state.get("program_recommendations", []),
-        taken_course_names=state.get("taken_course_names", set()),
+        taken_course_names=taken,
         remaining_terms=state.get("remaining_terms", []),
+        missing_required_courses=state.get("missing_required_courses", []),
+        missing_major_foundation_courses=state.get("missing_major_foundation_courses", []),
+        missing_elective_courses=elective_backfill,
+        missing_industry_project_courses=industry_backfill,
     )
     return {"roadmap": result}
 
@@ -159,8 +235,25 @@ def run_full_plan(
     remaining_terms: list[str],
     domain_overlay: str | None = None,
     grad_lab_cluster: str | None = None,
+    missing_required_courses: list[str] | None = None,
+    missing_major_foundation_courses: list[str] | None = None,
+    elective_credit_shortfall: int = 0,
+    industry_project_shortfall: int = 0,
+    industry_project_course_groups: dict[str, list[str]] | None = None,
 ) -> PathfinderState:
-    """화면 3(로드맵) 진입점 — 그래프 전체(역량진단→격차→추천→학기 배치)를 돈다."""
+    """화면 3(로드맵) 진입점 — 그래프 전체(역량진단→격차→추천→학기 배치)를 돈다.
+
+    missing_required_courses: audit_graduation()이 이미 계산한 미이수 전공필수 목록.
+    로드맵이 gap 추천과 무관하게 이 과목들을 우선 배치하기 위해 필요하다
+    (2026-08-21, "로드맵에 과목이 하나도 안 뜬다" 문제의 근본 원인 수정).
+    missing_major_foundation_courses: 같은 이유로 미이수 전공기초(25·26학번 신설) 목록도
+    받는다(2026-08-22) — 그 요건이 없는 학번은 audit.py가 빈 리스트를 넘긴다.
+    elective_credit_shortfall/industry_project_shortfall/industry_project_course_groups:
+    역량 격차(gap)가 전부 0이라 course_recommendations가 텅 비어도, 아직 채워야 할
+    전공선택 학점·산학프로젝트 인증이 있으면 로드맵이 계속 추천하도록 한다
+    (2026-08-23 사용자 실사례 — 역량은 충분한데 졸업요건이 안 채워졌는데도 로드맵에
+    과목이 하나도 안 뜬 문제).
+    """
     return _GRAPH.invoke({
         "transcript": transcript,
         "projects": projects,
@@ -170,4 +263,9 @@ def run_full_plan(
         "remaining_terms": remaining_terms,
         "domain_overlay": domain_overlay,
         "grad_lab_cluster": grad_lab_cluster,
+        "missing_required_courses": missing_required_courses or [],
+        "missing_major_foundation_courses": missing_major_foundation_courses or [],
+        "elective_credit_shortfall": elective_credit_shortfall,
+        "industry_project_shortfall": industry_project_shortfall,
+        "industry_project_course_groups": industry_project_course_groups or {},
     })

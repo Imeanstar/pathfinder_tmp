@@ -666,5 +666,5975 @@
       "창업_비즈니스",
       "커뮤니케이션_문서화"
     ]
+  },
+  {
+    "id": "NCR000000002011",
+    "title": "ABC Lab : 전공실험실",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-04-29 10 : 00 ~ 2025-04-30 17 : 00",
+    "operate_period": "2025-04-29 10 : 00 ~ 2025-04-30 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3372",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002011",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002012",
+    "title": "[브런치투어_4탄] 직무로 풀어보는 나의 진짜 로망",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-15 10 : 00 ~ 2025-05-22 11 : 00",
+    "operate_period": "2025-05-22 12 : 00 ~ 2025-05-22 12 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002012",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002013",
+    "title": "아주대학교 도구박물관 박물관 아카데미 3기",
+    "org": "박물관학예팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-04-14 09 : 00 ~ 2025-05-09 18 : 00",
+    "operate_period": "2025-05-13 14 : 00 ~ 2025-07-08 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 율곡관 151호",
+    "format": "강의형(다회성)",
+    "contact": "02-219-2997",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002013",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002014",
+    "title": "2025-1학기 자유전공학부 대학생활 수기 공모전-1",
+    "org": "자유전공학부 다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-13 17 : 30 ~ 2025-06-09 23 : 50",
+    "operate_period": "2025-05-13 17 : 30 ~ 2025-06-09 23 : 50",
+    "target_dept": "자유전공학부",
+    "target_grade": "1 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3054",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002014",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002016",
+    "title": "2025 뉴미디어 공개특강",
+    "org": "디지털미디어학과 소프트웨어융합대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-14 16 : 00 ~ 2025-05-21 17 : 30",
+    "operate_period": "2025-05-21 18 : 00 ~ 2025-05-21 20 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 지하1층 혁신공유라운지",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "17jungle@gmail.com",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002016",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002017",
+    "title": "2025-1학기 자유전공학부 대학생활 수기 공모전-2",
+    "org": "자유전공학부 다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-13 17 : 30 ~ 2025-06-09 23 : 50",
+    "operate_period": "2025-05-13 17 : 30 ~ 2025-06-09 23 : 50",
+    "target_dept": "자유전공학부",
+    "target_grade": "1 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3054",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002017",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002018",
+    "title": "지역인재 7급 시험 대비 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-15 13 : 00 ~ 2025-05-28 12 : 00",
+    "operate_period": "2025-05-28 15 : 00 ~ 2025-05-28 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2041",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002018",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002019",
+    "title": "6월 추천채용 채용공고분석 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-16 00 : 00 ~ 2025-06-09 23 : 50",
+    "operate_period": "2025-06-12 17 : 00 ~ 2025-06-12 19 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002019",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002020",
+    "title": "AJOU 취업부트캠프 2기(인문/사회/경영)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-26 10 : 00 ~ 2025-06-09 10 : 00",
+    "operate_period": "2025-06-24 13 : 00 ~ 2025-07-12 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002020",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002021",
+    "title": "영화가 있는 인문학 카페 제 3회 아주 씨네로그",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-19 00 : 00 ~ 2025-06-05 13 : 00",
+    "operate_period": "2025-06-04 15 : 00 ~ 2025-06-05 16 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 영상회의실(151호)",
+    "format": "기타(입력)",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002021",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002022",
+    "title": "2025 공학교육 학생포트폴리오 경진대회",
+    "org": "공학교육혁신센터",
+    "category_path": [
+      "취업/창업",
+      "공모전/경진대회",
+      "교내(참가)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-26 00 : 00 ~ 2025-07-06 23 : 50",
+    "operate_period": "2025-05-26 00 : 00 ~ 2025-07-06 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-1861",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002022",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002023",
+    "title": "[기업탐방]지란지교데이터 기업현장탐방",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "현장경험",
+      "탐방(국내)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-20 00 : 00 ~ 2025-06-15 23 : 50",
+    "operate_period": "2025-06-23 09 : 00 ~ 2025-06-24 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기업체 탐방, 견학",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002023",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002024",
+    "title": "[기업탐방]부천FC 1995 기업현장탐방",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "현장경험",
+      "탐방(국내)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-20 00 : 00 ~ 2025-06-25 15 : 00",
+    "operate_period": "2025-07-01 09 : 00 ~ 2025-07-02 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기업체 탐방, 견학",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002024",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002026",
+    "title": "2025 아주히든챔피언학생발굴단 12기",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "공모전/경진대회",
+      "교내(참가)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-20 00 : 00 ~ 2025-06-10 23 : 50",
+    "operate_period": "2025-06-26 10 : 00 ~ 2025-09-05 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002026",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002027",
+    "title": "2025학년도 1학기 아주 씨네로그 에세이 경진대회",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-05 00 : 00 ~ 2025-06-30 23 : 50",
+    "operate_period": "2025-06-05 00 : 00 ~ 2025-06-30 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002027",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002028",
+    "title": "2025 성평등 영화제",
+    "org": "성평등상담소",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-04-08 13 : 00 ~ 2025-05-15 14 : 00",
+    "operate_period": "2025-05-15 16 : 00 ~ 2025-05-15 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "원천관 강당 251호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1745 / help@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002028",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002029",
+    "title": "[기업탐방]SD바이오센서 기흥사업소 및 청주공장 견학",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "현장경험",
+      "탐방(국내)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-23 00 : 00 ~ 2025-06-23 15 : 00",
+    "operate_period": "2025-06-27 09 : 00 ~ 2025-06-27 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기업체 탐방, 견학",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002029",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002030",
+    "title": "[캠리]Southchip Korea 채용설명회 및 현장면접",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-26 00 : 00 ~ 2025-06-03 23 : 50",
+    "operate_period": "2025-06-04 15 : 00 ~ 2025-06-04 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002030",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002031",
+    "title": "[생성형 AI를 활용한 취업준비 ABC]",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-06-09 10 : 00 ~ 2025-06-23 12 : 00",
+    "operate_period": "2025-07-02 13 : 00 ~ 2025-07-04 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002031",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002032",
+    "title": "서류탈락자를 위한 현직자 소그룹 멘토링",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-29 09 : 00 ~ 2025-06-09 16 : 00",
+    "operate_period": "2025-06-16 09 : 00 ~ 2025-06-22 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3082",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002032",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002033",
+    "title": "[기관탐방_차세대융합기술연구원] 반도체 기술교육 & 클린룸 견학",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "현장경험",
+      "탐방(국내)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-30 18 : 00 ~ 2025-06-23 15 : 00",
+    "operate_period": "2025-06-30 13 : 00 ~ 2025-06-30 17 : 30",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기업체 탐방, 견학",
+    "contact": "031-219-2042",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002033",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002034",
+    "title": "25 하계 AJOU 취업훈련소 서류대비 졸업생반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-06-10 10 : 00 ~ 2025-06-19 16 : 00",
+    "operate_period": "2025-06-26 09 : 00 ~ 2025-08-14 18 : 30",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002034",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002035",
+    "title": "25 하계 AJOU 취업훈련소 서류대비 재학생반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-06-10 10 : 00 ~ 2025-06-19 16 : 00",
+    "operate_period": "2025-06-27 09 : 00 ~ 2025-08-15 18 : 30",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002035",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002036",
+    "title": "2025-2학기 파란학기제 및 강의페어링 설명회",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-02 15 : 00 ~ 2025-06-09 23 : 50",
+    "operate_period": "2025-06-11 13 : 00 ~ 2025-06-11 14 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 151호(영상회의실)",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3383/3387/ajouparan@ajou.ac.kr/신학생회관 321호",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002036",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002038",
+    "title": "아주대 x 크래프톤 웹개발 단기 집중 캠프(총 2회차 모집)",
+    "org": "AI융합교육원 소프트웨어융합대학 AI교육센터",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "캠프(단기)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-11 14 : 00 ~ 2025-07-21 23 : 50",
+    "operate_period": "2025-08-11 10 : 00 ~ 2025-08-22 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "크래프톤 정글 캠퍼스(경기도 용인시 포곡읍 영문로 55)",
+    "format": "캠프, 연수",
+    "contact": "031-219-3070",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002038",
+    "competency_tags": [
+      "웹_프론트엔드",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002039",
+    "title": "[디지털 직무역량강화] 구글애널리틱스 자격과정(GA4)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-09 10 : 00 ~ 2025-06-17 11 : 00",
+    "operate_period": "2025-06-24 14 : 00 ~ 2025-06-27 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3081",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002039",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002041",
+    "title": "ABC팔레트 홍보 슬로건 공모전",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-05-16 17 : 00 ~ 2025-06-07 00 : 00",
+    "operate_period": "2025-05-16 17 : 00 ~ 2025-06-07 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3372",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002041",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002042",
+    "title": "HR인사직무 아카데미",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-09 00 : 00 ~ 2025-07-31 23 : 50",
+    "operate_period": "2025-07-01 13 : 00 ~ 2025-08-29 15 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002042",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002044",
+    "title": "영화 속 첨단바이오",
+    "org": "첨단바이오융합대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-04-29 13 : 00 ~ 2025-05-22 15 : 00",
+    "operate_period": "2025-05-22 16 : 00 ~ 2025-05-22 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "혜강관 209호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "ibio@ajou.ac.kr, 3112",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002044",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002045",
+    "title": "25 하계 _Photoshop+ACP자격과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-12 09 : 00 ~ 2025-07-07 12 : 00",
+    "operate_period": "2025-07-14 13 : 00 ~ 2025-07-16 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3093",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002045",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002046",
+    "title": "25 하계 Premiere Pro +ACP자격과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-12 09 : 00 ~ 2025-07-14 12 : 00",
+    "operate_period": "2025-07-21 13 : 00 ~ 2025-07-23 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3093",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002046",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002047",
+    "title": "[졸특]2025 하계 서류완성 집중 컨설팅",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "상담",
+      "개인상담"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-06-17 09 : 00 ~ 2025-06-23 15 : 00",
+    "operate_period": "2025-06-25 09 : 00 ~ 2025-08-22 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "상담, 검사",
+    "contact": "031-219-3082",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002047",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002048",
+    "title": "2025년 사회초년생 및 예비취업자를 위한 커리어케어",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-16 09 : 00 ~ 2025-06-26 15 : 00",
+    "operate_period": "2025-07-01 19 : 00 ~ 2025-07-03 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3082",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002048",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002049",
+    "title": "[품질경영분야] 6시그마 Green Belt 자격증 취득 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-24 10 : 00 ~ 2025-07-04 23 : 50",
+    "operate_period": "2025-07-14 09 : 00 ~ 2025-07-17 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3079",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002049",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002050",
+    "title": "추천채용 합격자가 들려주는 취업 토크쇼!",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-10 00 : 00 ~ 2025-06-26 23 : 50",
+    "operate_period": "2025-06-27 19 : 00 ~ 2025-06-27 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002050",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002051",
+    "title": "2025 자기주도 진로 동아리",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "개인역량강화",
+      "교내활동",
+      "활동(동아리,소학회,학생회,캠페인)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-06-12 10 : 00 ~ 2025-06-20 15 : 00",
+    "operate_period": "2025-07-01 00 : 00 ~ 2025-10-31 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "동아리",
+    "contact": "031-219-3078",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002051",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002052",
+    "title": "전설의 마인드맵(1차)",
+    "org": "전공설계지원센터",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "개인"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-12 16 : 00 ~ 2025-06-20 14 : 30",
+    "operate_period": "2025-06-17 09 : 00 ~ 2025-06-20 10 : 20",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "상담, 검사",
+    "contact": "advising@ajou.ac.kr 또는 031)219-3121",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002052",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002053",
+    "title": "적당히 꾸물대면서 잘해내기(지연행동 조절 토크테라피)",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "집단"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-13 11 : 00 ~ 2025-06-25 18 : 00",
+    "operate_period": "2025-06-30 13 : 00 ~ 2025-07-10 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호 세미나실",
+    "format": "상담, 검사",
+    "contact": "031-219-3274, seulgiback@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002053",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002054",
+    "title": "'교육혁신 크리에이터 크루' 모집 (서포터즈)",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-06-16 00 : 00 ~ 2025-07-06 23 : 50",
+    "operate_period": "2025-07-04 00 : 00 ~ 2025-08-31 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "서포터즈, 홍보대사",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002054",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002055",
+    "title": "2025 하계 모각소(모여서 각자 소프트웨어 하자)",
+    "org": "AI융합교육원 소프트웨어융합대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-06-23 00 : 00 ~ 2025-06-30 00 : 00",
+    "operate_period": "2025-07-07 00 : 00 ~ 2025-08-24 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3072",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002055",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002056",
+    "title": "[졸업생 only] Chill Guy & Chill Girl의 합격 컬러 찾기",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "상담",
+      "개인상담"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-23 09 : 00 ~ 2025-06-30 11 : 00",
+    "operate_period": "2025-07-10 10 : 00 ~ 2025-07-10 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "상담, 검사",
+    "contact": "031-219-3082",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002056",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002057",
+    "title": "2025 GMP이론교육 및 HPLC실습 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-18 20 : 00 ~ 2025-06-23 10 : 00",
+    "operate_period": "2025-07-01 00 : 00 ~ 2025-08-23 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002057",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002058",
+    "title": "기업분석 특강&커리어플래닝&비즈니스매너",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-12 00 : 00 ~ 2025-06-25 23 : 50",
+    "operate_period": "2025-06-26 13 : 00 ~ 2025-06-26 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002058",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002059",
+    "title": "아주북통(Book+通) 17기",
+    "org": "학술정보팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-02-27 09 : 00 ~ 2025-03-05 13 : 00",
+    "operate_period": "2025-03-07 09 : 00 ~ 2025-06-04 20 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 중앙도서관",
+    "format": "기타(입력)",
+    "contact": "031-219-2132",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002059",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002060",
+    "title": "ADsP 데이터분석 준전문가 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-23 16 : 00 ~ 2025-07-01 11 : 00",
+    "operate_period": "2025-07-07 10 : 00 ~ 2025-07-11 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3081",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002060",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002061",
+    "title": "아주북통(Book+通) 17기",
+    "org": "학술정보팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-02-27 09 : 00 ~ 2025-03-05 13 : 00",
+    "operate_period": "2025-03-07 09 : 00 ~ 2025-06-04 20 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 중앙도서관",
+    "format": "기타(입력)",
+    "contact": "031-219-2132",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002061",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002062",
+    "title": "아주북통(Book+通) 17기",
+    "org": "학술정보팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-02-27 09 : 00 ~ 2025-03-05 13 : 00",
+    "operate_period": "2025-03-07 09 : 00 ~ 2025-06-04 20 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 중앙도서관",
+    "format": "기타(입력)",
+    "contact": "031-219-2132",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002062",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002065",
+    "title": "2025 취준진담-선배만남의날(멘토링 프로그램-HD현대, LG에너지솔루션 멘토편)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "멘토"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-23 00 : 00 ~ 2025-06-27 18 : 00",
+    "operate_period": "2025-06-27 19 : 00 ~ 2025-06-27 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002065",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002066",
+    "title": "2025 NCS 반도체 전공정 집중과정(하계방학)-10H",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-01 10 : 00 ~ 2025-07-04 10 : 00",
+    "operate_period": "2025-07-09 00 : 00 ~ 2025-07-23 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2169",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002066",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002067",
+    "title": "아주대와 함께하는 문화산책(7~8월)",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-07-01 00 : 00 ~ 2025-08-31 23 : 50",
+    "operate_period": "2025-07-01 00 : 00 ~ 2025-08-31 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3384, ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002067",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002068",
+    "title": "[졸업생특화] 여름방학 현직자 직무체험 프로그램",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-26 10 : 00 ~ 2025-07-01 23 : 50",
+    "operate_period": "2025-07-05 00 : 00 ~ 2025-08-17 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2042",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002068",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002069",
+    "title": "컴퓨터활용능력 1,2급 자격과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-14 10 : 00 ~ 2025-07-21 10 : 00",
+    "operate_period": "2025-08-04 09 : 00 ~ 2025-08-07 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3079",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002069",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002070",
+    "title": "[졸업생 특화] AJOU 취업ON 3.0",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-06-30 10 : 00 ~ 2025-07-25 16 : 00",
+    "operate_period": "2025-08-05 09 : 00 ~ 2025-10-29 20 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002070",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002072",
+    "title": "[거점형] 반도체 공정 엔지니어 양성과정(w.경진대회)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-01 10 : 00 ~ 2025-07-14 14 : 00",
+    "operate_period": "2025-07-18 14 : 00 ~ 2025-08-06 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002072",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002073",
+    "title": "[졸업생특화] AI를 활용한 하반기 취업 마스터 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-07-03 13 : 00 ~ 2025-07-27 23 : 00",
+    "operate_period": "2025-08-12 18 : 00 ~ 2025-08-13 22 : 30",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2042",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002073",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002074",
+    "title": "[졸업생특화] 여름방학 현직자 직무체험 프로그램",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-07-07 10 : 00 ~ 2025-07-14 23 : 50",
+    "operate_period": "2025-07-17 00 : 00 ~ 2025-08-31 23 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2042",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002074",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002076",
+    "title": "전설의 마인드맵(2차)",
+    "org": "전공설계지원센터",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "개인"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-09 10 : 50 ~ 2025-07-16 12 : 00",
+    "operate_period": "2025-07-14 13 : 50 ~ 2025-07-16 14 : 20",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 104호 전공설계지원센터",
+    "format": "상담, 검사",
+    "contact": "advising@ajou.ac.kr 또는 031)219-3121",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002076",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002077",
+    "title": "하반기 채용트렌드-AI 취업 마스터과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-09 13 : 40 ~ 2025-07-27 23 : 50",
+    "operate_period": "2025-08-12 18 : 40 ~ 2025-08-12 20 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2042",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002077",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002078",
+    "title": "[졸업생특화] 실습- AI를 활용한 하반기 취업 마스터 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-09 13 : 00 ~ 2025-07-27 23 : 00",
+    "operate_period": "2025-08-13 18 : 00 ~ 2025-08-13 22 : 30",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2042",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002078",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002079",
+    "title": "[특강]진로설정을 위한 산업 및 기업 직무분석&챗GPT 활용법",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-09 00 : 00 ~ 2025-07-28 23 : 50",
+    "operate_period": "2025-07-29 13 : 00 ~ 2025-07-29 16 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002079",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002080",
+    "title": "2025학년도 1학기 유익한 방학생활 에세이 공모전",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 00 : 00 ~ 2025-09-12 23 : 50",
+    "operate_period": "2025-08-25 00 : 00 ~ 2025-09-12 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002080",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002081",
+    "title": "2025-하계방학 현장실습 사전오리엔테이션",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-08 00 : 00 ~ 2025-06-11 23 : 50",
+    "operate_period": "2025-06-24 14 : 00 ~ 2025-06-24 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1786 / jeonjh1213@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002081",
+    "competency_tags": [
+      "협업_PM",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002082",
+    "title": "2025-2학기 현장실습 학생설명회",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "현장경험",
+      "현장실습(국내)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-02 09 : 00 ~ 2025-07-15 14 : 00",
+    "operate_period": "2025-07-15 14 : 00 ~ 2025-07-15 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "온라인 진행",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1786 / jeonjh1213@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002082",
+    "competency_tags": [
+      "협업_PM",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002083",
+    "title": "[거점형]AI활용역량 교육(w. KT AICE Associate 자격시험대비)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-21 10 : 00 ~ 2025-07-28 10 : 00",
+    "operate_period": "2025-08-04 00 : 00 ~ 2025-08-29 11 : 30",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002083",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002084",
+    "title": "[거점형]디지털전환(DX)대응 생산설비직무 교육 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-21 10 : 00 ~ 2025-08-05 10 : 00",
+    "operate_period": "2025-08-11 09 : 00 ~ 2025-08-25 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002084",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002085",
+    "title": "[거점형]디지털전환(DX)대응 마케팅직무 교육 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-21 10 : 00 ~ 2025-08-05 10 : 00",
+    "operate_period": "2025-08-11 14 : 00 ~ 2025-08-25 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002085",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002086",
+    "title": "[거점형]일잘러가 되기 위한 생성형 AI 실전활용",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-11 10 : 00 ~ 2025-08-20 10 : 00",
+    "operate_period": "2025-08-25 10 : 00 ~ 2025-08-27 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002086",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002087",
+    "title": "[특강]효과적인 PT제작 및 발표법 & 커리어 포트폴리오 구축법",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-17 00 : 00 ~ 2025-08-06 23 : 50",
+    "operate_period": "2025-08-08 13 : 00 ~ 2025-08-08 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002087",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002088",
+    "title": "전설의 마인드맵(3차)",
+    "org": "전공설계지원센터",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "개인"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-22 13 : 00 ~ 2025-08-01 12 : 00",
+    "operate_period": "2025-07-30 09 : 00 ~ 2025-08-01 10 : 20",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 104호 전공설계지원센터",
+    "format": "상담, 검사",
+    "contact": "advising@ajou.ac.kr 또는 031)219-3121",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002088",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002090",
+    "title": "2025년 대기업 하반기 취업 대비 [취업설명회] 및 [인적성 시험] 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-21 09 : 00 ~ 2025-08-25 23 : 50",
+    "operate_period": "2025-08-28 13 : 00 ~ 2025-08-29 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2043",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002090",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002091",
+    "title": "2025 NCS 반도체 후공정 심화과정(하계방학)-3H",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-29 10 : 00 ~ 2025-08-03 18 : 00",
+    "operate_period": "2025-08-07 00 : 00 ~ 2025-08-21 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2169",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002091",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002092",
+    "title": "ABC Lab: ABC 블록 실험실",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-25 15 : 00 ~ 2025-08-16 00 : 00",
+    "operate_period": "2025-07-25 15 : 00 ~ 2025-08-16 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3372",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002092",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002093",
+    "title": "25학년도 2학기 한국어 버디 프로그램",
+    "org": "글로벌교양학부 다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-01 09 : 00 ~ 2025-08-14 14 : 00",
+    "operate_period": "2025-09-01 09 : 00 ~ 2025-12-19 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "☎ 031-219-3057 / e-mail : thoon@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002093",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002094",
+    "title": "2025 하계 2차전지 장비제어 PLC 이론 & 실습 프로그램",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-05 10 : 00 ~ 2025-08-11 09 : 00",
+    "operate_period": "2025-08-19 09 : 00 ~ 2025-08-29 17 : 30",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2169",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002094",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002095",
+    "title": "25 하반기 AJOU 취업훈련소 면접대비 재학생반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-13 10 : 00 ~ 2025-08-21 16 : 00",
+    "operate_period": "2025-08-28 09 : 00 ~ 2025-11-28 20 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002095",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002096",
+    "title": "월간자소서 8월호(기초 서류특강, 1:1컨설팅)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-07-28 09 : 00 ~ 2025-08-19 16 : 00",
+    "operate_period": "2025-08-20 19 : 00 ~ 2025-08-28 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "상담, 검사",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002096",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002097",
+    "title": "[기간연장]파란학기제 학생서포터즈단(블루밍(Bluemeing)) 2기 추가 모집(~9/3(수) 18:00)",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-18 09 : 00 ~ 2025-09-03 18 : 00",
+    "operate_period": "2025-09-01 00 : 00 ~ 2026-02-28 23 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "서포터즈, 홍보대사",
+    "contact": "031-219-3383/7",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002097",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002098",
+    "title": "박물관 서포터즈 7기 모집",
+    "org": "박물관학예팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-18 00 : 00 ~ 2025-09-03 18 : 00",
+    "operate_period": "2025-09-08 00 : 00 ~ 2025-12-12 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "아주대학교 율곡관",
+    "format": "서포터즈, 홍보대사",
+    "contact": "031-219-2907 / 010-2167-3949",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002098",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002099",
+    "title": "길위의인문학 '기후위기, 인문학으로 구하는 수원'",
+    "org": "박물관학예팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-13 15 : 00 ~ 2025-09-01 18 : 00",
+    "operate_period": "2025-09-02 14 : 00 ~ 2025-11-11 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 율곡관 252호",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2997",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002099",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002100",
+    "title": "2025 제1회 Google-아주대학교 AI융합캡스톤디자인 대회",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "공모전/경진대회",
+      "교내(참가)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 00 : 00 ~ 2025-09-26 18 : 00",
+    "operate_period": "2025-08-25 00 : 00 ~ 2025-12-09 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-1780, hongsu@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002100",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002101",
+    "title": "다산서원(茶山書院)",
+    "org": "다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 00 : 00 ~ 2025-09-04 00 : 00",
+    "operate_period": "2025-09-07 00 : 00 ~ 2025-12-19 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "추후 공지",
+    "format": "기타(입력)",
+    "contact": "031-219-2867/jinsh1004ok@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002101",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002102",
+    "title": "[대학혁신지원사업] 대학혁신단 학생서포터즈 4기 추가 모집",
+    "org": "대학혁신단 대학혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-19 09 : 00 ~ 2025-09-01 00 : 00",
+    "operate_period": "2025-09-01 09 : 00 ~ 2026-02-28 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "서포터즈, 홍보대사",
+    "contact": "031-219-3379",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002102",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002103",
+    "title": "2025 아주러닝캠프(1차) 학습 자존감 진단과 회복",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-18 09 : 00 ~ 2025-08-26 14 : 00",
+    "operate_period": "2025-08-27 10 : 00 ~ 2025-08-27 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002103",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002104",
+    "title": "2025 아주러닝캠프(2차) 학습 동기 제고 전략",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-18 09 : 00 ~ 2025-08-26 14 : 00",
+    "operate_period": "2025-08-27 15 : 00 ~ 2025-08-27 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002104",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002105",
+    "title": "2025 아주러닝캠프(3차) 공부 집중력 향상 전략",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-18 09 : 00 ~ 2025-08-26 14 : 00",
+    "operate_period": "2025-08-28 10 : 00 ~ 2025-08-28 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002105",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002106",
+    "title": "2025-2학기 아주마스터클래스",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-12 18 : 00",
+    "operate_period": "2025-09-30 09 : 00 ~ 2026-01-15 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "동아리",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002106",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002107",
+    "title": "2025-2학기 강의페어링 설명회",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-19 09 : 00 ~ 2025-08-28 00 : 00",
+    "operate_period": "2025-08-29 14 : 00 ~ 2025-08-29 15 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "혜강관 209호",
+    "format": "기타(입력)",
+    "contact": "031-219-3383",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002107",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002108",
+    "title": "2025-2학기 학습공동체(I) 스터디그룹",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-12 18 : 00",
+    "operate_period": "2025-09-24 09 : 00 ~ 2026-01-15 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "동아리",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002108",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002109",
+    "title": "2025-2학기 학습공동체(II) ASAP",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-12 18 : 00",
+    "operate_period": "2025-09-25 09 : 00 ~ 2026-01-15 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002109",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002110",
+    "title": "2025-2학기 학습공동체(III) 공부가치",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-12 18 : 00",
+    "operate_period": "2025-09-26 09 : 00 ~ 2026-01-15 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002110",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002111",
+    "title": "2025-2 아주대학교 사회봉사단",
+    "org": "사회봉사센터",
+    "category_path": [
+      "사회공헌·봉사",
+      "봉사",
+      "교내"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-08-29 18 : 00",
+    "operate_period": "2025-09-01 09 : 00 ~ 2026-02-28 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-2034",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002111",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002112",
+    "title": "2025-2학기 고전 토론대회",
+    "org": "다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "학술제"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 00 : 00 ~ 2025-09-04 00 : 00",
+    "operate_period": "2025-09-07 00 : 00 ~ 2025-12-19 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "추후 공지",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-2867/jinsh1004ok@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002112",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002113",
+    "title": "2025-2 영통구 청소년 학습멘토링",
+    "org": "사회봉사센터",
+    "category_path": [
+      "사회공헌·봉사",
+      "봉사",
+      "교내"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-05 18 : 00",
+    "operate_period": "2025-09-01 09 : 00 ~ 2025-12-31 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-2034",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002113",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002115",
+    "title": "2021-1 인문대학 소속 학과 학생회 활동",
+    "org": "인문대학교학팀",
+    "category_path": [
+      "개인역량강화",
+      "교내활동",
+      "활동(동아리,소학회,학생회,캠페인)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2021-01-01 13 : 00 ~ 2021-08-31 14 : 00",
+    "operate_period": "2021-01-01 13 : 00 ~ 2021-08-31 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "인문대학교학팀",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002115",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002116",
+    "title": "2021-2 인문대학 소속 학과 학생회 활동",
+    "org": "인문대학교학팀",
+    "category_path": [
+      "개인역량강화",
+      "교내활동",
+      "활동(동아리,소학회,학생회,캠페인)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2021-09-01 13 : 00 ~ 2021-12-31 14 : 00",
+    "operate_period": "2021-09-01 13 : 00 ~ 2021-12-31 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "인문대학교학팀",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002116",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002117",
+    "title": "2023년도 1학기 인문대학 외국인 유학생지원회 활동",
+    "org": "인문대학교학팀",
+    "category_path": [
+      "개인역량강화",
+      "교내활동",
+      "활동(동아리,소학회,학생회,캠페인)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2023-01-01 13 : 00 ~ 2023-08-31 14 : 00",
+    "operate_period": "2023-01-01 13 : 00 ~ 2023-08-31 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "인문대학교학팀",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002117",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002118",
+    "title": "2025-2학기 고전 에세이대회",
+    "org": "다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 00 : 00 ~ 2025-09-04 00 : 00",
+    "operate_period": "2025-09-07 00 : 00 ~ 2025-12-19 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "추후 공지",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-2867/jinsh1004ok@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002118",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002119",
+    "title": "영화가 있는 인문학 카페 제 4회 아주 씨네로그",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-22 00 : 00 ~ 2025-09-10 11 : 00",
+    "operate_period": "2025-09-09 13 : 00 ~ 2025-09-10 14 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 영상회의실(151호)",
+    "format": "기타(입력)",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002119",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002120",
+    "title": "[외국인유학생대상] 아주Bb 기초 이해 특강(1)",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-08 14 : 00",
+    "operate_period": "2025-09-09 10 : 00 ~ 2025-09-09 11 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002120",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002121",
+    "title": "[외국인유학생대상] 아주Bb 기초 이해 특강(2)",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-08 14 : 00",
+    "operate_period": "2025-09-09 15 : 00 ~ 2025-09-09 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3592, kkeun@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002121",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002122",
+    "title": "걱정털어내고 힐링 한 스푼",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "집단"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-01 09 : 00 ~ 2025-09-11 10 : 00",
+    "operate_period": "2025-09-18 17 : 00 ~ 2025-09-29 19 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "상담, 검사",
+    "contact": "031-219-2294",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002122",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002124",
+    "title": "아주대와 함께하는 문화산책(9~10월)",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-09-01 00 : 00 ~ 2025-10-31 23 : 50",
+    "operate_period": "2025-09-01 00 : 00 ~ 2025-10-31 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3384, ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002124",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002125",
+    "title": "걱정이 많은게 걱정이야...",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-03 09 : 00 ~ 2025-09-17 10 : 00",
+    "operate_period": "2025-09-17 13 : 00 ~ 2025-09-17 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2274",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002125",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002128",
+    "title": "[특강] 기억의 효율을 높이는 노트필기의 핵심 '요약정리 기술'",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-04 13 : 00 ~ 2025-09-16 14 : 00",
+    "operate_period": "2025-09-17 15 : 00 ~ 2025-09-17 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002128",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002129",
+    "title": "아주허브 마일리지 장학 신청",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-09-08 17 : 00 ~ 2025-09-21 23 : 50",
+    "operate_period": "2025-09-08 16 : 00 ~ 2025-09-21 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3384,3372",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002129",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002130",
+    "title": "-Skill-up AWS(정보보호·보안) 교육(1차시)수강생 모집 안내-",
+    "org": "데이터보안·활용 혁신융합대학사업단 혁신융합팀 미래자동차 혁신융합대학사업단",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-10 00 : 00 ~ 2025-09-16 23 : 50",
+    "operate_period": "2025-09-27 09 : 00 ~ 2025-09-28 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "팔달관111호(CSMC)",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3023/heajin@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002130",
+    "competency_tags": [
+      "보안",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002131",
+    "title": "-Skill-up AWS(정보보호·보안) 교육(2차시)수강생 모집 안내-",
+    "org": "데이터보안·활용 혁신융합대학사업단 혁신융합팀 미래자동차 혁신융합대학사업단",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-15 00 : 00 ~ 2025-10-21 23 : 50",
+    "operate_period": "2025-11-01 09 : 00 ~ 2025-11-02 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "팔달관111호(CSMC)",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3023/heajin@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002131",
+    "competency_tags": [
+      "보안",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002132",
+    "title": "-Skill-up AWS(정보보호·보안) 교육(3차시)추가 수강생 모집 안내-",
+    "org": "데이터보안·활용 혁신융합대학사업단 혁신융합팀 미래자동차 혁신융합대학사업단",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-12 00 : 00 ~ 2025-11-23 23 : 50",
+    "operate_period": "2025-11-29 09 : 00 ~ 2025-11-30 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "팔달관111호(CSMC)",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3023/heajin@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002132",
+    "competency_tags": [
+      "보안",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002133",
+    "title": "미루기 장인, 실천 초보 탈출기",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "집단"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-12 13 : 00 ~ 2025-09-19 13 : 00",
+    "operate_period": "2025-09-22 16 : 00 ~ 2025-09-25 19 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "상담, 검사",
+    "contact": "031-219-2294",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002133",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002134",
+    "title": "발표가 끝날 땐 건어물이 되어 있었다...",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-15 09 : 00 ~ 2025-09-23 14 : 00",
+    "operate_period": "2025-09-24 13 : 00 ~ 2025-09-24 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2274",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002134",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002135",
+    "title": "프로젝트 Step-Up! 실전 역량 강화 프로그램(1차)",
+    "org": "산학사업팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-15 11 : 30 ~ 2025-09-26 23 : 50",
+    "operate_period": "2025-09-30 18 : 30 ~ 2025-09-30 20 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "혜강관 209호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1782",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002135",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002136",
+    "title": "[특강] ChatGPT로 대학생활 레벨업",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-16 13 : 00 ~ 2025-09-22 14 : 00",
+    "operate_period": "2025-09-23 10 : 00 ~ 2025-09-23 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002136",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002137",
+    "title": "[특강] 생성형 AI 학습 활용 전략",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-16 13 : 00 ~ 2025-09-22 14 : 00",
+    "operate_period": "2025-09-23 15 : 00 ~ 2025-09-23 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002137",
+    "competency_tags": [
+      "데이터_ML",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002138",
+    "title": "[특강] 생성형 AI와 싸우지 않는 법",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-16 13 : 00 ~ 2025-09-24 14 : 00",
+    "operate_period": "2025-09-25 15 : 00 ~ 2025-09-25 16 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002138",
+    "competency_tags": [
+      "데이터_ML",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002139",
+    "title": "[특강] 구글 AI 학습 활용 전략",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-16 13 : 00 ~ 2025-10-01 14 : 00",
+    "operate_period": "2025-10-02 10 : 00 ~ 2025-10-02 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002139",
+    "competency_tags": [
+      "데이터_ML",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002140",
+    "title": "2025-2학기 현장실습 사전오리엔테이션",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-07-16 00 : 00 ~ 2025-08-13 23 : 50",
+    "operate_period": "2025-08-26 14 : 00 ~ 2025-08-26 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1785 / sey@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002140",
+    "competency_tags": [
+      "협업_PM",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002141",
+    "title": "2025학년도 9월 데이터보안사업단 연계전공 설명회",
+    "org": "데이터보안·활용 혁신융합대학사업단 혁신융합팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-17 14 : 00 ~ 2025-09-23 13 : 00",
+    "operate_period": "2025-09-23 12 : 00 ~ 2025-09-23 13 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3023/heajin@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002141",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002142",
+    "title": "영화가 있는 인문학 카페 제 5회 아주 씨네로그",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-01 00 : 00 ~ 2025-10-30 11 : 00",
+    "operate_period": "2025-10-28 14 : 00 ~ 2025-10-30 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 영상회의실(151호)",
+    "format": "기타(입력)",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002142",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002143",
+    "title": "2025-2학기 파란학기제 인턴십",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "멘토링",
+      "멘티"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-08-31 18 : 00",
+    "operate_period": "2025-09-01 09 : 00 ~ 2025-12-21 18 : 00",
+    "target_dept": "자유전공학부",
+    "target_grade": "1 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "3383",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002143",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002144",
+    "title": "2025년 모의수업 및 에듀테크 활용 경진대회",
+    "org": "교직부 교무팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-01 09 : 00 ~ 2025-10-28 23 : 50",
+    "operate_period": "2025-10-01 09 : 00 ~ 2025-11-24 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "추후 안내",
+    "format": "공모전, 경진대회",
+    "contact": "경진대회 관련(홍성연 교수): hsy06@ajou.ac.kr, 3553 / 시스템 관련(교직부 담당자): syk@ajou.ac.kr, 2016",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002144",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002145",
+    "title": "프로젝트 Step-Up! 실전 역량 강화 프로그램(2차)",
+    "org": "산학사업팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-02 11 : 30 ~ 2025-10-24 23 : 50",
+    "operate_period": "2025-10-28 18 : 30 ~ 2025-10-28 20 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "혜강관 209호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1782",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002145",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002147",
+    "title": "2025 공학교육 캡스톤디자인 경진대회",
+    "org": "공학교육혁신센터",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-01 13 : 00 ~ 2025-11-20 16 : 00",
+    "operate_period": "2025-10-01 13 : 00 ~ 2025-11-20 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5 학년",
+    "target_audience": "-",
+    "location": "아주대학교 팔달관 로비",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-1861",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002147",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002148",
+    "title": "2025-2학기 아주Debate(아주 토론대회)",
+    "org": "다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-15 00 : 00 ~ 2025-10-28 17 : 00",
+    "operate_period": "2025-10-28 00 : 00 ~ 2025-11-13 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "추후 공지",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-2867/jinsh1004ok@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002148",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002149",
+    "title": "2025학년도 11월 데이터보안사업단 연계전공 설명회(2차)",
+    "org": "데이터보안·활용 혁신융합대학사업단 혁신융합팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-16 00 : 00 ~ 2025-11-10 23 : 50",
+    "operate_period": "2025-11-11 12 : 00 ~ 2025-11-11 13 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 COSS대단위강의실(소극장/135호)",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3023/heajin@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002149",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002150",
+    "title": "꾸물꾸물해도 괜찮아, 나답게 해내기(지연행동 조절 토크테라피)",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "집단"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-20 13 : 00 ~ 2025-11-03 13 : 00",
+    "operate_period": "2025-11-05 15 : 00 ~ 2025-11-26 17 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "상담, 검사",
+    "contact": "031-219-2294 / supiar@ajou.ac.kr(이보림 상담원)",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002150",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002151",
+    "title": "내 모든 걸 사랑하는 방법(자기이해 토크테라피)",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "집단"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-20 13 : 00 ~ 2025-11-03 09 : 00",
+    "operate_period": "2025-11-06 13 : 00 ~ 2025-11-27 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "상담, 검사",
+    "contact": "031-219-2274 / tiempo107@ajou.ac.kr(변하연 상담원)",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002151",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002152",
+    "title": "[외국인 유학생 대상] 학습 자존감 회복 및 발표 전략",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-20 13 : 00 ~ 2025-10-30 16 : 00",
+    "operate_period": "2025-11-04 14 : 00 ~ 2025-11-04 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002152",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002153",
+    "title": "[외국인 유학생 대상] 팀플 및 리포트 작성법",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-20 13 : 00 ~ 2025-10-30 16 : 00",
+    "operate_period": "2025-11-06 14 : 00 ~ 2025-11-06 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002153",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002154",
+    "title": "영화가 있는 인문학 카페 제 6회 아주 씨네로그",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-23 00 : 00 ~ 2025-11-20 11 : 00",
+    "operate_period": "2025-11-18 14 : 00 ~ 2025-11-20 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 영상회의실(151호)",
+    "format": "기타(입력)",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002154",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002155",
+    "title": "영화가 있는 인문학 카페 제 7회 아주 씨네로그",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-23 00 : 00 ~ 2025-12-04 14 : 00",
+    "operate_period": "2025-12-02 14 : 00 ~ 2025-12-04 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 영상회의실(151호)",
+    "format": "기타(입력)",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002155",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002158",
+    "title": "2025-1학기 APS; Ajou Prep School(자유전공학부 학습공동체)",
+    "org": "자유전공학부 다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-05-08 13 : 00 ~ 2025-05-13 23 : 00",
+    "operate_period": "2025-05-19 13 : 00 ~ 2025-06-24 14 : 00",
+    "target_dept": "자유전공학부",
+    "target_grade": "1 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3054",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002158",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002159",
+    "title": "[자유전공학부] 2025-2학기 아주크루 모집",
+    "org": "자유전공학부 다산학부대학교학팀",
+    "category_path": [
+      "개인역량강화",
+      "교내활동",
+      "활동(동아리,소학회,학생회,캠페인)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-07-25 10 : 00 ~ 2025-09-11 18 : 00",
+    "operate_period": "2025-07-28 10 : 00 ~ 2025-12-19 18 : 00",
+    "target_dept": "자유전공학부",
+    "target_grade": "1 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "동아리",
+    "contact": "031-219-3054/3055",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002159",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002160",
+    "title": "2025-2학기 자유전공학부 BSM 학습공동체",
+    "org": "자유전공학부 다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-09-01 13 : 00 ~ 2025-09-09 17 : 00",
+    "operate_period": "2025-09-22 13 : 00 ~ 2025-12-12 14 : 00",
+    "target_dept": "자유전공학부",
+    "target_grade": "1 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3054",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002160",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002161",
+    "title": "2025학년도 자유전공학부 브라운백세미나",
+    "org": "자유전공학부 다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-03-11 13 : 00 ~ 2025-03-21 14 : 00",
+    "operate_period": "2025-03-24 13 : 00 ~ 2025-05-28 14 : 00",
+    "target_dept": "자유전공학부",
+    "target_grade": "1 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3054",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002161",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002162",
+    "title": "[특강] 노션으로 대학생활 업그레이드",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-27 09 : 00 ~ 2025-11-10 14 : 00",
+    "operate_period": "2025-11-11 10 : 00 ~ 2025-11-11 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002162",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002163",
+    "title": "[특강] 대학생을 위한 PPT 기초 이해",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-27 09 : 00 ~ 2025-11-11 14 : 00",
+    "operate_period": "2025-11-12 10 : 00 ~ 2025-11-12 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002163",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002164",
+    "title": "[특강] 대학생을 위한 PPT 활용 전략",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-27 09 : 00 ~ 2025-11-11 14 : 00",
+    "operate_period": "2025-11-12 15 : 00 ~ 2025-11-12 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002164",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002165",
+    "title": "[졸업생특화프로그램] 자기주도형 잡아주(Job Ajou)_길(Path)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "상담",
+      "개인상담"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-13 09 : 00 ~ 2025-08-19 17 : 00",
+    "operate_period": "2025-08-20 13 : 00 ~ 2025-12-31 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "상담, 검사",
+    "contact": "031-219-3082",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002165",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002166",
+    "title": "[거점형]일잘러가 되기 위한 생성형 AI 실전활용 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-11 10 : 00 ~ 2025-08-21 16 : 00",
+    "operate_period": "2025-08-25 10 : 00 ~ 2025-08-27 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002166",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002167",
+    "title": "2025 멘토링 프로그램-취준진담(LIG넥스원, SK AX 멘토편)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "멘티"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-21 10 : 00 ~ 2025-08-21 18 : 00",
+    "operate_period": "2025-08-21 19 : 00 ~ 2025-08-21 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002167",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002168",
+    "title": "2025년 대기업 하반기 취업 대비 [취업설명회] 및 [인적성 시험] 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-07-21 09 : 00 ~ 2025-08-25 23 : 50",
+    "operate_period": "2025-08-28 13 : 00 ~ 2025-08-29 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2043",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002168",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002169",
+    "title": "25 하반기 AJOU 취업훈련소 면접대비 재학생반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-13 10 : 00 ~ 2025-08-26 16 : 00",
+    "operate_period": "2025-08-28 09 : 00 ~ 2025-11-28 20 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002169",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002171",
+    "title": "2025 취업토크쇼(w. 산업공학과 소학회 WAI)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "멘티"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-26 00 : 00 ~ 2025-08-28 00 : 00",
+    "operate_period": "2025-08-30 12 : 00 ~ 2025-08-30 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002171",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002172",
+    "title": "2025 A.C.E.STUDY(25-4기)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "컨설팅"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-12 14 : 00 ~ 2025-08-29 23 : 00",
+    "operate_period": "2025-08-26 14 : 00 ~ 2025-09-30 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002172",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002173",
+    "title": "2025 하반기 대기업 주요 그룹사별 서류 작성법 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-03-10 13 : 00 ~ 2025-09-01 00 : 00",
+    "operate_period": "2025-08-25 19 : 00 ~ 2025-09-05 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002173",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002174",
+    "title": "2025하반기 방산 기업 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-14 00 : 00 ~ 2025-09-03 10 : 00",
+    "operate_period": "2025-09-03 19 : 00 ~ 2025-09-03 21 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002174",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002175",
+    "title": "생성형 AI 활용, 취업완성캠프",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-26 10 : 00 ~ 2025-09-04 10 : 00",
+    "operate_period": "2025-09-05 10 : 00 ~ 2025-09-05 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4,5 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002175",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002176",
+    "title": "[아주히든챔피언학생발굴단]12기 선정기업 발표회",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "공모전/경진대회",
+      "교내(참가)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-27 00 : 00 ~ 2025-09-05 13 : 00",
+    "operate_period": "2025-09-05 14 : 00 ~ 2025-09-05 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002176",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002177",
+    "title": "[캠리]두산디지털이노베이션 AI직무 채용상담회",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-30 00 : 00 ~ 2025-09-08 15 : 00",
+    "operate_period": "2025-09-09 10 : 00 ~ 2025-09-09 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002177",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002178",
+    "title": "[캠리]BGF로지스 채용설명회&상담회(9/9)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-29 18 : 00 ~ 2025-09-08 23 : 50",
+    "operate_period": "2025-09-09 11 : 00 ~ 2025-09-09 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002178",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002179",
+    "title": "[캠리]뉴파워프라즈마(반도체 기업) 채용상담회",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-03 00 : 00 ~ 2025-09-10 09 : 00",
+    "operate_period": "2025-09-10 13 : 00 ~ 2025-09-10 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002179",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002180",
+    "title": "[캠리]SD바이오센서 채용설명회",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-08 00 : 00 ~ 2025-09-10 17 : 00",
+    "operate_period": "2025-09-11 12 : 00 ~ 2025-09-11 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002180",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002181",
+    "title": "[캠리]LIG넥스원 하반기 채용상담회",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-29 18 : 00 ~ 2025-09-10 23 : 50",
+    "operate_period": "2025-09-04 10 : 00 ~ 2025-09-11 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002181",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002183",
+    "title": "[캠리]Applied Materials Korea 채용상담회 및 설명회",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-09 00 : 00 ~ 2025-09-12 09 : 00",
+    "operate_period": "2025-09-11 10 : 00 ~ 2025-09-12 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002183",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002184",
+    "title": "[캠리]남해화학 채용설명회(9/17)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-08 00 : 00 ~ 2025-09-17 09 : 00",
+    "operate_period": "2025-09-17 16 : 00 ~ 2025-09-17 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002184",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002185",
+    "title": "[캠리]일본취업 채용설명회(9/18)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-12 00 : 00 ~ 2025-09-18 09 : 00",
+    "operate_period": "2025-09-18 16 : 00 ~ 2025-09-18 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002185",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002188",
+    "title": "월간자소서 9월호",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-02 00 : 00 ~ 2025-09-22 16 : 00",
+    "operate_period": "2025-09-23 19 : 00 ~ 2025-10-01 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002188",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002189",
+    "title": "토크살롱 : 추천채용 담당자's TMI",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-04 00 : 00 ~ 2025-09-23 23 : 50",
+    "operate_period": "2025-09-24 16 : 00 ~ 2025-09-24 17 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002189",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002190",
+    "title": "[기업탐방]이화다이이몬드 동탄R&D센터 탐방",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "현장경험",
+      "탐방(국내)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-10 00 : 00 ~ 2025-09-25 23 : 50",
+    "operate_period": "2025-09-26 09 : 00 ~ 2025-09-26 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기업체 탐방, 견학",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002190",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002191",
+    "title": "[캠리]한미약품 채용설명회(9/26)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-10 00 : 00 ~ 2025-09-26 09 : 00",
+    "operate_period": "2025-09-26 14 : 00 ~ 2025-09-26 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002191",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002193",
+    "title": "7급 공무원 시험 대비 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-23 14 : 50 ~ 2025-10-01 10 : 00",
+    "operate_period": "2025-10-01 13 : 50 ~ 2025-10-01 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2041",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002193",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002194",
+    "title": "[거점형]현직자 직무심화 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-22 10 : 00 ~ 2025-10-01 16 : 00",
+    "operate_period": "2025-09-26 19 : 00 ~ 2025-10-01 22 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002194",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002195",
+    "title": "10월 추천채용 채용공고분석 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-02 00 : 00 ~ 2025-10-13 23 : 00",
+    "operate_period": "2025-10-16 16 : 00 ~ 2025-10-16 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002195",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002197",
+    "title": "[25 하반기 유형별,산업별 면접특강/1:1 면접컨설팅]",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-03 10 : 00 ~ 2025-10-14 19 : 00",
+    "operate_period": "2025-09-22 19 : 00 ~ 2025-10-31 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002197",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002198",
+    "title": "[캠리]삼성 SSAFY 모집 설명회 및 상담회(10/15)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-26 00 : 00 ~ 2025-10-14 23 : 50",
+    "operate_period": "2025-10-15 13 : 00 ~ 2025-10-15 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002198",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002199",
+    "title": "PT면접 준비전략 특강_모의면접 희망자 필수",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-22 10 : 00 ~ 2025-10-16 19 : 00",
+    "operate_period": "2025-10-16 19 : 00 ~ 2025-10-16 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002199",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002200",
+    "title": "2025 청년미래직진프로그램",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-08-25 10 : 00 ~ 2025-11-03 15 : 00",
+    "operate_period": "2025-09-09 19 : 00 ~ 2025-11-04 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3080",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002200",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002201",
+    "title": "25년 하반기 서류탈락 원인분석",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-14 00 : 00 ~ 2025-10-27 10 : 00",
+    "operate_period": "2025-10-27 19 : 00 ~ 2025-10-27 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002201",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002202",
+    "title": "PT면접(이공계)_25 하반기 모의면접 실전반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "컨설팅"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-22 10 : 00 ~ 2025-10-30 14 : 00",
+    "operate_period": "2025-10-27 13 : 00 ~ 2025-10-31 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002202",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002203",
+    "title": "PT면접(인문계)_25 하반기 모의면접 실전반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "컨설팅"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-22 10 : 00 ~ 2025-10-29 14 : 00",
+    "operate_period": "2025-10-28 13 : 00 ~ 2025-10-30 16 : 50",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002203",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002204",
+    "title": "추천채용 합격자가 들려주는 취업 토크쇼!",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "멘티"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-25 00 : 00 ~ 2025-10-30 23 : 50",
+    "operate_period": "2025-10-31 19 : 00 ~ 2025-10-31 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002204",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002205",
+    "title": "2025 NCS 반도체 공정 심화과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "직무교육",
+      "직무교육"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-28 10 : 00 ~ 2025-10-31 15 : 00",
+    "operate_period": "2025-11-10 00 : 00 ~ 2025-11-24 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2169",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002205",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002206",
+    "title": "2025 수원시일자리박람회_현직자 취업특강(현, 삼성물산 상무이사)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-20 00 : 00 ~ 2025-10-28 10 : 00",
+    "operate_period": "2025-10-28 13 : 00 ~ 2025-10-28 16 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002206",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002207",
+    "title": "2025년 하반기 커리어 인사이트, 현직자에게 듣다(직무특강)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "직무교육",
+      "직무교육"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-10 10 : 00 ~ 2025-11-03 10 : 00",
+    "operate_period": "2025-10-27 19 : 00 ~ 2025-11-03 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002207",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002208",
+    "title": "25 하반기 모의면접 실전반_인성, 역량면접",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "컨설팅"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-22 10 : 00 ~ 2025-11-06 14 : 00",
+    "operate_period": "2025-11-04 10 : 00 ~ 2025-11-07 17 : 20",
+    "target_dept": "모든과",
+    "target_grade": "3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002208",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002209",
+    "title": "11월 추천채용 채용공고분석 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-15 00 : 00 ~ 2025-11-12 23 : 50",
+    "operate_period": "2025-11-13 16 : 00 ~ 2025-11-13 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002209",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002210",
+    "title": "2025 A.C.E.STUDY(25-5기)-면접반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-10 00 : 00 ~ 2025-11-14 23 : 00",
+    "operate_period": "2025-10-20 14 : 00 ~ 2025-11-28 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "동아리",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002210",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002212",
+    "title": "2025학년도 외국인 유학생 한국어 백일장",
+    "org": "글로벌교양학부 다산학부대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-27 09 : 00 ~ 2025-11-03 00 : 00",
+    "operate_period": "2025-11-07 17 : 00 ~ 2025-11-07 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "연암관 대강당",
+    "format": "공모전, 경진대회",
+    "contact": "☎ 031-219-3057 / e-mail : thoon@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002212",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002213",
+    "title": "2025학년도 생성형 AI 학습 활용 사례 공모전",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-27 09 : 00 ~ 2025-11-30 18 : 00",
+    "operate_period": "2025-10-27 09 : 00 ~ 2025-12-16 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002213",
+    "competency_tags": [
+      "데이터_ML",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002214",
+    "title": "2025 멘토링 프로그램-선배만남의 날(방산기업-LIG넥스원 멘토)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "멘티"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-27 13 : 00 ~ 2025-11-05 15 : 00",
+    "operate_period": "2025-11-05 19 : 00 ~ 2025-11-05 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002214",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002215",
+    "title": "2025 전설의 다전공 설명회",
+    "org": "전공설계지원센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-22 09 : 00 ~ 2025-10-28 16 : 00",
+    "operate_period": "2025-10-28 16 : 00 ~ 2025-10-28 17 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "advising@ajou.ac.kr 또는 031)219-3121",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002215",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002216",
+    "title": "내 연애는 왜 망할까...?",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-30 14 : 00 ~ 2025-11-10 15 : 00",
+    "operate_period": "2025-11-11 15 : 00 ~ 2025-11-11 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "비대면(zoom)",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2274",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002216",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002217",
+    "title": "아주대와 함께하는 문화산책(11~12월)",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-11-01 00 : 00 ~ 2025-12-31 23 : 50",
+    "operate_period": "2025-11-01 00 : 00 ~ 2025-12-31 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3384, ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002217",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002218",
+    "title": "2025-동계방학 현장실습 학생설명회",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "현장경험",
+      "현장실습(국내)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-14 13 : 00 ~ 2025-10-30 16 : 50",
+    "operate_period": "2025-10-30 17 : 00 ~ 2025-10-30 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "원천관 251호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1786 / jeonjh1213@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002218",
+    "competency_tags": [
+      "협업_PM",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002219",
+    "title": "2025 산학교수님과 함께하는 찾아가는 현장실습 상담회",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "상담",
+      "개인상담"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-01 00 : 00 ~ 2025-10-17 23 : 50",
+    "operate_period": "2025-10-27 09 : 00 ~ 2025-10-28 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "도서관 1층 커넥팅 라운지",
+    "format": "상담, 검사",
+    "contact": "031-219-1786 / jeonjh1213@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002219",
+    "competency_tags": [
+      "협업_PM",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002220",
+    "title": "월드프렌즈 중 · 단기 해외봉사단",
+    "org": "",
+    "category_path": [
+      "사회공헌·봉사",
+      "봉사",
+      "교외(해외포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-09-11 13 : 00 ~ 2025-11-22 14 : 00",
+    "operate_period": "2026-01-05 13 : 00 ~ 2026-02-26 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "-",
+    "contact": "031-219-2034",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002220",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002221",
+    "title": "월드프렌즈 중 · 단기 해외봉사단",
+    "org": "사회봉사센터",
+    "category_path": [
+      "사회공헌·봉사",
+      "봉사",
+      "교외(해외포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-09-11 13 : 00 ~ 2025-11-22 14 : 00",
+    "operate_period": "2026-01-05 13 : 00 ~ 2026-02-26 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-2034",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002221",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002222",
+    "title": "나답게 연결되기(대인관계 특강)",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-06 13 : 00 ~ 2025-11-17 09 : 00",
+    "operate_period": "2025-11-18 15 : 00 ~ 2025-11-18 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2274",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002222",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002223",
+    "title": "프로젝트 Step-Up! 실전 역량 강화 프로그램(3차)",
+    "org": "산학사업팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-07 11 : 00 ~ 2025-11-14 23 : 50",
+    "operate_period": "2025-11-18 18 : 00 ~ 2025-11-18 20 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "혜강관 209호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1782",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002223",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002224",
+    "title": "제5회 대학혁신지원사업 참여 수기 공모전",
+    "org": "대학혁신단 대학혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-11-11 10 : 30 ~ 2025-12-06 00 : 00",
+    "operate_period": "2025-11-11 10 : 30 ~ 2025-12-06 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3379",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002224",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002225",
+    "title": "2025 단과대학 연합축제 현장실습 상담회",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "상담",
+      "개인상담"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-09-26 09 : 00 ~ 2025-09-26 10 : 00",
+    "operate_period": "2025-09-26 10 : 00 ~ 2025-09-26 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 앞 B부스",
+    "format": "상담, 검사",
+    "contact": "031-219-1786 / jeonjh1213@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002225",
+    "competency_tags": [
+      "협업_PM",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002226",
+    "title": "흔들리는 진로 속에서 내 불안함이 느껴진 거야~",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-17 10 : 00 ~ 2025-11-21 15 : 00",
+    "operate_period": "2025-11-24 15 : 00 ~ 2025-11-24 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2274",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002226",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002227",
+    "title": "[특강] 학부생을 위한 대학원 입문 A to Z: 취업 vs 대학원, 2년을 바꿀 이야기",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-17 09 : 00 ~ 2025-11-26 14 : 00",
+    "operate_period": "2025-11-27 16 : 00 ~ 2025-11-27 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002227",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002228",
+    "title": "ABC Lab: ABC팔레트 실험보고",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-19 17 : 00 ~ 2026-01-10 00 : 00",
+    "operate_period": "2025-11-19 17 : 00 ~ 2026-01-10 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3372",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002228",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002229",
+    "title": "- 정보보호 비교과 Boot-camp 생성형 AI 보안교육(1차시) 수강생 모집 안내 -",
+    "org": "데이터보안·활용 혁신융합대학사업단 혁신융합팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-26 00 : 00 ~ 2025-12-03 23 : 50",
+    "operate_period": "2025-12-20 10 : 00 ~ 2025-12-21 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "AWS Korea(강남구 테헤란로 231, 센터필드)",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3023/heajin@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002229",
+    "competency_tags": [
+      "데이터_ML",
+      "보안",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002230",
+    "title": "(추가모집)정보보호 비교과 Boot-camp 생성형 AI 보안교육(2차시) 수강생 모집 안내",
+    "org": "데이터보안·활용 혁신융합대학사업단 혁신융합팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-23 00 : 00 ~ 2025-12-24 23 : 00",
+    "operate_period": "2025-12-27 10 : 00 ~ 2025-12-28 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "AWS Korea(강남구 테헤란로 231, 센터필드)",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3023/heajin@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002230",
+    "competency_tags": [
+      "데이터_ML",
+      "보안",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002232",
+    "title": "2025 사회과학대학 에세이경진대회",
+    "org": "사회과학대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-09-01 09 : 00 ~ 2025-10-30 18 : 00",
+    "operate_period": "2025-09-01 09 : 00 ~ 2025-11-26 18 : 00",
+    "target_dept": "사회과학대학(과),경제학과,행정학과,심리학과,사회학과,정치외교학과,스포츠레저학과,경제정치사회융합학부,문화산업과커뮤니케이션전공",
+    "target_grade": "1,2,3,4 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "2775",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002232",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002234",
+    "title": "2025학년도 2학기 아주 씨네로그 에세이 경진대회",
+    "org": "교육혁신팀",
+    "category_path": [
+      "개인역량강화",
+      "기타",
+      "자율활동(창업활동 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-02 00 : 00 ~ 2025-12-26 23 : 50",
+    "operate_period": "2025-12-02 00 : 00 ~ 2025-12-26 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002234",
+    "competency_tags": [
+      "창업_비즈니스"
+    ]
+  },
+  {
+    "id": "NCR000000002235",
+    "title": "2025학년도 수업 참여 사례 공모전",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-12-03 09 : 00 ~ 2026-01-02 18 : 00",
+    "operate_period": "2025-12-03 09 : 00 ~ 2026-01-23 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002235",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002236",
+    "title": "2026-1학기 파란학기제 설명회",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-04 10 : 00 ~ 2025-12-10 21 : 00",
+    "operate_period": "2025-12-11 14 : 00 ~ 2025-12-11 15 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 151호(영상회의실)",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3383/3387/ajouparan@ajou.ac.kr/신학생회관 321호",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002236",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002237",
+    "title": "2025 동계 모각소(모여서 각자 소프트웨어 하자)",
+    "org": "AI융합교육원 소프트웨어융합대학교학팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-12-22 00 : 00 ~ 2025-12-26 23 : 50",
+    "operate_period": "2026-01-05 00 : 00 ~ 2026-02-22 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3072",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002237",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002238",
+    "title": "[자존감GX] 마음근력 강화 프로젝트(자존감 향상 토크테라피)",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "집단"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-23 11 : 00 ~ 2025-12-30 14 : 00",
+    "operate_period": "2026-01-05 13 : 00 ~ 2026-01-26 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "신학생회관 411-1호",
+    "format": "상담, 검사",
+    "contact": "031-219-2277",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002238",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002239",
+    "title": "[온라인]슬기로운 방학 생활(진로동기강화 토크테라피)",
+    "org": "학생상담소",
+    "category_path": [
+      "상담(진로/심리)",
+      "상담",
+      "집단"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-31 11 : 00 ~ 2026-01-09 14 : 00",
+    "operate_period": "2026-01-13 13 : 00 ~ 2026-01-22 15 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "zoom(온라인 비대면)",
+    "format": "상담, 검사",
+    "contact": "031-219-2294",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002239",
+    "competency_tags": []
+  },
+  {
+    "id": "NCR000000002240",
+    "title": "아주대와 함께하는 문화산책(1~2월)",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2026-01-01 00 : 00 ~ 2026-02-10 15 : 00",
+    "operate_period": "2026-01-01 00 : 00 ~ 2026-02-10 15 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "기타(입력)",
+    "contact": "031-219-3384, ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002240",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002241",
+    "title": "2025-동계방학 현장실습 사전오리엔테이션",
+    "org": "산학사업팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-11-01 13 : 00 ~ 2025-12-02 14 : 00",
+    "operate_period": "2025-12-18 17 : 00 ~ 2025-12-18 19 : 00",
+    "target_dept": "모든과",
+    "target_grade": "2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 대강당",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-1786 / jeonjh1213@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002241",
+    "competency_tags": [
+      "협업_PM",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002242",
+    "title": "2025학년도 학습리더워크숍(1차) [노트북 LM 활용] 나만의 AI 학습도우미",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2026-01-05 13 : 00 ~ 2026-01-16 14 : 00",
+    "operate_period": "2026-01-19 14 : 00 ~ 2026-01-19 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002242",
+    "competency_tags": [
+      "데이터_ML",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002243",
+    "title": "2025학년도 학습리더워크숍(2차) [구글AI스튜디오] 문과생도 OK, '나만의 문제해결 웹 앱' 만들기",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2026-01-05 13 : 00 ~ 2026-01-16 14 : 00",
+    "operate_period": "2026-01-20 10 : 00 ~ 2026-01-20 12 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002243",
+    "competency_tags": [
+      "웹_프론트엔드",
+      "데이터_ML",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002244",
+    "title": "2025학년도 학습리더워크숍(3차) [AI 데이터 분석] 숫자로 증명하는 논리적 사고",
+    "org": "교수학습개발센터",
+    "category_path": [
+      "학습역량 강화",
+      "교육",
+      "강좌/특강"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2026-01-05 13 : 00 ~ 2026-01-16 14 : 00",
+    "operate_period": "2026-01-20 14 : 00 ~ 2026-01-20 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 303호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "교수학습개발센터, 031-219-3607, kimhr@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002244",
+    "competency_tags": [
+      "데이터_ML",
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002245",
+    "title": "아주(Ajou) 좋은 꿀팁 공모전",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "공모전",
+      "경진대회"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2026-01-07 16 : 00 ~ 2026-01-27 23 : 50",
+    "operate_period": "2026-01-07 16 : 00 ~ 2026-01-27 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3384 / ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002245",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002247",
+    "title": "2025학년도 하반기[디지털역량강화]구글애널리틱스 자격과정(GA4)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-31 10 : 00 ~ 2025-11-07 10 : 00",
+    "operate_period": "2025-11-17 19 : 00 ~ 2025-11-21 22 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3081",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002247",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002248",
+    "title": "아주대 3색 나침반- 브런치 투어 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-29 10 : 00 ~ 2025-11-07 16 : 00",
+    "operate_period": "2025-11-03 12 : 00 ~ 2025-11-07 12 : 50",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 151호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002248",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002249",
+    "title": "[캠리]현대하이테크 채용설명회(11/10)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-03 12 : 00 ~ 2025-11-09 23 : 50",
+    "operate_period": "2025-11-10 12 : 00 ~ 2025-11-10 13 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 151호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002249",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002250",
+    "title": "[캠리] 파네시아 채용설명회 · 상담회(11/11)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-06 16 : 00 ~ 2025-11-10 23 : 50",
+    "operate_period": "2025-11-11 10 : 00 ~ 2025-11-11 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "팔달관 108호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2044",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002250",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002251",
+    "title": "2025학년도 놓치면 나만 손해, 청년고용정책Day",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-31 00 : 00 ~ 2025-11-11 23 : 00",
+    "operate_period": "2025-11-04 10 : 00 ~ 2025-11-11 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 151호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002251",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002252",
+    "title": "2025 청년 수기 공모전 참여자 모집",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "공모전/경진대회",
+      "교외(참가)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-22 00 : 00 ~ 2025-11-14 18 : 00",
+    "operate_period": "2025-10-22 00 : 00 ~ 2025-11-14 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002252",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002253",
+    "title": "2025 A.C.E.STUDY(25-5기)-면접반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "멘티"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-10 00 : 00 ~ 2025-11-14 23 : 00",
+    "operate_period": "2025-10-20 14 : 00 ~ 2025-11-28 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002253",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002254",
+    "title": "[캠리]씨앤씨인터내셔널(화장품 제조사) 채용설명회(11/18)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-03 00 : 00 ~ 2025-11-17 23 : 50",
+    "operate_period": "2025-11-18 15 : 00 ~ 2025-11-18 16 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "성호관 131호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002254",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002255",
+    "title": "토크살롱 : 추천채용 담당자's TMI",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-28 00 : 00 ~ 2025-11-18 23 : 50",
+    "operate_period": "2025-11-19 16 : 00 ~ 2025-11-19 17 : 30",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002255",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002256",
+    "title": "[캠리]아우모비오 일렉트로닉스(구. 콘티넨탈 오토모티브) 채용설명회(11/21)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-13 00 : 00 ~ 2025-11-21 14 : 00",
+    "operate_period": "2025-11-21 14 : 00 ~ 2025-11-21 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002256",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002257",
+    "title": "동계방학 컴퓨터활용능력 1,2급 자격과정 우선 선발 대상 모집",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-10-31 10 : 00 ~ 2025-11-23 10 : 00",
+    "operate_period": "2026-02-02 09 : 00 ~ 2026-02-05 16 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3079",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002257",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002258",
+    "title": "[캠리]램리서치코리아 커피트럭 운영",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-12 00 : 00 ~ 2025-11-25 17 : 00",
+    "operate_period": "2025-11-25 00 : 00 ~ 2025-11-25 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002258",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002259",
+    "title": "2025학년도 「다시 듣고 싶은 명강의」, 「함께 하고 싶은 나의 교수님」에세이 공모전",
+    "org": "교육혁신팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2026-01-12 00 : 00 ~ 2026-01-31 15 : 00",
+    "operate_period": "2026-01-12 00 : 00 ~ 2026-01-31 15 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "공모전, 경진대회",
+    "contact": "031-219-3384 , ajouhub@ajou.ac.kr",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002259",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002260",
+    "title": "[캠리]2025 찾아가는 캠퍼스 리쿠르팅",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-13 00 : 00 ~ 2025-11-25 23 : 50",
+    "operate_period": "2025-11-26 10 : 00 ~ 2025-11-26 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "연암관 1층 로비, 대강당",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002260",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002262",
+    "title": "KT에이블 스쿨 9기(지역추천제) 현장 설명회",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-14 00 : 00 ~ 2025-11-27 14 : 00",
+    "operate_period": "2025-11-27 13 : 00 ~ 2025-11-27 14 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 151호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002262",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002263",
+    "title": "추천채용 합격자가 들려주는 취업 토크쇼!",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-10 00 : 00 ~ 2025-11-27 23 : 50",
+    "operate_period": "2025-11-28 19 : 00 ~ 2025-11-28 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002263",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002264",
+    "title": "구글 AI에센셜 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-10-13 00 : 00 ~ 2025-11-30 00 : 00",
+    "operate_period": "2025-10-13 00 : 00 ~ 2025-11-30 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002264",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002265",
+    "title": "[VOD] 커리어 인사이트, 현직자에게 듣다_다시 보기",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-05 00 : 00 ~ 2025-12-01 00 : 00",
+    "operate_period": "2025-11-10 00 : 00 ~ 2025-12-09 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002265",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002266",
+    "title": "[캠리]BGF리테일 채용상담회(12/2)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-25 00 : 00 ~ 2025-12-09 09 : 00",
+    "operate_period": "2025-12-02 10 : 00 ~ 2025-12-02 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "다산관 309호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002266",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002267",
+    "title": "2025 선배만남의날-취준진담(현대로템 멘토편)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-26 17 : 00 ~ 2025-12-04 15 : 00",
+    "operate_period": "2025-12-04 19 : 00 ~ 2025-12-04 21 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002267",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002268",
+    "title": "[캠리]한화생명 채용상담회(12/5)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "행사 참여(설명회/박람회/이벤트)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-27 00 : 00 ~ 2025-12-05 09 : 00",
+    "operate_period": "2025-12-05 11 : 00 ~ 2025-12-05 15 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "다산관 110호",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-3092",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002268",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002269",
+    "title": "12월 추천채용 채용공고분석 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-13 00 : 00 ~ 2025-12-10 23 : 50",
+    "operate_period": "2025-12-11 16 : 00 ~ 2025-12-11 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "세미나, 특강, 설명회 등(1회성)",
+    "contact": "031-219-2168",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002269",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002270",
+    "title": "2025 선배만남의 날(쿠쿠홈시스/재무회계 멘토편)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-25 18 : 00 ~ 2025-12-11 15 : 00",
+    "operate_period": "2025-12-11 19 : 00 ~ 2025-12-11 19 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002270",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002271",
+    "title": "동계 QC GMP Training Camp (GTC과정)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "캠프(중기)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-12-09 10 : 00 ~ 2025-12-15 16 : 00",
+    "operate_period": "2025-12-22 00 : 00 ~ 2026-03-06 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "ZOOM+서초 실습장 등",
+    "format": "캠프, 연수",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002271",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002272",
+    "title": "[25년 동계 | AJOU 취업부트캠프 3기(인문/사회/경영)]",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-11-26 18 : 00 ~ 2025-12-17 23 : 50",
+    "operate_period": "2025-12-22 13 : 00 ~ 2026-01-14 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "ZOOM+대면",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002272",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002273",
+    "title": "25년 동계 AJOU 취업훈련소 서류대비반",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-11-25 10 : 00 ~ 2025-12-23 18 : 00",
+    "operate_period": "2025-12-24 09 : 00 ~ 2026-02-13 18 : 30",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "대면교육",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002273",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002274",
+    "title": "2025 NCS 반도체 전공정 집중과정(동계방학)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-22 10 : 00 ~ 2025-12-24 15 : 00",
+    "operate_period": "2025-12-29 09 : 00 ~ 2026-01-12 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002274",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002275",
+    "title": "2025 A.C.E.STUDY(25-6기)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "멘토링",
+      "멘티"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-12-16 17 : 00 ~ 2025-12-29 18 : 00",
+    "operate_period": "2025-12-30 13 : 00 ~ 2026-01-30 23 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "멘토링, 튜터링",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002275",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002276",
+    "title": "ADsP 데이터분석 준전문가 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-08 10 : 00 ~ 2025-12-30 10 : 00",
+    "operate_period": "2026-01-12 10 : 00 ~ 2026-01-16 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3081",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002276",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002277",
+    "title": "월간자소서 12월호(기초 서류특강, 1:1컨설팅)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-11-28 00 : 00 ~ 2025-12-30 16 : 00",
+    "operate_period": "2025-12-30 19 : 00 ~ 2026-01-09 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002277",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002278",
+    "title": "[품질경영분야] 6시그마 Black Belt 자격증 취득 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-22 10 : 00 ~ 2026-01-02 10 : 00",
+    "operate_period": "2026-01-12 09 : 00 ~ 2026-01-15 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 356",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3079",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002278",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002279",
+    "title": "[25 동계 | 노션 포폴_생성형 AI를 활용한 취업준비 ABC]",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-02 17 : 00 ~ 2026-01-02 23 : 50",
+    "operate_period": "2026-01-07 13 : 00 ~ 2026-01-09 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "교내PC실",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3638",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002279",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002280",
+    "title": "2025 동계방학 토익&스피킹 사관학교",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-03 10 : 00 ~ 2026-01-04 23 : 50",
+    "operate_period": "2026-01-05 09 : 00 ~ 2026-01-30 19 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-2043",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002280",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002281",
+    "title": "[~연장1.5] KT에이블 스쿨 9기 모집(지역추천제)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-12-08 00 : 00 ~ 2026-01-05 10 : 00",
+    "operate_period": "2026-03-31 09 : 00 ~ 2026-09-01 08 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002281",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002282",
+    "title": "2025 NCS 반도체 공정심화과정(동계방학)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2026-01-06 10 : 00 ~ 2026-01-08 15 : 00",
+    "operate_period": "2026-01-13 09 : 00 ~ 2026-01-27 23 : 50",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3265",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002282",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002283",
+    "title": "동계 Photoshop+ACP자격 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-22 10 : 00 ~ 2026-01-13 13 : 00",
+    "operate_period": "2026-01-19 13 : 00 ~ 2026-01-21 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3093",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002283",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002284",
+    "title": "동계방학 컴퓨터활용능력 1,2급 자격과정_본 모집",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2026-01-05 10 : 00 ~ 2026-01-16 10 : 00",
+    "operate_period": "2026-02-02 09 : 00 ~ 2026-02-05 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "율곡관 156, 157호",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3079",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002284",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002286",
+    "title": "동계 Premiere Pro +ACP자격 과정",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2025-12-22 10 : 00 ~ 2026-01-20 13 : 00",
+    "operate_period": "2026-01-26 13 : 00 ~ 2026-01-28 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3093",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002286",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002287",
+    "title": "26 상반기 대기업 취업 성공 전략 특강",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2026-01-02 00 : 00 ~ 2026-01-29 09 : 00",
+    "operate_period": "2026-01-20 18 : 00 ~ 2026-02-13 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002287",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002288",
+    "title": "월간자소서 1월호(기초 서류특강, 1:1컨설팅)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선착순형",
+    "apply_period": "2026-01-05 00 : 00 ~ 2026-01-27 10 : 00",
+    "operate_period": "2026-01-27 19 : 00 ~ 2026-02-03 00 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "-",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3262",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002288",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002292",
+    "title": "2025 동계 AI비즈니스 활용 과정(AIBT 2급 대비)",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "강좌/특강/프로그램(온라인 강의 포함)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2026-01-19 00 : 00 ~ 2026-01-26 10 : 00",
+    "operate_period": "2026-02-09 10 : 00 ~ 2026-02-13 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "원천관 539호 PC",
+    "format": "강의형(다회성)",
+    "contact": "031-219-3263",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002292",
+    "competency_tags": [
+      "데이터_ML",
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
+  },
+  {
+    "id": "NCR000000002294",
+    "title": "아주북통(Book+通) 18기",
+    "org": "학술정보팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-05 13 : 00",
+    "operate_period": "2025-09-15 09 : 00 ~ 2025-12-05 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 중앙도서관",
+    "format": "기타(입력)",
+    "contact": "031-219-2132",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002294",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002296",
+    "title": "아주북통(Book+通) 18기",
+    "org": "학술정보팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-05 13 : 00",
+    "operate_period": "2025-09-15 09 : 00 ~ 2025-12-05 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 중앙도서관",
+    "format": "기타(입력)",
+    "contact": "031-219-2132",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002296",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002297",
+    "title": "아주북통(Book+通) 18기",
+    "org": "학술정보팀",
+    "category_path": [
+      "학습역량 강화",
+      "자율활동",
+      "교내.교외"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2025-08-25 09 : 00 ~ 2025-09-05 13 : 00",
+    "operate_period": "2025-09-15 09 : 00 ~ 2025-12-05 18 : 00",
+    "target_dept": "모든과",
+    "target_grade": "1,2,3,4,5,6 학년",
+    "target_audience": "-",
+    "location": "아주대학교 중앙도서관",
+    "format": "기타(입력)",
+    "contact": "031-219-2132",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002297",
+    "competency_tags": [
+      "문제해결_코딩테스트"
+    ]
+  },
+  {
+    "id": "NCR000000002298",
+    "title": "AJOU '26 취업 올 클리어(All Clear) 캠프",
+    "org": "대학일자리플러스센터운영팀",
+    "category_path": [
+      "취업/창업",
+      "교육",
+      "캠프(단기)"
+    ],
+    "program_type": "선발형",
+    "apply_period": "2026-01-19 09 : 00 ~ 2026-01-27 15 : 00",
+    "operate_period": "2026-02-11 09 : 00 ~ 2026-02-13 17 : 00",
+    "target_dept": "모든과",
+    "target_grade": "4,5,6 학년",
+    "target_audience": "-",
+    "location": "동원리더스아카데미 본관 챌린지홀",
+    "format": "캠프, 연수",
+    "contact": "031-219-3082",
+    "url": "https://hub.ajou.ac.kr/ncrProgramAppl/a/m/getProgramDetail.do?npiKeyId=NCR000000002298",
+    "competency_tags": [
+      "창업_비즈니스",
+      "커뮤니케이션_문서화"
+    ]
   }
 ]

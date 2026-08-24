@@ -13,10 +13,6 @@
         <img src="/ajou-logo.svg" alt="" class="brand-logo" />
         <span class="brand-name">AJOU PATHFINDER</span>
       </a>
-      <span class="brand-sub">STEP <span id="stepIndicator">1</span> / 3</span>
-    </div>
-    <div class="header-right">
-      <span class="pill">🔒 파일은 서버에 저장되지 않습니다</span>
     </div>
   </header>
 
@@ -27,6 +23,7 @@
       <div class="wizard-heading">
         <h1>성적표를 올려주세요</h1>
         <p>이름·학번은 서버에서 지운 뒤에만 분석에 사용합니다.</p>
+        <p class="wizard-subnote">🔒 파일은 서버에 저장되지 않습니다</p>
       </div>
 
       <div class="upload-card">
@@ -85,6 +82,11 @@
           </div>
         </div>
 
+        <div id="irregularSemesterSection" hidden>
+          <div class="mask-section-label">확인이 필요합니다</div>
+          <div id="irregularSemesterRows"></div>
+        </div>
+
         <div class="wizard-actions">
           <button class="btn-secondary" id="reuploadBtn">다시 업로드</button>
           <button class="btn-primary" id="confirmMaskBtn">확인했습니다 · 다음 →</button>
@@ -118,7 +120,7 @@
 
           <div class="field">
             <label>대상 학번 · 학과</label>
-            <div class="locked-chip">2025학번 · 소프트웨어학과</div>
+            <div class="locked-chip" id="admissionYearChip">학번 확인 중 · 소프트웨어학과</div>
           </div>
         </div>
 
@@ -128,12 +130,15 @@
           <label for="langExam">어학 성적 (선택)</label>
           <div class="cascade-row">
             <select id="langExam">
-              <option value="">선택 안 함</option>
+              <option value="">없음</option>
               <option value="TOEIC">TOEIC</option>
               <option value="TEPS">TEPS</option>
+              <option value="TEPS_NEW">(NEW) TEPS</option>
               <option value="TOEFL">TOEFL</option>
               <option value="GTELP">G-TELP</option>
-              <option value="TOEIC_Speaking">TOEIC Speaking</option>
+              <option value="IELTS">IELTS</option>
+              <option value="TOEIC_Speaking_OLD">TOEIC Speaking</option>
+              <option value="TOEIC_Speaking">(NEW) TOEIC Speaking</option>
               <option value="OPIc">OPIc</option>
             </select>
 
@@ -156,7 +161,7 @@
           <label for="progCert">프로그래밍 역량 인증 (선택)</label>
           <div class="cascade-row">
             <select id="progCert">
-              <option value="">선택 안 함</option>
+              <option value="">없음</option>
               <option value="topcit">TOPCIT 점수</option>
               <option value="apc">APC 대회 1문제 이상 정답</option>
               <option value="contest">SW 관련 전국대회 입상</option>
@@ -172,8 +177,8 @@
         <hr class="form-divider" />
 
         <div class="section-head">
-          <h2>개인 프로젝트 · 활동</h2>
-          <span class="hint">선택 · 성적표에 남지 않는 이력을 채웁니다</span>
+          <h2>프로젝트 · 자격증 · 수상 경력 · 교내 프로그램</h2>
+          <span class="hint">선택 · 성적표에 남지 않는 이력을 채웁니다. 다양하게 입력할수록 역량 진단이 정확해집니다</span>
         </div>
         <div id="projectRows"></div>
         <button type="button" class="add-link" id="addProjectRow">+ 항목 추가</button>
@@ -186,6 +191,15 @@
     </section>
 
   </main>
+
+  <!-- 로드맵 계산(추천 사유 Gemini 호출 포함)이 20초~1분 가까이 걸려서, 아무 반응이
+       없어 보이지 않게 전체 화면 오버레이로 진행 중임을 보여준다(2026-08-21 요청,
+       2026-08-22 안내 문구를 실측 소요시간에 맞게 "최대 1분"으로 수정). -->
+  <div class="loading-overlay" id="loadingOverlay" hidden>
+    <div class="loading-spinner"></div>
+    <p class="loading-title">로드맵을 만들고 있어요</p>
+    <p class="loading-sub">졸업 요건 확인 · 역량 진단 · 과목·프로그램 추천까지 한 번에 계산 중입니다 (최대 1분 정도 걸려요)</p>
+  </div>
 
   <script src="/js/upload.js"></script>
 </body>

@@ -19,11 +19,13 @@ def _gap_score(item: dict, gap: dict[str, float]) -> float:
 
 
 def _default_reason(item: dict, gap: dict[str, float]) -> str:
+    from app.agents.competency import get_competency_label  # 순환 임포트 방지용 지연 임포트
+
     tags = item.get("competency_tags", [])
     if not tags:
         return "역량 격차를 채우는 데 도움이 됩니다."
     top_tag = max(tags, key=lambda t: gap.get(t, 0.0))
-    return f"'{top_tag}' 역량 격차가 커서 추천합니다."
+    return f"'{get_competency_label(top_tag)}' 역량 격차가 커서 추천합니다."
 
 
 def closed_set_recommend(
