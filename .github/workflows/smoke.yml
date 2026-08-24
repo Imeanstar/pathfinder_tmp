@@ -37,6 +37,17 @@ jobs:
             | tee smoke_report.md
         continue-on-error: true
 
+      # 저장소에 라벨이 없으면 gh issue create --label이 "not found"로 거부한다
+      # (2026-08-24 실제로 겪음). --force로 이미 있어도 에러 없이 넘어간다 — 사람이
+      # 미리 라벨을 만들어둘 필요가 없게.
+      - name: 이슈 라벨 준비
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create "$ISSUE_LABEL" --color d73a4a \
+            --description "배포본 스모크 테스트 자동 실패 신호" --force
+
       - name: 기존 열린 이슈 찾기
         id: existing
         if: always()
