@@ -81,6 +81,19 @@ def check_config(base_url: str) -> list[str]:
     return []
 
 
+def check_gemini(base_url: str) -> list[str]:
+    """Gemini 쿼터 초과·장애를 감지한다(2026-08-24 추가). 배포본은 항상
+    GOOGLE_API_KEY가 Secret Manager로 설정돼 있어야 하므로, reachable=false는
+    "개발 모드"가 아니라 실제 장애로 취급한다."""
+    try:
+        body = _get_json(f"{base_url}/api/diagnostics/gemini", timeout=15)
+    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+        return [f"/api/diagnostics/gemini 요청 실패: {e}"]
+    if not body.get("reachable"):
+        return [f"Gemini 응답 불가(쿼터 초과 가능성): {body.get('reason', '사유 없음')}"]
+    return []
+
+
 def check_plan(base_url: str) -> list[str]:
     try:
         body = _post_json(f"{base_url}/api/plan", SAMPLE_PLAN_PAYLOAD, timeout=30)
@@ -106,6 +119,7 @@ def main() -> int:
     if health_body is not None:
         failures += check_version_drift(health_body, expected_sha)
         failures += check_config(base_url)
+        failures += check_gemini(base_url)
         failures += check_plan(base_url)
 
     report_lines = [f"## 스모크 테스트 — {base_url}"]

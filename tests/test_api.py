@@ -31,6 +31,18 @@ def test_health_version_reflects_git_sha_env_var(monkeypatch):
     assert resp.json()["version"] == "abc1234"
 
 
+def test_diagnostics_gemini_returns_reachable_false_without_api_key(monkeypatch):
+    # 운영 자동화 계층 3 확장(2026-08-24) — Gemini 쿼터 초과·장애를 외부에서
+    # 감지하려면 이 값을 명시적으로 물어볼 진단 엔드포인트가 필요했다. /api/upload가
+    # 성적표 구조화 실패 시 처리 안 된 예외로 500을 던지는 경로(app/llm.py의
+    # default_structure_fn엔 try/except가 없음)를 스모크 테스트가 직접 재현하지
+    # 않고도 감지할 수 있게 한다.
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
+    resp = client.get("/api/diagnostics/gemini")
+    assert resp.status_code == 200
+    assert resp.json() == {"reachable": False, "reason": "GOOGLE_API_KEY 미설정"}
+
+
 def test_config_returns_tracks_overlays_clusters_and_project_fields():
     resp = client.get("/api/config")
     assert resp.status_code == 200

@@ -1,4 +1,4 @@
-from app.llm import PROMPT_TEMPLATE, _call_gemini, default_structure_fn
+from app.llm import PROMPT_TEMPLATE, _call_gemini, check_gemini_reachability, default_structure_fn
 
 
 def test_prompt_template_category_enum_includes_major_foundation():
@@ -98,6 +98,58 @@ def test_soften_recommendation_reasons_parses_json_map_from_gemini(monkeypatch):
     assert result == {
         "데이터베이스": "백엔드 프로그래머를 목표로 하신다면, 데이터베이스 과목으로 실무 역량을 다져보는 건 어떨까요?"
     }
+
+
+# --- check_gemini_reachability — 운영 자동화 계층 3 확장(2026-08-24) ---
+# soften_recommendation_reasons·default_structure_fn은 Gemini 실패를 조용히
+# 삼키거나(전자, 장식용 문구라 폴백해도 안전) 처리 안 된 예외로 500을 던진다(후자,
+# /api/upload 경로 — 잡는 except가 PiiLeakDetected/InjectionDetected뿐이라 쿼터
+# 초과 같은 Gemini 예외는 그대로 새어나간다). 스모크 테스트가 "지금 Gemini가 실제로
+# 응답하는가"를 명시적으로 물어볼 진단 함수가 필요해서 추가한다 — 이 함수는 예외를
+# 삼키지 않고 사유를 그대로 보고하는 게 존재 이유다(다른 두 함수와 반대 원칙).
+
+
+def test_check_gemini_reachability_returns_false_without_api_key(monkeypatch):
+    monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
+    result = check_gemini_reachability()
+    assert result == {"reachable": False, "reason": "GOOGLE_API_KEY 미설정"}
+
+
+def test_check_gemini_reachability_returns_true_on_successful_call(monkeypatch):
+    monkeypatch.setenv("GOOGLE_API_KEY", "fake-key")
+
+    class FakeResponse:
+        text = "pong"
+
+    class FakeModels:
+        def generate_content(self, model, contents):
+            return FakeResponse()
+
+    class FakeClient:
+        def __init__(self, api_key):
+            self.models = FakeModels()
+
+    monkeypatch.setattr("google.genai.Client", FakeClient)
+
+    assert check_gemini_reachability() == {"reachable": True}
+
+
+def test_check_gemini_reachability_reports_reason_on_exception(monkeypatch):
+    monkeypatch.setenv("GOOGLE_API_KEY", "fake-key")
+
+    class FakeModels:
+        def generate_content(self, model, contents):
+            raise RuntimeError("429 RESOURCE_EXHAUSTED: quota exceeded")
+
+    class FakeClient:
+        def __init__(self, api_key):
+            self.models = FakeModels()
+
+    monkeypatch.setattr("google.genai.Client", FakeClient)
+
+    result = check_gemini_reachability()
+    assert result["reachable"] is False
+    assert "quota exceeded" in result["reason"]
 
 
 def test_soften_recommendation_reasons_returns_none_on_call_failure(monkeypatch):

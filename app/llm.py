@@ -47,6 +47,25 @@ year 또는 semester를 알 수 없는 행은 통째로 건너뛰어라.
 """
 
 
+def check_gemini_reachability() -> dict:
+    """운영 자동화 계층 3(스모크 테스트, docs/superpowers/specs/2026-08-24-운영-자동화
+    -design.md)이 Gemini 쿼터 초과·장애를 감지할 수 있도록 예외를 삼키지 않고 사유를
+    그대로 보고한다 — default_structure_fn(빈 배열 폴백)·soften_recommendation_reasons
+    (None 폴백)와 반대로, 이 함수의 존재 이유가 "실패를 정직하게 드러내는 것"이다.
+    "ping" 한 단어짜리 최소 호출이라 토큰 소모가 거의 없다."""
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        return {"reachable": False, "reason": "GOOGLE_API_KEY 미설정"}
+    try:
+        from google import genai
+
+        client = genai.Client(api_key=api_key)
+        client.models.generate_content(model="gemini-3.6-flash", contents="ping")
+        return {"reachable": True}
+    except Exception as e:
+        return {"reachable": False, "reason": str(e)[:200]}
+
+
 def default_structure_fn(masked_text: str) -> list[dict]:
     api_key = os.environ.get("GOOGLE_API_KEY")
     if not api_key:

@@ -41,7 +41,7 @@ from app.agents.supervisor import run_full_plan
 from app.audit import AuditResult, attach_citation, audit_graduation, load_requirements
 from app.auth import InvalidDomainError, verify_google_id_token
 from app.guardrail import get_blocked_count, is_guardrail_enabled, set_guardrail_override
-from app.llm import default_structure_fn, soften_recommendation_reasons
+from app.llm import check_gemini_reachability, default_structure_fn, soften_recommendation_reasons
 from app.masking import PiiLeakDetected
 from app.parser import (
     InjectionDetected,
@@ -87,6 +87,16 @@ def health():
         "guardrail_enabled": is_guardrail_enabled(),
         "version": os.environ.get("GIT_SHA", "unknown"),
     }
+
+
+@app.get("/api/diagnostics/gemini")
+def diagnostics_gemini():
+    """Gemini 쿼터 초과·장애를 운영 자동화 계층 3(스모크 테스트)이 외부에서 감지할 수
+    있게 한다. /api/upload의 성적표 구조화 실패는 처리 안 된 예외로 500까지 새어나가고
+    (app/llm.py default_structure_fn엔 try/except가 없음), /api/plan의 추천 사유
+    자연어화는 반대로 실패를 조용히 삼킨다 — 둘 다 사용자에게 보여줄 판단으로는
+    맞지만, 운영자는 "지금 Gemini가 실제로 응답하는가"를 알아야 하므로 별도로 둔다."""
+    return check_gemini_reachability()
 
 
 @app.get("/api/guardrail")
