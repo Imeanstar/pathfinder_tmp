@@ -1,0 +1,67 @@
+name: Deployment Smoke Test
+
+# 배포본 감시 (운영 자동화 계층 3) — docs/superpowers/specs/2026-08-24-운영-자동화-design.md 4장
+#
+# GCP 권한이 없어(부트캠프 공용 프로젝트) 자동 배포는 하지 않는다 — 여기선 "배포본이
+# main과 다른 상태"를 사람에게 신호(GitHub Issue)로만 알린다. 실패 하나마다 새 이슈를
+# 만들면 6시간마다 스팸이 되므로, 열린 이슈가 있으면 코멘트로만 갱신하고 복구되면
+# 자동으로 닫는다.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  DEPLOY_URL: https://ajou-pathfinder-783601922022.asia-northeast3.run.app
+  ISSUE_LABEL: smoke-test-failure
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 스모크 테스트 실행
+        id: smoke
+        run: |
+          python3 .github/scripts/smoke_test.py "$DEPLOY_URL" "$(git rev-parse --short HEAD)" \
+            | tee smoke_report.md
+        continue-on-error: true
+
+      - name: 기존 열린 이슈 찾기
+        id: existing
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          number=$(gh issue list --label "$ISSUE_LABEL" --state open --limit 1 --json number -q '.[0].number // empty')
+          echo "number=$number" >> "$GITHUB_OUTPUT"
+
+      - name: 실패 — 이슈 생성 또는 갱신
+        if: steps.smoke.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "${{ steps.existing.outputs.number }}" ]; then
+            gh issue comment "${{ steps.existing.outputs.number }}" --body-file smoke_report.md
+          else
+            gh issue create --title "🔴 배포본 스모크 테스트 실패" \
+              --label "$ISSUE_LABEL" --body-file smoke_report.md
+          fi
+
+      - name: 복구 — 열린 이슈 닫기
+        if: steps.smoke.outcome == 'success' && steps.existing.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ steps.existing.outputs.number }}" --body "✅ 복구됨 — 최근 스모크 테스트 통과"
+          gh issue close "${{ steps.existing.outputs.number }}"
+
+      - name: 실패 시 워크플로우 자체도 실패 처리
+        if: steps.smoke.outcome == 'failure'
+        run: exit 1

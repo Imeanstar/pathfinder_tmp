@@ -78,7 +78,15 @@ DEFAULT_REMAINING_TERMS = ["2-2", "3-1", "3-2", "4-1", "4-2"]  # 2025학번 2학
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "guardrail_enabled": is_guardrail_enabled()}
+    # GIT_SHA는 배포 시(docs/배포.md) --set-env-vars로 주입한다 — 운영 자동화 계층 3
+    # (docs/superpowers/specs/2026-08-24-운영-자동화-design.md 4장)가 이 값과 main 최신
+    # 커밋을 비교해 "배포본이 코드와 다른 상태"(버전 드리프트)를 감지한다. 로컬 개발처럼
+    # 안 넘긴 환경에서는 거짓 버전을 지어내지 않고 정직하게 "unknown"을 반환한다.
+    return {
+        "status": "ok",
+        "guardrail_enabled": is_guardrail_enabled(),
+        "version": os.environ.get("GIT_SHA", "unknown"),
+    }
 
 
 @app.get("/api/guardrail")

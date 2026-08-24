@@ -14,6 +14,23 @@ def test_health_returns_ok():
     assert resp.json()["status"] == "ok"
 
 
+def test_health_version_defaults_to_unknown_without_git_sha(monkeypatch):
+    # 운영 자동화 계층 3(배포본 감시)이 이 필드로 버전 드리프트를 판정한다
+    # (docs/superpowers/specs/2026-08-24-운영-자동화-design.md 4장). 로컬 개발처럼
+    # GIT_SHA를 안 넘긴 환경에서 거짓 버전을 지어내지 않는다 — 정직하게 "unknown".
+    monkeypatch.delenv("GIT_SHA", raising=False)
+    resp = client.get("/health")
+    assert resp.json()["version"] == "unknown"
+
+
+def test_health_version_reflects_git_sha_env_var(monkeypatch):
+    # 배포 시 --set-env-vars GIT_SHA=$(git rev-parse --short HEAD)로 주입된 값을
+    # 그대로 노출해야 스모크 테스트가 "배포본이 main 최신 커밋과 같은지" 비교할 수 있다.
+    monkeypatch.setenv("GIT_SHA", "abc1234")
+    resp = client.get("/health")
+    assert resp.json()["version"] == "abc1234"
+
+
 def test_config_returns_tracks_overlays_clusters_and_project_fields():
     resp = client.get("/api/config")
     assert resp.status_code == 200
