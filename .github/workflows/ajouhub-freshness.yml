@@ -1,0 +1,85 @@
+name: 아주허브 프로그램 신선도
+
+# 운영 자동화 계층 2(3.1장) — docs/superpowers/specs/2026-08-24-운영-자동화-design.md
+#
+# 01_fetch_programs.py는 NCR ID 순차 스캐너다(하드코딩 아님, 요람과 다름). data/
+# programs_raw.json은 gitignore 대상이라 CI 체크아웃엔 없다 — 기존 282건을 날리지
+# 않으려면 커밋된 data/programs.json을 raw 파일로 먼저 시딩해야 한다(태그 필드는
+# 03_tag_competency.py가 매번 새로 계산해 덮어쓰므로 시딩에 섞여 있어도 무해함).
+#
+# 새 프로그램이 없으면 아무것도 하지 않는다(로컬에서 실제로 검증함 — 시딩 후
+# 재실행하면 파일이 바이트 단위로 완전히 동일함, 즉 멱등). 발견되면 자동 머지가
+# 아니라 PR만 연다 — 규칙 기반 태깅이 오분류할 수 있어 사람이 확인해야 한다.
+
+on:
+  schedule:
+    - cron: "0 3 * * 1" # 매주 월요일 03:00 UTC(정오경 KST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  freshness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          # 01_fetch_programs.py·03_tag_competency.py 둘 다 표준 라이브러리만 쓴다
+          # (urllib/json/re/html/argparse) — pip install 자체가 필요 없다.
+
+      - name: 스캔 범위 계산
+        id: range
+        run: |
+          read start end <<< "$(python3 .github/scripts/ajouhub_freshness.py range)"
+          echo "start=$start" >> "$GITHUB_OUTPUT"
+          echo "end=$end" >> "$GITHUB_OUTPUT"
+
+      - name: 재수집을 위한 시딩(기존 데이터 유지) + 변경 전 스냅샷
+        run: |
+          cp data/programs.json data/programs_raw.json
+          cp data/programs.json /tmp/before_programs.json
+
+      - name: 신규 프로그램 수집 (0.7초 간격, 학교 서버 배려)
+        run: python3 data_pipeline/01_fetch_programs.py --start ${{ steps.range.outputs.start }} --end ${{ steps.range.outputs.end }}
+
+      - name: 규칙 기반 태깅
+        run: python3 data_pipeline/03_tag_competency.py
+
+      - name: 변경 여부 확인
+        id: check
+        run: |
+          if git diff --exit-code -- data/programs.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: PR 본문 생성
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          {
+            python3 .github/scripts/ajouhub_freshness.py summarize /tmp/before_programs.json data/programs.json
+            echo ""
+            echo "스캔 범위: NCR${{ steps.range.outputs.start }} ~ NCR${{ steps.range.outputs.end }}"
+            echo ""
+            echo "규칙 기반 태깅 결과라 오분류 가능성이 있습니다 — 태그를 확인한 뒤 머지해주세요."
+          } > /tmp/pr_body.md
+
+      # 자동 머지가 아니라 자동 PR — 새로 발견된 프로그램의 역량 태그는 규칙 기반이라
+      # 오분류 가능성이 있다. 완전 자동 반영 대신 사람이 최종 확인한다.
+      - name: PR 생성
+        if: steps.check.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "data: 아주허브 신규 프로그램 반영(자동 수집)"
+          title: "🆕 아주허브 신규 프로그램 발견"
+          body-path: /tmp/pr_body.md
+          branch: auto/ajouhub-freshness
+          add-paths: data/programs.json
+          delete-branch: true
