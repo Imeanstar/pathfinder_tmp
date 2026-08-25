@@ -163,9 +163,14 @@ function renderCreditCard() {
       <div class="progress-bar"><div style="width:${pct}%"></div></div>
       <div class="credit-overview-meta"><span>이수율 ${pct}%</span><span>남은 ${remainingCredit}학점</span></div>
     </section>
-    <section class="academic-requirements" aria-label="졸업 요건 점검">
-      <div class="academic-section-head"><strong>졸업 요건 점검</strong><span>현재 이수 현황</span></div>
-      <ul class="req-list academic-req-list">
+    <details class="acc-outer detail-accordion graduation-accordion"${CREDIT_ACCORDION_OPEN ? " open" : ""}>
+      <summary class="detail-accordion-summary">
+        <span><strong>졸업 요건 점검</strong><small>전공·인증·어학 이수 현황</small></span>
+        <span class="detail-accordion-action"><span class="detail-open-label">펼쳐보기</span><span class="detail-close-label">접기</span><i aria-hidden="true"></i></span>
+      </summary>
+      <section class="acc-outer-body detail-accordion-body academic-requirements" aria-label="졸업 요건 점검">
+        <div class="academic-section-head"><strong>현재 이수 현황</strong><span>${items.length}개 항목</span></div>
+        <ul class="req-list academic-req-list">
       ${items
         .map((it) => {
           const citations = it.name === "전공필수" && !majorOk
@@ -189,8 +194,9 @@ function renderCreditCard() {
         </li>`;
         })
         .join("")}
-      </ul>
-    </section>
+        </ul>
+      </section>
+    </details>
   `;
 }
 
@@ -637,10 +643,16 @@ function renderCompetencyCard() {
       <span><i class="level-dot level-caution"></i>보통</span>
       <span><i class="level-dot level-ok"></i>충족</span>
     </div>
-    <section class="gap-list competency-inspection" aria-label="역량별 진단 결과">
-      <div class="competency-list-head"><span>역량</span><span>현재 상태</span></div>
-      ${gapRows}
-    </section>
+    <details class="detail-accordion competency-accordion">
+      <summary class="detail-accordion-summary">
+        <span><strong>역량별 현재 상태</strong><small>과목·활동 근거를 함께 확인하세요</small></span>
+        <span class="detail-accordion-action"><span class="detail-open-label">${axes.length}개 보기</span><span class="detail-close-label">접기</span><i aria-hidden="true"></i></span>
+      </summary>
+      <section class="detail-accordion-body gap-list competency-inspection" aria-label="역량별 진단 결과">
+        <div class="competency-list-head"><span>역량</span><span>현재 상태</span></div>
+        ${gapRows}
+      </section>
+    </details>
   `;
 }
 
@@ -826,8 +838,8 @@ function setupGuardrailToggle() {
   });
 }
 
-// 모바일에서는 3열 대시보드를 한 번에 축소하지 않는다. 현황·로드맵·역량진단을
-// 하단 탭으로 전환하고, 상담은 필요할 때만 시트처럼 열어 현재 행동을 방해하지 않는다.
+// 모바일에서는 현황·로드맵·역량진단을 하단 탭으로 전환한다. 상담은 화면 크기와
+// 관계없이 우측 하단 플로팅 버튼으로 열며, 모바일에서만 바텀 시트처럼 확장한다.
 function setupMobileNavigation() {
   const tabButtons = document.querySelectorAll("[data-mobile-tab]");
   const setTab = (tab) => {
@@ -845,13 +857,20 @@ function setupMobileNavigation() {
 
   const chatFab = document.getElementById("chatFab");
   const chatClose = document.getElementById("chatClose");
+  const chatPanel = document.getElementById("chatPanel");
   const toggleChat = (open) => {
     document.body.classList.toggle("chat-open", open);
-    document.body.style.overflow = open ? "hidden" : "";
+    chatFab.setAttribute("aria-expanded", String(open));
+    chatFab.setAttribute("aria-label", open ? "상담 닫기" : "상담 열기");
+    chatPanel.setAttribute("aria-hidden", String(!open));
+    document.body.style.overflow = open && window.matchMedia("(max-width: 720px)").matches ? "hidden" : "";
     if (open) setTimeout(() => document.getElementById("chatInput").focus(), 180);
   };
-  chatFab.addEventListener("click", () => toggleChat(true));
+  chatFab.addEventListener("click", () => toggleChat(!document.body.classList.contains("chat-open")));
   chatClose.addEventListener("click", () => toggleChat(false));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && document.body.classList.contains("chat-open")) toggleChat(false);
+  });
 }
 
 // --- 초기화 ---

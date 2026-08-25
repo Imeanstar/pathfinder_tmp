@@ -24,16 +24,20 @@
   <main class="dashboard-grid">
     <section class="col" id="statusCol">
       <div class="card" id="creditCard"></div>
-      <div class="card" id="competencyCard"></div>
     </section>
 
     <section class="col" id="roadmapCol">
       <div class="card" id="roadmapCard"></div>
     </section>
 
-    <section class="col chat-col">
+    <section class="col" id="competencyCol">
+      <div class="card" id="competencyCard"></div>
+    </section>
+  </main>
+
+  <section class="chat-col" id="chatPanel" role="dialog" aria-modal="false" aria-labelledby="chatTitle" aria-hidden="true">
       <div class="card" id="chatCard">
-        <div class="chat-head">상담 <span class="sub">근거 없으면 답하지 않음</span><button class="chat-close" id="chatClose" aria-label="상담 닫기">✕</button></div>
+        <div class="chat-head"><span id="chatTitle">상담</span><span class="sub">확인된 근거로만 안내해요</span><button class="chat-close" id="chatClose" aria-label="상담 닫기">✕</button></div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-chips" id="chatChips"></div>
         <div class="chat-input-row">
@@ -48,10 +52,9 @@
           졸업 여부를 확정하지 않습니다. 학사팀에 무엇을 확인해야 하는지를 특정해 드립니다.
         </p>
       </div>
-    </section>
-  </main>
+  </section>
 
-  <button class="chat-fab" id="chatFab" aria-label="상담 열기"><span class="chat-fab-dots" aria-hidden="true">•••</span><strong>상담</strong></button>
+  <button class="chat-fab" id="chatFab" aria-label="상담 열기" aria-controls="chatPanel" aria-expanded="false"><span class="chat-fab-dots" aria-hidden="true">•••</span><strong>상담</strong></button>
   <nav class="mobile-tabbar" aria-label="대시보드 탐색">
     <button type="button" class="is-active" data-mobile-tab="status"><span>◷</span>현황</button>
     <button type="button" data-mobile-tab="roadmap"><span>⌁</span>로드맵</button>

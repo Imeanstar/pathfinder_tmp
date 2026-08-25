@@ -160,9 +160,9 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 300px 1fr 340px;
+  grid-template-columns: minmax(285px, .9fr) minmax(480px, 1.55fr) minmax(310px, 1fr);
   gap: 20px;
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 24px;
   align-items: start;
@@ -349,9 +349,21 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 }
 .rm-activity-btn:hover { background: var(--blue-50); text-decoration: none; }
 
-/* --- 상담(챗봇) --- */
-.chat-col .card { display: flex; flex-direction: column; height: 640px; padding: 18px; }
-.chat-head { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+/* --- 상담(챗봇): 대시보드 열이 아니라 우측 하단 독립 플로팅 패널 --- */
+.chat-col {
+  position: fixed; right: 24px; bottom: 92px; z-index: 80;
+  width: min(390px, calc(100vw - 32px));
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(14px) scale(.98); transform-origin: right bottom;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+}
+body.chat-open .chat-col { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
+.chat-col .card {
+  display: flex; flex-direction: column; width: 100%; height: min(620px, calc(100vh - 128px));
+  margin: 0; padding: 18px; border: 1px solid #dfe5ef; border-radius: 18px;
+  box-shadow: 0 22px 70px rgba(18, 33, 63, .22);
+}
+.chat-head { display: flex; align-items: center; min-height: 34px; font-size: 14px; font-weight: 800; margin-bottom: 2px; }
 .chat-head .sub { font-weight: 400; color: var(--text-muted); font-size: 11.5px; margin-left: 6px; }
 .chat-messages { flex: 1; overflow-y: auto; margin: 12px 0; display: flex; flex-direction: column; gap: 10px; }
 .chat-bubble {
@@ -392,6 +404,22 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 }
 .toggle-switch.on::after { left: 16px; }
 .disclaimer { font-size: 11px; color: var(--text-muted); margin-top: 8px; }
+.chat-close {
+  display: inline-grid; place-items: center; width: 30px; height: 30px; margin-left: auto;
+  border: 0; border-radius: 50%; background: #f1f4f9; color: #667389; cursor: pointer;
+}
+.chat-close:hover { background: var(--blue-50); color: var(--blue-600); }
+.chat-fab {
+  position: fixed; right: 24px; bottom: 24px; z-index: 81;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 78px; height: 52px; padding: 0 18px; border: 0; border-radius: 999px;
+  background: var(--blue-600); color: #fff; box-shadow: 0 12px 30px rgba(47,95,218,.34); cursor: pointer;
+  transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+}
+.chat-fab:hover { background: var(--navy-800); transform: translateY(-2px); box-shadow: 0 16px 34px rgba(47,95,218,.38); }
+.chat-fab-dots { letter-spacing: 1px; font-size: 10px; transform: translateY(-1px); }
+.chat-fab strong { font-size: 12px; }
+body.chat-open .chat-fab { background: var(--navy-900); }
 
 /* ============================================================
    랜딩(index.html) — 2026-08-21 신설.
@@ -943,7 +971,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 .loading-steps li.is-complete em { color: var(--green); }
 .loading-footnote { margin: 0; color: var(--text-muted); font-size: 11px; line-height: 1.6; text-align: center; }
 
-.mobile-tabbar, .chat-fab, .chat-close { display: none; }
+.mobile-tabbar { display: none; }
 
 @media (max-width: 720px) {
   body:not(.landing-body) { padding-bottom: 84px; background: #f5f7fb; }
@@ -1024,9 +1052,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   .dashboard-grid > .col { display: none; }
   body[data-mobile-tab="status"] #statusCol,
   body[data-mobile-tab="roadmap"] #roadmapCol,
-  body[data-mobile-tab="skills"] #statusCol { display: block; }
-  body[data-mobile-tab="status"] #competencyCard { display: none; }
-  body[data-mobile-tab="skills"] #creditCard { display: none; }
+  body[data-mobile-tab="skills"] #competencyCol { display: block; }
   .col > .card { margin-bottom: 14px; }
   .card-title { font-size: 14px; }
   .credit-big { font-size: 44px; }
@@ -1050,23 +1076,21 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   .mobile-tabbar button.is-active { position: relative; color: var(--blue-600); }
   .mobile-tabbar button.is-active::before { content: ""; position: absolute; top: 0; right: 0; left: 0; width: auto; height: 3px; border-radius: 0; background: var(--blue-600); }
   .chat-fab {
-    position: fixed; right: 18px; bottom: 90px; z-index: 59; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    right: 18px; bottom: 90px; z-index: 91; gap: 5px;
     width: 74px; height: 50px; border: 0; border-radius: 999px; background: var(--blue-600); color: #fff;
     box-shadow: 0 10px 26px rgba(47,95,218,.32); cursor: pointer;
   }
-  .chat-fab-dots { letter-spacing: 1px; font-size: 10px; transform: translateY(-1px); }
-  .chat-fab strong { font-size: 12px; }
-  .chat-col { display: none !important; }
-  body.chat-open .dashboard-grid .chat-col {
-    position: fixed; inset: 0; z-index: 90; display: flex !important; align-items: flex-end;
+  body.chat-open .chat-fab { opacity: 0; pointer-events: none; transform: translateY(8px); }
+  .chat-col { inset: 0; z-index: 90; display: flex; align-items: flex-end; width: auto; transform: translateY(20px); }
+  body.chat-open .chat-col {
+    transform: translateY(0);
     padding: 64px 10px 0; background: rgba(18,33,63,.46); backdrop-filter: blur(3px);
   }
-  body.chat-open .chat-col .card {
+  .chat-col .card {
     width: 100%; max-width: 600px; height: min(720px, calc(100svh - 64px)); margin: 0 auto;
     padding: 20px 18px 18px; border-radius: 22px 22px 0 0; box-shadow: 0 -12px 40px rgba(20,30,60,.18);
   }
-  .chat-head { display: flex; align-items: center; }
-  .chat-close { display: inline-grid; place-items: center; width: 32px; height: 32px; margin-left: auto; border: 0; border-radius: 50%; background: var(--blue-50); color: var(--blue-600); cursor: pointer; }
+  .chat-close { width: 32px; height: 32px; }
   .chat-input-row textarea { min-height: 48px; border-radius: 13px; }
   .chat-input-row button { width: 48px; height: 48px; border-radius: 13px; }
 }
@@ -1154,7 +1178,27 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 .credit-overview .credit-big .of { margin-left: 4px; color: #68758a; font-size: 15px; letter-spacing: -.02em; }
 .credit-overview .progress-bar { height: 6px; margin: 13px 0 7px; border-radius: 4px; background: #e6ebf3; }
 .credit-overview .progress-bar > div { border-radius: 4px; }
-.academic-requirements { margin-top: 17px; }
+.detail-accordion { margin-top: 16px; border-top: 1px solid #e1e6ee; }
+.detail-accordion-summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  min-height: 54px; padding: 10px 0; color: var(--navy-900); cursor: pointer; list-style: none;
+}
+.detail-accordion-summary::-webkit-details-marker { display: none; }
+.detail-accordion-summary:focus-visible { border-radius: 7px; outline: 3px solid rgba(47,95,218,.18); outline-offset: 2px; }
+.detail-accordion-summary > span:first-child { min-width: 0; }
+.detail-accordion-summary strong { display: block; font-size: 13px; letter-spacing: -.015em; }
+.detail-accordion-summary small { display: block; margin-top: 3px; color: var(--text-muted); font-size: 10.5px; font-weight: 500; }
+.detail-accordion-action { display: inline-flex; align-items: center; gap: 8px; color: var(--blue-600); font-size: 10.5px; font-weight: 750; white-space: nowrap; }
+.detail-accordion-action i {
+  width: 7px; height: 7px; margin-top: -3px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); transition: transform .18s ease, margin .18s ease;
+}
+.detail-close-label { display: none; }
+.detail-accordion[open] .detail-open-label { display: none; }
+.detail-accordion[open] .detail-close-label { display: inline; }
+.detail-accordion[open] .detail-accordion-action i { margin-top: 3px; transform: rotate(225deg); }
+.detail-accordion-body { margin-top: 0; padding: 3px 0 4px; border-top: 1px solid #edf0f5; }
+.academic-requirements { margin-top: 0; }
 .academic-section-head, .competency-list-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .academic-section-head { margin-bottom: 7px; }
 .academic-section-head strong { color: var(--navy-900); font-size: 13px; }
@@ -1177,7 +1221,8 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 .competency-summary { flex: 0 0 auto; padding-top: 1px; color: var(--red); font-size: 11px; font-weight: 800; white-space: nowrap; }
 .competency-summary.is-good { color: var(--green); }
 .competency-card-head + .radar-frame { margin-top: 12px; }
-.competency-inspection { margin-top: 5px; }
+.competency-accordion { margin-top: 13px; }
+.competency-inspection { margin-top: 0; border-top: 1px solid #edf0f5; }
 .competency-list-head { padding: 9px 0 7px; color: var(--text-muted); font-size: 10.5px; font-weight: 700; }
 .competency-row { margin: 0; padding: 11px 0; }
 .competency-row .gap-label { align-items: center; }
