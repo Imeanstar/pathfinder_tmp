@@ -1245,8 +1245,16 @@ body.chat-open .chat-fab { background: var(--navy-900); }
 .roadmap-term-state.is-current { background: #eaf7ef; color: #23764b; }
 .roadmap-term-state.is-final { background: #eaf0ff; color: #385bb8; }
 .roadmap-term-credit { margin-left: auto; color: var(--blue-600); font-size: 11px; font-weight: 800; white-space: nowrap; }
-.roadmap-term-chevron { display: grid; place-items: center; align-self: stretch; width: 20px; margin-left: 8px; color: var(--blue-600); font-size: 16px; line-height: 1; text-align: center; transition: transform .2s ease; }
-.roadmap-term[open] .roadmap-term-chevron { transform: rotate(180deg); }
+.roadmap-term-chevron {
+  display: grid; place-items: center; flex: 0 0 24px; width: 24px; height: 24px;
+  margin-left: 8px; color: var(--blue-600);
+}
+.roadmap-term-chevron::before {
+  content: ""; width: 7px; height: 7px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); transform-origin: center; transition: transform .2s ease;
+}
+.roadmap-term[open] .roadmap-term-chevron::before { transform: rotate(225deg); }
 .roadmap-term-body { padding: 0 14px 15px; border-top: 1px solid var(--border); }
 .roadmap-section-title { display: flex; align-items: center; gap: 6px; margin: 15px 0 8px; color: var(--text); font-size: 12px; font-weight: 800; }
 .roadmap-section-title > span { color: var(--blue-600); font-size: 11px; }

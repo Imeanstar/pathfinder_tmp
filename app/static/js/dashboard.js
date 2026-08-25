@@ -723,7 +723,7 @@ function renderRoadmapCard() {
               ${labelHtml}
             </span>
             <span class="roadmap-term-credit">총 ${totalCredit}학점</span>
-            <span class="roadmap-term-chevron" aria-hidden="true">⌄</span>
+            <span class="roadmap-term-chevron" aria-hidden="true"></span>
           </summary>
           <div class="roadmap-term-body">
             <p class="roadmap-section-title"><span>▣</span> 핵심 이수 추천 과목 <small>(필수 우선)</small></p>
