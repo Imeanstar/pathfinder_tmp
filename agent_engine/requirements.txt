@@ -3,11 +3,14 @@
 #
 # app/agents/supervisor.py의 그래프는 결정론적 코드만 쓴다(Gemini 등 LLM 호출이
 # 그래프 안에 없음, app/llm.py·app/agents/chat.py만 LLM을 쓴다) — 그래서
-# google-genai/langchain-google-genai가 전혀 필요 없고, deploy.py가 요구하는
-# google-cloud-aiplatform과 정확히 부딪히던 protobuf<6.0 대 6.x 충돌
-# (requirements.txt·requirements-runtime.txt 주석 참고, 2026-08-21/24 직접 겪음)을
-# 원천적으로 피한다.
+# google-genai/langchain-google-genai는 전혀 필요 없다. google-cloud-aiplatform은
+# 우리 코드가 아니라 Agent Engine 프레임워크 자체(텔레메트리 초기화, telemetry_utils.py의
+# resolve_project_id)가 원격 컨테이너 안에서 요구한다 — 없으면 기동 자체가
+# ModuleNotFoundError로 실패한다(2026-08-25 실제 배포에서 발견). 이 컨테이너는 Cloud
+# Run 배포(google-genai 계열, protobuf<6.0)와 완전히 분리된 별도 환경이라, 여기서
+# google-cloud-aiplatform이 요구하는 protobuf 6.x를 써도 Cloud Run 쪽엔 영향이 없다.
 
 langgraph>=0.2
 pdfplumber>=0.11
 pyyaml>=6
+google-cloud-aiplatform

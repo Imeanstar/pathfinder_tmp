@@ -67,7 +67,12 @@ def main() -> None:
 
     # app/agents/course_reco.py 등이 DATA_DIR = .../app/agents/../../data 로 상대경로를
     # 계산하므로, 원격에서도 같은 상대 위치에 놓이도록 app/ 옆에 data 파일들을 그대로 둔다.
+    # agent_engine 자체도 반드시 포함해야 한다 — cloudpickle이 PathfinderAgentEngine
+    # 인스턴스를 agent_engine.pathfinder_agent 모듈 경로로 참조해서 저장하므로, 원격에서
+    # unpickle할 때 이 패키지가 없으면 ModuleNotFoundError로 기동이 실패한다(2026-08-25
+    # 실제 배포에서 발견 — 최초 배포 시도가 이 이유로 실패했다).
     extra_packages = [
+        "agent_engine",
         "app",
         "data/courses.json",
         "data/programs.json",
