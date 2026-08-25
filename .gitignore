@@ -19,11 +19,6 @@ data/*.sqlite
 data/programs_raw.json
 data_pipeline/logs/
 
-# Vertex AI Pipelines 컴파일 산출물(vertex_pipelines/*.py에서 재생성 가능) + 배포 전용 venv
-vertex_pipelines/*.json
-.venv-agent-engine/
-.venv-vertex-pipelines/
-
 # 로그인 계정별 최신 로드맵 저장소 — 이메일 해시 키지만 사용자 진단 데이터라 커밋 안 함
 data/*.db
 
