@@ -722,7 +722,11 @@ function renderRoadmapCard() {
               <strong>${calendarLabel(term, FORM_STATE.admission_year)}</strong>
               ${labelHtml}
             </span>
-            <span class="roadmap-term-credit">총 ${totalCredit}학점</span>
+            <span class="roadmap-term-overview" aria-label="추천 과목 ${items.courses.length}개, 활동 ${items.programs.length}개, 총 ${totalCredit}학점">
+              <span>과목 <b>${items.courses.length}</b></span><i aria-hidden="true"></i>
+              <span>활동 <b>${items.programs.length}</b></span><i aria-hidden="true"></i>
+              <strong>${totalCredit}학점</strong>
+            </span>
             <span class="roadmap-term-chevron" aria-hidden="true"></span>
           </summary>
           <div class="roadmap-term-body">
