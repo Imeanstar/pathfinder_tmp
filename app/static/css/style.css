@@ -854,7 +854,6 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 }
 .drawer-logout:hover { color: var(--red); }
 
-<<<<<<< HEAD
 /* ============================================================
    2026-08-24 Mobile product refresh
    - 데스크톱 3열 정보 구조는 보존하고, 720px 이하에서는 실제 사용 순서에 맞춰
@@ -1271,7 +1270,6 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
-=======
 /* 저학점 학기(6학점 이하) 확인 질문 — 화면1 마스킹 확인 단계(2026-08-22) */
 .irregular-semester-row {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
@@ -1280,4 +1278,3 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 }
 .irregular-semester-row p { margin: 0; flex: 1 1 260px; font-size: 14px; color: var(--navy-900, #14213c); }
 .irregular-semester-row select { flex: 0 0 auto; }
->>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c

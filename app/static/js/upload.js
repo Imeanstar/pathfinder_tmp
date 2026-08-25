@@ -10,7 +10,6 @@ const PROJECT_FORM_TYPES = [
 
 let CONFIG = null;
 let uploadedCourses = [];
-<<<<<<< HEAD
 let loadingStageTimer = null;
 
 const WIZARD_STEP_IDS = ["stepUpload", "stepMasked", "stepSettings"];
@@ -23,10 +22,8 @@ function syncWizardProgress(activeId) {
     item.toggleAttribute("aria-current", index === activeIndex);
   });
 }
-=======
 let detectedAdmissionYear = null;
 let lowCreditSemesters = [];
->>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c
 
 // --- 단계 전환: 나가는 섹션을 위로 페이드아웃 → 들어오는 섹션을 아래에서 페이드인 ---
 function goToStep(fromId, toId) {
