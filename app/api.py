@@ -40,14 +40,32 @@ from app.agents.session_chat import (
 from app.agents.supervisor import run_full_plan
 from app.audit import AuditResult, attach_citation, audit_graduation, load_requirements
 from app.auth import InvalidDomainError, verify_google_id_token
-from app.guardrail import get_blocked_count, is_guardrail_enabled, set_guardrail_override
-from app.llm import default_structure_fn, soften_recommendation_reasons
+from app.guardrail import (
+    detect_injection,
+    get_blocked_count,
+    increment_blocked_count,
+    is_guardrail_enabled,
+    set_guardrail_override,
+)
+from app.llm import check_gemini_reachability, default_structure_fn, soften_recommendation_reasons
 from app.masking import PiiLeakDetected
-from app.parser import InjectionDetected, TranscriptData, parse_transcript
+from app.parser import (
+    InjectionDetected,
+    TranscriptData,
+    compute_remaining_terms,
+    compute_term_calendar_labels,
+    find_low_credit_semesters,
+    infer_admission_year,
+    parse_transcript,
+)
 from app.retrieval import retrieve
+from app.tracing import setup_tracing
 from app.user_store import get_latest_plan, save_latest_plan
 
 app = FastAPI(title="AJOU Pathfinder API")
+# ENABLE_CLOUD_TRACE=true일 때만 켜진다(Cloud Run 배포에서만 설정) — 로컬 개발·테스트엔
+# GCP 인증정보가 없어 기본은 꺼둔다. app/tracing.py 참고.
+setup_tracing(app)
 
 
 @app.middleware("http")
@@ -70,7 +88,25 @@ DEFAULT_REMAINING_TERMS = ["2-2", "3-1", "3-2", "4-1", "4-2"]  # 2025학번 2학
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "guardrail_enabled": is_guardrail_enabled()}
+    # GIT_SHA는 배포 시(docs/배포.md) --set-env-vars로 주입한다 — 운영 자동화 계층 3
+    # (docs/superpowers/specs/2026-08-24-운영-자동화-design.md 4장)가 이 값과 main 최신
+    # 커밋을 비교해 "배포본이 코드와 다른 상태"(버전 드리프트)를 감지한다. 로컬 개발처럼
+    # 안 넘긴 환경에서는 거짓 버전을 지어내지 않고 정직하게 "unknown"을 반환한다.
+    return {
+        "status": "ok",
+        "guardrail_enabled": is_guardrail_enabled(),
+        "version": os.environ.get("GIT_SHA", "unknown"),
+    }
+
+
+@app.get("/api/diagnostics/gemini")
+def diagnostics_gemini():
+    """Gemini 쿼터 초과·장애를 운영 자동화 계층 3(스모크 테스트)이 외부에서 감지할 수
+    있게 한다. /api/upload의 성적표 구조화 실패는 처리 안 된 예외로 500까지 새어나가고
+    (app/llm.py default_structure_fn엔 try/except가 없음), /api/plan의 추천 사유
+    자연어화는 반대로 실패를 조용히 삼킨다 — 둘 다 사용자에게 보여줄 판단으로는
+    맞지만, 운영자는 "지금 Gemini가 실제로 응답하는가"를 알아야 하므로 별도로 둔다."""
+    return check_gemini_reachability()
 
 
 @app.get("/api/guardrail")
@@ -130,9 +166,17 @@ def plan_latest(email_hash: str):
     return record
 
 
+MAX_UPLOAD_BYTES = 10 * 1024 * 1024  # 성적표 PDF는 보통 1MB를 안 넘는다 — 넉넉히 10MB
+
+
 @app.post("/api/upload")
 async def upload(file: UploadFile = File(...)):
     pdf_bytes = await file.read()
+    # 2026-08-24 보안 감사에서 발견: 업로드 크기 제한이 없어 file.read()가 무제한으로
+    # 메모리에 올라갔다(DoS 여지) — 파싱을 시도하기 전에 먼저 거절한다.
+    if len(pdf_bytes) > MAX_UPLOAD_BYTES:
+        raise HTTPException(status_code=413, detail="파일이 너무 큽니다(10MB 이하만 업로드할 수 있어요).")
+
     try:
         transcript = parse_transcript(pdf_bytes, structure_fn=default_structure_fn)
     except PiiLeakDetected:
@@ -145,6 +189,15 @@ async def upload(file: UploadFile = File(...)):
             status_code=422,
             detail="입력에서 이상한 지시문이 감지되어 처리를 거부했습니다.",
         )
+    except Exception:
+        # 2026-08-24 보안 감사에서 발견: PDF가 아니거나 깨진 파일을 pdfplumber에 그대로
+        # 넘기면 잡히지 않은 예외가 FastAPI 기본 500으로 새 나갔다(스택트레이스 노출
+        # 위험). 원인이 다양해(암호화된 PDF, 손상된 파일 등) 구체적으로 분류하지 않고
+        # 전부 "파일을 열 수 없다"는 정직한 4xx로 처리한다.
+        raise HTTPException(
+            status_code=422,
+            detail="PDF 파일을 열 수 없습니다. 손상되지 않은 성적표 PDF인지 확인해주세요.",
+        )
 
     # 마스킹 본문은 앞부분만 잘라 보낸다 — 화면에서 "이렇게 가렸습니다"를 확인시키는 용도라
     # 전문이 필요하지 않고, 응답 크기도 불필요하게 키우지 않는다.
@@ -152,6 +205,8 @@ async def upload(file: UploadFile = File(...)):
         "courses": transcript.courses,
         "pii_masked": True,
         "masked_preview": transcript.masked_text[:1200],
+        "admission_year": infer_admission_year(transcript.courses),
+        "low_credit_semesters": find_low_credit_semesters(transcript.courses),
     }
     if not os.environ.get("GOOGLE_API_KEY"):
         response["warning"] = (
@@ -192,6 +247,10 @@ class PlanRequest(BaseModel):
     grad_lab_cluster: Optional[str] = None
     projects: list[ManualProjectIn] = []
     remaining_terms: list[str] = DEFAULT_REMAINING_TERMS
+    # 화면1 마스킹 확인 단계에서 사용자가 "정규학기가 아닙니다"라고 답한 저학점
+    # 학기만 담긴다(키: f"{year}-{semester}", 값 False). 나머지는 그대로 정규학기로
+    # 간주한다(2026-08-22).
+    irregular_semester_answers: dict[str, bool] = {}
     # 성적표에 없는 자기신고 항목 — 원래는 챗봇으로만 채웠으나, 화면1에서 드롭다운으로
     # 직접 고를 수 있게 되면서 여기서도 받는다(2026-08-21). 안 보내면 unresolved 유지.
     language_score: Optional[LanguageScoreIn] = None
@@ -238,11 +297,44 @@ def _apply_dropdown_selfreports(audit: AuditResult, req: "PlanRequest", requirem
     )
 
 
+def _reject_injected_project_titles(projects: list["ManualProjectIn"]) -> None:
+    """개인 프로젝트 제목은 자유 입력이라 성적표 텍스트와 같은 인젝션 방어를 적용한다
+    (app/guardrail.py 설계 원칙의 "2경로" 중 하나 — 2026-08-24 보안 감사에서 실제로는
+    성적표 경로만 적용돼 있던 걸 발견해 보완). GUARDRAIL_ENABLED=false면 건너뛴다
+    (parser.py의 인젝션 검사와 동일한 토글 규칙)."""
+    if not is_guardrail_enabled():
+        return
+    for p in projects:
+        if detect_injection(p.title):
+            increment_blocked_count()
+            raise HTTPException(
+                status_code=422,
+                detail="입력에서 이상한 지시문이 감지되어 처리를 거부했습니다.",
+            )
+
+
 @app.post("/api/plan")
 def plan(req: PlanRequest):
+    _reject_injected_project_titles(req.projects)
+    resolved_admission_year = infer_admission_year(req.courses) or req.admission_year
+    # "or" 폴백을 쓰면 안 된다 — compute_remaining_terms가 8개 정규학기를 모두 이수한
+    # 학생에 대해 정확히 빈 리스트([], 남은 학기 없음)를 돌려줘도 파이썬은 []를 falsy로
+    # 봐서 "계산 실패"로 오인해 req.remaining_terms(하드코딩된 기본값)로 되돌아간다
+    # (2026-08-23 사용자 실사례 — 로드맵에 엉뚱한 연도의 5개 학기가 나타난 원인).
+    # None(계산 불가, semester 정보 자체가 없음)일 때만 폴백해야 한다.
+    computed_remaining_terms = compute_remaining_terms(req.courses, req.irregular_semester_answers)
+    resolved_remaining_terms = (
+        computed_remaining_terms if computed_remaining_terms is not None else req.remaining_terms
+    )
+    # 화면이 학기별 로드맵 카드에 실제 달력 연도를 붙여야 해서, "입학년도+학년" 공식이
+    # 아니라 성적표에 실제로 찍힌 마지막 정규학기를 기준으로 계산한 라벨을 함께 보낸다
+    # (2026-08-23 — 휴학한 학생은 입학년도+학년 공식이 실제 달력과 어긋난다).
+    term_calendar_labels = compute_term_calendar_labels(
+        req.courses, resolved_remaining_terms, req.irregular_semester_answers
+    )
     transcript = TranscriptData(courses=req.courses)
-    requirements = load_requirements(req.admission_year)
-    audit = audit_graduation(transcript, req.admission_year, req.track_type, requirements)
+    requirements = load_requirements(resolved_admission_year)
+    audit = audit_graduation(transcript, resolved_admission_year, req.track_type, requirements)
     audit = _apply_dropdown_selfreports(audit, req, requirements)
 
     taken_course_names = {c["name"] for c in req.courses}
@@ -251,16 +343,29 @@ def plan(req: PlanRequest):
         for p in req.projects
     ]
 
+    # 역량 격차(gap)가 자기신고로 다 채워져도 전공선택 학점·산학프로젝트 인증이 아직
+    # 부족하면 로드맵에 그 졸업요건을 채울 과목이 추천돼야 한다(2026-08-23 사용자
+    # 실사례 — gap 기반 추천만으론 이 두 요건이 로드맵에서 완전히 누락될 수 있었다).
+    elective_threshold = requirements["elective_major_credit"][req.track_type]
+    elective_credit_shortfall = max(0, elective_threshold - audit.elective_major_credit_earned)
+    industry_min_courses = requirements["industry_project_certification"][req.track_type]["min_courses"]
+    industry_project_shortfall = max(0, industry_min_courses - audit.industry_project_count)
+    industry_project_course_groups = requirements["industry_project_certification"]["course_groups"]
+
     result = run_full_plan(
         transcript,
         projects,
         req.track,
         taken_course_names=taken_course_names,
         taken_program_titles=set(),
-        remaining_terms=req.remaining_terms,
+        remaining_terms=resolved_remaining_terms,
         domain_overlay=req.domain_overlay,
         grad_lab_cluster=req.grad_lab_cluster,
         missing_required_courses=audit.missing_required_major_courses,
+        missing_major_foundation_courses=audit.missing_major_foundation_courses,
+        elective_credit_shortfall=elective_credit_shortfall,
+        industry_project_shortfall=industry_project_shortfall,
+        industry_project_course_groups=industry_project_course_groups,
     )
 
     # 화면이 "33/42학점"처럼 기준치를 같이 보여줘야 해서, AuditResult엔 없는 원 기준값을
@@ -273,7 +378,13 @@ def plan(req: PlanRequest):
         "required_major_course_count": len(requirements["required_major_courses"]),
         "industry_project_min_courses": industry_cert["min_courses"],
         "language_requirement": requirements["language_requirement"],
+        "elective_fieldwork_cap_credit": requirements.get("elective_credit_cap_groups", {})
+        .get("현장실습군", {})
+        .get("max_credit"),
     }
+    major_foundation_threshold = requirements.get("major_foundation_credit", {}).get(req.track_type)
+    if major_foundation_threshold is not None:
+        requirements_summary["major_foundation_credit_required"] = major_foundation_threshold
 
     # "근거 보기" — 미이수 전공필수 과목마다 요람 조항을 검색해 붙인다(Task 3-2 attach_citation,
     # Task 3-4 retrieve 연결). yoram 코퍼스 전용 검색이라 LLM 호출 없음.
@@ -295,6 +406,7 @@ def plan(req: PlanRequest):
 
     response = {
         "audit": asdict(audit),
+        "admission_year": resolved_admission_year,
         "requirements_summary": requirements_summary,
         "citations": citations,
         "questions": build_question_list(audit.unresolved),
@@ -306,6 +418,7 @@ def plan(req: PlanRequest):
         "course_recommendations": result["course_recommendations"],
         "program_recommendations": result["program_recommendations"],
         "roadmap": result["roadmap"],
+        "term_calendar_labels": term_calendar_labels,
     }
 
     if req.email_hash:

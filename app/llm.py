@@ -13,14 +13,31 @@ google-genai(`from google import genai`)를 쓴다 — 지연 import는 1차 프
 import json
 import os
 
-PROMPT_TEMPLATE = """다음은 마스킹된 대학교 성적표 텍스트다. 이수한 과목만 골라
-JSON 배열로 출력하라. 각 항목은 {{"name": 과목명, "credit": 학점(숫자),
-"category": 이수구분("전공필수"|"전공선택"|"교양"|"대학필수")}} 형태여야 한다.
-설명이나 다른 텍스트 없이 JSON 배열만 출력하라.
+from app.prompts import get_prompt
 
---- 성적표 텍스트 ---
-{masked_text}
-"""
+# 프롬프트 원문은 app/prompts/*.yaml로 버전관리된다(2026-08-24) — 여기선 이름으로
+# 최신 버전을 불러쓰기만 한다. 프롬프트를 고치려면 이 상수가 아니라 해당 yaml 파일의
+# template을 고치고 version·changelog를 같이 올려야 한다(tests/test_prompt_registry.py).
+PROMPT_TEMPLATE = get_prompt("transcript_extraction")
+
+
+def check_gemini_reachability() -> dict:
+    """운영 자동화 계층 3(스모크 테스트, docs/superpowers/specs/2026-08-24-운영-자동화
+    -design.md)이 Gemini 쿼터 초과·장애를 감지할 수 있도록 예외를 삼키지 않고 사유를
+    그대로 보고한다 — default_structure_fn(빈 배열 폴백)·soften_recommendation_reasons
+    (None 폴백)와 반대로, 이 함수의 존재 이유가 "실패를 정직하게 드러내는 것"이다.
+    "ping" 한 단어짜리 최소 호출이라 토큰 소모가 거의 없다."""
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        return {"reachable": False, "reason": "GOOGLE_API_KEY 미설정"}
+    try:
+        from google import genai
+
+        client = genai.Client(api_key=api_key)
+        client.models.generate_content(model="gemini-3.6-flash", contents="ping")
+        return {"reachable": True}
+    except Exception as e:
+        return {"reachable": False, "reason": str(e)[:200]}
 
 
 def default_structure_fn(masked_text: str) -> list[dict]:
@@ -42,24 +59,7 @@ def _call_gemini(masked_text: str, api_key: str) -> list[dict]:
     return json.loads(text)
 
 
-REASON_PROMPT_TEMPLATE = """다음은 '{track_label}' 진로를 목표로 하는 학생에게 추천하는
-과목·프로그램 목록이다. 각 항목마다 부드럽고 자연스러운 한국어 추천 멘트를 한 문장으로
-새로 작성하라.
-
-형식 예시(참고용, 그대로 베끼지 말고 자연스럽게 바꿔 쓸 것):
-"{track_label}을(를) 목표로 하신다면, 이 과목을 통해 데이터베이스 역량을 기르는 건 어떨까요?"
-
-지켜야 할 것:
-- "'OO' 역량 격차가 커서 추천합니다" 같은 딱딱한 기계적 문구는 쓰지 마라.
-- 항목 이름과 역량(reason에 이미 담긴 근거)은 아래 목록에 있는 그대로만 쓰고, 없는 내용을 지어내지 마라.
-- 과목이면 "수강", 프로그램이면 "참여" 같은 자연스러운 동사를 골라라.
-
---- 항목 목록(JSON) ---
-{items_json}
-
-각 항목의 "name"을 그대로 key로 써서 다음 형식의 JSON 객체만 출력하라(설명 없이):
-{{"항목명": "추천 멘트", ...}}
-"""
+REASON_PROMPT_TEMPLATE = get_prompt("recommendation_reason")
 
 
 def soften_recommendation_reasons(items: list[dict], track_label: str) -> dict[str, str] | None:

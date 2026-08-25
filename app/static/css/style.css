@@ -1,12 +1,12 @@
-/* AJOU Pathfinder 공통 디자인 시스템 — Design Reference 폴더의 톤(네이비+블루, 화이트 카드,
-   차분한 여백)을 따르되 우리 스펙(역할 8트랙 + 산업/연구실 조건부 드롭다운, 과정 구분)에 맞춤. */
+/* AJOU Pathfinder 공통 디자인 시스템 — majorpath(랜딩 프론트) 톤에 맞춰 재조정
+   (2026-08-21): 네이비 단일 톤(blue-950/900), 더 둥근 radius, 살짝 더 뚜렷한 그림자. */
 
 :root {
-  --navy-900: #12213f;
-  --navy-800: #1a2f57;
-  --blue-600: #2f5fda;
-  --blue-500: #4f74e3;
-  --blue-50: #eef2ff;
+  --navy-900: #172554;
+  --navy-800: #1e3a8a;
+  --blue-600: #1e3a8a;
+  --blue-500: #1d4ed8;.
+  --blue-50: #eff6ff;
   --bg: #f5f7fb;
   --card: #ffffff;
   --border: #e3e6ee;
@@ -17,8 +17,8 @@
   --amber-text: #8a5a00;
   --green: #1e8e5a;
   --red: #d33f3f;
-  --radius: 10px;
-  --shadow: 0 1px 2px rgba(20, 30, 60, 0.06), 0 1px 8px rgba(20, 30, 60, 0.04);
+  --radius: 16px;
+  --shadow: 0 1px 3px rgba(30, 41, 59, 0.08), 0 4px 16px rgba(30, 41, 59, 0.06);
 }
 
 * { box-sizing: border-box; }
@@ -27,7 +27,9 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
     "Malgun Gothic", "Segoe UI", sans-serif;
-  background: var(--bg);
+  /* index.html(.landing-body)과 배경색을 통일한다(2026-08-24 사용자 요청 —
+     upload.html/dashboard.html도 rgb(250,250,250)). */
+  background: #fafafa;
   color: var(--text);
   line-height: 1.55;
 }
@@ -37,11 +39,12 @@ a:hover { text-decoration: underline; }
 
 /* --- 헤더 --- */
 /* index.html의 랜딩 헤더(.landing-header/.landing-brand)와 위치·폰트굵기·폰트크기·
-   배경색·자간을 전부 동일하게 맞춘다(2026-08-21 사용자 요청 — "디자인 통일"). 다른
-   점은 랜딩엔 없는 header-context/header-right(뒤로가기·처음부터 버튼)가 붙는다는
-   것뿐이라, 그 요소들만 흰 배경 위에서 보이도록 색을 조정했다. */
+   배경색·자간·여백·그림자를 전부 동일하게 맞춘다(2026-08-21, 2026-08-24 사용자 요청 —
+   "디자인 통일"). 다른 점은 랜딩엔 없는 header-context/header-right(처음부터 버튼)가
+   붙는다는 것뿐이라, 그 요소들만 흰 배경 위에서 보이도록 색을 조정했다. */
 .app-header {
   background: #fff;
+  color: var(--text);
   padding: 22px 40px;
   display: flex;
   align-items: center;
@@ -51,20 +54,30 @@ a:hover { text-decoration: underline; }
   z-index: 10;
   /* 배경을 랜딩과 통일해 흰색으로 바꾸면서 그 아래 콘텐츠(옅은 회색 배경)와의 경계가
      흐려졌다 — sticky로 스크롤 위에 계속 떠 있는 바라 경계가 뚜렷해야 한다(2026-08-21
-     사용자가 스크린샷으로 지적). */
-  box-shadow: 0 2px 10px rgba(20, 30, 60, 0.08);
+     사용자가 스크린샷으로 지적). var(--shadow)는 카드에 쓰는 것과 같은 그림자라
+     페이지 전체의 그림자 강도가 통일된다(2026-08-24 사용자 요청).*/
+  box-shadow: var(--shadow);
 }
 .app-header .brand { display: flex; align-items: center; gap: 10px; }
 .app-header .brand-name {
-  font-weight: 800; font-size: 13px; letter-spacing: 0.14em; color: var(--navy-900);
-  white-space: nowrap;
+  font-weight: 700; font-size: 14px; letter-spacing: 0.025em; white-space: nowrap;
+  color: var(--navy-900);
 }
-/* 로고 — index.html/upload.html/dashboard.html 헤더에서 공통으로 쓴다(2026-08-21 통일) */
+.app-header .brand-sub {
+  font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted); font-weight: 600;
+  margin-left: 6px; padding-left: 10px; border-left: 1px solid var(--border);
+}
+
 .brand-logo { width: 20px; height: 20px; display: block; flex-shrink: 0; }
 .app-header .header-context {
   font-size: 13px; color: var(--text-muted); margin-left: 16px;
 }
 .header-right { display: flex; align-items: center; gap: 10px; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--border);
+  color: var(--text-muted); border-radius: 999px; padding: 6px 14px; font-size: 12.5px;
+}
 
 /* --- 레이아웃 --- */
 .page-main { max-width: 880px; margin: 0 auto; padding: 56px 24px 80px; }
@@ -130,7 +143,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer;
   transition: background .15s;
 }
-.btn-primary:hover { background: #274ec2; }
+.btn-primary:hover { background: var(--navy-800); }
 .btn-primary:disabled { background: #a8b5d6; cursor: not-allowed; }
 
 .footnote { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-top: 16px; }
@@ -143,7 +156,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   background: none; border: 1px solid var(--border); color: var(--text);
   border-radius: 8px; padding: 7px 14px; font-size: 12.5px; cursor: pointer;
 }
-.header-right .btn-ghost:hover { background: var(--blue-50); }
+.header-right .btn-ghost:hover { background: var(--bg); }
 
 .dashboard-grid {
   display: grid;
@@ -171,34 +184,65 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 .progress-bar > div { height: 100%; background: var(--blue-600); border-radius: 999px; }
 .remaining-terms { font-size: 12.5px; color: var(--text-muted); margin-bottom: 18px; }
 
-.req-list { list-style: none; margin: 0; padding: 0; }
-.req-list li {
-  display: flex; align-items: flex-start; gap: 8px; padding: 9px 0;
-  border-top: 1px solid var(--border); font-size: 13px;
+/* 카드 전체를 접는 바깥 아코디언(졸업 현황·역량 진단 공용) — 2026-08-24 신설.
+   요약(학점 진행률 / 레이더 차트)은 항상 보이고, 아래 목록은 눌러야 나온다. */
+.acc-outer-summary { display: block; list-style: none; cursor: pointer; }
+.acc-outer-summary::-webkit-details-marker { display: none; }
+.acc-toggle-row {
+  display: flex; align-items: center; gap: 6px; margin-top: 14px; padding-top: 12px;
+  border-top: 1px solid var(--border); color: var(--blue-600); font-size: 12.5px; font-weight: 700;
 }
-.req-list li:first-child { border-top: none; }
-.req-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.acc-toggle-open-label { display: none; }
+.acc-outer[open] .acc-toggle-closed-label { display: none; }
+.acc-outer[open] .acc-toggle-open-label { display: inline; }
+.acc-chevron {
+  width: 8px; height: 8px; margin-left: auto; margin-top: -2px;
+  border-right: 2px solid var(--blue-600); border-bottom: 2px solid var(--blue-600);
+  transform: rotate(45deg); transition: transform .2s ease;
+}
+.acc-outer[open] .acc-chevron { transform: rotate(225deg); margin-top: 2px; }
+.acc-outer-body { margin-top: 16px; }
+
+/* 졸업요건 항목도 하나하나 아코디언(2026-08-24) — 요약(이름·값)은 늘 보이고,
+   미이수 상세·요람 근거·자기신고 입력은 눌러야 나온다. */
+.req-list { display: flex; flex-direction: column; gap: 8px; }
+.req-item { border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+.req-item-head {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px; font-size: 13px;
+}
+.req-item-head::-webkit-details-marker { display: none; }
+.req-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .req-dot.ok { background: var(--green); }
 .req-dot.warn { background: var(--amber-border); }
 .req-dot.bad { background: var(--red); }
 .req-dot.unknown { background: #c7cbd6; }
-.req-name { font-weight: 600; }
-.req-detail { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
-.req-value { margin-left: auto; font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+.req-name { font-weight: 700; flex: 1; word-break: keep-all; }
+.req-value { font-size: 12px; color: var(--text-muted); white-space: nowrap; word-break: keep-all; }
+.req-item-chevron {
+  width: 7px; height: 7px; flex-shrink: 0;
+  border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg); transition: transform .2s ease, border-color .2s ease;
+}
+.req-item[open] .req-item-chevron { border-color: var(--blue-600); transform: rotate(225deg); }
+.req-item-body { padding: 0 14px 14px; }
+.req-detail { color: var(--text-muted); font-size: 12px; margin-top: 2px; word-break: keep-all; }
 .citation-link { font-size: 12px; margin-left: 4px; }
 
 /* --- 역량 레이더 --- */
 .radar-legend { display: flex; gap: 14px; font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px; }
 .radar-legend span { display: inline-flex; align-items: center; gap: 4px; }
 .legend-swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
-.gap-list { margin-top: 14px; }
-.gap-row { margin-bottom: 10px; }
-.gap-row .gap-label { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 4px; }
+.gap-list { display: flex; flex-direction: column; gap: 10px; }
+.gap-row {
+  border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; background: #fff;
+}
+.gap-row .gap-label { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px; }
 .gap-row .gap-bar { height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
 .gap-row .gap-bar > div { height: 100%; background: var(--red); border-radius: 999px; }
-.gap-row .citation-details { margin-top: 5px; }
+.gap-row .citation-details { margin-top: 8px; }
 .gap-row .citation-details summary { font-size: 11px; }
-.evidence-empty { margin-top: 5px; font-size: 11px; color: var(--text-muted); }
+.evidence-empty-note { margin-top: 8px; font-size: 11px; color: var(--text-muted); }
 .evidence-list { margin: 8px 0 0; padding: 10px 12px; background: var(--bg); border-radius: 8px; list-style: none; }
 .evidence-list li { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 3px 0; color: var(--text); }
 .evidence-badge {
@@ -207,51 +251,103 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 .evidence-badge.course { background: var(--blue-50); color: var(--blue-600); }
 .evidence-badge.project { background: var(--amber-bg); color: var(--amber-text); }
 
-/* --- 로드맵 --- */
-.roadmap-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
-.roadmap-header h2 { font-size: 17px; margin: 0; }
+/* --- 로드맵(아코디언) --- 2026-08-24 전면 개편: 학기를 전부 펼쳐두던 방식에서
+   학기 단위 아코디언(<details>)으로 바꾸고, 과목 한 줄(배지·이름·학점·사유·근거
+   버튼)에 활동 카드 섹션을 아래로 붙였다. 아코디언 열림·닫힘도, 과목별/학기별
+   "근거 보기" 펼침도 전부 <details>·[open] 속성만으로 처리해 JS 토글이 없다. */
+.roadmap-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.roadmap-header h2 { font-size: 19px; font-weight: 800; margin: 0; color: var(--navy-900); }
 .term-count-badge {
-  font-size: 12px; color: var(--text-muted); background: var(--blue-50); padding: 2px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 700; color: var(--blue-600); background: var(--blue-50);
+  padding: 2px 10px; border-radius: 999px;
 }
+.roadmap-desc { font-size: 12.5px; color: var(--text-muted); margin: 0 0 16px; }
 .warning-banner {
   background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber-text);
   border-radius: 8px; padding: 12px 14px; font-size: 13px; margin-bottom: 18px;
 }
-.term-block { margin-bottom: 22px; }
-.term-block-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.term-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--blue-600); }
-.term-dot.current { background: var(--blue-600); }
-.term-label { font-weight: 700; font-size: 14.5px; }
-.term-sub { font-size: 12px; color: var(--text-muted); }
-.term-credit { margin-left: auto; font-size: 12px; color: var(--text-muted); }
 
-.item-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-  padding: 14px 16px; margin-bottom: 10px;
+.roadmap-accordion { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.term-item { background: #fff; }
+.term-item + .term-item { border-top: 1px solid var(--border); }
+.term-item-head {
+  list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 16px 18px;
 }
-.item-card-top { display: flex; align-items: center; gap: 8px; }
-.item-badge {
-  font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px;
+.term-item-head::-webkit-details-marker { display: none; }
+.term-item-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.term-item-label { font-weight: 800; font-size: 15.5px; color: var(--navy-900); }
+.term-badge {
+  font-size: 11.5px; font-weight: 700; padding: 2px 10px; border-radius: 999px; white-space: nowrap;
 }
-.item-badge.course { background: var(--blue-50); color: var(--navy-800); }
-.item-badge.program { background: #e8f6ee; color: var(--green); }
-.item-name { font-weight: 700; font-size: 14px; }
-.item-meta { margin-left: auto; font-size: 12px; color: var(--text-muted); }
-.item-reason { font-size: 12.5px; color: var(--text-muted); margin-top: 6px; }
-.item-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-.item-precedent {
+.term-badge.current { background: #e8f6ee; color: var(--green); }
+.term-badge.last { background: #f2e7fd; color: #7c3aed; }
+.term-item-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.term-item-credit { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+.term-item-chevron {
+  width: 8px; height: 8px; margin-top: -4px;
+  border-right: 2px solid var(--text-muted); border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg); transition: transform .2s ease, border-color .2s ease;
+}
+.term-item[open] .term-item-credit { color: var(--blue-600); }
+.term-item[open] .term-item-chevron { border-color: var(--blue-600); transform: rotate(225deg); margin-top: 4px; }
+
+.term-item-body { padding: 0 18px 20px; }
+
+.rm-section-head { display: flex; align-items: baseline; gap: 6px; margin: 4px 0 12px; }
+.rm-section-title { font-size: 13.5px; font-weight: 700; color: var(--navy-900); }
+.rm-section-note { font-size: 11.5px; color: var(--text-muted); }
+
+.rm-course-list { display: flex; flex-direction: column; gap: 8px; }
+/* 배지·이름·학점 칸을 고정폭으로 둬서 행마다 내용 길이가 달라도 위아래 줄이
+   맞는다(2026-08-24 사용자 요청 — 표처럼 정렬). 각 행은 독립된 grid 컨테이너지만
+   폭을 고정값으로 맞췄기 때문에 행 사이에서도 자연히 정렬된다. */
+.rm-course-row {
+  display: grid; grid-template-columns: 74px 122px 42px 1fr;
+  align-items: center; column-gap: 14px; row-gap: 4px;
+  border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; background: #fff;
+}
+@media (max-width: 480px) {
+  .rm-course-row { grid-template-columns: 74px 1fr 42px; }
+  .rm-course-desc { grid-column: 1 / -1; }
+}
+.rm-course-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+  text-align: center; white-space: nowrap;
+}
+.rm-course-badge.required { background: var(--amber-bg); color: var(--amber-text); }
+.rm-course-badge.foundation { background: #e8f6ee; color: var(--green); }
+.rm-course-badge.elective { background: var(--blue-50); color: var(--blue-600); }
+.rm-course-badge.etc { background: #f1f2f6; color: var(--text-muted); }
+.rm-course-name { font-weight: 700; font-size: 13.5px; }
+.rm-course-credit { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+.rm-course-desc { font-size: 12.5px; color: var(--text-muted); }
+.rm-empty { font-size: 12.5px; color: var(--text-muted); padding: 4px 0; }
+
+.rm-divider { border: none; border-top: 1px solid var(--border); margin: 18px 0; }
+
+.rm-activity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 640px) {
+  .rm-activity-grid { grid-template-columns: 1fr; }
+}
+.rm-activity-card {
+  border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+  display: flex; flex-direction: column; gap: 4px; background: #fff;
+}
+.rm-activity-title { font-weight: 700; font-size: 13.5px; color: var(--navy-900); }
+.rm-activity-org { font-size: 12px; color: var(--text-muted); }
+.rm-activity-deadline { font-size: 12px; color: var(--text-muted); }
+.rm-activity-reason { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.rm-activity-precedent {
   font-size: 11px; color: var(--amber-text); background: var(--amber-bg);
-  border-radius: 6px; padding: 5px 8px; margin-top: 8px; line-height: 1.5;
+  border-radius: 6px; padding: 5px 8px; margin-top: 6px; line-height: 1.5;
 }
-
-/* 학기 카드를 좌(이수 추천 과목)/우(교내 프로그램) 2열로 나눈다(2026-08-21) —
-   예전엔 프로그램만 세로로 나열돼 "과목은 왜 안 알려주냐"는 지적을 받았다. */
-.term-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media (max-width: 1400px) {
-  .term-columns { grid-template-columns: 1fr; }
+.rm-activity-btn {
+  align-self: flex-end; margin-top: 10px;
+  border: 1px solid var(--blue-500); color: var(--blue-600); background: #fff;
+  border-radius: 999px; padding: 6px 16px; font-size: 12px; font-weight: 700;
 }
-.term-col-head { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
-.term-col-empty { font-size: 12px; color: var(--text-muted); padding: 10px 0; }
+.rm-activity-btn:hover { background: var(--blue-50); text-decoration: none; }
 
 /* --- 상담(챗봇) --- */
 .chat-col .card { display: flex; flex-direction: column; height: 640px; padding: 18px; }
@@ -301,15 +397,20 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
    랜딩(index.html) — 2026-08-21 신설.
    앱 내부(대시보드)의 네이비 헤더 대신, 흰 배경 위 큰 타이포 한 덩어리로 첫인상을 만든다.
    ============================================================ */
-.landing-body { background: #fff; }
+.landing-body { background: #fafafa; }
 
 .landing-header {
   display: flex; align-items: center; justify-content: space-between;
   padding: 22px 40px; background: #fff;
+  /* 스크롤해도 항상 화면 위에 고정되도록(2026-08-24 사용자 요청). 아래 콘텐츠와
+     같은 흰 배경이라 경계가 흐려지지 않게 var(--shadow)로 옅게 분리한다 — 카드에
+     쓰는 것과 같은 그림자라 페이지 전체의 그림자 강도가 통일된다. */
+  position: sticky; top: 0; z-index: 10;
+  box-shadow: var(--shadow);
 }
 .landing-brand { display: flex; align-items: center; gap: 10px; }
 .landing-brand span {
-  font-weight: 800; font-size: 13px; letter-spacing: 0.14em; color: var(--navy-900);
+  font-weight: 700; font-size: 14px; letter-spacing: 0.025em; color: var(--navy-900);
 }
 
 /* 2026-08-21: 전체적으로 60~70% 크기로 축소 — 원래 값은 화면을 거의 다 채울 만큼 컸다 */
@@ -318,25 +419,26 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
   text-align: center; padding: 6vh 24px 8vh; gap: 20px;
 }
 .landing-hero {
-  margin: 0; font-size: clamp(21px, 3.4vw, 44px); line-height: 1.28;
-  font-weight: 800; letter-spacing: -0.02em; color: var(--navy-900);
+  margin: 0; font-size: clamp(28px, 4.4vw, 52px); line-height: 1.2;
+  font-weight: 600; letter-spacing: -0.02em; color: var(--navy-900);
   /* 한글은 어절 중간에서 끊으면 안 된다 — keep-all 없이는 "추/천해"처럼 갈라진다 */
   word-break: keep-all;
   max-width: 20em;
 }
 .landing-hero em { font-style: normal; color: var(--blue-600); }
 .landing-sub {
-  margin: 0; color: var(--text-muted); font-size: clamp(12px, 1.05vw, 13px); line-height: 1.7;
+  margin: 16px 0 0; color: var(--text-muted); font-size: clamp(15px, 1.4vw, 18px); line-height: 1.7;
+  max-width: 32em;
 }
 
 .landing-cta {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   min-width: min(280px, 70vw); padding: 12px 22px;
-  background: var(--navy-900); color: #fff; border: none; border-radius: 7px;
+  background: var(--navy-900); color: #fff; border: none; border-radius: 14px;
   font-size: 13.5px; font-weight: 700; cursor: pointer;
   transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
 }
-.landing-cta:hover { background: var(--navy-800); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(18,33,63,.22); }
+.landing-cta:hover { background: var(--navy-800); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(23,37,84,.25); }
 
 .landing-or {
   display: flex; align-items: center; gap: 12px;
@@ -368,7 +470,8 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 /* --- 업로드 카드 + 점선 드롭존 --- */
 .upload-card {
   background: var(--card); border-radius: 20px; padding: 20px;
-  box-shadow: 0 10px 40px rgba(20, 30, 60, 0.08);
+  /* 상단바·대시보드 카드와 그림자 강도 통일(2026-08-24 사용자 요청) */
+  box-shadow: var(--shadow);
 }
 .dropzone {
   border: 2px dashed #ccd5e4; border-radius: 14px;
@@ -479,16 +582,140 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 .req-list .req-name, .req-list .req-detail { word-break: keep-all; }
 .req-list .req-value { word-break: keep-all; text-align: right; flex-shrink: 0; max-width: 48%; }
 
-/* 역량 4요소 체크(수업/실전참여/동아리/자격증) — 2026-08-21 */
+/* ============================================================
+   랜딩 확장 — majorpath(Next.js) 랜딩과 동일 구성으로 맞춤(2026-08-21).
+   히어로 스크롤 페이드(.fade-hero) + 섹션 등장 애니메이션(.reveal)은
+   js/landing.js의 IntersectionObserver/scroll 리스너로 제어한다.
+   ============================================================ */
+
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 640px;
+  height: calc(100svh - 73px);
+  padding: 0 24px;
+  overflow: hidden;
+}
+.hero-content { display: flex; flex-direction: column; align-items: center; }
+
+.landing-hero .accent { color: var(--navy-900); }
+
+.hero-cta-card { margin-top: 24px; width: 100%; max-width: 380px; }
+.hero-cta-card .landing-cta { width: 100%; border-radius: 16px; padding: 16px 24px; font-size: 14px; }
+.hero-cta-card .landing-or { margin: 24px 0; width: 100%; }
+.hero-resume-label { margin: 0; font-size: 12px; color: var(--text-muted); }
+.hero-resume-link {
+  /* 원래 <a> 태그였는데 auth.js가 기대하는 id="resumeBtn"이 로그인 여부를 확인해
+     동작을 분기하는 <button>이라(2026-08-24, PR #1 머지 시 발견) 버튼 기본 스타일을
+     지운다 — 시각적으로는 원래 링크 디자인 그대로 보이게. */
+  background: none; border: none; padding: 0; font: inherit; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px; margin-top: 8px;
+  font-size: 14px; font-weight: 700; color: var(--navy-900);
+}
+.hero-resume-link:hover { color: var(--navy-800); text-decoration: none; }
+
+.scroll-indicator {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  color: rgba(23, 37, 84, 0.3); animation: bounce 1.6s infinite;
+}
+.scroll-indicator:hover { color: rgba(23, 37, 84, 0.6); }
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+.section-inner { max-width: 1000px; margin: 0 auto; }
+.eyebrow-label { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--navy-900); }
+.section-title { margin: 8px 0 0; font-size: 26px; font-weight: 700; color: var(--text); }
+
+.how-it-works-section { background: #fff; padding: 80px 24px; border-radius: 48px 48px 0 0; }
+.steps-grid {
+  margin-top: 48px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;
+}
+@media (min-width: 900px) { .steps-grid { grid-template-columns: repeat(4, 1fr); } }
+.step-num { font-size: 14px; font-weight: 700; color: var(--navy-900); }
+.step-title { margin: 12px 0 0; font-size: 16px; font-weight: 700; color: var(--text); }
+.step-desc { margin: 8px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-muted); }
+
+.preview-section { background: #fff; border-top: 1px solid var(--border); padding: 80px 24px; }
+.preview-window {
+  position: relative; margin: 40px auto 0; max-width: 720px;
+  border-radius: 16px; border: 1px solid var(--border); background: var(--bg);
+  padding: 12px; box-shadow: 0 20px 40px rgba(30, 41, 59, 0.15);
+}
+.preview-chrome { display: flex; gap: 6px; padding: 4px 8px 12px; }
+.preview-chrome span { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+.preview-body { background: #fff; border-radius: 12px; padding: 24px 32px; }
+.preview-body-head { display: flex; align-items: center; justify-content: space-between; }
+.preview-term { font-size: 14px; font-weight: 700; color: var(--navy-900); }
+.preview-badge {
+  border-radius: 999px; background: var(--blue-50); color: var(--navy-900);
+  font-size: 12px; font-weight: 600; padding: 4px 12px;
+}
+.preview-progress-list { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.preview-progress-label {
+  display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted);
+}
+.preview-progress-label span:last-child { font-weight: 600; color: var(--text); }
+.preview-progress-bar {
+  margin-top: 6px; height: 8px; border-radius: 999px; background: var(--bg); overflow: hidden;
+}
+.preview-progress-bar > div { height: 100%; border-radius: 999px; background: var(--navy-900); }
+.preview-courses { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.preview-course-chip {
+  border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
+  font-size: 13px; font-weight: 600; color: var(--text);
+}
+.preview-expand {
+  position: absolute; bottom: -16px; right: -16px; width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center; border-radius: 50%;
+  background: var(--navy-900); color: #fff; box-shadow: 0 8px 20px rgba(23, 37, 84, 0.3);
+}
+
+.resources-section { padding: 80px 24px; }
+.resources-grid { margin-top: 40px; display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 700px) { .resources-grid { grid-template-columns: 1fr 1fr; } }
+.resource-card {
+  display: flex; height: 100%; flex-direction: column; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--card); box-shadow: var(--shadow);
+  padding: 32px; color: inherit; transition: border-color .2s ease;
+}
+.resource-card:hover { border-color: rgba(23,37,84,.3); text-decoration: none; }
+.resource-card h3 { margin: 0; font-size: 17px; font-weight: 700; color: var(--text); }
+.resource-card p { margin: 8px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--text-muted); }
+.resource-cta {
+  margin-top: auto; padding-top: 24px; display: inline-flex; align-items: center; gap: 4px;
+  font-size: 13.5px; font-weight: 700; color: var(--navy-900);
+}
+
+.landing-footer {
+  border-top: 1px solid var(--border); background: #fff; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: space-between;
+  font-size: 11.5px; color: var(--text-muted); text-align: center;
+}
+@media (min-width: 700px) {
+  .landing-footer { flex-direction: row; }
+}
+
+/* --- 등장 애니메이션 --- */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease-out, transform .7s ease-out;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+/* 역량 근거 칩(수업 이수율/실전참여/자격증/수상 경력) — 2026-08-21, 2026-08-22 개편 */
 .factor-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.evidence-empty .factor-row, .evidence-empty { display: flex; flex-direction: column; gap: 6px; }
 .factor-chip {
   font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px;
   background: #f1f2f6; color: #9aa1ae;
 }
 .factor-chip.on { background: var(--blue-50); color: var(--blue-600); }
 
-/* 로드맵 계산 로딩 오버레이(2026-08-21) — Gemini 사유 생성까지 포함해 최대 20초
+/* 로드맵 계산 로딩 오버레이(2026-08-21) — Gemini 사유 생성까지 포함해 최대 1분
    걸리는데 화면이 멈춘 것처럼 보이지 않게 진행 중임을 명확히 알린다. */
 .loading-overlay {
   position: fixed; inset: 0; z-index: 100;
@@ -627,6 +854,7 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 }
 .drawer-logout:hover { color: var(--red); }
 
+<<<<<<< HEAD
 /* ============================================================
    2026-08-24 Mobile product refresh
    - 데스크톱 3열 정보 구조는 보존하고, 720px 이하에서는 실제 사용 순서에 맞춰
@@ -1043,3 +1271,13 @@ select:focus, input:focus { outline: 2px solid var(--blue-500); outline-offset: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+=======
+/* 저학점 학기(6학점 이하) 확인 질문 — 화면1 마스킹 확인 단계(2026-08-22) */
+.irregular-semester-row {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 12px 14px; margin-bottom: 8px;
+  background: var(--blue-50, #eef4ff); border-radius: 10px;
+}
+.irregular-semester-row p { margin: 0; flex: 1 1 260px; font-size: 14px; color: var(--navy-900, #14213c); }
+.irregular-semester-row select { flex: 0 0 auto; }
+>>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c

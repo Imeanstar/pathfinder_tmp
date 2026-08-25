@@ -8,6 +8,7 @@ yoram_chunks.jsonl)로 교체했다. GOOGLE_API_KEY가 없으면 TF-IDF 단독�
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -17,6 +18,30 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
+
+# 임베딩 사전계산 캐시 — 비용/레이턴시 최적화(2026-08-24). Cloud Run은 스케일-투-제로라
+# 트래픽 없다가 첫 요청이 올 때마다(콜드스타트) GeminiEncoder.fit()이 코퍼스 전체를
+# 매번 API로 재임베딩했다. data_pipeline/04_precompute_embeddings.py로 미리 계산해
+# 여기 커밋해두면, 코퍼스가 안 바뀐 한 API 호출 없이 그대로 로드만 한다.
+EMBEDDINGS_CACHE_DIR = DATA_DIR / "embeddings"
+
+
+def _fingerprint(texts: list[str]) -> str:
+    """코퍼스가 바뀌었는지 판정하는 지문. 캐시 저장 시점의 문서 텍스트와 지금 실제로
+    fit()에 들어온 텍스트가 정확히 같을 때만(순서까지) 캐시를 신뢰한다."""
+    return hashlib.sha256("\n".join(texts).encode("utf-8")).hexdigest()
+
+
+def _load_cached_embeddings(corpus: str, texts: list[str]) -> np.ndarray | None:
+    """캐시 파일이 없거나 코퍼스가 바뀌어 지문이 안 맞으면 None — 호출부가 실시간
+    계산으로 안전하게 폴백한다(오래된 임베딩을 잘못 쓰는 것보다 API 호출이 낫다)."""
+    path = EMBEDDINGS_CACHE_DIR / f"{corpus}.npz"
+    if not path.exists():
+        return None
+    data = np.load(path)
+    if str(data["fingerprint"]) != _fingerprint(texts):
+        return None
+    return data["embeddings"].astype("float32")
 
 
 def minmax(v: np.ndarray) -> np.ndarray:
@@ -52,16 +77,24 @@ class TfidfEncoder:
 
 
 class GeminiEncoder:
-    """1차와 동일한 GoogleGenerativeAIEmbeddings 경로. API 키 없으면 make_encoder()가 안 씀."""
+    """1차와 동일한 GoogleGenerativeAIEmbeddings 경로. API 키 없으면 make_encoder()가 안 씀.
+
+    corpus를 넘기면 fit() 전에 사전계산 캐시(EMBEDDINGS_CACHE_DIR)를 먼저 확인한다 —
+    지문이 일치하면 API를 아예 호출하지 않는다."""
 
     name = "gemini-embedding-001"
 
-    def __init__(self, model: str = "models/gemini-embedding-001") -> None:
+    def __init__(self, model: str = "models/gemini-embedding-001", corpus: str | None = None) -> None:
         from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
         self._e = GoogleGenerativeAIEmbeddings(model=model)
+        self._corpus = corpus
 
     def fit(self, texts: list[str]) -> None:
+        cached = _load_cached_embeddings(self._corpus, texts) if self._corpus else None
+        if cached is not None:
+            self._m = cached
+            return
         self._m = np.asarray(self._e.embed_documents(texts), dtype="float32")
 
     def similarity(self, query: str) -> np.ndarray:
@@ -87,12 +120,13 @@ class HybridEncoder:
         return sum(w * minmax(e.similarity(query)) for e, w in zip(self.encoders, self.weights))
 
 
-def make_encoder() -> Encoder:
-    """Gemini가 붙으면 하이브리드, 아니면 TF-IDF 단독(대체 경로)."""
+def make_encoder(corpus: str | None = None) -> Encoder:
+    """Gemini가 붙으면 하이브리드, 아니면 TF-IDF 단독(대체 경로). corpus를 넘겨야
+    GeminiEncoder가 사전계산 캐시(EMBEDDINGS_CACHE_DIR)를 찾을 수 있다."""
     tfidf = TfidfEncoder()
     if os.environ.get("GOOGLE_API_KEY"):
         try:
-            return HybridEncoder([tfidf, GeminiEncoder()], [0.5, 0.5])
+            return HybridEncoder([tfidf, GeminiEncoder(corpus=corpus)], [0.5, 0.5])
         except Exception:  # 패키지 미설치·인증 실패 - 조용히 대체 경로로
             pass
     return tfidf
@@ -137,7 +171,7 @@ class _CorpusIndex:
     def __init__(self, corpus: str) -> None:
         self.corpus = corpus
         self.items = _load_corpus_items(corpus)
-        self.encoder = make_encoder()
+        self.encoder = make_encoder(corpus)
         self.encoder.fit([it["_doc_text"] for it in self.items])
 
     def search(self, query: str, top_k: int) -> list[dict]:

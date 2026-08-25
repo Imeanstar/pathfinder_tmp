@@ -27,12 +27,12 @@ class ManualProject:
     title: str
     field: str  # competency.yaml project_fields의 키 (예: "웹_백엔드", "기타")
     is_team: bool = False
-    # 2026-08-21 추가 — "과목 하나로 역량이 충족됐다고 뜨는 게 부적절하다"는 피드백에 따라
-    # 역량 판정에 다양한 근거(수업/프로젝트/동아리/자격증)를 반영하려면 활동 종류를 구분해야
-    # 했다. "분야"(field)는 기존 project_fields를 그대로 재사용한다 — 자격증·동아리도
+    # 2026-08-21 추가, 2026-08-22 "동아리" 제거 + "수상 경력" 추가 — 역량 판정에 다양한
+    # 근거(수업/실전 참여/자격증/수상 경력)를 반영하려면 활동 종류를 구분해야 했다.
+    # "분야"(field)는 기존 project_fields를 그대로 재사용한다 — 자격증·수상 경력도
     # "이 활동이 어떤 역량 분야와 관련있는지"는 프로젝트와 같은 방식으로 태깅되면 되므로
     # 별도 매핑 테이블을 새로 만들 필요가 없었다.
-    activity_type: str = "project"  # "project" | "club" | "certification" | "program"
+    activity_type: str = "project"  # "project" | "program" | "certification" | "award"
 
 
 @lru_cache(maxsize=1)
@@ -121,15 +121,34 @@ def collect_competency_evidence(
     return evidence
 
 
-# 5단계 역량 판정 — 2026-08-21 사용자 피드백으로 재설계.
+# 5단계 역량 판정 — 2026-08-21 최초 설계, 2026-08-22 사용자 요청으로 점수 체계 재설계.
 # "컴퓨터프로그래밍및실습 한 과목만 들었다고 소프트웨어공학·설계가 '충족'으로 뜨는 건
-# 너무 낙관적이다"라는 지적에 따라, 연속적인 숫자 격차(gap) 대신 4개 요소(수업을
-# 충분히 들었는지 / 실전 참여[프로젝트·교내프로그램] 경험이 있는지 / 관련 동아리
-# 활동이 있는지 / 관련 자격증이 있는지)의 개수로 5단계 라벨을 매긴다. 요소가 다 있어야
-# "매우 충족"이고, 한둘 빠지면 "충족", 절반이면 "보통" 식으로 사용자가 직접 제시한
-# 기준을 그대로 코드화했다. compute_gap/compute_target의 연속값(레이더 모양·추천
+# 너무 낙관적이다"라는 지적에 따라, 연속적인 숫자 격차(gap) 대신 여러 근거를 합산한
+# 점수로 5단계 라벨을 매긴다. compute_gap/compute_target의 연속값(레이더 모양·추천
 # 랭킹에 계속 쓰임)은 건드리지 않고, 화면에 보여줄 라벨만 별도로 계산한다.
-LEVEL_BY_SCORE = {4: "매우 충족", 3: "충족", 2: "보통", 1: "부족", 0: "매우 부족"}
+#
+# 2026-08-22: "동아리"는 역량 근거로 부적절하다는 사용자 판단에 따라 제거하고 "수상
+# 경력"을 추가했다. 또한 실전 참여·자격증·수상 경력을 O/X가 아니라 "몇 개/몇 회"
+# 개수 기반 점수로 바꿨다(사용자 명시):
+#   - 수업 이수율(0~1 비율) 그대로 최대 1점
+#   - 자격증 1개당 0.5점
+#   - 실전 참여(프로젝트·교내프로그램) 1회당 0.5점
+#   - 수상 경력 1회당 1점
+# 총점 구간(사용자 명시, 2.5점은 "만족"으로 확정):
+#   0~0.5: 매우 부족 / 0.5 초과~1: 부족 / 1 초과~2: 보통 / 2 초과~2.5: 만족 / 2.5 초과: 매우 만족
+_LEVEL_THRESHOLDS = [
+    (0.5, "매우 부족"),
+    (1.0, "부족"),
+    (2.0, "보통"),
+    (2.5, "만족"),
+]
+
+
+def _classify_level(score: float) -> str:
+    for upper_bound, label in _LEVEL_THRESHOLDS:
+        if score <= upper_bound:
+            return label
+    return "매우 만족"
 
 
 @lru_cache(maxsize=1)
@@ -189,15 +208,17 @@ def classify_competency_levels(
         items = evidence.get(axis, [])
         taken_names = {e["name"] for e in items if e["type"] == "course"}
         course_factor = _course_ratio_factor(axis, taken_names, current_grade, catalog)
+        activity_count = sum(1 for e in items if e["type"] in ("project", "program"))
+        certification_count = sum(1 for e in items if e["type"] == "certification")
+        award_count = sum(1 for e in items if e["type"] == "award")
         factors = {
             "course": course_factor,
-            "activity": any(e["type"] in ("project", "program") for e in items),
-            "club": any(e["type"] == "club" for e in items),
-            "certification": any(e["type"] == "certification" for e in items),
+            "activity": activity_count,
+            "certification": certification_count,
+            "award": award_count,
         }
-        score = course_factor + int(factors["activity"]) + int(factors["club"]) + int(factors["certification"])
-        level = LEVEL_BY_SCORE[max(0, min(4, round(score)))]
-        levels[axis] = {"level": level, "score": score, "factors": factors}
+        score = course_factor + activity_count * 0.5 + certification_count * 0.5 + award_count * 1.0
+        levels[axis] = {"level": _classify_level(score), "score": score, "factors": factors}
     return levels
 
 

@@ -10,6 +10,7 @@ const PROJECT_FORM_TYPES = [
 
 let CONFIG = null;
 let uploadedCourses = [];
+<<<<<<< HEAD
 let loadingStageTimer = null;
 
 const WIZARD_STEP_IDS = ["stepUpload", "stepMasked", "stepSettings"];
@@ -22,6 +23,10 @@ function syncWizardProgress(activeId) {
     item.toggleAttribute("aria-current", index === activeIndex);
   });
 }
+=======
+let detectedAdmissionYear = null;
+let lowCreditSemesters = [];
+>>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c
 
 // --- 단계 전환: 나가는 섹션을 위로 페이드아웃 → 들어오는 섹션을 아래에서 페이드인 ---
 function goToStep(fromId, toId) {
@@ -180,6 +185,11 @@ function uploadFile(file) {
     dropzone.setAttribute("aria-busy", "false");
 
     uploadedCourses = body.courses || [];
+    detectedAdmissionYear = body.admission_year || null;
+    const chip = document.getElementById("admissionYearChip");
+    chip.textContent = detectedAdmissionYear
+      ? `${detectedAdmissionYear}학번 · 소프트웨어학과`
+      : "학번 확인 불가 · 소프트웨어학과"; // 개발 모드(과목 미인식) 등 수강년도를 못 얻은 경우
     renderMaskResult(body);
     setTimeout(() => goToStep("stepUpload", "stepMasked"), 700);
   });
@@ -256,6 +266,50 @@ function renderMaskResult(body) {
       </tr>`
     )
     .join("");
+
+  renderIrregularSemesterQuestions(body.low_credit_semesters);
+}
+
+function renderIrregularSemesterQuestions(lowCredit) {
+  lowCreditSemesters = lowCredit || [];
+  const section = document.getElementById("irregularSemesterSection");
+  const rows = document.getElementById("irregularSemesterRows");
+
+  if (lowCreditSemesters.length === 0) {
+    section.hidden = true;
+    rows.innerHTML = "";
+    return;
+  }
+
+  section.hidden = false;
+  rows.innerHTML = lowCreditSemesters
+    .map(
+      (s) => `
+      <div class="irregular-semester-row">
+        <p>${s.year}년도 ${s.semester}에 이수한 학점(${s.credit_sum}학점)이 너무 적어요. 정규학기가 아닌가요?</p>
+        <select data-year="${s.year}" data-semester="${s.semester}">
+          <option value="">선택해주세요</option>
+          <option value="regular">정규학기입니다.</option>
+          <option value="not_regular">정규학기가 아닙니다.</option>
+        </select>
+      </div>`
+    )
+    .join("");
+}
+
+function collectIrregularSemesterAnswers() {
+  const answers = {};
+  document.querySelectorAll("#irregularSemesterRows select").forEach((sel) => {
+    if (!sel.value) return;
+    answers[`${sel.dataset.year}-${sel.dataset.semester}`] = sel.value === "regular";
+  });
+  return answers;
+}
+
+function allIrregularSemestersAnswered() {
+  if (lowCreditSemesters.length === 0) return true;
+  const selects = document.querySelectorAll("#irregularSemesterRows select");
+  return Array.from(selects).every((sel) => sel.value !== "");
 }
 
 function escapeHtml(text) {
@@ -324,8 +378,11 @@ const GTELP_SUBTYPES = [
   { value: "GTELP_Lv2", label: "Level 2" },
   { value: "GTELP_Lv3", label: "Level 3" },
 ];
-// TOEIC Speaking·OPIc 등급(높은 것부터 나열해 고르기 쉽게)
-const SPEAKING_GRADES = ["AH", "AM", "AL", "IH", "IM", "IL", "NH", "NM", "NL"];
+// (NEW) TOEIC Speaking·OPIc 등급(높은 것부터 나열해 고르기 쉽게). 둘은 등급 체계가
+// 다르다(2026-08-22 사용자 지시) — OPIc은 AH/AM 등급이 없고, IM은 세부적으로
+// IM1~IM3로 나뉘어 성적표에 그대로 찍힌다.
+const TOEIC_SPEAKING_NEW_GRADES = ["AH", "AM", "AL", "IH", "IM3", "IM2", "IM1", "IL", "NH", "NM", "NL"];
+const OPIC_GRADES = ["AL", "IH", "IM3", "IM2", "IM1", "IL", "NH", "NM", "NL"];
 
 function setSlot(slotId, visible) {
   document.getElementById(slotId).hidden = !visible;
@@ -356,9 +413,10 @@ function updateLanguageFields() {
   }
 
   if (exam === "TOEIC_Speaking" || exam === "OPIc") {
+    const grades = exam === "TOEIC_Speaking" ? TOEIC_SPEAKING_NEW_GRADES : OPIC_GRADES;
     gradeSelect.innerHTML =
       `<option value="">등급 선택</option>` +
-      SPEAKING_GRADES.map((g) => `<option value="${g}">${g}</option>`).join("");
+      grades.map((g) => `<option value="${g}">${g}</option>`).join("");
     setSlot("langGradeSlot", true);
     note.textContent =
       exam === "TOEIC_Speaking"
@@ -367,9 +425,16 @@ function updateLanguageFields() {
     return;
   }
 
-  // TOEIC / TEPS — 바로 점수 입력
+  // TOEIC / TEPS / TEPS_NEW / IELTS / TOEIC_Speaking_OLD — 바로 점수 입력
   setSlot("langScoreSlot", true);
-  note.textContent = exam === "TOEIC" ? "졸업 기준: 730점 이상" : "졸업 기준: 605점 이상";
+  const NOTES = {
+    TOEIC: "졸업 기준: 730점 이상",
+    TEPS: "졸업 기준: 605점 이상(구 텝스)",
+    TEPS_NEW: "졸업 기준: 329점 이상(뉴텝스)",
+    IELTS: "졸업 기준: 5.5점 이상",
+    TOEIC_Speaking_OLD: "졸업 기준: Level 5 이상(구버전)",
+  };
+  note.textContent = NOTES[exam] || "";
 }
 
 function collectLanguageScore() {
@@ -408,13 +473,15 @@ function collectProgrammingCompetency() {
   return null;
 }
 
-// --- 개인 활동(프로젝트·동아리·자격증·교내프로그램) ---
+// --- 개인 활동(프로젝트·자격증·수상 경력·교내프로그램) ---
 // 2026-08-21: 역량 진단이 "과목 하나만 들어도 충족"으로 뜨는 게 너무 낙관적이라는
 // 피드백에 따라, 판정 근거를 과목 외에 다양화하려고 활동 유형을 추가했다(app/agents/
-// competency.py의 4요소 판정: 수업/실전참여/동아리/자격증).
+// competency.py의 점수 산정: 수업 이수율/실전참여/자격증/수상 경력).
+// 2026-08-22: "동아리"는 역량 근거로 부적절하다는 사용자 판단에 따라 빼고
+// "수상 경력"을 추가했다.
 const ACTIVITY_TYPES = [
   { id: "project", label: "프로젝트" },
-  { id: "club", label: "동아리" },
+  { id: "award", label: "수상 경력" },
   { id: "certification", label: "자격증" },
   { id: "program", label: "교내 프로그램" },
 ];
@@ -459,7 +526,7 @@ async function handleSubmit(e) {
   const submitBtn = document.getElementById("submitBtn");
   submitBtn.disabled = true;
   submitBtn.textContent = "분석 중...";
-  // 졸업판정+역량진단+추천(Gemini 사유 생성 포함)까지 한 번에 계산해 20초 가까이
+  // 졸업판정+역량진단+추천(Gemini 사유 생성 포함)까지 한 번에 계산해 최대 1분 가까이
   // 걸린다 — 화면이 멈춘 것처럼 보이지 않게 전체 화면 오버레이로 진행 중임을 알린다.
   showRoadmapLoading();
 
@@ -489,6 +556,7 @@ async function handleSubmit(e) {
     language_score: collectLanguageScore(),
     programming_competency: collectProgrammingCompetency(),
     email_hash: emailHash,
+    irregular_semester_answers: collectIrregularSemesterAnswers(),
   };
 
   try {
@@ -499,6 +567,14 @@ async function handleSubmit(e) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const result = await res.json();
+
+    // 서버가 성적표의 수강년도로 실제 판정에 쓴 입학년도를 되돌려준다 — 화면1에서
+    // 보낸 admission_year(기본값 2025)는 폴백일 뿐이라, 응답값으로 덮어써야
+    // 대시보드의 "OOOO학년도 학사요람" 표시와 자기신고 재판정이 정확해진다
+    // (2026-08-22, 21~26학번 확장).
+    if (result.admission_year) {
+      payload.admission_year = result.admission_year;
+    }
 
     sessionStorage.setItem("pathfinder:formState", JSON.stringify(payload));
     sessionStorage.setItem("pathfinder:planResult", JSON.stringify(result));
@@ -525,6 +601,10 @@ document.addEventListener("DOMContentLoaded", () => {
     goToStep("stepMasked", "stepUpload");
   });
   document.getElementById("confirmMaskBtn").addEventListener("click", () => {
+    if (!allIrregularSemestersAnswered()) {
+      alert("아직 답하지 않은 학기가 있습니다. 전부 답해주세요.");
+      return;
+    }
     goToStep("stepMasked", "stepSettings");
   });
 

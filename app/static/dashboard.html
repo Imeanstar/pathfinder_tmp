@@ -17,6 +17,7 @@
     </div>
     <div class="header-right">
       <button class="btn-ghost" id="restartBtn">처음부터</button>
+      <div class="auth-slot" id="authSlot"></div>
     </div>
   </header>
 
@@ -50,6 +51,7 @@
     </section>
   </main>
 
+<<<<<<< HEAD
   <button class="chat-fab" id="chatFab" aria-label="상담 열기"><span class="chat-fab-dots" aria-hidden="true">•••</span><strong>상담</strong></button>
   <nav class="mobile-tabbar" aria-label="대시보드 탐색">
     <button type="button" class="is-active" data-mobile-tab="status"><span>◷</span>현황</button>
@@ -57,6 +59,23 @@
     <button type="button" data-mobile-tab="skills"><span>◇</span>역량진단</button>
   </nav>
 
+=======
+  <!-- 계정 드로어 — index.html/upload.html과 동일하되 [내 로드맵] 버튼은 없음
+       (이미 로드맵 화면이라 불필요, 2026-08-24 사용자 요청). -->
+  <div class="modal-overlay" id="drawerOverlay" hidden>
+    <aside class="side-drawer">
+      <button class="modal-close" id="drawerCloseBtn" aria-label="닫기">✕</button>
+      <div class="drawer-account">
+        <div class="drawer-avatar" id="drawerAvatar"></div>
+        <div class="drawer-name" id="drawerName"></div>
+        <div class="drawer-email" id="drawerEmail"></div>
+      </div>
+      <button class="drawer-logout" id="drawerLogoutBtn">로그아웃</button>
+    </aside>
+  </div>
+
+  <script src="/js/auth.js"></script>
+>>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c
   <script src="/js/dashboard.js"></script>
 </body>
 </html>

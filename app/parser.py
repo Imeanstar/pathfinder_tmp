@@ -39,6 +39,114 @@ class TranscriptData:
     masked_text: str = ""
 
 
+def infer_admission_year(courses: list[dict]) -> int | None:
+    """1학년 1학기는 휴학이 교칙상 불가능하므로, 성적표에 찍힌 "수강년도"(courses의
+    "year" 키) 중 최솟값이 곧 입학년도다. 사용자가 화면에서 입학년도를 직접 입력하지
+    않아도 되게 하려고 서버가 자동으로 추론한다(2026-08-22 사용자 지시). "year"가
+    있는 과목이 하나도 없으면(예: 개발 모드 수동 입력) 추측하지 않고 None을 돌려준다."""
+    years = [c["year"] for c in courses if "year" in c]
+    return min(years) if years else None
+
+
+_REGULAR_SEMESTERS = ("1학기", "2학기")
+
+
+def _semester_key(year: int, semester: str) -> str:
+    return f"{year}-{semester}"
+
+
+def _regular_semester_credit_sums(courses: list[dict]) -> dict[tuple[int, str], int]:
+    sums: dict[tuple[int, str], int] = {}
+    for c in courses:
+        semester = c.get("semester")
+        if semester not in _REGULAR_SEMESTERS:
+            continue  # 계절학기 또는 정보 없음 — 정규학기 후보가 아니다
+        key = (c["year"], semester)
+        sums[key] = sums.get(key, 0) + c["credit"]
+    return sums
+
+
+def find_low_credit_semesters(courses: list[dict], threshold: int = 6) -> list[dict]:
+    """1학기/2학기인데 학점 합이 threshold 이하인 학기를 찾는다. 우리 학교엔 최소수강학점
+    제도가 없어 "진짜 적게 들은 정규학기"와 "군 e-러닝처럼 성적표엔 정규학기로 찍히지만
+    실제로는 정규학기가 아닌 경우"를 성적표만으로 구분할 수 없다 — 그래서 사용자에게
+    직접 물어본다(2026-08-22 사용자 지시). 계절학기는 학점과 무관하게 애초에 후보에서
+    빠진다(_regular_semester_credit_sums가 이미 걸러냄)."""
+    sums = _regular_semester_credit_sums(courses)
+    flagged = [
+        {"year": year, "semester": semester, "credit_sum": total}
+        for (year, semester), total in sums.items()
+        if total <= threshold
+    ]
+    flagged.sort(key=lambda f: (f["year"], f["semester"]))
+    return flagged
+
+
+def compute_remaining_terms(
+    courses: list[dict], semester_overrides: dict[str, bool] | None = None
+) -> list[str] | None:
+    """입학년도로부터 "정규학기를 몇 번 이수했는가"(n)를 세어 8-n개의 남은 학기를
+    돌려준다(2026-08-22 사용자 지시) — 달력상 몇 년이 지났는지가 아니라 실제로 이수한
+    정규학기 수만 본다(휴학 기간은 성적표에 아예 안 남으므로 자동으로 제외된다).
+
+    semester_overrides: find_low_credit_semesters()가 찾아낸 저학점 학기 중 사용자가
+    "정규학기가 아닙니다"라고 답한 것만 f"{year}-{semester}" 키로 False를 넣어 넘긴다.
+    답하지 않은 저학점 학기는 정규학기로 간주한다(화면 흐름상 항상 답하게 막지만, 이
+    함수 자체가 서버 단독 호출에도 안전해야 하므로 — 모른다고 0으로 깎지 않는다).
+
+    과목에 "semester" 정보가 하나도 없으면(개발 모드 수동 입력 등) 계산할 수 없으므로
+    추측하지 않고 None을 돌려준다 — 호출자가 기존 기본값으로 폴백해야 한다."""
+    if not any("semester" in c for c in courses):
+        return None
+
+    overrides = semester_overrides or {}
+    sums = _regular_semester_credit_sums(courses)
+    regular_count = sum(
+        1 for (year, semester) in sums if overrides.get(_semester_key(year, semester), True)
+    )
+
+    start_index = min(regular_count, 8)  # 8개 이상 이수했으면 남은 학기 없음(range가 비어 [])
+    return [f"{i // 2 + 1}-{i % 2 + 1}" for i in range(start_index, 8)]
+
+
+def _next_semester(year: int, semester: str) -> tuple[int, str]:
+    if semester == "1학기":
+        return (year, "2학기")
+    return (year + 1, "1학기")
+
+
+def compute_term_calendar_labels(
+    courses: list[dict],
+    remaining_terms: list[str],
+    semester_overrides: dict[str, bool] | None = None,
+) -> dict[str, str]:
+    """remaining_terms(예: ["4-1","4-2"], compute_remaining_terms가 돌려주는 학년-학기
+    상대 표기)를 화면에 보여줄 실제 달력 연도-학기로 바꾼다.
+
+    "입학년도 + (학년-1)"처럼 계산하면 휴학(군 e-러닝으로 정규학기가 빠진 경우 등)이
+    있는 학생은 실제 달력과 어긋난다(2026-08-23 사용자 실사례 — 마지막 학기가 실제로는
+    2026-2인데 2024-2로 잘못 표시됨). 대신 성적표에 실제로 찍힌 "마지막 정규학기"를
+    기준점 삼아 그 다음 학기부터 순차적으로 이어붙인다 — 휴학 기간이 몇 년이든 무관하게
+    항상 실제 달력과 맞는다."""
+    overrides = semester_overrides or {}
+    sums = _regular_semester_credit_sums(courses)
+    regular_keys = [
+        (year, semester) for (year, semester) in sums
+        if overrides.get(_semester_key(year, semester), True)
+    ]
+    if not regular_keys:
+        return {}
+
+    regular_keys.sort(key=lambda ys: (ys[0], 0 if ys[1] == "1학기" else 1))
+    cursor = regular_keys[-1]
+    labels: dict[str, str] = {}
+    for term in remaining_terms:
+        cursor = _next_semester(*cursor)
+        sem_num = "1" if cursor[1] == "1학기" else "2"
+        labels[term] = f"{cursor[0]}-{sem_num}"
+    return labels
+
+
 def extract_words_from_pdf(pdf_bytes: bytes) -> list[dict]:
     """pdfplumber 경계 코드. 원본 PDF 바이트는 이 함수 밖으로 나가지 않는다."""
     words = []

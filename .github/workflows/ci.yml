@@ -1,0 +1,65 @@
+name: CI
+
+# 코드 회귀 방지 (운영 자동화 계층 1) — docs/superpowers/specs/2026-08-24-운영-자동화-design.md
+#
+# API 키 없는 "개발 모드" 경로가 실제 CI 환경(비밀값 없음)에서도 안전하게 동작해야 하므로,
+# 이 워크플로우는 어떤 secrets도 참조하지 않는다 — 그 자체가 "개발 모드 폴백이 실제로
+# 동작한다"는 검증이기도 하다(app/llm.py, app/retrieval.py, app/user_store.py의 대체 경로).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: pytest (API 키 없는 개발 모드)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: pytest
+        run: pytest -q
+
+  container:
+    name: 컨테이너 빌드 + 헬스체크
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 이미지 빌드
+        run: docker build -t ajou-pathfinder:ci .
+
+      # requirements.txt(개발)와 requirements-runtime.txt(런타임)가 분리돼 있어
+      # "로컬 테스트는 통과하는데 배포만 깨지는" 구조적 위험이 실제로 있었다
+      # (google-cloud-firestore/google-genai protobuf 버전 충돌, docs/배포.md 참고).
+      # docker build 성공만으로는 부족하고, 실제로 띄워서 import 에러·설정 누락을 잡는다.
+      - name: 컨테이너 기동 (Cloud Run과 동일하게 PORT=8080, 비밀값 없음)
+        run: docker run -d --name ci-app -p 8080:8080 -e PORT=8080 ajou-pathfinder:ci
+
+      - name: 헬스체크 (콜드스타트 대비 최대 30초 재시도)
+        run: |
+          for i in $(seq 1 15); do
+            if curl -sf http://localhost:8080/health; then
+              echo ""
+              echo "헬스체크 통과"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "헬스체크 실패 — 컨테이너 로그:"
+          docker logs ci-app
+          exit 1
+
+      - name: 컨테이너 로그 (실패 시 디버깅용, 항상 출력)
+        if: always()
+        run: docker logs ci-app || true

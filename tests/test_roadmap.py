@@ -230,3 +230,148 @@ def test_plan_roadmap_places_prereq_asap_then_dependent_in_next_term_when_both_o
     assert "자료구조" in courses_by_term["3-2"]
     assert "알고리즘" in courses_by_term["4-1"]
     assert result["warnings"] == []
+
+
+# --- 전공기초(SW커리어세미나·확률및통계1·선형대수1) 자동 배치 (2026-08-22) ---
+# 25·26학번부터 신설된 전공기초도 전공필수처럼 gap 추천과 무관하게 졸업하려면
+# 반드시 들어야 하는 과목이다 — audit.py의 missing_major_foundation_courses를
+# 그대로 로드맵에 넘겨 배치한다. 다만 카드/문구에서 "전공필수"와 혼동되지 않도록
+# 사유 접두사는 "[졸업요건] 전공기초 —"로 구분한다.
+
+def test_plan_roadmap_places_missing_major_foundation_course_regardless_of_gap_recommendation():
+    # SW커리어세미나: recommended_terms=[1-1] (요람 1학년 1학기 권장, courses.json 기준)
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names=set(),
+        remaining_terms=["1-1", "1-2"],
+        missing_major_foundation_courses=["SW커리어세미나"],
+    )
+    placed = result["schedule"]["1-1"]["courses"]
+    assert any(c["name"] == "SW커리어세미나" for c in placed)
+
+
+def test_plan_roadmap_major_foundation_reason_says_major_foundation_not_required_major():
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names=set(),
+        remaining_terms=["1-1"],
+        missing_major_foundation_courses=["SW커리어세미나"],
+    )
+    reason = next(
+        c["reason"] for c in result["schedule"]["1-1"]["courses"] if c["name"] == "SW커리어세미나"
+    )
+    assert "[졸업요건] 전공기초" in reason
+    assert "전공필수" not in reason
+
+
+def test_plan_roadmap_places_all_three_major_foundation_courses_in_recommended_terms():
+    # 확률및통계1: recommended_terms=[2-1], 선형대수1: recommended_terms=[2-2] (courses.json 기준)
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names=set(),
+        remaining_terms=["1-1", "2-1", "2-2"],
+        missing_major_foundation_courses=["SW커리어세미나", "확률및통계1", "선형대수1"],
+    )
+    courses_by_term = {
+        term: [c["name"] for c in data["courses"]] for term, data in result["schedule"].items()
+    }
+    assert "SW커리어세미나" in courses_by_term["1-1"]
+    assert "확률및통계1" in courses_by_term["2-1"]
+    assert "선형대수1" in courses_by_term["2-2"]
+    assert result["warnings"] == []
+
+
+def test_plan_roadmap_places_overdue_major_foundation_course_asap():
+    # 남은 학기가 3-1부터라 선형대수1의 권장 시기(2-2)가 이미 지났어도, 조용히
+    # 빠뜨리지 않고 가장 이른 남은 학기에 배치해야 한다(전공필수와 같은 원칙).
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names=set(),
+        remaining_terms=["3-1", "3-2"],
+        missing_major_foundation_courses=["선형대수1"],
+    )
+    placed = result["schedule"]["3-1"]["courses"]
+    assert any(c["name"] == "선형대수1" for c in placed)
+    reason = next(c["reason"] for c in placed if c["name"] == "선형대수1")
+    assert "지났" in reason or "최대한" in reason
+    assert result["warnings"] == []
+
+
+def test_plan_roadmap_does_not_duplicate_major_foundation_course_already_taken():
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names={"SW커리어세미나"},
+        remaining_terms=["2-1"],
+        missing_major_foundation_courses=[],  # audit.py가 이미 이수한 과목은 빼서 넘긴다
+    )
+    placed_names = [c["name"] for term in result["schedule"].values() for c in term["courses"]]
+    assert "SW커리어세미나" not in placed_names
+
+
+# --- 졸업요건 백필(전공선택 학점·산학프로젝트 인증) 배치 (2026-08-23) ---
+# 역량 격차(gap)가 전부 0이라 course_recommendations가 비어도, 아직 채워야 할 전공선택
+# 학점·산학프로젝트 인증 과목이 있으면 로드맵이 반드시 배치를 시도해야 한다(사용자
+# 실사례 — gap이 충분해도 졸업요건이 안 채워졌으면 계속 추천해야 한다).
+
+def test_plan_roadmap_places_missing_elective_backfill_courses_regardless_of_gap():
+    # 데이터베이스: offered_terms=[3-1,3-2], prereq=[자료구조] — gap 기반 추천
+    # (course_recommendations)이 텅 비어 있어도(사용자 사례처럼 gap=0)
+    # missing_elective_courses로 넘긴 과목은 반드시 배치를 시도한다.
+    result = plan_roadmap(
+        course_recommendations=[],  # gap이 0이라 아무것도 없음
+        program_recommendations=[],
+        taken_course_names={"자료구조"},
+        remaining_terms=["3-1", "3-2"],
+        missing_elective_courses=["데이터베이스"],
+    )
+    placed = [c for term in result["schedule"].values() for c in term["courses"]]
+    assert any(c["name"] == "데이터베이스" for c in placed)
+
+
+def test_plan_roadmap_elective_backfill_reason_says_전공선택_not_전공필수():
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names={"자료구조"},
+        remaining_terms=["3-1", "3-2"],
+        missing_elective_courses=["데이터베이스"],
+    )
+    placed = [c for term in result["schedule"].values() for c in term["courses"]]
+    reason = next(c["reason"] for c in placed if c["name"] == "데이터베이스")
+    assert "[졸업요건] 전공선택" in reason
+
+
+def test_plan_roadmap_places_missing_industry_project_backfill_courses():
+    # 자기주도프로젝트: offered_terms=[3-2,3-1], prereq=[객체지향프로그래밍및실습]
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names={"객체지향프로그래밍및실습"},
+        remaining_terms=["4-1", "4-2"],
+        missing_industry_project_courses=["자기주도프로젝트"],
+    )
+    placed = [c for term in result["schedule"].values() for c in term["courses"]]
+    assert any(c["name"] == "자기주도프로젝트" for c in placed)
+    reason = next(c["reason"] for c in placed if c["name"] == "자기주도프로젝트")
+    assert "[졸업요건] 산학프로젝트 인증" in reason
+
+
+def test_plan_roadmap_backfill_courses_placed_overdue_when_window_passed():
+    # 데이터베이스는 3학년에 권장되는데 남은 학기가 4학년뿐이면(권장 시기가 이미
+    # 지났으면) 전공필수와 같은 원칙으로 조용히 빠뜨리지 않고 가장 이른 학기에
+    # 밀려서라도 배치해야 한다.
+    result = plan_roadmap(
+        course_recommendations=[],
+        program_recommendations=[],
+        taken_course_names={"자료구조"},
+        remaining_terms=["4-1"],
+        missing_elective_courses=["데이터베이스"],
+    )
+    placed = result["schedule"]["4-1"]["courses"]
+    assert any(c["name"] == "데이터베이스" for c in placed)
+    assert result["warnings"] == []

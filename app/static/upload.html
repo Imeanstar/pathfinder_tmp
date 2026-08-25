@@ -14,6 +14,7 @@
         <span class="brand-name">AJOU PATHFINDER</span>
       </a>
     </div>
+    <div class="auth-slot" id="authSlot"></div>
   </header>
 
   <main class="wizard">
@@ -104,6 +105,7 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <details class="masked-source">
           <summary>
             <span>가려진 원문 확인</span>
@@ -111,6 +113,12 @@
           </summary>
           <div class="mask-preview" id="maskPreview"></div>
         </details>
+=======
+        <div id="irregularSemesterSection" hidden>
+          <div class="mask-section-label">확인이 필요합니다</div>
+          <div id="irregularSemesterRows"></div>
+        </div>
+>>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c
 
         <div class="wizard-actions">
           <button class="btn-secondary" id="reuploadBtn">다시 업로드</button>
@@ -146,7 +154,7 @@
 
           <div class="field">
             <label>대상 학번 · 학과</label>
-            <div class="locked-chip">2025학번 · 소프트웨어학과</div>
+            <div class="locked-chip" id="admissionYearChip">학번 확인 중 · 소프트웨어학과</div>
           </div>
         </div>
 
@@ -169,12 +177,30 @@
                   <option value="OPIc">OPIc</option>
                 </select>
 
+<<<<<<< HEAD
                 <span class="cascade-slot" id="langSubSlot" hidden><select id="langSub"></select></span>
                 <span class="cascade-slot" id="langScoreSlot" hidden><input type="number" id="langScore" placeholder="점수 입력" min="0" /></span>
                 <span class="cascade-slot" id="langGradeSlot" hidden><select id="langGrade"></select></span>
               </div>
               <div class="field-note" id="langNote"></div>
             </div>
+=======
+        <div class="field">
+          <label for="langExam">어학 성적 (선택)</label>
+          <div class="cascade-row">
+            <select id="langExam">
+              <option value="">없음</option>
+              <option value="TOEIC">TOEIC</option>
+              <option value="TEPS">TEPS</option>
+              <option value="TEPS_NEW">(NEW) TEPS</option>
+              <option value="TOEFL">TOEFL</option>
+              <option value="GTELP">G-TELP</option>
+              <option value="IELTS">IELTS</option>
+              <option value="TOEIC_Speaking_OLD">TOEIC Speaking</option>
+              <option value="TOEIC_Speaking">(NEW) TOEIC Speaking</option>
+              <option value="OPIc">OPIc</option>
+            </select>
+>>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c
 
             <div class="field">
               <label for="progCert">프로그래밍 역량 인증 (선택)</label>
@@ -197,7 +223,38 @@
             <div id="projectRows"></div>
             <button type="button" class="add-link" id="addProjectRow">+ 항목 추가</button>
           </div>
+<<<<<<< HEAD
         </details>
+=======
+          <div class="field-note" id="langNote"></div>
+        </div>
+
+        <div class="field">
+          <label for="progCert">프로그래밍 역량 인증 (선택)</label>
+          <div class="cascade-row">
+            <select id="progCert">
+              <option value="">없음</option>
+              <option value="topcit">TOPCIT 점수</option>
+              <option value="apc">APC 대회 1문제 이상 정답</option>
+              <option value="contest">SW 관련 전국대회 입상</option>
+            </select>
+
+            <span class="cascade-slot" id="topcitSlot" hidden>
+              <input type="number" id="topcitScore" placeholder="TOPCIT 점수" min="0" />
+            </span>
+          </div>
+          <div class="field-note">심화과정은 TOPCIT 190점 이상이거나 APC·전국대회 실적이 있어야 합니다.</div>
+        </div>
+
+        <hr class="form-divider" />
+
+        <div class="section-head">
+          <h2>프로젝트 · 자격증 · 수상 경력 · 교내 프로그램</h2>
+          <span class="hint">선택 · 성적표에 남지 않는 이력을 채웁니다. 다양하게 입력할수록 역량 진단이 정확해집니다</span>
+        </div>
+        <div id="projectRows"></div>
+        <button type="button" class="add-link" id="addProjectRow">+ 항목 추가</button>
+>>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c
 
         <button type="submit" class="btn-primary" id="submitBtn">로드맵 만들기</button>
         <p class="disclaimer">
@@ -208,9 +265,11 @@
 
   </main>
 
-  <!-- 로드맵 계산(추천 사유 Gemini 호출 포함)이 20초 가까이 걸려서, 아무 반응이
-       없어 보이지 않게 전체 화면 오버레이로 진행 중임을 보여준다(2026-08-21 요청). -->
+  <!-- 로드맵 계산(추천 사유 Gemini 호출 포함)이 20초~1분 가까이 걸려서, 아무 반응이
+       없어 보이지 않게 전체 화면 오버레이로 진행 중임을 보여준다(2026-08-21 요청,
+       2026-08-22 안내 문구를 실측 소요시간에 맞게 "최대 1분"으로 수정). -->
   <div class="loading-overlay" id="loadingOverlay" hidden>
+<<<<<<< HEAD
     <div class="loading-card">
       <div class="loading-spinner"></div>
       <p class="loading-title">맞춤 로드맵을 정리하고 있어요</p>
@@ -222,8 +281,29 @@
       </ol>
       <p class="loading-footnote">보통 30초 이내에 완료됩니다. 원본 성적표는 저장하지 않아요.</p>
     </div>
+=======
+    <div class="loading-spinner"></div>
+    <p class="loading-title">로드맵을 만들고 있어요</p>
+    <p class="loading-sub">졸업 요건 확인 · 역량 진단 · 과목·프로그램 추천까지 한 번에 계산 중입니다 (최대 1분 정도 걸려요)</p>
+>>>>>>> a2e8bbfbf1aa8374abae40d1c5999c72c464880c
   </div>
 
+  <!-- 계정 드로어 — index.html과 동일. [내 로드맵]을 누르면 가장 최근 로드맵을
+       불러와 dashboard.html로 이동한다(2026-08-24 신설). -->
+  <div class="modal-overlay" id="drawerOverlay" hidden>
+    <aside class="side-drawer">
+      <button class="modal-close" id="drawerCloseBtn" aria-label="닫기">✕</button>
+      <div class="drawer-account">
+        <div class="drawer-avatar" id="drawerAvatar"></div>
+        <div class="drawer-name" id="drawerName"></div>
+        <div class="drawer-email" id="drawerEmail"></div>
+      </div>
+      <button class="drawer-action" id="drawerMyRoadmapBtn">내 로드맵</button>
+      <button class="drawer-logout" id="drawerLogoutBtn">로그아웃</button>
+    </aside>
+  </div>
+
+  <script src="/js/auth.js"></script>
   <script src="/js/upload.js"></script>
 </body>
 </html>
