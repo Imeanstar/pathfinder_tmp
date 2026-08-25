@@ -743,11 +743,18 @@ function renderRoadmapCard() {
     <div class="roadmap-header">
       <h2>학기별 로드맵</h2>
       <span class="term-count-badge">${terms.length}개 학기</span>
+      <button class="roadmap-collapse-all" id="collapseAllRoadmap" type="button">모두 접기</button>
     </div>
     <p class="roadmap-intro">현재 학기를 기준으로 추천 과목과 활동을 정리했습니다.</p>
     ${warningHtml}
     <div class="roadmap-accordion">${termsHtml}</div>
   `;
+
+  document.getElementById("collapseAllRoadmap").addEventListener("click", () => {
+    document.querySelectorAll("#roadmapCard .roadmap-term[open]").forEach((term) => {
+      term.open = false;
+    });
+  });
 }
 
 // --- 상담(챗봇) ---
@@ -877,6 +884,21 @@ function setupMobileNavigation() {
   });
 }
 
+function setupScrollTopButton() {
+  const button = document.getElementById("scrollTopBtn");
+  const syncVisibility = () => {
+    const visible = window.scrollY > Math.max(420, window.innerHeight * 0.55);
+    button.classList.toggle("is-visible", visible);
+    button.setAttribute("aria-hidden", String(!visible));
+    button.tabIndex = visible ? 0 : -1;
+  };
+
+  window.addEventListener("scroll", syncVisibility, { passive: true });
+  window.addEventListener("resize", syncVisibility);
+  button.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+  syncVisibility();
+}
+
 // --- 초기화 ---
 document.addEventListener("DOMContentLoaded", () => {
   if (!loadState()) return;
@@ -889,6 +911,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupGuardrailToggle();
   setupSelfReportDelegation();
   setupMobileNavigation();
+  setupScrollTopButton();
 
   document.getElementById("chatSend").addEventListener("click", sendChat);
   const chatInputEl = document.getElementById("chatInput");
