@@ -10,6 +10,32 @@ Engine](https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/overv
 메인으로 갈아끼울 수 있다. 그 전까진 두 배포가 동시에 존재하고, 서비스는 계속
 Cloud Run 것을 쓴다.
 
+**실제로 배포해서 검증함**(2026-08-25, `projects/783601922022/locations/
+asia-northeast3/reasoningEngines/1514951101214883840`): 배포된 Agent Engine에
+실제 쿼리(`{"courses":[{"name":"자료구조",...}], "track":"백엔드", ...}`)를
+날려 로컬 Cloud Run 경로와 동일한 과목·프로그램 추천 결과를 받았다. 처음 두 번의
+배포 시도는 실패했고 원인을 Cloud Logging에서 직접 찾아 고쳤다(아래
+"배포 중 실제로 겪은 문제" 참고, `agent_engine/deploy.py`·
+`agent_engine/requirements.txt`에 이미 반영됨).
+
+### 배포 중 실제로 겪은 문제
+
+1. **`ModuleNotFoundError: No module named 'agent_engine'`** — `extra_packages`에
+   `agent_engine` 패키지 자체가 빠져 있었다. cloudpickle이 `PathfinderAgentEngine`
+   인스턴스를 `agent_engine.pathfinder_agent` 모듈 경로로 참조해 저장하는데,
+   원격에서 unpickle할 때 그 패키지가 없으면 기동 자체가 실패한다.
+2. **`ModuleNotFoundError: No module named 'google.cloud.aiplatform'`** — 우리
+   코드가 아니라 Agent Engine 프레임워크 자체(`telemetry_utils.py`의
+   `resolve_project_id`)가 원격 컨테이너 안에서 이 패키지를 요구한다.
+   `agent_engine/requirements.txt`에 `google-cloud-aiplatform`을 추가해서
+   해결했다 — 이 컨테이너는 Cloud Run 배포와 완전히 분리된 별도 환경이라 여기서
+   protobuf 6.x를 쓰는 건 Cloud Run 쪽에 영향이 없다.
+
+둘 다 Cloud Logging(`gcloud logging read 'resource.type="aiplatform.googleapis.com/
+ReasoningEngine" resource.labels.reasoning_engine_id="<ID>"'`)에서 정확한
+트레이스백을 확인해서 찾았다 — `agent_engines.create()`가 던지는 에러 메시지
+자체("failed to start and cannot serve traffic")는 원인을 안 알려준다.
+
 ## 왜 별도 venv가 필요한가
 
 `google-cloud-aiplatform[agent_engines,langgraph]`는 `protobuf>=4.25.8,<8.0`을

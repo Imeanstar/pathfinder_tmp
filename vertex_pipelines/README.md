@@ -34,6 +34,18 @@ summarize_new_programs(programs_tagged, new_count)  -- 신규 프로그램 요�
 "[미래자동차 Skill-UP]..." 제목을 `모빌리티_임베디드지식`으로 정확히 태깅했다 —
 `data_pipeline/03_tag_competency.py`를 직접 돌렸을 때와 동일한 결과.
 
+**Vertex AI Pipelines에 실제로 제출해서도 검증함**(2026-08-25,
+`ajouhub-freshness-20260825101750`, 3단계 전부 SUCCEEDED): ID 2299~2498 구간을
+수집한 결과 "새로 발견된 프로그램 없음" — 2026-08-24에 이미 확인했던 사실(아주허브가
+ID 2298 이후 7개월간 신규 프로그램을 안 올렸다는 것, 대화 세션 기록 참고)과
+정확히 일치한다. 배포 과정에서 실제로 겪은 문제 2가지:
+1. 실행 서비스 계정(기본 Compute Engine SA)에 스테이징 버킷 권한이 없어 즉시
+   FAILED — 아래 IAM 단계로 해결.
+2. `PipelineState`/`PipelineTaskDetail.State`는 서로 다른 enum이라 숫자만 보고
+   섣불리 "완료"로 판단하면 안 된다(`RUNNING=3`을 종료 상태로 착각해 조기 종료한
+   적이 있음) — 반드시 `google.cloud.aiplatform_v1.types.PipelineState`로 이름을
+   확인할 것.
+
 ## 왜 별도 venv가 필요한가
 
 `kfp`(파이프라인 컴파일용)와 `google-cloud-aiplatform`(제출용) 둘 다
@@ -58,6 +70,14 @@ python3 vertex_pipelines/ajouhub_freshness_pipeline.py
 # 3. Vertex AI Pipelines API 활성화 + 스테이징 버킷(최초 1회, agent_engine와 재사용 가능)
 gcloud services enable aiplatform.googleapis.com
 gsutil mb -l asia-northeast3 gs://<프로젝트ID>-pipelines-staging   # 이미 있으면 생략
+
+# 파이프라인을 "제출"하는 내 계정과 실제로 "실행"하는 서비스 계정(기본 Compute Engine
+# 서비스 계정)은 다르다 — 후자가 스테이징 버킷 읽기 권한이 없으면 PipelineJob이
+# storage.objects.get 권한 에러로 즉시 FAILED된다(2026-08-25 실제 배포에서 발견).
+PROJECT_NUMBER=$(gcloud projects describe <GCP_PROJECT_ID> --format='value(projectNumber)')
+gsutil iam ch \
+  serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com:roles/storage.objectAdmin \
+  gs://<프로젝트ID>-pipelines-staging
 
 # 4. 제출 — 반드시 저장소 루트에서 실행
 python3 vertex_pipelines/submit.py \
